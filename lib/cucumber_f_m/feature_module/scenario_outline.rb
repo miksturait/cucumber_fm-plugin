@@ -1,6 +1,6 @@
 module CucumberFM
   module FeatureModule
-    class Info
+    class ScenarioOutline < Scenario
 
     end
   end

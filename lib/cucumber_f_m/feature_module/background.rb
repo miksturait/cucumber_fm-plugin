@@ -1,4 +1,4 @@
-module Cucumber_FM
+module CucumberFM
   module FeatureModule
     class Background
       #Code here
