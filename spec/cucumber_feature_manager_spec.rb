@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe CucumberFeatureManager do
-  it "should test spec config" do
-    true.should be_true
-  end
+  it "should store path for features"
+  it "should scan files in specyfic directory"
 end
