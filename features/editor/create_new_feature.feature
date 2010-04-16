@@ -1,7 +1,7 @@
 Feature: Create New Feature
   To track information about new requirements
-  as Product Owner
-  I want be able to add new feature
+  product owner
+  should be able to add new feature
 
   Scenario: Creating new feature file
 
