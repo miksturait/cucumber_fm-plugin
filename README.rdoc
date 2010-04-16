@@ -1,0 +1,77 @@
+= Cucumber Feature Manager
+
+It's support tool to cope wiht many features written in cucumber.
+
+== Project is driven by two constrains:
+
+* minimize manual work to lowest posible value
+* remove duplication of specification
+
+== Some examples how we want achieve this
+
+=== Storing specyfication direct in application repository
+
+Yes, that's true that this is not problem for developers, but features and scenarios should be written by product owner. We had tested - in Selleo - many possibilities, first it was written in wiki, then in google page, excel, (...)  by product owner, then we have manualy copy&paste all information to our feature directory, and what product owner update something, we have to update this manualy once again.
+
+This force us to think about sollution to minimalize amount of our work (i'm not sure if you can say that copy and paste is some kind of work, but what ever). We don't want to force our customer to install git and all other stuff to be able to write specification, it has to be simple way.
+
+So we think about very simple editor with navigation for feature files - and this start working. What is more we also remove duplication of specyfication - now to update changes we use git facility of merging branches.
+
+
+=== Preparing Estimation to project
+
+Becasue estimation need to be done before starting milestone, so before we have features in repository we have to manually estimate each scenario (an it requires copy&paste scenario to spreadsheet nad add estimation) - It was nightmare.
+
+The sollutions came from tagging, we start using tags (@5 @4.5 @0.5) to asign hours to scenarios, what is more we add tags that represent milestone (@m1, @m2, @m0) in witch this scenarios should be done. Additional we add tags for each developer (@mc, @ak, @ao).
+  As we have all this information gather in one place it was easy to implemented report generation that will take into account only scenarios that pass filter and summarize information about quantity and estimation per feature, developer, milestone. This make proces of estimation easiest.
+
+== Cucumber_fe
+
+This two features mention in earlier section was developed in cucumber_fe ()
+
+After i developed it, a realize how big potential it has, some of them:
+* attach link to wireframes for each feature
+* using tags to present status of scenario (@_todo, @_deprecated, @_done, @_qa, @_accepted)
+* generating - each day - burndow of done features for each developer or whole milestone
+
+So I make decision about redesigning, write from the beginig this is how idea about Cucumber FM born.
+
+= Status
+
+It's not even on alpha state - but i plan to relaese beta version in may (2010) - so it should be pretty soon usable
+
+= Main Goals/Features
+
+It's base around three aspects of managing cukes
+
+== Editor facility
+
+* crating feature
+* editing content of feature
+
+== Control Version System Integration
+
+for non it only supports git
+
+* every save trigger commit
+* setting remote branch
+* setting push policy
+* triggering push to remote
+
+== Report facility
+
+=== table reports
+
+* with posibility to export to spreadsheat
+
+=== graph reports
+
+* based on actual_data
+* based on periodic data storing
+
+=== Filter facility
+
+* filter scenarios by tags
+* have rules for categorizing tags
+* accept logical AND, OR, NOT for building filter
+
