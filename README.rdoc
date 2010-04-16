@@ -23,11 +23,11 @@ So we think about very simple editor with navigation for feature files - and thi
 Becasue estimation need to be done before starting milestone, so before we have features in repository we have to manually estimate each scenario (an it requires copy&paste scenario to spreadsheet nad add estimation) - It was nightmare.
 
 The sollutions came from tagging, we start using tags (@5 @4.5 @0.5) to asign hours to scenarios, what is more we add tags that represent milestone (@m1, @m2, @m0) in witch this scenarios should be done. Additional we add tags for each developer (@mc, @ak, @ao).
-  As we have all this information gather in one place it was easy to implemented report generation that will take into account only scenarios that pass filter and summarize information about quantity and estimation per feature, developer, milestone. This make proces of estimation easiest.
+As we have all this information gather in one place it was easy to implemented report generation that will take into account only scenarios that pass filter and summarize information about quantity and estimation per feature, developer, milestone. This make proces of estimation easiest.
 
 == Cucumber_fe
 
-This two features mention in earlier section was developed in cucumber_fe ()
+This two features mention in earlier section was developed in cucumber_fe (http://github.com/cs3b/cucumber_fe)
 
 After i developed it, a realize how big potential it has, some of them:
 * attach link to wireframes for each feature
