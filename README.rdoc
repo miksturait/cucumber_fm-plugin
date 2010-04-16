@@ -1,6 +1,6 @@
 = Cucumber Feature Manager
 
-It's support tool to cope wiht many features written in cucumber.
+It's support tool to cope with many features written in cucumber.
 
 == Project is driven by two constrains:
 
