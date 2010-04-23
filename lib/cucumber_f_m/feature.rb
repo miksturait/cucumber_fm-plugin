@@ -1,5 +1,5 @@
 module CucumberFM
-  class Feature
+  class Feature < Struct.new(:path)
     #Code here
   end
 end

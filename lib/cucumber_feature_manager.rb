@@ -10,6 +10,16 @@ require 'cucumber_f_m/feature_module/tag'
 require 'cucumber_f_m/comment_module/comment'
 require 'cucumber_f_m/cvs/git'
 
-class CucumberFeatureManager
-  #Code here
+class CucumberFeatureManager < Struct.new(:prefix)
+  def features
+    @features ||= scan_features
+  end
+
+  private
+
+  def scan_features
+    Dir.glob("#{prefix}/**/*.feature").collect do |full_path|
+      CucumberFM::Feature.new(full_path)
+    end
+  end
 end
