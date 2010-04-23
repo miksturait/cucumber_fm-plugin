@@ -1,4 +1,4 @@
-module CucumberFm
+module CucumberFM
   module Cvs
     class Git
       

@@ -8,6 +8,7 @@ require 'cucumber_f_m/feature_module/example'
 require 'cucumber_f_m/feature_module/step'
 require 'cucumber_f_m/feature_module/tag'
 require 'cucumber_f_m/comment_module/comment'
+require 'cucumber_f_m/cvs/git'
 
 class CucumberFeatureManager
   #Code here
