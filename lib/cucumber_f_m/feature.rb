@@ -23,18 +23,18 @@ module CucumberFM
     end
 
     def fetch_scenarios
+      scenarios = []
       text = raw
       while match = scan_for_scenarios_and_scenario_outline_from(text)
-#        case match.regexp
-#          when FeatureModule::Scenario::PATTERN
-#            print 'scenario'
-#          when FeatureModule::ScenarioOutline::PATTERN
-#            print 'scenario outline'
-#        end
-        print match
+        scenarios.push case match[0]
+          when FeatureModule::Scenario::PATTERN
+            FeatureModule::Scenario.new(match[0])
+          when FeatureModule::ScenarioOutline::PATTERN
+            FeatureModule::ScenarioOutline.new(match[0])
+        end
         text = match.post_match
       end
-      '########################'
+      scenarios
     end
 
     # TODO check if it really find string
