@@ -37,7 +37,14 @@ describe CucumberFM::Feature do
       CucumberFM::FeatureModule::Scenario.should_receive(:new).with(SCENARIO_CONTENT)
       subject.scenarios
     end
-    it "should parse scenario outlines"
+    it "should parse scenario outlines" do
+      CucumberFM::FeatureModule::ScenarioOutline.should_receive(:new).with(SCENARIO_OUTLINE)
+      subject.scenarios
+    end
+
+    it "should parse two scenarios" do
+      subject.should have(2).scenarios
+    end
   end
 
   describe "WRITING" do
