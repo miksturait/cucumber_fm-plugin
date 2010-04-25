@@ -33,7 +33,10 @@ describe CucumberFM::Feature do
       CucumberFM::FeatureModule::Background.should_receive(:new).with(BACKGROUND_CONTENT)
       subject.background
     end
-    it "should parse scenarios"
+    it "should parse scenarios" do
+      CucumberFM::FeatureModule::Scenario.should_receive(:new).with(SCENARIO_CONTENT)
+      subject.scenarios
+    end
     it "should parse scenario outlines"
   end
 
@@ -90,8 +93,8 @@ FEATURE_CONTENT = <<EOF
 
 #{BACKGROUND_CONTENT}
 
-#{SCENARIO_CONTENT}
-
 #{SCENARIO_OUTLINE}
+
+#{SCENARIO_CONTENT}
 
 EOF
