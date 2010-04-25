@@ -1,7 +1,7 @@
 module CucumberFM
   module FeatureModule
     class Background
-      #Code here
+      PATTERN = /((^.*#+.*\n)+\n?)?^[ \t]*Background:.*\n(^.*\S+.*\n?)*/
     end
   end
 end
