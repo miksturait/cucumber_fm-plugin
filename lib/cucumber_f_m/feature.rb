@@ -5,11 +5,11 @@ module CucumberFM
     end
 
     def info
-      FeatureModule::Info.new(scan_for_feature_info_from_raw)
+      FeatureModule::Info.new(self, scan_for_feature_info_from_raw)
     end
 
     def background
-      FeatureModule::Background.new(scan_for_background_from_raw)
+      FeatureModule::Background.new(self, scan_for_background_from_raw)
     end
 
     def scenarios
@@ -28,9 +28,9 @@ module CucumberFM
       while match = scan_for_scenarios_and_scenario_outline_from(text)
         scenarios.push case match[0]
           when FeatureModule::Scenario::PATTERN
-            FeatureModule::Scenario.new(match[0])
+            FeatureModule::Scenario.new(self, match[0])
           when FeatureModule::ScenarioOutline::PATTERN
-            FeatureModule::ScenarioOutline.new(match[0])
+            FeatureModule::ScenarioOutline.new(self, match[0])
         end
         text = match.post_match
       end

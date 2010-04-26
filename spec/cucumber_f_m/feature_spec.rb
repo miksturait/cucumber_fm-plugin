@@ -26,19 +26,19 @@ describe CucumberFM::Feature do
       subject.stub(:raw).and_return(FEATURE_CONTENT)
     end
     it "should parse feature info" do
-      CucumberFM::FeatureModule::Info.should_receive(:new).with(INFO_CONTENT)
+      CucumberFM::FeatureModule::Info.should_receive(:new).with(subject, INFO_CONTENT)
       subject.info
     end
     it "should parse background" do
-      CucumberFM::FeatureModule::Background.should_receive(:new).with(BACKGROUND_CONTENT)
+      CucumberFM::FeatureModule::Background.should_receive(:new).with(subject, BACKGROUND_CONTENT)
       subject.background
     end
     it "should parse scenarios" do
-      CucumberFM::FeatureModule::Scenario.should_receive(:new).with(SCENARIO_CONTENT)
+      CucumberFM::FeatureModule::Scenario.should_receive(:new).with(subject, SCENARIO_CONTENT)
       subject.scenarios
     end
     it "should parse scenario outlines" do
-      CucumberFM::FeatureModule::ScenarioOutline.should_receive(:new).with(SCENARIO_OUTLINE)
+      CucumberFM::FeatureModule::ScenarioOutline.should_receive(:new).with(subject, SCENARIO_OUTLINE)
       subject.scenarios
     end
 
