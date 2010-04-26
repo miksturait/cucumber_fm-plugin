@@ -5,13 +5,16 @@ module CucumberFM
         LINE_PATTERN = /^\s*@\S.*$/
         TAG_PATTERN = /@\S+/
 
-        COMPONENT_PATTERN = /@[a-z]\S{3,}\z/
-        MILESTONE_PATTERN = /@m\d.?\z/
-        STATUS_PATTERN = /@_[a-z]\S+\z/
-        DEVELOPER_PATTERN = /@[a-z]{2,3}/
-        BUCKET_PATTERN = /@__[^\s\d]+/
-        ESTIMATION_PATTERN = /@\d/
-        VALUE_PATTERN = /@_\d/
+        PATTERN = {
+                :component => /@[a-z]\S{3,}\z/,
+                :milestone => /@m\d.?\z/,
+                :status => /@_[a-z]\S+\z/,
+                :developer => /@[a-z]{2,3}/,
+                :bucket => /@__[^\s\d]+/,
+                :estimation => /@\d/,
+                :value => /@_\d/
+                }
+
         TECHNICAL = [
                 '@javascript',
                 '@mongo',
@@ -28,7 +31,7 @@ module CucumberFM
         end
 
         def module
-          find(COMPONENT_PATTERN) || ( feature.module if respond_to?(:feature) )
+          find(PATTERN[:module]) || fetch_from_optional_tag_source(:module)
         end
 
         private
@@ -39,6 +42,10 @@ module CucumberFM
           else
             []
           end
+        end
+
+        def fetch_from_optional_tag_source(name)
+          optional_tags_source.send(name) if respond_to(:optional_tags_source)
         end
 
         def find pattern
