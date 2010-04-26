@@ -26,24 +26,28 @@ describe CucumberFM::Feature do
       subject.stub(:raw).and_return(FEATURE_CONTENT)
     end
     it "should parse feature info" do
-      CucumberFM::FeatureModule::Info.should_receive(:new).with(subject, INFO_CONTENT)
+      CucumberFM::FeatureElement::Info.should_receive(:new).with(subject, INFO_CONTENT)
       subject.info
     end
     it "should parse background" do
-      CucumberFM::FeatureModule::Background.should_receive(:new).with(subject, BACKGROUND_CONTENT)
+      CucumberFM::FeatureElement::Background.should_receive(:new).with(subject, BACKGROUND_CONTENT)
       subject.background
     end
     it "should parse scenarios" do
-      CucumberFM::FeatureModule::Scenario.should_receive(:new).with(subject, SCENARIO_CONTENT)
+      CucumberFM::FeatureElement::Scenario.should_receive(:new).with(subject, SCENARIO_CONTENT)
       subject.scenarios
     end
     it "should parse scenario outlines" do
-      CucumberFM::FeatureModule::ScenarioOutline.should_receive(:new).with(subject, SCENARIO_OUTLINE)
+      CucumberFM::FeatureElement::ScenarioOutline.should_receive(:new).with(subject, SCENARIO_OUTLINE)
       subject.scenarios
     end
 
     it "should parse two scenarios" do
       subject.should have(2).scenarios
+    end
+    context "TAGS" do
+      specify { should have(2).tags }
+      specify { subject.tags.should == %w(@tag @mc) }
     end
   end
 
@@ -51,10 +55,12 @@ describe CucumberFM::Feature do
     it "should compact file content"
     it "should write content to file"
   end
+
 end
 
-
-INFO_CONTENT = <<EOF
+  INFO_CONTENT = <<EOF
+# some comment
+# wireframe:: http://cs3b.com
 @tag @mc
 Feature: Tag filter
   In order to fetch only scenarios that i want
@@ -105,3 +111,7 @@ FEATURE_CONTENT = <<EOF
 #{SCENARIO_CONTENT}
 
 EOF
+
+
+
+

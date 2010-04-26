@@ -1,5 +1,5 @@
 module CucumberFM
-  module FeatureModule
+  module FeatureElement
     class Narrative
       #Code here
     end

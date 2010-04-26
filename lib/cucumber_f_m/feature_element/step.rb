@@ -1,6 +1,6 @@
 module CucumberFM
-  module FeatureModule
-    class Tag
+  module FeatureElement
+    class Step
       #Code here
     end
   end
