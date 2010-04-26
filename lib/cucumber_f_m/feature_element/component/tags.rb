@@ -31,7 +31,7 @@ module CucumberFM
         end
 
         def module
-          find(PATTERN[:module]) || fetch_from_optional_tag_source(:module)
+          find(PATTERN[:module]) || try_from_second_tag_source(:module)
         end
 
         private
@@ -44,8 +44,8 @@ module CucumberFM
           end
         end
 
-        def fetch_from_optional_tag_source(name)
-          optional_tags_source.send(name) if respond_to(:optional_tags_source)
+        def try_from_second_tag_source(name)
+          second_tags_source.send(name) if respond_to(:second_tags_source)
         end
 
         def find pattern
