@@ -5,15 +5,15 @@ module CucumberFM
     end
 
     def info
-      FeatureModule::Info.new(self, scan_for_feature_info_from_raw)
+      @info ||= FeatureModule::Info.new(self, scan_for_feature_info_from_raw)
     end
 
     def background
-      FeatureModule::Background.new(self, scan_for_background_from_raw)
+      @background ||= FeatureModule::Background.new(self, scan_for_background_from_raw)
     end
 
     def scenarios
-      fetch_scenarios
+      @scenarios ||= fetch_scenarios
     end
 
     private
