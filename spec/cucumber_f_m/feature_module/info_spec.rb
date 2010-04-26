@@ -2,14 +2,11 @@ require 'spec_helper'
 
 describe CucumberFM::FeatureElement::Info do
   before(:all) do
-    @comments_raw = %q{# some comment
-# wireframe:: http://cs3b.com}
-    @tags_raw = "@tag @mc"
-    @title = "Tag filter"
     raw = <<EOF
-#{@comments_raw}
-#{@tags_raw}
-Feature: #{@title}
+#{@comments_raw = %q{# some comment
+# wireframe:: http://cs3b.com}}
+@tag @mc
+Feature: #{@title = "Tag filter"}
   In order to fetch only scenarios that i want
   as project manager, developer
   I want to be able to create filter scope
@@ -25,7 +22,7 @@ EOF
     subject.should have(2).comments
   end
   it "should parse title" do
-    subject.title.should =~ @title
+    @info.title.should == @title
   end
   it "should parse narrative"
 end
