@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe CucumberFM::FeatureModule::ScenarioOutline do
+describe CucumberFM::FeatureElement::ScenarioOutline do
   it "should have access to feature"
   it "should parse tags"
   it "should parse comments lines"
