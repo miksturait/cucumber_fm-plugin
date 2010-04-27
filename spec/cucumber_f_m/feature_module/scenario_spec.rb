@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CucumberFM::FeatureElement::Scenario do
   before(:all) do
-raw = %Q{## wireframe::http://somelink
+raw = %Q{#{@comment = "## wireframe::http://somelink"}
 
   @_todo @hash @wow
   Scenario: #{@title = "Creating filter scope"}
@@ -20,6 +20,7 @@ raw = %Q{## wireframe::http://somelink
     @scenario.tags.should == %w(@_todo @hash @wow @mc @aaa)
   end
   it "should parse comments lines" do
+    CucumberFM::FeatureElement::Comment.should_receive(:new).with(@scenario, @comment)
     @scenario.should have(1).comments
   end
   it "should parse title" do
