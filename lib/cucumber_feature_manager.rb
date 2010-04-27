@@ -2,8 +2,10 @@ require 'cucumber_f_m/feature'
 
 require 'cucumber_f_m/feature_element/component/tags'
 require 'cucumber_f_m/feature_element/component/title'
+require 'cucumber_f_m/feature_element/component/comments'
 
 require 'cucumber_f_m/feature_element/info'
+require 'cucumber_f_m/feature_element/comment'
 require 'cucumber_f_m/feature_element/narrative'
 require 'cucumber_f_m/feature_element/background'
 require 'cucumber_f_m/feature_element/scenario'

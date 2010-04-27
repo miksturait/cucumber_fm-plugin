@@ -6,6 +6,7 @@ module CucumberFM
 
       include CucumberFM::FeatureElement::Component::Tags
       include CucumberFM::FeatureElement::Component::Title
+      include CucumberFM::FeatureElement::Component::Comments
 
     end
   end
