@@ -17,10 +17,19 @@ require 'cucumber_f_m/feature_element/step'
 require 'cucumber_f_m/comment_module/comment'
 
 require 'cucumber_f_m/cvs/git'
+require 'grit/lib/grit'
 
-class CucumberFeatureManager < Struct.new(:prefix)
+# TODO refactor, use repo full_path and feature not full path
+class CucumberFeatureManager < Struct.new(:prefix, :repo_path)
+
+  include Grit
+
   def features
     @features ||= scan_features
+  end
+
+  def repo
+    @repo ||= Repo.new(repo_path)
   end
 
   private
