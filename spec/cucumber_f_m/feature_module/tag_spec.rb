@@ -1,19 +1,59 @@
 require 'spec_helper'
 
 describe "Cucumber::FeatureElement::Component::Tags" do
-  it "should parse tags"
-  it "should fetch module"
-  it "should fetch module from feature if not present"
-  it "should fetch milestone"
-  it "should fetch milestone from feature if not present"
-  it "should fetch status"
-  it "should fetch status from feature if not present"
-  it "should fetch bucket"
-  it "should fetch bucket from feature if not present"
-  it "should fetch estimation"
-  it "should fetch estimation from feature if not present"
-  it "should fetch value"
-  it "should fetch value from feature if not present"
-  it "should fetch developer"
-  it "should fetch developer from feature if not present"
+  before(:all) do
+    class TagTesting
+      include CucumberFM::FeatureElement::Component::Tags
+    end
+  end
+  before(:each) do
+    @test = TagTesting.new
+  end
+  it "should find all tags" do
+    @test.stub!(:raw).and_return("@aa @bb @24343 @dd")
+    @test.stub!(:parent_tags).and_return(['@mc', '@_done', '@aaa', '@4.5'])
+    @test.tags.should == %w(@aa @bb @24343 @dd @mc @_done @aaa @4.5)
+  end
+
+  context "without need to look in feature" do
+    before(:each) do
+      @test.stub!(:raw).and_return("@user @m2 @_done @__forums @5 @_3 @mc")
+      @test.stub!(:parent_tags).and_return(['@tb', '@_wip', '@m2b', '@4.5',
+                                            '@__knowledge_base', '@_8', '@knowledge_base'])
+    end
+    {
+            :component => '@user',
+            :milestone => '@m2',
+            :status => '@_done',
+            :bucket => '@__forums',
+            :estimation => 5.0,
+            :value => 3,
+            :developer => '@mc'
+     }.each do |tag, value|
+      it "should scan #{tag} with #{value}" do
+        @test.send(tag).should == value
+      end
+    end
+  end
+
+  context "from feature" do
+    before(:each) do
+      @test.stub!(:raw).and_return("@javascript @mongo")
+      @test.stub!(:parent_tags).and_return(['@tb', '@_wip', '@m2b', '@4.5',
+                                            '@__knowledge_base', '@_8', '@knowledge_base'])
+    end
+{
+            :component => '@knowledge_base',
+            :milestone => '@m2b',
+            :status => '@_wip',
+            :bucket => '@__knowledge_base',
+            :estimation => 4.5,
+            :value => 8,
+            :developer => '@tb'
+     }.each do |tag, value|
+      it "should scan #{tag} with #{value}" do
+        @test.send(tag).should == value
+      end
+    end
+  end
 end

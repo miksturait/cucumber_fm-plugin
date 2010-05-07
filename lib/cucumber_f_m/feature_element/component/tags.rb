@@ -10,10 +10,10 @@ module CucumberFM
                 :component => /@[a-z]\S{3,}\z/,
                 :milestone => /@m\d.?\z/,
                 :status => /@_[a-z]\S+\z/,
-                :developer => /@[a-z]{2,3}/,
+                :developer => /@[a-z]{2,3}\z/,
                 :bucket => /@__[^\s\d]+/,
                 :effort => /@\d/,
-                :value => /@_\d/
+                :benefit => /@_\d/
                 }
 
         TECHNICAL = [
@@ -37,6 +37,10 @@ module CucumberFM
 
         def estimation
           effort ? effort.gsub('@', '').to_f : 0.0
+        end
+
+        def value
+          benefit ? benefit.gsub('@_', '').to_i : 0
         end
 
         private
