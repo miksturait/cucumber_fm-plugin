@@ -26,5 +26,5 @@ EOF
   it "should parse title" do
     @info.title.should == @title
   end
-  it "should parse narrative"
+#  it "should parse narrative"
 end

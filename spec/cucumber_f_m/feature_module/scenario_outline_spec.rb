@@ -29,6 +29,6 @@ raw = %Q{#{@comment = "## wireframe::http://somelink"}
   it "should parse title" do
     @scenario.title.should == @title
   end
-  it "should parse steps"
-  it "should parse example outline"
+#  it "should parse steps"
+#  it "should parse example outline"
 end

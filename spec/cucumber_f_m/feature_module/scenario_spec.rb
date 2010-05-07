@@ -29,5 +29,5 @@ raw = %Q{#{@comment = "## wireframe::http://somelink"}
   it "should parse estimation" do
     @scenario.estimation.should == 2.5
   end
-  it "should parse steps"
+#  it "should parse steps"
 end
