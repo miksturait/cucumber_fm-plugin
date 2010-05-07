@@ -3,6 +3,7 @@ require 'spec_helper'
 describe CucumberFM::FeatureElement::ScenarioOutline do
     before(:each) do
 raw = %Q{#{@comment = "## wireframe::http://somelink"}
+#{@comment1 = "# some text comment"}
 
   @_todo @2 @hash @wow
   Scenario Outline: #{@title = "Creating filter scope"}
@@ -25,7 +26,11 @@ raw = %Q{#{@comment = "## wireframe::http://somelink"}
   it "should parse estimation" do
     @scenario.estimation.should == 2.0
   end
-  it "should parse comments lines"
+  it "should parse comments lines"     do
+    CucumberFM::FeatureElement::Comment.should_receive(:new).with(@scenario, @comment)
+    CucumberFM::FeatureElement::Comment.should_receive(:new).with(@scenario, @comment1)
+    @scenario.should have(2).comments
+  end
   it "should parse title" do
     @scenario.title.should == @title
   end
