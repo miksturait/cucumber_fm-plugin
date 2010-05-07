@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe CucumberFM::Feature do
   it "should store path for file" do
-   path = "some_path_to_my.feature"
-   feature = CucumberFM::Feature.new(path)
-   feature.path.should == path
+    path = "some_path_to_my.feature"
+    feature = CucumberFM::Feature.new(path)
+    feature.path.should == path
   end
 
   it "should load file content" do
-   feature = CucumberFM::Feature.new('spec/data/cucumber_f_m/feature/first.feature')
-   feature.raw.should == %q{Feature: Edit feature content
+    feature = CucumberFM::Feature.new('spec/data/cucumber_f_m/feature/first.feature')
+    feature.raw.should == %q{Feature: Edit feature content
   To update requirement for project
   product owner
   should be able to change feature content
@@ -52,13 +52,14 @@ describe CucumberFM::Feature do
   end
 
   describe "WRITING" do
-    it "should compact file content"
+    # TODO
+    #    it "should compact file content"
     it "should write content to file"
   end
 
 end
 
-  INFO_CONTENT = <<EOF
+INFO_CONTENT = <<EOF
 # some comment
 # wireframe:: http://cs3b.com
 @tag @mc
