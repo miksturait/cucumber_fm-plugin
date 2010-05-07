@@ -54,7 +54,15 @@ describe CucumberFM::Feature do
   describe "WRITING" do
     # TODO
     #    it "should compact file content"
-    it "should write content to file"
+    it "should write content to file" do
+      @feature = CucumberFM::Feature.new('tmp/some.feature')
+      @feature.stub!(:raw).and_return("Some Content")
+      @feature.save
+      File.open('tmp/some.feature', 'r') { |stream| stream.read.should == "Some Content" }
+
+      # claenup
+      File.delete('tmp/some.feature')
+    end
   end
 
 end

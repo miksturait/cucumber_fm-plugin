@@ -5,6 +5,10 @@ module CucumberFM
       @raw ||= read_content_from_file
     end
 
+    def raw= content
+      @raw = content
+    end
+
     def info
       @info ||= FeatureElement::Info.new(self, scan_for_feature_info_from_raw)
     end
@@ -21,10 +25,17 @@ module CucumberFM
       info.tags
     end
 
+    def save
+      write_content_to_file
+    end
+
     private
 
     def read_content_from_file
       File.open(path, 'r') { |stream| stream.read }
+    end
+    def write_content_to_file
+      File.open(path, 'w') { |stream| stream.write raw }
     end
 
     def fetch_scenarios
