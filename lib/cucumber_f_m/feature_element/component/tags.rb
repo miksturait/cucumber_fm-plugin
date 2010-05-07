@@ -2,6 +2,7 @@ module CucumberFM
   module FeatureElement
     module Component
       module Tags
+        # TODO think about priority in tags - those in scenario should have value than this in feature
         LINE_PATTERN = /^\s*@\S.*$/
         TAG_PATTERN = /@\S+/
 
@@ -11,12 +12,15 @@ module CucumberFM
                 :status => /@_[a-z]\S+\z/,
                 :developer => /@[a-z]{2,3}/,
                 :bucket => /@__[^\s\d]+/,
-                :estimation => /@\d/,
+                :effort => /@\d/,
                 :value => /@_\d/
                 }
 
         TECHNICAL = [
                 '@javascript',
+                '@selenium',
+                '@celerity',
+                '@culerity',
                 '@mongo',
                 '@need-confirmation',
                 '@question'
@@ -30,13 +34,18 @@ module CucumberFM
           @tags = tags
         end
 
-        def module
-          find(PATTERN[:module]) || try_from_second_tag_source(:module)
+
+        def estimation
+          effort ? effort.gsub('@', '').to_f : 0.0
         end
 
         private
 
         def fetch_tags
+          this_tags + parent_tags
+        end
+
+        def this_tags
           if tag_line = LINE_PATTERN.match(raw)
             tag_line[0].scan(TAG_PATTERN)
           else
@@ -44,13 +53,21 @@ module CucumberFM
           end
         end
 
-        def try_from_second_tag_source(name)
-          second_tags_source.send(name) if respond_to(:second_tags_source)
+        def parent_tags
+          respond_to?(:second_tags_source) ? second_tags_source.this_tags : []
         end
 
-        def find pattern
+        def find type
           tags.detect do |tag|
-            !TECHNICAL.include?(tag) and tag =~ pattern
+            !TECHNICAL.include?(tag) and tag =~ PATTERN[type]
+          end
+        end
+
+        def method_missing(m, *args, &block)
+          if PATTERN.has_key?(m.to_sym)
+            find(m.to_sym)
+          else
+            super
           end
         end
       end
