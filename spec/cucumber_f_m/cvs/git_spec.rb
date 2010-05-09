@@ -8,6 +8,7 @@ describe CucumberFM::Cvs::Git do
     `git clone #{@base_repo_path} #{@repo_path}`
     @cfm = CucumberFeatureManager.new(@repo_path+'/features', @repo_path)
     @repo = @cfm.send(:repo)
+    `cd #{@repo_path} && git remote rm origin`
     @repo.remote_add('origin', @remote_repo)
 #    @repo.git.push({}, '--force', 'origin', 'master:master')
   end
@@ -25,16 +26,12 @@ describe CucumberFM::Cvs::Git do
     commit.should =~ /1 files changed/
   end
 
-  it "should detect that there is no changes" do
+  it "should detect that there is no changes"
 
-  end
-
-  it "should be able to commit changes to local branch" do
-
-  end
+  it "should be able to commit changes to local branch"
 
   it "should be able to push changes to remote branch" do
-    throw @cfm.send_to_remote
+    @cfm.send_to_remote
   end
   it "should handle when remote branch is not fast forward"
 

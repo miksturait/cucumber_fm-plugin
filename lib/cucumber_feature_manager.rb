@@ -38,7 +38,7 @@ class CucumberFeatureManager < Struct.new(:prefix, :repo_path)
   end
 
   def send_to_remote
-    git.push({}, repo_remote_name, "#{repo_current_branch}:#{repo_remote_branch_name}")
+    push_to_remote
   end
 
   private
@@ -47,6 +47,12 @@ class CucumberFeatureManager < Struct.new(:prefix, :repo_path)
     # WTF - why this is not works
     # repo.add(feature.path)
     `cd #{repo_path} && git add #{feature.path}`
+  end
+
+  def push_to_remote
+    # WTF - why this is not works
+    # git.push({}, repo_remote_name, "#{repo_current_branch}:#{repo_remote_branch_name}")
+    `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{repo_remote_branch_name}`
   end
 
   def scan_features
