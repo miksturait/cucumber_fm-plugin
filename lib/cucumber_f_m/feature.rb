@@ -29,6 +29,10 @@ module CucumberFM
       write_content_to_file
     end
 
+    def filename
+      path.split("/").last
+    end
+
     private
 
     def read_content_from_file

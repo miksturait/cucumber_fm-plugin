@@ -24,19 +24,68 @@ class CucumberFeatureManager < Struct.new(:prefix, :repo_path)
 
   include Grit
 
+  attr_reader :info
+
   def features
     @features ||= scan_features
+  end
+
+  def commit_change_on(feature)
+    # use info to notify user
+    # @info = 'aaaa'
+    add_to_index(feature)
+    repo.commit_index(feature.filename)
+  end
+
+  def send_to_remote
+    git.push({}, repo_remote_name, "#{repo_current_branch}:#{repo_remote_branch_name}")
+  end
+
+  private
+
+  def add_to_index(feature)
+    # WTF - why this is not works
+    # repo.add(feature.path)
+    `cd #{repo_path} && git add #{feature.path}`
+  end
+
+  def scan_features
+    Dir.glob("#{prefix}/**/*.feature").collect do |full_path|
+      CucumberFM::Feature.new(full_path)
+    end
+  end
+
+  def repo_relative_path(path)
+    path.gsub(repo_path, '').gsub(/^\//, '')
   end
 
   def repo
     @repo ||= Repo.new(repo_path)
   end
 
-  private
+  def git
+    repo.git
+  end
 
-  def scan_features
-    Dir.glob("#{prefix}/**/*.feature").collect do |full_path|
-      CucumberFM::Feature.new(full_path)
+  def repo_current_branch
+    repo.head.name
+  end
+
+  def repo_remote_name
+    repo.remote_list.first
+  end
+
+  def repo_remote_branch_name
+    "stories_#{timestamp}"
+  end
+
+  def timestamp
+    # check if it's deployed with capistrano
+    pattern = /\d{14}$/
+    if defined?(Rails) and Rails.root.to_s =~ pattern
+      pattern.match(Rails.root).to_s
+    else
+      Time.now.to_i.to_s
     end
   end
 end
