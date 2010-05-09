@@ -38,7 +38,9 @@ So I make decision about redesigning, write from the beginig this is how idea ab
 
 = Status
 
-It's not even on alpha state - but i plan to relaese beta version in may (2010) - so it should be pretty soon usable
+Base functionality of libraries are done
+
+Now i need to create user interface to allow user to interact with tool
 
 = Main Goals/Features
 
