@@ -71,10 +71,6 @@ for non it only supports git
 
 == Report facility
 
-=== table reports
-
-* with posibility to export to spreadsheat [backlog]
-
 === graph reports
 
 * based on actual_data [backlog]
