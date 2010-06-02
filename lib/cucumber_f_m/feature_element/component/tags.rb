@@ -16,14 +16,15 @@ module CucumberFM
                 :benefit => /@_\d/
                 }
 
+        #TODO how to define answer ???
         TECHNICAL = [
                 '@javascript',
                 '@selenium',
                 '@celerity',
                 '@culerity',
                 '@mongo',
-                '@need-confirmation',
-                '@question'
+                '@???',
+                '@!!!'
         ]
 
         def tags
