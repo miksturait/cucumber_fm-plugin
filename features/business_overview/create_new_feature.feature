@@ -1,4 +1,4 @@
-Feature: Create New Feature
+Feature: Business Overview - Create New Feature
   To track information about new requirements
   product owner
   should be able to add new feature
