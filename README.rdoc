@@ -4,7 +4,7 @@ It's support tool to cope with many features written in cucumber.
 
 == Project is driven by two constrains:
 
-* minimize manual work to lowest posible value
+* minimize manual work (with scope management) to lowest posible value
 * remove duplication of specification
 
 == Some examples how we want achieve this
@@ -46,34 +46,43 @@ Now i need to create user interface to allow user to interact with tool
 
 It's base around three aspects of managing cukes
 
+== Dashboard
+
+* viewing all features [todo]
+* scoping by directory [todo]
+* filtering by tags [todo]
+* aggregating by one of tag type [backlog]
+
 == Editor facility
 
-* crating feature
-* editing content of feature
+* crating feature [todo]
+* editing content of feature [todo]
+* navigating through scenarios [todo]
+* see estimation per scenario [todo]
 
 == Control Version System Integration
 
 for non it only supports git
 
-* every save trigger commit
-* setting remote branch
-* setting push policy
-* triggering push to remote
+* every save trigger commit [done]
+* setting remote branch [backlog]
+* setting push policy [backlog]
+* triggering push to remote [done]
 
 == Report facility
 
 === table reports
 
-* with posibility to export to spreadsheat
+* with posibility to export to spreadsheat [backlog]
 
 === graph reports
 
-* based on actual_data
-* based on periodic data storing
+* based on actual_data [backlog]
+* based on periodic data storing [backlog]
 
 === Filter facility
 
-* filter scenarios by tags
-* have rules for categorizing tags
-* accept logical AND, OR, NOT for building filter
+* filter scenarios by tags [todo]
+* have rules for categorizing tags [todo]
+* accept logical AND, OR, NOT for building filter [backlog]
 
