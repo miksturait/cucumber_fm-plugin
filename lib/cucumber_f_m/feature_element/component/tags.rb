@@ -9,12 +9,14 @@ module CucumberFM
         PATTERN = {
                 :component => /@[a-z]\S{3,}\z/,
                 :milestone => /@m\d.?\z/,
+                :iteration => /@i\d+\z/,
+                :priority => /@p\d+\z/,
                 :status => /@_[a-z]\S+\z/,
                 :developer => /@[a-z]{2,3}\z/,
                 :bucket => /@__[^\s\d]+/,
                 :effort => /@\d/,
                 :benefit => /@_\d/
-                }
+        }
 
         #TODO how to define answer ???
         TECHNICAL = [

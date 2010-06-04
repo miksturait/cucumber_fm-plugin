@@ -4,16 +4,16 @@ Feature: Business Overview - dashboard
   As project manager, product owner
   I want to see estimation based on active scope and filter
 
-  @_todo
+  @_todo @m1 @i1 @p1
   Scenario: Viewing dashobard
 
-  @_todo
+  @_todo @m1 @i1 @p2
   Scenario: Adding new feature
 
-  @_todo
+  @_todo @m1 @i1 @p3
   Scenario: Filtering By tag and folder
 
-  @_todo
+  @_todo @m1 @i2 @p1
   Scenario: Going to feature editing
 
   @_backlog
