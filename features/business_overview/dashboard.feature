@@ -4,8 +4,13 @@ Feature: Business Overview - dashboard
   As project manager, product owner
   I want to see estimation based on active scope and filter
 
-  @_todo @m1 @i1 @p1
+  @_wip @m1 @i1 @p1
   Scenario: Viewing dashobard
+    When I visit documentation page
+    Then I should see:
+      |list of features                                       |
+      |total quantity of features, scenarios and estimation   |
+      |per feature total quantity of scenarios and estimation |
 
   @_todo @m1 @i1 @p2
   Scenario: Adding new feature

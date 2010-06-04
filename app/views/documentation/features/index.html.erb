@@ -1,0 +1,22 @@
+<table>
+  <thead>
+   <tr>
+     <th></th>
+     <th></th>
+     <th>Features [<%= @cfm.features.size %>]</th>
+     <th>Scenarios</th>
+     <th>Estimation</th>
+   </tr>
+  </thead>
+  <tbody>
+    <% @cfm.features.each do |feature| %>
+       <tr>
+         <td></td>
+         <td><%= feature.info.title %></td>
+         <td></td>
+         <td><%= feature.scenarios.size %></td>
+         <td></td>
+       </tr>
+    <% end %>
+  </tbody>
+</table>
