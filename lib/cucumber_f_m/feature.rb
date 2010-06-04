@@ -35,6 +35,15 @@ module CucumberFM
       path.split("/").last
     end
 
+    # TODO extract to module and include in rails/init.rb
+    #  def id(path)
+    #    Base64.encode64(path.gsub(feature_dir_path << '/', ''))
+    #  end
+    #
+    #  def self.find(id)
+    #    feature_dir_path.join(Base64.decode64(id))
+    #  end
+
     private
 
     def read_content_from_file
