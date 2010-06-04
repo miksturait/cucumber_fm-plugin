@@ -41,7 +41,6 @@ describe CucumberFM::Feature do
       CucumberFM::FeatureElement::ScenarioOutline.should_receive(:new).with(subject, SCENARIO_OUTLINE)
       subject.scenarios
     end
-
     it "should parse two scenarios" do
       subject.should have(2).scenarios
     end
@@ -62,6 +61,17 @@ describe CucumberFM::Feature do
 
       # claenup
       File.delete('tmp/some.feature')
+    end
+  end
+
+  describe "ESTIMATION" do
+    before(:each) do
+      subject { CucumberFM::Feature.new('some_path') }
+      subject.stub(:raw).and_return(FEATURE_CONTENT)
+    end
+
+    it "should compute correct total estimation" do
+      subject.estimation.should == 8.25
     end
   end
 
@@ -90,7 +100,7 @@ EOF
 SCENARIO_CONTENT = <<EOF
   ## wireframe::http://somelink
 
-  @_todo
+  @_todo @5.25
   Scenario: Creating filter scope
     When I follow "New system user"
     And I fill in "systemuser@hp.mc" for "Email"
@@ -102,7 +112,7 @@ EOF
 SCENARIO_OUTLINE = <<EOF
   # some comment about below filter
 
-  @_todo
+  @_todo @3
   Scenario Outline: Selecting filter scope as active
 
   Examples:
@@ -120,7 +130,6 @@ FEATURE_CONTENT = <<EOF
 #{SCENARIO_CONTENT}
 
 EOF
-
 
 
 

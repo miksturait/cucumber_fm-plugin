@@ -1,8 +1,9 @@
-require 'cucumber_f_m/feature'
-
 require 'cucumber_f_m/feature_element/component/tags'
 require 'cucumber_f_m/feature_element/component/title'
 require 'cucumber_f_m/feature_element/component/comments'
+require 'cucumber_f_m/feature_element/component/total_estimation'
+
+require 'cucumber_f_m/comment_module/comment'
 
 require 'cucumber_f_m/feature_element/info'
 require 'cucumber_f_m/feature_element/comment'
@@ -13,8 +14,7 @@ require 'cucumber_f_m/feature_element/scenario_outline'
 require 'cucumber_f_m/feature_element/example'
 require 'cucumber_f_m/feature_element/step'
 
-
-require 'cucumber_f_m/comment_module/comment'
+require 'cucumber_f_m/feature'
 
 require 'cucumber_f_m/cvs/git'
 require 'grit/lib/grit'
@@ -23,6 +23,7 @@ require 'grit/lib/grit'
 class CucumberFeatureManager < Struct.new(:prefix, :repo_path)
 
   include Grit
+  include CucumberFM::FeatureElement::Component::TotalEstimation
 
   attr_reader :info
 
@@ -34,9 +35,7 @@ class CucumberFeatureManager < Struct.new(:prefix, :repo_path)
     @scenarios = (features.collect {|feature| feature.scenarios }).flatten
   end
 
-  def estimation
-    scenarios.inject(0.0) {|sum, scenario| sum + scenario.estimation }
-  end
+
 
   def commit_change_on(feature)
     # use info to notify user

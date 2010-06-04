@@ -1,6 +1,8 @@
 module CucumberFM
   class Feature < Struct.new(:path)
 
+    include FeatureElement::Component::TotalEstimation
+
     def raw
       @raw ||= read_content_from_file
     end
