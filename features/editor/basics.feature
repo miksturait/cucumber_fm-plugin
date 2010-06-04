@@ -4,10 +4,10 @@ Feature: Editor - Basics
   product owner
   should be able to change feature content
 
-  @_todo
+  @_todo @m1 @i2 @p2
   Scenario: Viewing editor
 
-  @_todo
+  @_todo @m1 @i2 @p3
   Scenario: Updating feature contennt
 
   @_backlog
@@ -19,7 +19,7 @@ Feature: Editor - Basics
   @_backlog
   Scenario: Deleting feature
 
-  @_todo
+  @_todo @m1 @i2 @p4
   Scenario: Navigating between scenarios
 
 

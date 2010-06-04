@@ -3,10 +3,10 @@ Feature: Tag filter
   as project manager, developer
   I want to be able to create filter scope
 
-  @_todo
+  @_todo @m1 @i4 @p1
   Scenario: Filtering by one tag
 
-  @_todo
+  @_todo @m1 @i4 @p2
   Scenario: Filtering by two tags ( using and )
 
   @_backlog

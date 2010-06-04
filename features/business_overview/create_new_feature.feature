@@ -3,13 +3,13 @@ Feature: Business Overview - Create New Feature
   product owner
   should be able to add new feature
 
-  @_todo
+  @_todo @m1 @i3 @p1
   Scenario: Creating new feature file
 
-  @_todo
+  @_todo @m1 @i3 @p2
   Scenario: Creating new feature file with name that already exist
 
-  @_todo
+  @_todo @m1 @i3 @p3
   Scenario: Creating new feature file with non valid name
 
 
