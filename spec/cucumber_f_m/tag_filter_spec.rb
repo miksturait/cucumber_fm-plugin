@@ -1,9 +1,21 @@
 require 'spec_helper'
 
 describe CucumberFM::TagFilter do
+  context "empty expression" do
+    before(:each) do
+      @filter = CucumberFM::TagFilter.new('')
+    end
+    it "should pass when we give any kind of tags" do
+      @filter.pass?(['@td', '@m2', '@i1']).should be_true
+    end
+  end
+  
   context "single tag expression" do
     before(:each) do
       @filter = CucumberFM::TagFilter.new('@m1')
+    end
+    it "should return false we give empty array of tags" do
+      @filter.pass?([]).should be_false
     end
     it "should return false if there is no tag like this" do
       @filter.pass?(['@m2', '@mc']).should be_false
