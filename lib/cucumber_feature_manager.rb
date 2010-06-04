@@ -20,7 +20,7 @@ require 'cucumber_f_m/cvs/git'
 require 'grit/lib/grit'
 
 # TODO refactor, use repo full_path and feature not full path
-class CucumberFeatureManager < Struct.new(:prefix, :repo_path)
+class CucumberFeatureManager < Struct.new(:prefix, :repo_path, :scope_params)
 
   include Grit
   include CucumberFM::FeatureElement::Component::TotalEstimation
@@ -32,10 +32,12 @@ class CucumberFeatureManager < Struct.new(:prefix, :repo_path)
   end
 
   def scenarios
-    @scenarios = (features.collect {|feature| feature.scenarios }).flatten
+    (features.collect {|feature| feature.scenarios }).flatten
   end
 
-
+  def scope
+    @scope ||= CucumberFM::Scope.new({:prefix => prefix}.merge(scope_params || {:scope => {}}))
+  end
 
   def commit_change_on(feature)
     # use info to notify user
