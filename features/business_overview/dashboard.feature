@@ -4,7 +4,7 @@ Feature: Business Overview - dashboard
   As project manager, product owner
   I want to see estimation based on active scope and filter
 
-  @_wip @m1 @i1 @p1
+  @_done @m1 @i1 @p1
   Scenario: Viewing dashobard
     When I visit documentation page
     Then I should see:
