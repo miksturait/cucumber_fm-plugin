@@ -3,11 +3,17 @@ Feature: Tag filter
   as project manager, developer
   I want to be able to create filter scope
 
-  @_todo @m1 @i4 @p1
+  @_todo @m1 @i1 @p3
   Scenario: Filtering by one tag
 
-  @_todo @m1 @i4 @p2
+  @_todo @m1 @i1 @p4
   Scenario: Filtering by two tags ( using and )
+
+  @_todo @m1 @i1 @p6
+  Scenario: Agregating by one dimension with sorting
+
+  @_todo @m1 @i1 @p7
+  Scenario: Agregating by two dimension with sorting
 
   @_backlog
   Scenario: Creating filter scope

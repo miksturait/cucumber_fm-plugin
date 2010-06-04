@@ -12,11 +12,14 @@ Feature: Business Overview - dashboard
       |total quantity of features, scenarios and estimation   |
       |per feature total quantity of scenarios and estimation |
 
-  @_todo @m1 @i1 @p2
+  @_todo @m1 @i3 @p1
   Scenario: Adding new feature
 
-  @_todo @m1 @i1 @p3
+  @_todo @m1 @i1 @p2
   Scenario: Filtering By tag and folder
+
+  @_todo @m1 @i1 @p5
+  Scenario: Agregating by tag type
 
   @_todo @m1 @i2 @p1
   Scenario: Going to feature editing
