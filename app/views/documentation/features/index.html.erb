@@ -1,22 +1,57 @@
+<h1>Dashboard</h1>
+
+
+<% form_tag '', :method => :get do %>
+    <div id='filter' style="width: 100%; padding: 1%; float: none;">
+      <h2>Scope by</h2>
+
+      <div id='scope' style="width: 100%">
+        <span>Scope</span>
+        <%= label_tag :dir, "Directory:" %>
+        <%= select_tag :dir, options_for_select([], :selected => params[:scope]) %>
+        <%= label_tag :tags, "Tags:" %>
+        <%= text_field_tag :tags %>
+      </div>
+    </div>
+    <div id='view' style="width: 100%; padding: 1%; float: none;">
+      <h2>Presentation settings</h2>
+
+      <div id='aggregate' style="float: left; width: 30%">
+        <span>Aggregate by:</span>
+      </div>
+      <div id='sort' style="float: left; width: 30%">
+        <span>Sort by:</span>
+      </div>
+      <div id='display' style="float: left; width: 30%">
+        <span>Display as:</span>
+        kanban
+        list
+      </div>
+    </div>
+
+<% end %>
+
+<h2>Features</h2>
+
 <table>
   <thead>
-   <tr>
-     <th></th>
-     <th></th>
-     <th>Features [<%= @cfm.features.size %>]</th>
-     <th>Scenarios [<%= @cfm.scenarios.size %>]</th>
-     <th>Estimation [<%= @cfm.estimation %>]</th>
-   </tr>
+  <tr>
+    <th></th>
+    <th></th>
+    <th>Features [<%= @cfm.features.size %>]</th>
+    <th>Scenarios [<%= @cfm.scenarios.size %>]</th>
+    <th>Estimation [<%= @cfm.estimation %>]</th>
+  </tr>
   </thead>
   <tbody>
-    <% @cfm.features.each do |feature| %>
-       <tr>
-         <td></td>
-         <td><%= feature.info.title %></td>
-         <td></td>
-         <td><%= feature.scenarios.size %></td>
-         <td><%= feature.estimation %></td>
-       </tr>
-    <% end %>
+  <% @cfm.features.each do |feature| %>
+      <tr>
+        <td></td>
+        <td><%= feature.info.title %></td>
+        <td></td>
+        <td><%= feature.scenarios.size %></td>
+        <td><%= feature.estimation %></td>
+      </tr>
+  <% end %>
   </tbody>
 </table>
