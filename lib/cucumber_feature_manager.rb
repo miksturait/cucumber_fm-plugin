@@ -34,6 +34,10 @@ class CucumberFeatureManager < Struct.new(:prefix, :repo_path)
     @scenarios = (features.collect {|feature| feature.scenarios }).flatten
   end
 
+  def estimation
+    scenarios.inject(0.0) {|sum, scenario| sum + scenario.estimation }
+  end
+
   def commit_change_on(feature)
     # use info to notify user
     # @info = 'aaaa'

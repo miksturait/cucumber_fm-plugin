@@ -61,7 +61,7 @@ module CucumberFM
         end
 
         def parent_tags
-          respond_to?(:second_tags_source) ? second_tags_source.this_tags : []
+          respond_to?(:second_tags_source) ? second_tags_source.tags : []
         end
 
         def find type
