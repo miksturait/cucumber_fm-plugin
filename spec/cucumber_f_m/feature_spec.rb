@@ -45,6 +45,7 @@ describe CucumberFM::Feature do
       CucumberFM::FeatureElement::ScenarioOutline.should_receive(:new).with(subject, SCENARIO_OUTLINE)
       subject.scenarios
     end
+    
     it "should parse two scenarios" do
       subject.should have(2).scenarios
     end

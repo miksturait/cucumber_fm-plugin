@@ -62,12 +62,13 @@ module CucumberFM
       scenarios = []
       text = raw
       while match = scan_for_scenarios_and_scenario_outline_from(text)
-        scenarios.push case match[0]
+        scenario = case match[0]
           when FeatureElement::Scenario::PATTERN
             FeatureElement::Scenario.new(self, match[0])
           when FeatureElement::ScenarioOutline::PATTERN
             FeatureElement::ScenarioOutline.new(self, match[0])
         end
+        scenarios.push(scenario) if cfm.filter.pass?(scenario.tags)
         text = match.post_match
       end
       scenarios
