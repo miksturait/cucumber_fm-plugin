@@ -1,5 +1,5 @@
 module CucumberFM
-  class Feature < Struct.new(:path)
+  class Feature < Struct.new(:path, :cfm)
 
     include FeatureElement::Component::TotalEstimation
 
@@ -25,6 +25,10 @@ module CucumberFM
 
     def tags
       info.tags
+    end
+
+    def tags_all
+      scenarios.collect{|scenario| scenario.tags }.flatten.uniq
     end
 
     def save
@@ -69,19 +73,29 @@ module CucumberFM
       scenarios
     end
 
-    # TODO check if it really find string
     def scan_for_feature_info_from_raw
-      FeatureElement::Info::PATTERN.match(raw)[0]
+      if match = FeatureElement::Info::PATTERN.match(raw)
+        match[0]
+      else
+        ''
+      end
     end
 
     def scan_for_background_from_raw
-      FeatureElement::Background::PATTERN.match(raw)[0]
+      if match = FeatureElement::Background::PATTERN.match(raw)
+        match[0]
+      else
+        ''
+      end
     end
 
     def scan_for_scenarios_and_scenario_outline_from(string)
-      scenario_or_scenario_outline = Regexp.union(FeatureElement::Scenario::PATTERN,
-                                                  FeatureElement::ScenarioOutline::PATTERN)
       scenario_or_scenario_outline.match(string)
+    end
+
+    def scenario_or_scenario_outline
+      Regexp.union(FeatureElement::Scenario::PATTERN,
+                   FeatureElement::ScenarioOutline::PATTERN)
     end
   end
 end

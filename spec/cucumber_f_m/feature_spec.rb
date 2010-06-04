@@ -24,6 +24,10 @@ describe CucumberFM::Feature do
     before(:each) do
       subject { CucumberFM::Feature.new('some_path') }
       subject.stub(:raw).and_return(FEATURE_CONTENT)
+      cfm = mock(:cfm)
+      filter = CucumberFM::TagFilter.new('')
+      cfm.stub(:filter).and_return(filter)
+      subject.stub(:cfm).and_return(cfm)
     end
     it "should parse feature info" do
       CucumberFM::FeatureElement::Info.should_receive(:new).with(subject, INFO_CONTENT)
@@ -68,6 +72,10 @@ describe CucumberFM::Feature do
     before(:each) do
       subject { CucumberFM::Feature.new('some_path') }
       subject.stub(:raw).and_return(FEATURE_CONTENT)
+      cfm = mock(:cfm)
+      filter = CucumberFM::TagFilter.new('')
+      cfm.stub!(:filter).and_return(filter)
+      subject.stub(:cfm).and_return(cfm)
     end
 
     it "should compute correct total estimation" do

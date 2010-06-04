@@ -16,12 +16,13 @@ require 'cucumber_f_m/feature_element/step'
 
 require 'cucumber_f_m/feature'
 require 'cucumber_f_m/tag_filter'
+require 'cucumber_f_m/config'
 
 require 'cucumber_f_m/cvs/git'
 require 'grit/lib/grit'
 
 # TODO refactor, use repo full_path and feature not full path
-class CucumberFeatureManager < Struct.new(:prefix, :repo_path, :scope_params)
+class CucumberFeatureManager < Struct.new(:prefix, :repo_path, :config_parameters)
 
   include Grit
   include CucumberFM::FeatureElement::Component::TotalEstimation
@@ -36,8 +37,12 @@ class CucumberFeatureManager < Struct.new(:prefix, :repo_path, :scope_params)
     (features.collect {|feature| feature.scenarios }).flatten
   end
 
-  def scope
-    @scope ||= CucumberFM::Scope.new({:prefix => prefix}.merge(scope_params || {:scope => {}}))
+  def config
+    @config ||= CucumberFM::Config.new((config_parameters || {}))
+  end
+
+  def filter
+    @filter ||= CucumberFM::TagFilter.new(config.tags)
   end
 
   def commit_change_on(feature)
@@ -66,9 +71,12 @@ class CucumberFeatureManager < Struct.new(:prefix, :repo_path, :scope_params)
   end
 
   def scan_features
-    Dir.glob("#{prefix}/**/*.feature").collect do |full_path|
-      CucumberFM::Feature.new(full_path)
+    features = []
+    Dir.glob("#{prefix}/**/*.feature").each do |full_path|
+      feature = CucumberFM::Feature.new(full_path, self)
+      features.push(feature) if filter.pass?(feature.tags_all)
     end
+    features
   end
 
   def repo_relative_path(path)

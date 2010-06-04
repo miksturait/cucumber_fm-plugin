@@ -3,8 +3,8 @@ Feature: Edit feature content
   product owner
   should be able to change feature content
 
-  @5
+  @5 @m1
   Scenario: Inserting Background
 
-  @7.5
+  @7.5 @m1
   Scenario: Inserting Scenario when cursor on text field
