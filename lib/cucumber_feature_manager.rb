@@ -30,6 +30,10 @@ class CucumberFeatureManager < Struct.new(:prefix, :repo_path)
     @features ||= scan_features
   end
 
+  def scenarios
+    @scenarios = (features.collect {|feature| feature.scenarios }).flatten
+  end
+
   def commit_change_on(feature)
     # use info to notify user
     # @info = 'aaaa'

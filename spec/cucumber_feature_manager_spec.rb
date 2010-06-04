@@ -10,4 +10,7 @@ describe CucumberFeatureManager do
   it "should scan files in specific directory" do
     @cfm.should have(5).features
   end
+  it "should return list of all scenarios" do
+    @cfm.should have(4).scenarios
+  end
 end
