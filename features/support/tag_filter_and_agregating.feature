@@ -12,7 +12,7 @@ Feature: Tag filter
   @_todo @m1 @i1 @p6
   Scenario: Agregating by one dimension with sorting
 
-  @_todo @m1 @i1 @p7
+  @_backlog
   Scenario: Agregating by two dimension with sorting
 
   @_backlog
