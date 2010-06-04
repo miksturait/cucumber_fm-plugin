@@ -37,6 +37,7 @@ describe CucumberFM::Feature do
       CucumberFM::FeatureElement::Background.should_receive(:new).with(subject, BACKGROUND_CONTENT)
       subject.background
     end
+    
 # SKIP bug in rspec
 #    it "should parse scenarios" do
 #      CucumberFM::FeatureElement::Scenario.should_receive(:new).with(subject, SCENARIO_CONTENT)
