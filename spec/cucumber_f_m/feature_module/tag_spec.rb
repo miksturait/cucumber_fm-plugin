@@ -38,6 +38,7 @@ describe "Cucumber::FeatureElement::Component::Tags" do
     end
   end
 
+  # TODO it should removes duplication - tags from the same type if they are present in scenario
   context "from feature" do
     before(:each) do
       @test.stub!(:raw).and_return("@javascript @mongo")
