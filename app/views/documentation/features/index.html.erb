@@ -49,9 +49,16 @@
         <td></td>
         <td><%= feature.info.title %></td>
         <td></td>
-        <td><%= feature.scenarios.size %></td>
-        <td><%= feature.estimation %></td>
+        <td style="text-align:center;"><%= feature.scenarios.size %></td>
+        <td style="text-align:center;"><%= feature.estimation %></td>
       </tr>
+      <% feature.scenarios.each do |scenario| %>
+          <tr>
+            <td></td>
+            <td colspan= "3" style="text-align:right;"><%= scenario.title %></td>
+            <td style="text-align:center;"><%= feature.estimation %></td>
+          </tr>
+      <% end %>
   <% end %>
   </tbody>
 </table>
