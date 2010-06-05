@@ -5,5 +5,5 @@ Feature: Edit feature content
 
   Scenario: Inserting Background
 
-  @2.75 @m1
+  @2.75 @m1 @mc
   Scenario: Inserting Scenario when cursor on text field

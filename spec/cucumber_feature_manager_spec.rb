@@ -19,15 +19,28 @@ describe CucumberFeatureManager do
     end
   end
 
-  context "features filtering" do
+  context "features filtering by one tag" do
     before(:all) do
       @cfm = CucumberFeatureManager.new("spec/data/feature_manager", "spec/data", {'tags' => '@m1'})
     end
-    it "should scan files in specific directory" do
+    it "should scan files that have one tag" do
       @cfm.should have(3).features
     end
-    it "should return list of all scenarios" do
+    it "should return list of all scenarios that have this tag" do
       @cfm.should have(4).scenarios
+    end
+  end
+
+
+  context "features filtering by one multiple tags" do
+    before(:all) do
+      @cfm = CucumberFeatureManager.new("spec/data/feature_manager", "spec/data", {'tags' => '@m1 @mc'})
+    end
+    it "should scan files that have every one tag" do
+      @cfm.should have(1).features
+    end
+    it "should return list of all scenarios that have both tag" do
+      @cfm.should have(1).scenarios
     end
   end
 

@@ -6,7 +6,7 @@ Feature: Tag filter
   @_done @m1 @i1 @p3
   Scenario: Filtering by one tag
 
-  @_todo @m1 @i1 @p4
+  @_done @m1 @i1 @p4
   Scenario: Filtering by two tags ( using and )
 
   @_todo @m1 @i1 @p6
