@@ -2,6 +2,7 @@ class Documentation::ApplicationController < ActionController::Base
   layout '/documentation/layouts/cucumber_fe'
 
   before_filter :digest_authenticate
+  before_filter :save_config
 
   private
 
@@ -11,6 +12,18 @@ class Documentation::ApplicationController < ActionController::Base
 
   def git_dir_path
     Rails.root
+  end
+
+  def save_config
+    if params.has_key?(:config)
+      cookies[:config] = params[:config].to_json
+    elsif cookies[:config].nil?
+      cookies[:config] = {}.to_json
+    end
+  end
+
+  def read_config
+    JSON.parse(cookies[:config])
   end
 
   def digest_authenticate

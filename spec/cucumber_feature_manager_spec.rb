@@ -21,7 +21,7 @@ describe CucumberFeatureManager do
 
   context "features filtering" do
     before(:all) do
-      @cfm = CucumberFeatureManager.new("spec/data/feature_manager", "spec/data", {:tags => '@m1'})
+      @cfm = CucumberFeatureManager.new("spec/data/feature_manager", "spec/data", {'tags' => '@m1'})
     end
      it "should scan files in specific directory" do
       @cfm.should have(3).features
