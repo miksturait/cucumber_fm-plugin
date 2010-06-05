@@ -15,7 +15,7 @@ Feature: Business Overview - dashboard
   @_todo @m1 @i3 @p1
   Scenario: Adding new feature
 
-  @_todo @m1 @i1 @p2
+  @_done @m1 @i1 @p2
   Scenario: Filtering By tag and folder
 
   @_todo @m1 @i1 @p5

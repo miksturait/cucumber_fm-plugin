@@ -22,7 +22,7 @@ require 'cucumber_f_m/cvs/git'
 require 'grit/lib/grit'
 
 # TODO refactor, use repo full_path and feature not full path
-class CucumberFeatureManager < Struct.new(:prefix, :repo_path, :config_parameters)
+class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
 
   include Grit
   include CucumberFM::FeatureElement::Component::TotalEstimation
@@ -43,6 +43,10 @@ class CucumberFeatureManager < Struct.new(:prefix, :repo_path, :config_parameter
 
   def filter
     @filter ||= CucumberFM::TagFilter.new(config.tags)
+  end
+
+  def prefix
+    config.dir.empty? ? path : File.join(path, config.dir)
   end
 
   def commit_change_on(feature)

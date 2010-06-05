@@ -23,11 +23,23 @@ describe CucumberFeatureManager do
     before(:all) do
       @cfm = CucumberFeatureManager.new("spec/data/feature_manager", "spec/data", {'tags' => '@m1'})
     end
-     it "should scan files in specific directory" do
+    it "should scan files in specific directory" do
       @cfm.should have(3).features
     end
     it "should return list of all scenarios" do
       @cfm.should have(4).scenarios
+    end
+  end
+
+  context "dir scoping" do
+    before(:all) do
+      @cfm = CucumberFeatureManager.new("spec/data/feature_manager", "spec/data", {'dir' => 'subdir'})
+    end
+    it "should scan files in specific directory" do
+      @cfm.should have(3).features
+    end
+    it "should return list of all scenarios" do
+      @cfm.should have(1).scenarios
     end
   end
 

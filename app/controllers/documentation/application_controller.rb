@@ -4,6 +4,8 @@ class Documentation::ApplicationController < ActionController::Base
   before_filter :digest_authenticate
   before_filter :save_config
 
+  helper_method :list_of_dirs
+
   private
 
   def feature_dir_path
@@ -12,6 +14,14 @@ class Documentation::ApplicationController < ActionController::Base
 
   def git_dir_path
     Rails.root
+  end
+
+  def dir_that_should_be_skippped
+    %w(_step_definitions support . ..)
+  end
+
+  def list_of_dirs
+    [""] + Dir.entries(feature_dir_path) - dir_that_should_be_skippped
   end
 
   def save_config

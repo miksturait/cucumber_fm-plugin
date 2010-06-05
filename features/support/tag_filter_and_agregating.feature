@@ -3,7 +3,7 @@ Feature: Tag filter
   as project manager, developer
   I want to be able to create filter scope
 
-  @_todo @m1 @i1 @p3
+  @_done @m1 @i1 @p3
   Scenario: Filtering by one tag
 
   @_todo @m1 @i1 @p4
@@ -21,6 +21,10 @@ Feature: Tag filter
   @_backlog
   Scenario: Selecting filter scope as active
 
-  @_backlog
+  @_done
   Scenario: Moving between pages store current scope
+    When I fill in with config settings
+    And I press "Refresh"
+    And I visit dashboard page
+    Then I should see config values saved as it was before
 
