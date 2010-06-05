@@ -12,33 +12,37 @@ describe CucumberFM::Aggregator do
     @aggregator1 = CucumberFM::FeatureElement::Component::Tags::PATTERN[:milestone]
     @aggregator2 = CucumberFM::FeatureElement::Component::Tags::PATTERN[:iteration]
   end
-
-  it "should aggregate correctly by one dimension" do
-    result = CucumberFM::Aggregator.new(@cfm, @aggregator1)
-    result.collection.should == {'@m1' => {
-                                         @f1 => [@s11]
-                                 },
-                                 '@m2' => {
-                                         @f1 => [@s12],
-                                         @f2 => [@s22]
-                                 },
-                                 '@m3' => {
-                                         @f2 => [@s21]
-                                 }}
+  
+  context "single dimension" do
+    it "should aggregate correctly" do
+      result = CucumberFM::Aggregator.new(@cfm, @aggregator1)
+      result.collection.should == {'@m1' => {
+              @f1 => [@s11]
+      },
+                                   '@m2' => {
+                                           @f1 => [@s12],
+                                           @f2 => [@s22]
+                                   },
+                                   '@m3' => {
+                                           @f2 => [@s21]
+                                   }}
+    end
   end
 
-  it "should aggregate correctly by two dimension" do
-    result = CucumberFM::Aggregator.new(@cfm, @aggregator1, @aggregator2)
-    result.collection.should == {'@m1' => {
-                                         '@i1' => { @f1 => [@s11] }
-                                 },
-                                 '@m2' => {
-                                         '@i1' => { @f1 => [@s12]},
-                                         '@i2' => { @f2 => [@s22]}
-                                 },
-                                 '@m3' => {
-                                         '@i1' => { @f2 => [@s21]}
-                                 }}
+  context "double dimension" do
+    it "should aggregate correctly" do
+      result = CucumberFM::Aggregator.new(@cfm, @aggregator1, @aggregator2)
+      result.collection.should == {'@m1' => {
+              '@i1' => { @f1 => [@s11] }
+      },
+                                   '@m2' => {
+                                           '@i1' => { @f1 => [@s12]},
+                                           '@i2' => { @f2 => [@s22]}
+                                   },
+                                   '@m3' => {
+                                           '@i1' => { @f2 => [@s21]}
+                                   }}
+    end
   end
 
 end
