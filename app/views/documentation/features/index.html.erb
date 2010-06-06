@@ -2,8 +2,8 @@
 
 
 <% form_tag '', :method => :get do %>
-    <div id='filter' style="width: 100%; padding: 1%; float: none;">
-      <h2>Scope by</h2>
+    <div id='filter' style="width: 100%; padding: 1%; float: left;">
+      <h3>Scope by</h3>
 
       <div id='scope' style="width: 100%">
         <span>Scope</span>
@@ -14,19 +14,16 @@
       </div>
     </div>
     <div id='view' style="width: 100%; padding: 1%; float: none;">
-      <h2>Presentation settings</h2>
+      <h3>Presentation settings</h3>
 
-      <div id='aggregate' style="float: left; width: 30%">
+      <div id='aggregate' style="float: left; width: 50%">
         <span>Aggregate by:</span>
-        <%= label_tag 'config[aggregate]' %>
         <%= select_tag 'config[aggregate][]', options_for_select(@cfm.config.aggregate_options, :selected => @cfm.config.aggregate.first) %>
         <%= select_tag 'config[aggregate][]', options_for_select(@cfm.config.aggregate_options, :selected => @cfm.config.aggregate.last) %>
-      </div>
-      <div id='sort' style="float: left; width: 30%">
-        <span>Sort by:</span>
+        <span style="margin-left: 250px;"><%= submit_tag "Filter" %></span>
       </div>
     </div>
-    <%= submit_tag "Refresh" %>
+
 <% end %>
 
 <h2>Features</h2>
