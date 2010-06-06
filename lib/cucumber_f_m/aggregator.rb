@@ -1,15 +1,15 @@
 module CucumberFM
   class Aggregator
-    def initialize(cfm, aggregate1, aggregate2=nil)
-      if aggregate2
-        @collection = Collection.nested_hash(2)
+    def initialize(cfm, aggregator)
+        @collection = Collection.nested_hash(aggregator.size)
+      if aggregator.size == 2
         cfm.scenarios.each do |scenario|
-          @collection[label(aggregate1, scenario.tags)][label(aggregate2, scenario.tags)][scenario.feature].push scenario
+          @collection[label(aggregator.first, scenario.tags)][label(aggregator.last, scenario.tags)][scenario.feature].push scenario
         end
       else
         @collection = Collection.nested_hash(1)
         cfm.scenarios.each do |scenario|
-          @collection[label(aggregate1, scenario.tags)][scenario.feature].push scenario
+          @collection[label(aggregator.first, scenario.tags)][scenario.feature].push scenario
         end
       end
     end
