@@ -24,6 +24,11 @@ module CucumberFM
       tags.find('no defined') {|tag| tag =~ aggregate}
     end
 
+    # TODO optimize singe and double aggregate collection to one initializer
+    #    def initialize_empty_collection(level=1)
+    #
+    #    end
+
     def single_aggregate_collection
       Hash.new do |hash, key|
         hash[key] = Hash.new do |hash2, key2|
