@@ -30,20 +30,43 @@ module CucumberFM
     #    end
 
     def single_aggregate_collection
-      Hash.new do |hash, key|
-        hash[key] = Hash.new do |hash2, key2|
+      Collection.new do |hash, key|
+        hash[key] = Collection.new do |hash2, key2|
           hash2[key2] = []
         end
       end
     end
 
     def double_aggregate_collection
-      Hash.new do |hash, key|
-        hash[key] = Hash.new do |hash2, key2|
-          hash2[key2] = Hash.new do |hash3, key3|
+      Collection.new do |hash, key|
+        hash[key] = Collection.new do |hash2, key2|
+          hash2[key2] = Collection.new do |hash3, key3|
             hash3[key3] = []
           end
         end
+      end
+    end
+
+    class Collection < Hash
+
+      include CucumberFM::FeatureElement::Component::TotalEstimation
+
+      def features
+        keys.collect { |key|
+          key.is_a?(CucumberFM::Feature) ? key : self[key].features
+        }.flatten.uniq
+      end
+
+      def scenarios
+        values.collect { |value|
+          value.is_a?(Array) ? value : value.scenarios
+        }.flatten
+      end
+
+      # TODO status sorting
+
+      def keys
+        super.sort
       end
     end
   end
