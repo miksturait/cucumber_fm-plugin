@@ -1,8 +1,19 @@
+0.0.7 - http://github.com/cs3b/cucumber_fm/compare/0.0.6...0.0.7
+* listing scenarios in dashboard
+* aggregator for based on two dimensions
+> Viewing dashboard
+  http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.7.dashboard.jpg
+
+0.0.6 - http://github.com/cs3b/cucumber_fm/compare/0.0.5...0.0.6
+* basic tag filtering
+* keeping user setting in cookie
+
 0.0.5
 Business Overview - dashboard
 > Viewing dashobard
   http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.5.dashboard.jpg
 * scheduling features
 * features specyfication
+
 0.0.4
 * core development
