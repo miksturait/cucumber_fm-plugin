@@ -54,7 +54,7 @@ module CucumberFM
       def features
         keys.collect { |key|
           self[key].is_a?(Array) ? key : self[key].features
-        }.flatten
+        }.flatten.uniq
       end
 
       def scenarios

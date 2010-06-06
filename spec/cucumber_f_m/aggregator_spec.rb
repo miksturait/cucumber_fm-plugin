@@ -16,6 +16,22 @@ describe CucumberFM::Aggregator do
     @aggregator2 = CucumberFM::FeatureElement::Component::Tags::PATTERN[:iteration]
   end
 
+  context "totals values should be correct" do
+    before(:each) do
+      @aggregator = CucumberFM::Aggregator.new(@cfm, @aggregator1)
+      @collection = @aggregator.collection
+    end
+    it "for features" do
+      @collection.should have(2).features
+    end
+    it "for scenarios" do
+      @collection.should have(5).scenarios
+    end
+    it "for estimation" do
+      @collection.estimation.should == 7.25
+    end
+  end
+
   context "single dimension" do
     before(:each) do
       @aggregator = CucumberFM::Aggregator.new(@cfm, @aggregator1)
