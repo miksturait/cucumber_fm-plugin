@@ -9,11 +9,11 @@ Feature: Tag filter
   @_done @m1 @i1 @p4
   Scenario: Filtering by two tags ( using and )
 
-  @_todo @m1 @i1 @p6
-  Scenario: Agregating by one dimension with sorting
+  @_done @m1 @i1 @p6
+  Scenario: Agregating by one dimension
 
-  @_backlog
-  Scenario: Agregating by two dimension with sorting
+  @_done @m1 @i1
+  Scenario: Agregating by two dimension
 
   @_backlog
   Scenario: Creating filter scope
@@ -21,7 +21,7 @@ Feature: Tag filter
   @_backlog
   Scenario: Selecting filter scope as active
 
-  @m1 @i1 @_done
+  @_done @m1 @i1
   Scenario: Moving between pages store current scope
     When I fill in with config settings
     And I press "Refresh"
