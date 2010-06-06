@@ -9,5 +9,9 @@ module CucumberFM
       self.sort = (params['sort'] || '')
       self.display_as = (params['display_as'] || 'list')
     end
+
+    def aggregate_options
+      [''] + CucumberFM::FeatureElement::Component::Tags::PATTERN.keys.map(&:to_s)
+    end
   end
 end

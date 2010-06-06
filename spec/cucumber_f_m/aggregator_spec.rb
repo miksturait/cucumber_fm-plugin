@@ -16,6 +16,11 @@ describe CucumberFM::Aggregator do
     @aggregator2 = CucumberFM::FeatureElement::Component::Tags::PATTERN[:iteration]
   end
 
+  it "should return estimation value for scenarios array" do
+    @aggregator = CucumberFM::Aggregator.new(@cfm, @aggregator1)
+    @aggregator.collection['@m2'][@f1].estimation.should == 2.75
+  end
+
   context "totals values should be correct" do
     before(:each) do
       @aggregator = CucumberFM::Aggregator.new(@cfm, @aggregator1)
@@ -108,7 +113,7 @@ describe CucumberFM::Aggregator do
       end
     end
 
-    {['@m2','@i1'] =>[1,2,2.75], ['@m2','@i2'] =>[1,1,1], ['@m3','@i1'] => [1,1,2]}.each_pair do |key, value|
+    {['@m2', '@i1'] =>[1, 2, 2.75], ['@m2', '@i2'] =>[1, 1, 1], ['@m3', '@i1'] => [1, 1, 2]}.each_pair do |key, value|
       context "should count correctly at second level" do
         context key do
           it "features " do
@@ -124,5 +129,32 @@ describe CucumberFM::Aggregator do
       end
     end
 
+  end
+
+  context "when tag for pattern not found is should be labelled as 'undefined' " do
+    before(:each) do
+      @s22 = mock('scenario4', :feature => @f2, :tags => ['@tb'], :estimation => 1)
+      @cfm = mock('cfm', :scenarios => [@s11, @s12, @s13, @s21, @s22])
+      @aggregator = CucumberFM::Aggregator.new(@cfm, @aggregator1)
+      @collection = @aggregator.collection
+    end
+
+    it "should aggregate correctly" do
+      @collection.should ==
+              {
+                      '@m1' => {
+                              @f1 => [@s11]
+                      },
+                      '@m2' => {
+                              @f1 => [@s12, @s13]
+                      },
+                      '_undefined_' => {
+                              @f2 => [@s22]
+                      },
+                      '@m3' => {
+                              @f2 => [@s21]
+                      }
+              }
+    end
   end
 end

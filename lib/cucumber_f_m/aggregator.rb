@@ -20,8 +20,8 @@ module CucumberFM
 
     private
 
-    def label (aggregate, tags)
-      tags.find('no defined') {|tag| tag =~ aggregate}
+    def label(aggregate, tags)
+      tags.find {|tag| tag =~ aggregate} || '_undefined_' 
     end
 
     class Collection < Hash
@@ -42,9 +42,15 @@ module CucumberFM
 
       def Collection.nested_hash (level=1)
         new do |hash, key|
-          hash[key]= (level > 0 ? nested_hash(level-1) : [])
+          hash[key]= (level > 0 ? nested_hash(level-1) : ScenarioCollection.new)
         end
       end
+    end
+    class ScenarioCollection < Array
+
+      include CucumberFM::FeatureElement::Component::TotalEstimation
+
+      alias_method :scenarios, :entries
     end
   end
 end

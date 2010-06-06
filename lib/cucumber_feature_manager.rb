@@ -46,6 +46,13 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
     @filter ||= CucumberFM::TagFilter.new(config.tags)
   end
 
+  def aggregate
+    unless config.aggregate.empty?
+      pattern = CucumberFM::FeatureElement::Component::Tags::PATTERN[config.aggregate.to_sym]
+      @raport ||= CucumberFM::Aggregator.new(self, pattern).collection
+    end
+  end
+
   def prefix
     config.dir.empty? ? path : File.join(path, config.dir)
   end
