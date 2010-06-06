@@ -81,9 +81,9 @@ describe CucumberFM::Aggregator do
     end
 
     {'@m1' =>[1, 1, 1.5], '@m2' => [2, 3, 3.75], '@m3' => [1, 1, 2]}.each_pair do |key, value|
-      context "should correct count" do
+      context "should count correctly at first level" do
         context key do
-#          it "features" do
+#          it "features " do
 #            @collection[key].should have(value[0]).features
 #          end
           it "scenarios" do
@@ -91,6 +91,22 @@ describe CucumberFM::Aggregator do
           end
           it "estimation" do
             @collection[key].estimation.should == value[2]
+          end
+        end
+      end
+    end
+
+    {['@m2','@i1'] =>[1,2,2.75], ['@m2','@i2'] =>[1,1,1], ['@m3','@i1'] => [1,1,2]}.each_pair do |key, value|
+      context "should count correctly at second level" do
+        context key do
+#          it "features " do
+#            @collection[key.first][key.last].should have(value[0]).features
+#          end
+          it "scenarios" do
+            @collection[key.first][key.last].should have(value[1]).scenarios
+          end
+          it "estimation" do
+            @collection[key.first][key.last].estimation.should == value[2]
           end
         end
       end
