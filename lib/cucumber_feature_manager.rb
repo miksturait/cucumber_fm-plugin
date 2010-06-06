@@ -47,9 +47,8 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
   end
 
   def aggregate
-    unless config.aggregate.empty?
-      pattern = CucumberFM::FeatureElement::Component::Tags::PATTERN[config.aggregate.to_sym]
-      @raport ||= CucumberFM::Aggregator.new(self, pattern).collection
+    unless patterns_for_aggregator.empty?
+      @raport ||= CucumberFM::Aggregator.new(self, patterns_for_aggregator).collection
     end
   end
 
@@ -123,5 +122,11 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
     else
       Time.now.to_i.to_s
     end
+  end
+
+  def patterns_for_aggregator
+    config.aggregate.map { |label|
+      CucumberFM::FeatureElement::Component::Tags::PATTERN[label.to_sym] unless label.blank?
+    }.compact
   end
 end

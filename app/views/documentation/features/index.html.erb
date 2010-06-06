@@ -19,7 +19,8 @@
       <div id='aggregate' style="float: left; width: 30%">
         <span>Aggregate by:</span>
         <%= label_tag 'config[aggregate]' %>
-        <%= select_tag 'config[aggregate]', options_for_select(@cfm.config.aggregate_options, :selected => @cfm.config.aggregate) %>
+        <%= select_tag 'config[aggregate][]', options_for_select(@cfm.config.aggregate_options, :selected => @cfm.config.aggregate.first) %>
+        <%= select_tag 'config[aggregate][]', options_for_select(@cfm.config.aggregate_options, :selected => @cfm.config.aggregate.last) %>
       </div>
       <div id='sort' style="float: left; width: 30%">
         <span>Sort by:</span>
