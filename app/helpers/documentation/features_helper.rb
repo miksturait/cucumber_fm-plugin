@@ -18,11 +18,11 @@ module Documentation
               scenario_rows(scenarios)
     end
 
-    def draw_aggregate(aggregate)
+    def draw_aggregate(aggregate, level=1)
       aggregate.keys.collect { |key|
         key.is_a?(CucumberFM::Feature) ?
                 draw_aggregate_feature(key, aggregate[key]) :
-                report_header(aggregate[key], key) << draw_aggregate(aggregate[key])
+                report_header(aggregate[key], key, level) << draw_aggregate(aggregate[key], level+1)
       }.join(''.html_safe).html_safe
     end
 
@@ -37,8 +37,8 @@ module Documentation
       end
     end
 
-    def report_header(collection, name)
-      content_tag 'tr', :class => 'raport_header' do
+    def report_header(collection, name, level)
+      content_tag 'tr', :class => "raport_header level_#{level}" do
         content_tag('td', name, :collspan => 2) <<
                 content_tag('td', collection.features.size) <<
                 content_tag('td', collection.scenarios.size) <<
