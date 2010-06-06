@@ -22,10 +22,6 @@ describe CucumberFM::Aggregator do
       @collection = @aggregator.collection
     end
 
-    it "should can iterate over ordered keys" do
-      @collection.keys.should == ['@m1', '@m2', '@m3']
-    end
-
     it "should aggregate correctly" do
       @collection.should ==
               {
@@ -45,9 +41,9 @@ describe CucumberFM::Aggregator do
     {'@m1' =>[1, 1, 1.5], '@m2' => [2, 3, 3.75], '@m3' => [1, 1, 2]}.each_pair do |key, value|
       context "should correct count" do
         context key do
-#          it "features" do
-#            @collection[key].should have(value[0]).features
-#          end
+          it "features" do
+            @collection[key].should have(value[0]).features
+          end
           it "scenarios" do
             @collection[key].should have(value[1]).scenarios
           end
@@ -83,9 +79,9 @@ describe CucumberFM::Aggregator do
     {'@m1' =>[1, 1, 1.5], '@m2' => [2, 3, 3.75], '@m3' => [1, 1, 2]}.each_pair do |key, value|
       context "should count correctly at first level" do
         context key do
-#          it "features " do
-#            @collection[key].should have(value[0]).features
-#          end
+          it "features " do
+            @collection[key].should have(value[0]).features
+          end
           it "scenarios" do
             @collection[key].should have(value[1]).scenarios
           end
@@ -99,9 +95,9 @@ describe CucumberFM::Aggregator do
     {['@m2','@i1'] =>[1,2,2.75], ['@m2','@i2'] =>[1,1,1], ['@m3','@i1'] => [1,1,2]}.each_pair do |key, value|
       context "should count correctly at second level" do
         context key do
-#          it "features " do
-#            @collection[key.first][key.last].should have(value[0]).features
-#          end
+          it "features " do
+            @collection[key.first][key.last].should have(value[0]).features
+          end
           it "scenarios" do
             @collection[key.first][key.last].should have(value[1]).scenarios
           end

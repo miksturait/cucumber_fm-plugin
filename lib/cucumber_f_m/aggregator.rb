@@ -53,20 +53,14 @@ module CucumberFM
 
       def features
         keys.collect { |key|
-          key.is_a?(CucumberFM::Feature) ? key : self[key].features
-        }.flatten.uniq
+          self[key].is_a?(Array) ? key : self[key].features
+        }.flatten
       end
 
       def scenarios
         values.collect { |value|
           value.is_a?(Array) ? value : value.scenarios
         }.flatten
-      end
-
-      # TODO status sorting
-
-      def keys
-        super.sort
       end
     end
   end
