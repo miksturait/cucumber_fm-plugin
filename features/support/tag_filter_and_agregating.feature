@@ -21,7 +21,7 @@ Feature: Tag filter
   @_backlog
   Scenario: Selecting filter scope as active
 
-  @_done
+  @m1 @i1 @_done
   Scenario: Moving between pages store current scope
     When I fill in with config settings
     And I press "Refresh"
