@@ -23,7 +23,7 @@ module Documentation
         key.is_a?(CucumberFM::Feature) ?
                 draw_aggregate_feature(key, aggregate[key]) :
                 report_header(aggregate[key], key) << draw_aggregate(aggregate[key])
-      }
+      }.join(''.html_safe).html_safe
     end
 
     # TODO missing information about estimation per feature
