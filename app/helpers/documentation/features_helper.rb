@@ -39,7 +39,7 @@ module Documentation
 
     def report_header(collection, name, level)
       content_tag 'tr', :class => "raport_header level_#{level}" do
-        content_tag('td', name, :collspan => 2) <<
+        content_tag('td', name, :colspan => 2) <<
                 content_tag('td', collection.features.size) <<
                 content_tag('td', collection.scenarios.size) <<
                 content_tag('td', collection.estimation)
