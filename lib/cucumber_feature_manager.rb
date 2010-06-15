@@ -22,6 +22,8 @@ require 'cucumber_f_m/aggregator'
 require 'cucumber_f_m/cvs/git'
 require 'grit/lib/grit'
 
+require 'base64'
+
 # TODO refactor, use repo full_path and feature not full path
 class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
 

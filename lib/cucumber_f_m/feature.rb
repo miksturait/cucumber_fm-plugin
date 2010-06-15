@@ -3,6 +3,10 @@ module CucumberFM
 
     include FeatureElement::Component::TotalEstimation
 
+    def id
+      Base64.encode64(relative_path)
+    end
+
     def raw
       @raw ||= read_content_from_file
     end
@@ -97,6 +101,10 @@ module CucumberFM
     def scenario_or_scenario_outline
       Regexp.union(FeatureElement::Scenario::PATTERN,
                    FeatureElement::ScenarioOutline::PATTERN)
+    end
+
+    def relative_path
+      path.gsub(/^#{cfm.path}\//, '')
     end
   end
 end

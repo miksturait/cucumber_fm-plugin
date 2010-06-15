@@ -37,7 +37,7 @@ describe CucumberFM::Feature do
       CucumberFM::FeatureElement::Background.should_receive(:new).with(subject, BACKGROUND_CONTENT)
       subject.background
     end
-    
+
 # SKIP bug in rspec
 #    it "should parse scenarios" do
 #      CucumberFM::FeatureElement::Scenario.should_receive(:new).with(subject, SCENARIO_CONTENT)
@@ -47,7 +47,7 @@ describe CucumberFM::Feature do
 #      CucumberFM::FeatureElement::ScenarioOutline.should_receive(:new).with(subject, SCENARIO_OUTLINE)
 #      subject.scenarios
 #    end
-    
+
     it "should parse two scenarios" do
       subject.should have(2).scenarios
     end
@@ -85,6 +85,21 @@ describe CucumberFM::Feature do
       subject.estimation.should == 8.25
     end
   end
+  context "PATH & ID" do
+    before(:each) do
+      cfm = mock('cfm', :path => "/some/path/features")
+      @feature = CucumberFM::Feature.new("/some/path/features/one/user_login.feature", cfm)
+    end
+
+    it "should return relative path based on cfm path" do
+      @feature.send(:relative_path).should == "one/user_login.feature"
+    end
+
+    it "should return id (base64 encode relative path)" do
+      @feature.id.should == Base64.encode64("one/user_login.feature")
+    end
+  end
+
 
 end
 
