@@ -1,0 +1,9 @@
+<h1><%= @feature.info.title %></h1>
+<span><i><%= @feature.send(:relative_path) %></i></span>
+
+<% form_tag documentation_feature_path(@feature.id) do %>
+    <%= submit_tag 'Save' %>
+    <div>
+      <%= text_area_tag 'raw', @feature.raw, :size => "100x40" %>
+    </div>
+<% end %>

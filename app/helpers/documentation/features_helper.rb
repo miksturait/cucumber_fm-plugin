@@ -30,7 +30,7 @@ module Documentation
     def draw_aggregate_feature(feature, scenarios)
       content_tag 'tr', :class => 'feature_header' do
         content_tag('td') <<
-                content_tag('td', feature.info.title) <<
+                content_tag('td', link_to(feature.info.title, edit_documentation_feature_path(feature.id))) <<
                 content_tag('td') <<
                 content_tag('td', scenarios.size, :style => "text-align:center;") <<
                 content_tag('td', scenarios.estimation, :style => "text-align:center;")
@@ -50,7 +50,7 @@ module Documentation
     def feature_header(feature)
       content_tag 'tr', :class => 'feature_header' do
         content_tag('td') <<
-                content_tag('td', feature.info.title) <<
+                content_tag('td', link_to(feature.info.title, edit_documentation_feature_path(feature.id))) <<
                 content_tag('td') <<
                 content_tag('td', feature.scenarios.size, :style => "text-align:center;") <<
                 content_tag('td', feature.estimation, :style => "text-align:center;")
