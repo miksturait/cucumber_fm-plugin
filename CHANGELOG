@@ -1,6 +1,7 @@
 * simply editor
 * ugly styling in dashboard
 * bugfix: spelling of collspan -> colspan
+
 0.0.7 - http://github.com/cs3b/cucumber_fm/compare/0.0.6...0.0.7
 * listing scenarios in dashboard
 * aggregator for based on two dimensions
