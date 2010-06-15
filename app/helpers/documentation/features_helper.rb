@@ -38,11 +38,12 @@ module Documentation
     end
 
     def report_header(collection, name, level)
-      content_tag 'tr', :class => "raport_header level_#{level}" do
+      warning_class = (name == '_undefined_' ? ' warning' : '')
+      content_tag 'tr', :class => "raport_header level_#{level}#{warning_class}" do
         content_tag('td', name, :colspan => 2) <<
-                content_tag('td', collection.features.size) <<
-                content_tag('td', collection.scenarios.size) <<
-                content_tag('td', collection.estimation)
+                content_tag('td', collection.features.size, :style => "text-align:center;") <<
+                content_tag('td', collection.scenarios.size, :style => "text-align:center;") <<
+                content_tag('td', collection.estimation, :style => "text-align:center;")
       end
     end
 

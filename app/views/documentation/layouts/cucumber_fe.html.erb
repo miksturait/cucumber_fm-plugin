@@ -3,6 +3,29 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
   <title>Documentation</title>
+  <style>
+    tr.level_1 {
+        background-color: #90f2f3;
+        font-weight: bolder;
+    }
+    tr.level_2 {
+        background-color: #cff3f3;
+        font-style: italic;
+        font-weight: normal;
+    }
+    tr.feature_header:nth-child(2n) {
+        background-color: #e3f4f4;
+    }
+
+    tr.level_2 td:first-child {
+        padding-left: 45px;
+    }
+
+    .warning {
+        color: red;
+    }
+
+  </style>
 </head>
     <body>
         <%= yield %>        
