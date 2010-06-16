@@ -7,5 +7,7 @@ ActionController::Routing::Routes.draw do |map|
                        :controller => 'features',
                        :action => 'update'
     doc.resources :features
+    doc.connect "assets/:path", :controller => 'assets', :action => 'get',
+                :requirements => { :path => /.*/ }
   end
 end
