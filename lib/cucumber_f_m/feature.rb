@@ -62,7 +62,7 @@ module CucumberFM
 
     # TODO we need to detect it in more clever way
     def commit
-      cfm.commit(self) if cfm && cfm.respond_to?(:commit)
+      cfm.commit_change_on(self) if cfm && cfm.respond_to?(:commit_change_on)
     end
 
     # TODO we need to detect it in more clever way
