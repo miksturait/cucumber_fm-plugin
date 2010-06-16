@@ -1,8 +1,11 @@
+<div style="margin: 5px 0 35px 5px;"><%= button_to 'Back', documentation_features_path %></div>
+
 <h1><%= @feature.info.title %></h1>
 <span><i><%= @feature.relative_path %></i></span>
 
 <% form_tag documentation_feature_path(@feature.id) do %>
-    <%= submit_tag 'Save' %>
+    <div style="margin: 35px;"><%= submit_tag 'Save' %></div>
+
     <div>
       <%= text_area_tag 'raw', @feature.raw, :size => "100x40" %>
     </div>
