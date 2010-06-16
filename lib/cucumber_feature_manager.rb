@@ -77,10 +77,21 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
     `cd #{repo_path} && git add #{feature.path}`
   end
 
+  # TODO cleanup 
   def push_to_remote
     # WTF - why this is not works
     # git.push({}, repo_remote_name, "#{repo_current_branch}:#{repo_remote_branch_name}")
-    `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{repo_remote_branch_name}`
+    if capistrano_branch_name
+      `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{stories_branch_name(capistrano_branch_name)}`
+    elsif last_stories_branch_name
+      begin
+        `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{last_stories_branch_name}`
+      rescue => e
+        `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{new_branch_name}`
+      end
+    else
+      `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{new_branch_name}`
+    end
   end
 
   def scan_features
@@ -112,18 +123,23 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
     repo.remote_list.first
   end
 
-  def repo_remote_branch_name
-    "stories_#{timestamp}"
+  def last_stories_branch_name
+    repo.remotes.map(&:name).collect {|name| /stories_\d+/.match(name) }.compact.map(&:to_s).sort.last
   end
 
-  def timestamp
-    # check if it's deployed with capistrano
+  def capistrano_branch_name
+    "stories_#{timestamp_capistrano}" if timestamp_capistrano
+  end
+
+  def timestamp_capistrano
     pattern = /\d{14}$/
-    if defined?(Rails) and Rails.root.to_s =~ pattern
-      pattern.match(Rails.root).to_s
-    else
-      Time.now.to_i.to_s
+    if defined?(Rails)
+      pattern.match(Rails.root)
     end
+  end
+
+  def new_branch_name
+    "stories_#{Time.now.strftime('%Y%m%d%H%M%S')}"
   end
 
   def patterns_for_aggregator

@@ -92,7 +92,7 @@ describe CucumberFM::Feature do
     end
 
     it "should return relative path based on cfm path" do
-      @feature.send(:relative_path).should == "one/user_login.feature"
+      @feature.relative_path.should == "one/user_login.feature"
     end
 
     it "should return id (base64 encode relative path)" do

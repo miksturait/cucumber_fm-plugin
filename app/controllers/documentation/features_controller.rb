@@ -32,4 +32,5 @@ class Documentation::FeaturesController < Documentation::ApplicationController
   def cfm
     @cfm ||= CucumberFeatureManager.new(feature_dir_path, git_dir_path, read_config)
   end
+
 end

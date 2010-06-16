@@ -7,6 +7,10 @@ module CucumberFM
       Base64.encode64(relative_path)
     end
 
+    def relative_path
+      path.gsub(/^#{cfm.path}\//, '')
+    end
+
     def raw
       @raw ||= read_content_from_file
     end
@@ -37,20 +41,13 @@ module CucumberFM
 
     def save
       write_content_to_file
+      commit
+      push
     end
 
     def filename
       path.split("/").last
     end
-
-    # TODO extract to module and include in rails/init.rb
-    #  def id(path)
-    #    Base64.encode64(path.gsub(feature_dir_path << '/', ''))
-    #  end
-    #
-    #  def self.find(id)
-    #    feature_dir_path.join(Base64.decode64(id))
-    #  end
 
     private
 
@@ -60,6 +57,17 @@ module CucumberFM
 
     def write_content_to_file
       File.open(path, 'w') { |stream| stream.write raw }
+    end
+
+
+    # TODO we need to detect it in more clever way
+    def commit
+      cfm.commit(self) if cfm && cfm.respond_to?(:commit)
+    end
+
+    # TODO we need to detect it in more clever way
+    def push
+      cfm.send_to_remote if cfm && cfm.respond_to?(:send_to_remote)
     end
 
     def fetch_scenarios
@@ -101,10 +109,6 @@ module CucumberFM
     def scenario_or_scenario_outline
       Regexp.union(FeatureElement::Scenario::PATTERN,
                    FeatureElement::ScenarioOutline::PATTERN)
-    end
-
-    def relative_path
-      path.gsub(/^#{cfm.path}\//, '')
     end
   end
 end

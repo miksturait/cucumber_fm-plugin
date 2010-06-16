@@ -1,5 +1,5 @@
 <h1><%= @feature.info.title %></h1>
-<span><i><%= @feature.send(:relative_path) %></i></span>
+<span><i><%= @feature.relative_path %></i></span>
 
 <% form_tag documentation_feature_path(@feature.id) do %>
     <%= submit_tag 'Save' %>
