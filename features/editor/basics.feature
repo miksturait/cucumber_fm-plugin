@@ -19,7 +19,7 @@ Feature: Editor - Basics
   @_backlog
   Scenario: Deleting feature
 
-  @_todo @m1 @i2 @p4
+  @_todo @m1 @i3 @p4
   Scenario: Navigating between scenarios
 
 

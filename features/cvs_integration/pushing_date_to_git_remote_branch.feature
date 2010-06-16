@@ -12,7 +12,7 @@ Feature: Pushing date to git remote branch
   @_backlog
   Scenario: Setting push policy
 
-  @_done @m1 @i3 @p4
+  @_done @m1 @i2 @p4
   Scenario: Pushing changes to remote branch
 
 
