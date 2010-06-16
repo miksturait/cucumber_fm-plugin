@@ -21,7 +21,7 @@ Feature: Business Overview - dashboard
   @_done @m1 @i1 @p5
   Scenario: Agregating by tag type
 
-  @_todo @m1 @i2 @p1
+  @_done @m1 @i2 @p1
   Scenario: Going to feature editing
 
   @_backlog
