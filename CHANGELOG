@@ -1,7 +1,9 @@
+0.0.9
+* using bespin as editor
 * internal assets serving
 * bugfix: wrong method name in cfm
 
-0.0.8 - http://github.com/cs3b/cucumber_fm/compare/0.0.7...0.0.8
+0.0.8
 * git (with remotes) support
 * simply editor
   http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.8.editor.jpg
@@ -9,13 +11,13 @@
   http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.8.dashboard.jpg
 * bugfix: spelling of collspan -> colspan
 
-0.0.7 - http://github.com/cs3b/cucumber_fm/compare/0.0.6...0.0.7
+0.0.7
 * listing scenarios in dashboard
 * aggregator for based on two dimensions
 > Viewing dashboard
   http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.7.dashboard.jpg
 
-0.0.6 - http://github.com/cs3b/cucumber_fm/compare/0.0.5...0.0.6
+0.0.6
 * basic tag filtering
 * keeping user setting in cookie
 
