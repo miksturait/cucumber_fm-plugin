@@ -5,8 +5,8 @@
 
 <% form_tag documentation_feature_path(@feature.id) do %>
     <div style="margin: 35px;"><%= submit_tag 'Save' %></div>
-
-    <div>
-      <%= text_area_tag 'raw', @feature.raw, :size => "100x40" %>
-    </div>
 <% end %>
+<!-- data-bespinoptions='{ "settings":{"tabstop":2} }' -->
+    <div id="raw" class="bespin">
+      <%= @feature.raw %>
+    </div>
