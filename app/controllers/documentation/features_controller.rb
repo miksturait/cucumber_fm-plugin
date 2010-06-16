@@ -1,6 +1,5 @@
 class Documentation::FeaturesController < Documentation::ApplicationController
 
-  helper :all
   before_filter :fetch_feature, :only => [:show, :edit, :update]
   before_filter :cleanup_raw, :only => [:update]
 

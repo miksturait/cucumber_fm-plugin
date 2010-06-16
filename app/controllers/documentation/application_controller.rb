@@ -1,5 +1,6 @@
 class Documentation::ApplicationController < ActionController::Base
   layout '/documentation/layouts/cucumber_fe'
+  helper :all
 
   before_filter :digest_authenticate
   before_filter :save_config

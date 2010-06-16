@@ -1,3 +1,6 @@
+* internal assets serving
+* bugfix: wrong method name in cfm
+
 0.0.8 - http://github.com/cs3b/cucumber_fm/compare/0.0.7...0.0.8
 * git (with remotes) support
 * simply editor

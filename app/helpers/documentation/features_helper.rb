@@ -68,5 +68,11 @@ module Documentation
                 content_tag('td', scenario.estimation, :style => 'text-align: center;')
       end
     end
+
+    # assets
+    
+    def asset_link(path)
+      "/documentation/assets/#{path}"
+    end
   end
 end
