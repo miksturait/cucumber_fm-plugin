@@ -82,7 +82,7 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
     # WTF - why this is not works
     # git.push({}, repo_remote_name, "#{repo_current_branch}:#{repo_remote_branch_name}")
     if capistrano_branch_name
-      `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{stories_branch_name(capistrano_branch_name)}`
+      `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{capistrano_branch_name}`
     elsif last_stories_branch_name
       begin
         `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{last_stories_branch_name}`
