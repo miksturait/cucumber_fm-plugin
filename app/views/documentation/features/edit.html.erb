@@ -6,7 +6,5 @@
 <% form_tag documentation_feature_path(@feature.id) do %>
     <div style="margin: 35px;"><%= submit_tag 'Save' %></div>
 <% end %>
-<!-- data-bespinoptions='{ "settings":{"tabstop":2} }' -->
-    <div id="raw" class="bespin">
-      <%= @feature.raw %>
-    </div>
+
+<div id="raw" style="height: 1024px; width: 800px" class="bespin"><%= @feature.raw -%></div>
