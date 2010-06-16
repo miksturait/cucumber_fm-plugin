@@ -1,5 +1,9 @@
+0.0.8 - http://github.com/cs3b/cucumber_fm/compare/0.0.7...0.0.8
+* git (with remotes) support
 * simply editor
+  http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.8.editor.jpg
 * ugly styling in dashboard
+  http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.8.dashboard.jpg
 * bugfix: spelling of collspan -> colspan
 
 0.0.7 - http://github.com/cs3b/cucumber_fm/compare/0.0.6...0.0.7
