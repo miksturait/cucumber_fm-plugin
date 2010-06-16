@@ -2,6 +2,7 @@ class Documentation::FeaturesController < Documentation::ApplicationController
 
   helper :all
   before_filter :fetch_feature, :only => [:show, :edit, :update]
+  before_filter :cleanup_raw, :only => [:update]
 
   def index
     cfm
@@ -31,6 +32,10 @@ class Documentation::FeaturesController < Documentation::ApplicationController
 
   def cfm
     @cfm ||= CucumberFeatureManager.new(feature_dir_path, git_dir_path, read_config)
+  end
+
+  def cleanup_raw
+    params[:raw].gsub!(/\r/,'')
   end
 
 end
