@@ -4,7 +4,7 @@ body
     padding: 0px;
     font: 12px 'Trebuchet MS',Helvetica, Arial, Verdana, Tahoma;
     color: #5a7582;
-    background: url(/images/layout/bg_body.png) repeat-x top center #f1f5f7;
+    background: url(/documentation/assets/images//layout/bg_body.png) repeat-x top center #f1f5f7;
 }
 
 #container
@@ -54,13 +54,13 @@ ul, ul li, p, input, textarea, select, label
 #menu ul li a.development
 {
     width: 163px;
-    background: url(/images/layout/menu_development.png) no-repeat top center transparent;
+    background: url(/documentation/assets/images//layout/menu_development.png) no-repeat top center transparent;
 }
 
 #menu ul li a.business
 {
     width: 147px;
-    background: url(/images/layout/menu_business.png) no-repeat top center transparent;
+    background: url(/documentation/assets/images//layout/menu_business.png) no-repeat top center transparent;
 }
 
 
@@ -94,7 +94,7 @@ ul, ul li, p, input, textarea, select, label
 {
     width: 100%;
     height: 43px;
-    background: url(/images/layout/frame_head.png) repeat-x top left #b5bcc0;
+    background: url(/documentation/assets/images//layout/frame_head.png) repeat-x top left #b5bcc0;
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
 }
@@ -112,7 +112,7 @@ ul, ul li, p, input, textarea, select, label
 {
     width: 200px;
     height: 43px;
-    background: url(/images/layout/frame_head_actions.png) repeat-x top left #83969f;
+    background: url(/documentation/assets/images//layout/frame_head_actions.png) repeat-x top left #83969f;
     float: right;
     -moz-border-radius-topright: 5px;    
 }
@@ -124,7 +124,7 @@ ul, ul li, p, input, textarea, select, label
     padding: 13px 14px 13px;
     color: #fff;
     font-weight: 700;
-    background: url(/images/layout/frame_head_actions_lb.png) no-repeat 0px 1px;
+    background: url(/documentation/assets/images//layout/frame_head_actions_lb.png) no-repeat 0px 1px;
 }
 
 .frame .content
@@ -139,7 +139,7 @@ ul, ul li, p, input, textarea, select, label
 
 .frame .two_columns
 {
-    background: url(/images/layout/frame_content_twocolumns.png) repeat-y right top #fff;
+    background: url(/documentation/assets/images//layout/frame_content_twocolumns.png) repeat-y right top #fff;
 }
 
 .frame .content .left
@@ -164,7 +164,7 @@ ul, ul li, p, input, textarea, select, label
     padding: 13px 14px 12px;
     color: #fff;
     font-weight: 700;    
-    background: url(/images/layout/frame_head_actions.png) repeat-x top left #83969f;
+    background: url(/documentation/assets/images//layout/frame_head_actions.png) repeat-x top left #83969f;
 }
 
 .frame .content .right ul.actions
@@ -181,7 +181,7 @@ ul, ul li, p, input, textarea, select, label
 {
     display: block;
     border: 1px solid #6c9c28;
-    background: url(/images/layout/bt_green.png) repeat-x top left #74af16;
+    background: url(/documentation/assets/images//layout/bt_green.png) repeat-x top left #74af16;
     -moz-border-radius: 5px;
     padding: 7px 10px;
     margin: 0px 8px;
@@ -202,7 +202,7 @@ ul, ul li, p, input, textarea, select, label
 
 .frame .content .right ul.actions li.section_view h4
 {
-    background: url(/images/layout/table_thead.png) repeat-x bottom left #edf2f4;
+    background: url(/documentation/assets/images//layout/table_thead.png) repeat-x bottom left #edf2f4;
     padding: 3px 4px 6px;
     border-top: 1px solid #c2c9cd;
 }
@@ -215,7 +215,7 @@ table.generic
 
 table thead tr th
 {
-    background: url(/images/layout/table_thead.png) repeat-x bottom left #edf2f4;
+    background: url(/documentation/assets/images//layout/table_thead.png) repeat-x bottom left #edf2f4;
     padding: 6px 4px;
 }
 
@@ -331,7 +331,7 @@ table tbody tr.feature_header:first-child td
 .navigator_list li
 {
     display: block;
-    background: url("/images/layout/frame_head.png") repeat-x 0px -1px #B5BCC0;
+    background: url("/documentation/assets/images//layout/frame_head.png") repeat-x 0px -1px #B5BCC0;
     padding: 5px 5px 6px;
     position: relative;
 }
