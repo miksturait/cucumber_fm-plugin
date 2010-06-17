@@ -15,10 +15,10 @@ Feature: Tag filter
   @_done @m1 @i1
   Scenario: Agregating by two dimension
 
-  @_backlog
+  @_backlog @m0
   Scenario: Creating filter scope
 
-  @_backlog
+  @_backlog @m0
   Scenario: Selecting filter scope as active
 
   @_done @m1 @i1

@@ -4,7 +4,7 @@ Feature: Business Overview - dashboard
   As project manager, product owner
   I want to see estimation based on active scope and filter
 
-  @_done @m1 @i1 @p1
+  @_done @m1 @i1
   Scenario: Viewing dashobard
     When I visit documentation page
     Then I should see:
@@ -15,14 +15,14 @@ Feature: Business Overview - dashboard
   @_todo @m1 @i3 @p1
   Scenario: Adding new feature
 
-  @_done @m1 @i1 @p2
+  @_done @m1 @i1
   Scenario: Filtering By tag and folder
 
-  @_done @m1 @i1 @p5
+  @_done @m1 @i1
   Scenario: Agregating by tag type
 
-  @_done @m1 @i2 @p1
+  @_done @m1 @i2
   Scenario: Going to feature editing
 
-  @_done
+  @_done @m1 @i2
   Scenario: Agregating based on tag type

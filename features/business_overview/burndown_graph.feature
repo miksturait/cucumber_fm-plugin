@@ -3,12 +3,12 @@ Feature: Burndown graph
   as project manager, developer
   I want to be able to define burndow chart that would be redraw every day
 
-  @_backlog
+  @m0 @_backlog
   Scenario: Defining burndow chart
 
-  @_backlog
+  @m0 @_backlog
   Scenario: Browsing burndow charts
 
-  @_backlog
+  @m0 @_backlog
   Scenario: Viewing burndow chart
 

@@ -4,14 +4,14 @@ Feature: Kanban - dashboard
   as project manager, developer
   I want to be able to browse scenarios aggregated by status
 
-  @_backlog
+  @_backlog @m0
   Scenario: Viewing Kanban
 
-  @_backlog
+  @_backlog @m0
   Scenario: Hiding/Viewing features with scenarios for specific status
 
-  @_backlog
+  @_backlog @m0
   Scenario: Hiding/Showing scenarios for particular feature
 
-  @_backlog
+  @_backlog @m0
   Scenario: Filtering Scenarios by tags and module

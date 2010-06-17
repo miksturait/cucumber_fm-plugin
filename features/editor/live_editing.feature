@@ -15,8 +15,8 @@ Feature: Editor - Live Editing
     When Greg write "ario: "
     Then Tome should imediately see "Scenario: " within editor in his browser
 
-  @m0
+  @_backlog @m0
   Scenario: Syntax highlighting
 
-  @m0
+  @_backlog @m0
   Scenario: Keyboard Shortcuts

@@ -3,13 +3,13 @@ Feature: Pushing date to git remote branch
   developer
   should be able to push data to remote branch
 
-  @_backlog
+  @_backlog @m0
   Scenario: Setting local branch configuration
 
-  @_backlog
+  @_backlog @m0
   Scenario: Setting remote branch configuration
 
-  @_backlog
+  @_backlog @m0
   Scenario: Setting push policy
 
   @_done @m1 @i2 @p4

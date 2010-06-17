@@ -4,5 +4,5 @@ Feature: Support - changelog
   I want to be able generate changelog based on filter criteria
   (like milestone, iterations, developer)
 
-  @_backlog
+  @_backlog @m0
   Scenario: Generating change log as text
