@@ -70,9 +70,14 @@ module Documentation
     end
 
     # assets
-    
+
     def asset_link(path)
       "/documentation/assets/#{path}"
+    end
+
+    # menu highlighting
+    def highlight(name)
+      (@highlight == name) ? ' highlighted' : nil
     end
   end
 end

@@ -4,6 +4,7 @@ class Documentation::FeaturesController < Documentation::ApplicationController
   before_filter :cleanup_raw, :only => [:update]
 
   def index
+    @highlight = 'business_overview'
     cfm
   end
 
