@@ -1,13 +1,51 @@
-<div style="margin: 5px 0 35px 5px;"><%= button_to 'Back', documentation_features_path %></div>
+<div class="frame">
+  <div class="head">
+    <div class="actions">
+      <h2>Actions</h2>
+    </div>
+    <h1><%= @feature.info.title %> - <i><%= @feature.relative_path %></i></h1>
+  </div>
+  <div class="content two_columns">
+    <div class="left">
+      <div id="raw-bespin" class="bespin"><%= @feature.raw -%></div> 
+    </div>
 
-<h1><%= @feature.info.title %></h1>
-<span><i><%= @feature.relative_path %></i></span>
+    <div class="right">
+      <ul class="actions">
+        <li>
+          <%= link_to "Save", {}, :onClick => "document.getElementById('raw').value= document.getElementById('raw-bespin').bespin.value;" %>
+          <%= hidden_field_tag 'raw' %>
+        </li>
+        <li><%= link_to "Back", documentation_features_path %></li>
+      </ul>
+      <h3>Navigatior</h3>
+      <ul class="navigator_list">
+        <li>
+          <h5>I can edit permissions</h5>
+          <p>@2 @_todo @mc</p>
+          <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">3</span>
+        </li>
+        <li>
+          <h5>I can edit permissions</h5>
+          <p>@2 @_todo @mc</p>
+          <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">7</span>
+        </li>
+        <li>
+          <h5>I can edit permissions</h5>
+          <p>@2 @_todo @mc</p>
+          <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">8</span>
+        </li>
+        <li>
+          <h5>I can edit permissions</h5>
+          <p>@2 @_todo @mc</p>
+          <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">1</span>
+        </li>        
+      </ul>
+    </div>
 
-<% form_tag documentation_feature_path(@feature.id) do %>
-    <div style="margin: 35px;">
-      <%= submit_tag 'Save',
-                     :onClick => "document.getElementById('raw').value= document.getElementById('raw-bespin').bespin.value;" %></div>
-    <%= hidden_field_tag 'raw', '' %>
-<% end %>
+    <div class="clb"></div>
 
-<div id="raw-bespin" style="height: 1024px; width: 800px" class="bespin"><%= @feature.raw -%></div>
+
+  </div>
+</div>      
+

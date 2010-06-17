@@ -3,61 +3,21 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
   <title>Documentation</title>
-  <style>
-      tr.level_1 {
-          background-color: #49A3B3;
-          font-weight: bolder;
-      }
-
-      tr.level_2 {
-          background-color: #9bcfd9;
-          font-style: italic;
-          font-weight: normal;
-      }
-
-      tr.feature_header:nth-child(2n)
-      {
-      background-color: #e3f4f4;
-      }
-
-      tr.level_2 td:first-child {
-          padding-left: 45px;
-      }
-
-      .warning {
-          color: red;
-          font-weight: bold;
-      }
-
-      a:link {
-          text-decoration: none;
-          color: #B06448;
-      }
-
-      a:visited {
-          text-decoration: none;
-          color: #B06448;
-      }
-
-      a:active {
-          text-decoration: none;
-          color: #B06448;
-      }
-
-      a:hover {
-          text-decoration: underline;
-          color: #B36B49;
-      }
-      #sc464 {
-          float: left;
-      }
-
-  </style>
-  <LINK href="<%= asset_link('stylesheets/BespinEmbedded.compressed.css') -%>" rel="stylesheet" type="text/css">
+  <link href="<%= asset_link('stylesheets/BespinEmbedded.compressed.css') -%>" media="screen" rel="stylesheet" type="text/css"/>
   <script src="<%= asset_link('javascripts/BespinEmbedded.compressed.js') -%>"></script>
-
+  <link href="/stylesheets/layout.css" rel="stylesheet" media="screen" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<%= yield %>
+<div id="container">
+  <div id="menu">
+    <ul>
+      <li><%= link_to "development overview", {}, :class => "development" %></li>
+      <li><%= link_to "business overview", {}, :class => "business highlighted" %></li>
+    </ul>
+  </div>
+  <div id="content">
+    <%= yield %>
+  </div>
+</div>
 </body>
 </html>

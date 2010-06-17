@@ -1,44 +1,74 @@
-<h1>Dashboard</h1>
-
-
-<% form_tag '', :method => :get do %>
-    <div id='filter' style="width: 100%; padding: 1%; float: left;">
-      <h3>Scope by</h3>
-
-      <div id='scope' style="width: 100%">
-        <span>Scope</span>
-        <%= label_tag 'config[dir]', "Directory:" %>
-        <%= select_tag 'config[dir]', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
-        <%= label_tag 'config[tags]', "Tags:" %>
-        <%= text_field_tag 'config[tags]', @cfm.config.tags %>
-      </div>
+<div class="frame">
+  <div class="head">
+    <div class="actions">
+      <h2>Actions</h2>
     </div>
-    <div id='view' style="width: 100%; padding: 1%; float: none;">
-      <h3>Presentation settings</h3>
-
-      <div id='aggregate' style="float: left; width: 50%">
-        <span>Aggregate by:</span>
-        <%= select_tag 'config[aggregate][]', options_for_select(@cfm.config.aggregate_options, :selected => @cfm.config.aggregate.first) %>
-        <%= select_tag 'config[aggregate][]', options_for_select(@cfm.config.aggregate_options, :selected => @cfm.config.aggregate.last) %>
-        <span style="margin-left: 250px;"><%= submit_tag "Filter" %></span>
-      </div>
+    <h1>Feature</h1>
+  </div>
+  <div class="content two_columns">
+    <div class="left">
+      <table class="generic" cellpadding="0" cellspacing="0">
+        <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>Features <span class="marker m_blue"><%= @cfm.features.size %></span></th>
+          <th>Scenarios <span class="marker m_magenta"><%= @cfm.scenarios.size %></span></th>
+          <th>Estimation <span class="marker m_grey"><%= @cfm.estimation %></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= draw_report_rows(@cfm) %>
+        </tbody>
+      </table>
     </div>
 
-<% end %>
+    <div class="right">
+      <ul class="actions">
+        <li><%= link_to "Filter" %></li>
+        <li class="section_view">
 
-<h2>Features</h2>
+          <% form_tag '', :method => :get do %>
+              <h4>Scope by</h4>
 
-<table>
-  <thead>
-  <tr>
-    <th></th>
-    <th></th>
-    <th>Features [<%= @cfm.features.size %>]</th>
-    <th>Scenarios [<%= @cfm.scenarios.size %>]</th>
-    <th>Estimation [<%= @cfm.estimation %>]</th>
-  </tr>
-  </thead>
-  <tbody>
-  <%= draw_report_rows(@cfm) %>
-  </tbody>
-</table>
+              <ul class="form_fields">
+                <li>
+                <%= label_tag 'config[dir]', "Directory:" %>
+                <%= select_tag 'config[dir]', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
+                </li>
+                <li>
+                <%= label_tag 'config[tags]', "Tags:" %>
+                <%= text_field_tag 'config[tags]', @cfm.config.tags %>
+                </li>
+              </ul>
+
+              <h4>Presentation settings</h4>
+
+              <ul class="form_fields">
+                <li>
+                  <label>Aggregate by</label>
+                  <%= select_tag 'config[aggregate][]', options_for_select(@cfm.config.aggregate_options, :selected => @cfm.config.aggregate.first) %>
+                </li>
+                <li>
+                  <%= select_tag 'config[aggregate][]', options_for_select(@cfm.config.aggregate_options, :selected => @cfm.config.aggregate.last) %>
+                </li>
+                <li class="commit">
+                  <%= submit_tag "Filter" %>
+                </li>
+              </ul>
+
+
+
+
+          <% end %>
+        </li>
+        <li><%= link_to "Add new feature" %></li>
+      </ul>
+    </div>
+
+    <div class="clb"></div>
+
+
+  </div>
+</div>
+
