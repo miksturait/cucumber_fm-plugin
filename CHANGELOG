@@ -1,7 +1,7 @@
-
+* fix colspan spelling
 * fix correct paths to assests
 * fix assent handling (content_type)
-* graphic and design
+* graphic and design <Rafał Bromirski>
 0.0.9
 * using bespin as editor
   http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.9.editor.jpg
