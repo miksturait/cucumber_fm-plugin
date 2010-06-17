@@ -21,7 +21,7 @@ module Documentation
     def draw_aggregate(aggregate, level=1)
       aggregate.keys.collect { |key|
         key.is_a?(CucumberFM::Feature) ?
-                draw_aggregate_feature(key, aggregate[key]) :
+                draw_aggregate_feature(key, aggregate[key]) + scenario_rows(aggregate[key]) :
                 report_header(aggregate[key], key, level) << draw_aggregate(aggregate[key], level+1)
       }.join(''.html_safe).html_safe
     end
