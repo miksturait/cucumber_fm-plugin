@@ -25,7 +25,7 @@
 
     <div class="right">
       <ul class="actions">
-        <li><%= link_to "Filter" %></li>
+        <li><%= link_to "Filter", "#" %></li>
         <li class="section_view">
 
           <% form_tag '', :method => :get do %>
@@ -33,12 +33,12 @@
 
               <ul class="form_fields">
                 <li>
-                <%= label_tag 'config[dir]', "Directory:" %>
-                <%= select_tag 'config[dir]', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
+                  <%= label_tag 'config[dir]', "Directory:" %>
+                  <%= select_tag 'config[dir]', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
                 </li>
                 <li>
-                <%= label_tag 'config[tags]', "Tags:" %>
-                <%= text_field_tag 'config[tags]', @cfm.config.tags %>
+                  <%= label_tag 'config[tags]', "Tags:" %>
+                  <%= text_field_tag 'config[tags]', @cfm.config.tags %>
                 </li>
               </ul>
 
@@ -58,11 +58,24 @@
               </ul>
 
 
-
-
           <% end %>
         </li>
-        <li><%= link_to "Add new feature" %></li>
+        <li><%= link_to_function "Add new feature", "#" %></li>
+
+        <li class="section_view">
+          <ul class="form_fields">
+              <% form_tag documentation_features_path, :name => 'new_form' do %>
+            <li>
+              <label>Feature title</label>
+                  <%= text_field_tag 'name' %>
+            </li>
+                <li class="commit">
+                  <%= submit_tag "Add" %>
+                </li>
+
+              <% end %>
+          </ul>
+        </li>
       </ul>
     </div>
 

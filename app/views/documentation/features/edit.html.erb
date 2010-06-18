@@ -7,13 +7,16 @@
   </div>
   <div class="content two_columns">
     <div class="left">
-      <div id="raw-bespin" class="bespin"><%= @feature.raw -%></div> 
+      <div id="raw-bespin" class="bespin"><%= @feature.raw -%></div>
     </div>
 
     <div class="right">
       <ul class="actions">
         <li>
-          <%= link_to "Save", {}, :onClick => "document.getElementById('raw').value= document.getElementById('raw-bespin').bespin.value;" %>
+          <% form_tag documentation_feature_path(@feature.id), :name => 'edit_form' do %>
+              <%= link_to_function "Save", "document.edit_form.submit();", :onClick => "document.getElementById('raw').value= document.getElementById('raw-bespin').bespin.value;" %>
+              <%= hidden_field_tag 'raw', '' %>
+          <% end %>
           <%= hidden_field_tag 'raw' %>
         </li>
         <li><%= link_to "Back", documentation_features_path %></li>
@@ -22,24 +25,28 @@
       <ul class="navigator_list">
         <li>
           <h5>I can edit permissions</h5>
+
           <p>@2 @_todo @mc</p>
           <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">3</span>
         </li>
         <li>
           <h5>I can edit permissions</h5>
+
           <p>@2 @_todo @mc</p>
           <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">7</span>
         </li>
         <li>
           <h5>I can edit permissions</h5>
+
           <p>@2 @_todo @mc</p>
           <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">8</span>
         </li>
         <li>
           <h5>I can edit permissions</h5>
+
           <p>@2 @_todo @mc</p>
           <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">1</span>
-        </li>        
+        </li>
       </ul>
     </div>
 

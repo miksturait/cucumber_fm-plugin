@@ -1,10 +1,13 @@
+0.0.10
+* add create new feature
 * menu items highlighting
 * in aggregate report also displaying scenarios
 * fix colspan spelling
 * fix correct paths to assests
 * fix assent handling (content_type)
 * graphic and design <Rafał Bromirski>
-
+  http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.10.editor.jpg
+  http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.10.dasboard.jpg
 0.0.9
 * using bespin as editor
   http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.9.editor.jpg

@@ -85,7 +85,8 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
       `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{capistrano_branch_name}`
     elsif last_stories_branch_name
       begin
-        `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{last_stories_branch_name}`
+       response = `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{last_stories_branch_name}`
+       throw :not_fast_forward if response =~ /non\-fast\-forward/
       rescue => e
         `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{new_branch_name}`
       end
