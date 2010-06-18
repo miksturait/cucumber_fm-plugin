@@ -1,4 +1,5 @@
 0.0.10
+* fix of saving edited file
 * add create new feature
 * menu items highlighting
 * in aggregate report also displaying scenarios
