@@ -19,7 +19,7 @@ Feature: Editor - Basics
   @_todo @m1 @i7
   Scenario: Deleting feature
 
-  @_todo @m1 @i4
+  @_done @m1 @i4
   Scenario: Navigating between scenarios
 
 
