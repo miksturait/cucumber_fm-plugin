@@ -19,30 +19,6 @@
       </ul>
       <h3>Navigatior</h3>
       <ul class="navigator_list">
-        <li>
-          <h5><%= link_to_function 'I can edit permissions', 'scrollTo(15);' %></h5>
-
-          <p>@2 @_todo @mc</p>
-          <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">3</span>
-        </li>
-        <li>
-          <h5>I can edit permissions</h5>
-
-          <p>@2 @_todo @mc</p>
-          <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">7</span>
-        </li>
-        <li>
-          <h5>I can edit permissions</h5>
-
-          <p>@2 @_todo @mc</p>
-          <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">8</span>
-        </li>
-        <li>
-          <h5>I can edit permissions</h5>
-
-          <p>@2 @_todo @mc</p>
-          <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">1</span>
-        </li>
       </ul>
     </div>
 
@@ -58,25 +34,20 @@
 
 
 <script>
-    $(document).ready(function() {
-        var bespin = document.getElementById('raw-bespin').bespin;
-        bespin.setSetting('tabstop', 2);
+    window.onBespinLoad = function() {
+        var edit = document.getElementById("raw-bespin");
+        var env = edit.bespin;
+        window.editor = env.editor;
         navigationRedraw();
-
-        bespin.editor.textChange.add(function(oldRange, newRange, newText) {
+        editor.textChanged.add(function(oldRange, newRange, newText) {
             navigationRedraw();
         });
+    };
 
-    });
-
-    function bespin()
-    {
-        return(document.getElementById('raw-bespin').bespin);
-    }
 
     function editorLines()
     {
-        return(bespin().value.split("\n"));
+        return(editor.value.split("\n"));
     }
 
     function navigationElement(line_number, title)
@@ -103,7 +74,7 @@
 
     function scrollTo(number)
     {
-        bespin().setLineNumber(number);
+        editor.setLineNumber(number);
     }
 
 </script>
