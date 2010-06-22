@@ -10,16 +10,16 @@ Feature: Editor - Basics
   @_done @m1 @i2 @p3
   Scenario: Updating feature contennt
 
-  @_backlog @m0
+  @_todo @m1 @i7
   Scenario: Moving feature to other directory
 
-  @_backlog @m0
+  @_todo @m1 @i7
   Scenario: Renaming filename
 
-  @_backlog @m0
+  @_todo @m1 @i7
   Scenario: Deleting feature
 
-  @_todo @m1 @i3 @p4
+  @_todo @m1 @i4
   Scenario: Navigating between scenarios
 
 
