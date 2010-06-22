@@ -55,3 +55,19 @@
 <% form_tag documentation_feature_path(@feature.id), :name => 'edit_form' do %>
     <%= hidden_field_tag 'raw', '' %>
 <% end %>
+
+
+<script>
+    $(document).ready(function() {
+        var bespin = document.getElementById('raw-bespin').bespin
+        bespin.setSetting('tabstop', 2);
+
+    });
+
+
+    function scroll(number)
+    {
+        bespin.setLineNumber(number);
+    }
+
+</script>
