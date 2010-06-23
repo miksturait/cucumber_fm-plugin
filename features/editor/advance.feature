@@ -1,10 +1,10 @@
-Feature: Editor - Live Editing
+Feature: Editor - advance
   In order to have better - in real time - collaboration
   As a manager and product owner
   I want to have editor that have no delay when more then one person working on the same feature content,
-  also with syntax highlighting and shortcuts, live validation 
+  also with syntax highlighting and shortcuts, live validation
 
-  @_todo @m1 @i3 @p0
+  @_backlog @m0
   Scenario: Two people can collaborate on this same feature
     Given Tom is logged in
     And he is editing feature "Business overview - dashboard"
@@ -15,7 +15,7 @@ Feature: Editor - Live Editing
     When Greg write "ario: "
     Then Tome should imediately see "Scenario: " within editor in his browser
 
-  @_backlog @m0
+  @_todo @m1 @i4
   Scenario: Syntax highlighting
 
   @_backlog @m0

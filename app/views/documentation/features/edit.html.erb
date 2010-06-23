@@ -13,36 +13,12 @@
     <div class="right">
       <ul class="actions">
         <li>
-          <%= link_to_function "Save", "document.getElementById('raw').value= document.getElementById('raw-bespin').bespin.value; document.edit_form.submit();" %>
+          <%= link_to_function "Save", "document.getElementById('raw').value= editor.value; document.edit_form.submit();" %>
         </li>
         <li><%= link_to "Back", documentation_features_path %></li>
       </ul>
       <h3>Navigatior</h3>
       <ul class="navigator_list">
-        <li>
-          <h5>I can edit permissions</h5>
-
-          <p>@2 @_todo @mc</p>
-          <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">3</span>
-        </li>
-        <li>
-          <h5>I can edit permissions</h5>
-
-          <p>@2 @_todo @mc</p>
-          <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">7</span>
-        </li>
-        <li>
-          <h5>I can edit permissions</h5>
-
-          <p>@2 @_todo @mc</p>
-          <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">8</span>
-        </li>
-        <li>
-          <h5>I can edit permissions</h5>
-
-          <p>@2 @_todo @mc</p>
-          <span class="marker m_magenta" style="position:absolute; top: 13px; right: 5px;">1</span>
-        </li>
       </ul>
     </div>
 
@@ -55,3 +31,50 @@
 <% form_tag documentation_feature_path(@feature.id), :name => 'edit_form' do %>
     <%= hidden_field_tag 'raw', '' %>
 <% end %>
+
+
+<script>
+    window.onBespinLoad = function() {
+        var edit = document.getElementById("raw-bespin");
+        var env = edit.bespin;
+        window.editor = env.editor;
+        navigationRedraw();
+        editor.textChanged.add(function(oldRange, newRange, newText) {
+            navigationRedraw();
+        });
+    };
+
+
+    function editorLines()
+    {
+        return(editor.value.split("\n"));
+    }
+
+    function navigationElement(line_number, title)
+    {
+        return("<li><h5><a onclick=\"scrollTo(" + line_number + ");; return false;\" href=\"#\">" + title + "</a></h5>\
+       <p>@no_tags_jet</p>\
+       <span class=\"marker m_magenta\" style=\"position:absolute; top: 13px; right: 5px;\">0</span> </li>");
+    }
+
+    function navigationRedraw()
+    {
+        var scenario_line = /Scenario:/
+        var scenario_title = /[^(Scenario:\s)].*/
+        var navigation = ""
+        $.each(editorLines(), function(index, line)
+        {
+            if (scenario_line.test(line))
+            {
+                navigation += navigationElement(index + 1, scenario_title.exec(line));
+            }
+        });
+        $('.navigator_list').html(navigation);
+    }
+
+    function scrollTo(number)
+    {
+        editor.setLineNumber(number);
+    }
+
+</script>
