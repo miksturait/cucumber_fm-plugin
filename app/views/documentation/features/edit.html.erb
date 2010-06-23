@@ -13,7 +13,7 @@
     <div class="right">
       <ul class="actions">
         <li>
-          <%= link_to_function "Save", "document.getElementById('raw').value= document.getElementById('raw-bespin').bespin.value; document.edit_form.submit();" %>
+          <%= link_to_function "Save", "document.getElementById('raw').value= editor.value; document.edit_form.submit();" %>
         </li>
         <li><%= link_to "Back", documentation_features_path %></li>
       </ul>
