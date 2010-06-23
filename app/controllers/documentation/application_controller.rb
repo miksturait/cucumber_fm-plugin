@@ -22,7 +22,8 @@ class Documentation::ApplicationController < ActionController::Base
   end
 
   def list_of_dirs
-    [""] + Dir.entries(feature_dir_path) - dir_that_should_be_skippped
+    [""] +
+      (Dir.entries(feature_dir_path) - dir_that_should_be_skippped).collect { |name| name if File.directory?(File.join(feature_dir_path, name))}.compact
   end
 
   def save_config

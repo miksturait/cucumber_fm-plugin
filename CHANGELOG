@@ -1,3 +1,4 @@
+* fix of listing only directories in dir scope
 * adding navigation to editor
 * updated bespin to 0.8.0
 
