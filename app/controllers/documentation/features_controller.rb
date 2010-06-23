@@ -15,7 +15,7 @@ class Documentation::FeaturesController < Documentation::ApplicationController
   end
 
   def create
-    feature = CucumberFM::Feature.new(new_file_path,cfm)
+    feature = CucumberFM::Feature.new(new_file_path, cfm)
     feature.raw=(new_feature_raw)
     feature.save
     redirect_to edit_documentation_feature_path(feature.id)
@@ -42,15 +42,19 @@ class Documentation::FeaturesController < Documentation::ApplicationController
   end
 
   def cleanup_raw
-    params[:raw].gsub!(/\r/,'')
+    params[:raw].gsub!(/\r/, '')
   end
 
   def new_file_path
-     File.join(feature_dir_path, read_config['dir'], "#{new_file_name}.feature")
+    if read_config['dir']
+      File.join(feature_dir_path, read_config['dir'], "#{new_file_name}.feature")
+    else
+      File.join(feature_dir_path, "#{new_file_name}.feature")
+    end
   end
 
   def new_file_name
-    params[:name].gsub(/[^a-zA-Z0-9]/,'_')
+    params[:name].gsub(/[^a-zA-Z0-9]/, '_')
   end
 
   def new_file_feature_name
