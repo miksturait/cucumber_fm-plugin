@@ -30,7 +30,9 @@ class Documentation::ApplicationController < ActionController::Base
     if params.has_key?(:config)
       cookies[:config] = params[:config].to_json
     elsif cookies[:config].nil?
-      cookies[:config] = {}.to_json
+      cookies[:config] = {'dir' => ''}.to_json
+    elsif !cookies[:config].has_key?('dir')
+      cookies[:config]['dir'] = ''
     end
   end
 
