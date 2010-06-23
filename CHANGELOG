@@ -1,3 +1,4 @@
+* fix navigator title regex 
 * fix of listing only directories in dir scope
 * adding navigation to editor
 * updated bespin to 0.8.0
@@ -13,6 +14,7 @@
 * graphic and design be Rafał Bromirski from Selleo
   http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.10.editor.jpg
   http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.10.dasboard.jpg
+
 0.0.9
 * using bespin as editor
   http://cs3b-cucumber-fm.s3.amazonaws.com/0.0.9.editor.jpg

@@ -60,13 +60,13 @@
     function navigationRedraw()
     {
         var scenario_line = /Scenario:/
-        var scenario_title = /[^(Scenario:\s)].*/
+        var scenario_title = /Scenario:\s?/
         var navigation = ""
         $.each(editorLines(), function(index, line)
         {
             if (scenario_line.test(line))
             {
-                navigation += navigationElement(index + 1, scenario_title.exec(line));
+                navigation += navigationElement(index + 1, line.replace(scenario_title, ''));
             }
         });
         $('.navigator_list').html(navigation);
