@@ -64,7 +64,7 @@
 
         <li class="section_view">
           <ul class="form_fields">
-              <% form_tag documentation_features_path, :name => 'new_form' do %>
+              <% form_tag documentation_features_path, :name => 'new_form', :method => 'post' do %>
             <li>
               <label>Feature title</label>
                   <%= text_field_tag 'name' %>

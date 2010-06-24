@@ -1,5 +1,5 @@
 class Documentation::ApplicationController < ActionController::Base
-  layout '/documentation/layouts/cucumber_fe'
+  layout '/documentation/layouts/cucumber_fm'
   helper :all
 
   before_filter :digest_authenticate

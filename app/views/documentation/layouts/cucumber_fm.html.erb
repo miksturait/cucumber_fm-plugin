@@ -18,6 +18,7 @@
       <!--<li><%#= link_to "development overview", documentation_kanban_path, :class => "development" %></li>-->
     </ul>
   </div>
+    <%= content_tag('div', flash[:error], :class => 'error') if flash[:error] %>
   <div id="content">
     <%= yield %>
   </div>

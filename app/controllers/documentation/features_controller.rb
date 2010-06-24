@@ -15,10 +15,17 @@ class Documentation::FeaturesController < Documentation::ApplicationController
   end
 
   def create
-    feature = CucumberFM::Feature.new(new_file_path,cfm)
-    feature.raw=(new_feature_raw)
-    feature.save
-    redirect_to edit_documentation_feature_path(feature.id)
+    if filename_invalid?
+      redirect_to :action => 'index'
+    elsif File.exists?(new_file_path)
+      feature = CucumberFM::Feature.new(new_file_path, cfm)
+      redirect_to edit_documentation_feature_path(feature.id)
+    else
+      feature = CucumberFM::Feature.new(new_file_path, cfm)
+      feature.raw=(new_feature_raw)
+      feature.save
+      redirect_to edit_documentation_feature_path(feature.id)
+    end
   end
 
   def update
@@ -42,15 +49,15 @@ class Documentation::FeaturesController < Documentation::ApplicationController
   end
 
   def cleanup_raw
-    params[:raw].gsub!(/\r/,'')
+    params[:raw].gsub!(/\r/, '')
   end
 
   def new_file_path
-     File.join(feature_dir_path, read_config['dir'], "#{new_file_name}.feature")
+    File.join(feature_dir_path, read_config['dir'], "#{new_file_name}.feature")
   end
 
   def new_file_name
-    params[:name].gsub(/[^a-zA-Z0-9]/,'_')
+    params[:name].gsub(/[^a-zA-Z0-9]/, '_')
   end
 
   def new_file_feature_name
@@ -59,6 +66,12 @@ class Documentation::FeaturesController < Documentation::ApplicationController
 
   def new_feature_raw
     %{Feature: #{new_file_feature_name}}
+  end
+
+  def filename_invalid?
+    (params[:name].blank? or params[:name].size < 4) ?
+            flash[:error] = 'File name too short, at least 4 alphanumeric characters' :
+            false
   end
 
 end

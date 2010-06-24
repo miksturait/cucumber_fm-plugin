@@ -1,4 +1,5 @@
-* fix navigator title regex 
+* adding some validation for create feature 
+* fix navigator title regex
 * fix of listing only directories in dir scope
 * adding navigation to editor
 * updated bespin to 0.8.0
