@@ -1,4 +1,6 @@
-* adding some validation for create feature 
+0.0.11
+* moving syntax highlighting to next milestone
+* adding some validation for create feature
 * fix navigator title regex
 * fix of listing only directories in dir scope
 * adding navigation to editor
