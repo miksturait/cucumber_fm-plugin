@@ -53,7 +53,7 @@ describe CucumberFM::Feature do
     end
     context "TAGS" do
       specify { should have(2).tags }
-      specify { subject.tags.should == %w(@tag @mc) }
+      specify { subject.tags.should == %w( @tag @mc ) }
     end
   end
 
@@ -97,6 +97,61 @@ describe CucumberFM::Feature do
 
     it "should return id (base64 encode relative path)" do
       @feature.id.should == Base64.encode64("one/user_login.feature")
+    end
+  end
+
+
+  context "CVS TRIGGER" do
+    context "on default config values" do
+      before(:each) do
+        cfm = mock('cfm', :send_to_remote => true, :commit_change_on => true, :config => CucumberFM::Config.new)
+        @feature = CucumberFM::Feature.new("", cfm)
+      end
+      it "should do commit" do
+        @feature.send(:do_commit?).should be_true
+      end
+      it "should do push" do
+        @feature.send(:do_push?).should be_true
+      end
+    end
+    context "when push is set to false" do
+      before(:each) do
+        cfm = mock('cfm', :send_to_remote => true, :commit_change_on => true,
+                   :config => CucumberFM::Config.new({:cvs_push => false}))
+        @feature = CucumberFM::Feature.new("", cfm)
+      end
+      it "should do commit" do
+        @feature.send(:do_commit?).should be_true
+      end
+      it "should skip push" do
+        @feature.send(:do_push?).should be_false
+      end
+    end
+    context "when only commit is set to false" do
+      before(:each) do
+        cfm = mock('cfm', :send_to_remote => true, :commit_change_on => true,
+                   :config => CucumberFM::Config.new({:cvs_commit => false}))
+        @feature = CucumberFM::Feature.new("", cfm)
+      end
+      it "should skip commit" do
+        @feature.send(:do_commit?).should be_false
+      end
+      it "should skip push" do
+        @feature.send(:do_push?).should be_false
+      end
+    end
+    context "when only commit and push are set to false" do
+      before(:each) do
+        cfm = mock('cfm', :send_to_remote => true, :commit_change_on => true,
+                   :config => CucumberFM::Config.new({:cvs_commit => false, :cvs_push => false}))
+        @feature = CucumberFM::Feature.new("", cfm)
+      end
+      it "should skip commit" do
+        @feature.send(:do_commit?).should be_false
+      end
+      it "should skip push" do
+        @feature.send(:do_push?).should be_false
+      end
     end
   end
 

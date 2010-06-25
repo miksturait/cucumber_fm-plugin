@@ -62,12 +62,20 @@ module CucumberFM
 
     # TODO we need to detect it in more clever way
     def commit
-      cfm.commit_change_on(self) if cfm && cfm.respond_to?(:commit_change_on)
+      cfm.commit_change_on(self) if do_commit?
     end
 
     # TODO we need to detect it in more clever way
     def push
-      cfm.send_to_remote if cfm && cfm.respond_to?(:send_to_remote)
+      cfm.send_to_remote if do_push?
+    end
+
+    def do_push?
+      cfm && cfm.respond_to?(:send_to_remote) && cfm.config.cvs_commit && cfm.config.cvs_push
+    end
+
+    def do_commit?
+      cfm && cfm.respond_to?(:commit_change_on) && cfm.config.cvs_commit
     end
 
     def fetch_scenarios
