@@ -13,6 +13,27 @@
     <div class="right">
       <ul class="actions">
         <li>
+          <% form_tag documentation_feature_path(@feature.id), :name => 'edit_form' do %>
+              <%= hidden_field_tag 'raw', '' %>
+
+              <%= hidden_field_tag 'config[tags]', @cfm.config.tags %>
+              <%= hidden_field_tag 'config[dir]', @cfm.config.dir %>
+
+              <ul class="form_fields">
+                <li>
+                  <label for="config_cvs_commit">
+                    <%= hidden_field_tag 'config[cvs_commit]', 0 %>
+                    <%= check_box_tag 'config[cvs_commit]', 1, @cfm.config.cvs_commit=='1' %>
+                    Commit
+                  </label>
+                  <label for="config_cvs_push">
+                    <%= hidden_field_tag 'config[cvs_push]', 0 %>
+                    <%= check_box_tag 'config[cvs_push]', 1, @cfm.config.cvs_push=='1' %>
+                    Push
+                  </label>
+                </li>
+              </ul>
+          <% end %>
           <%= link_to_function "Save", "document.getElementById('raw').value= editor.value; document.edit_form.submit();" %>
         </li>
         <li><%= link_to "Back", documentation_features_path %></li>
@@ -28,10 +49,6 @@
   </div>
 </div>
 
-<% form_tag documentation_feature_path(@feature.id), :name => 'edit_form' do %>
-    <%= hidden_field_tag 'raw', '' %>
-<% end %>
-
 
 <script>
 
@@ -43,6 +60,8 @@
         editor.textChanged.add(function(oldRange, newRange, newText) {
             navigationRedraw();
         });
+
+        togglePushCheckBox($("#config_cvs_commit"));
     };
 
 
