@@ -29,7 +29,8 @@ module CucumberFM
 
     def update(params)
       params.each_pair do |attribute, value|
-        send("#{attribute}=", value) if respond_to? attribute
+        setter_method_name = "#{attribute}="
+        send(setter_method_name, value) if respond_to? setter_method_name
       end
     end
   end
