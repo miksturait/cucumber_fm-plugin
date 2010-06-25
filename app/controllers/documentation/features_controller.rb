@@ -36,6 +36,7 @@ class Documentation::FeaturesController < Documentation::ApplicationController
 
   private
 
+  # TODO create method find in Feature and remove method path
   def fetch_feature
     @feature = CucumberFM::Feature.new(path, cfm)
   end
@@ -56,6 +57,8 @@ class Documentation::FeaturesController < Documentation::ApplicationController
     File.join(feature_dir_path, read_config['dir'], "#{new_file_name}.feature")
   end
 
+  # TODO move this methods to feature
+  
   def new_file_name
     params[:name].gsub(/[^a-zA-Z0-9]/, '_')
   end
@@ -67,6 +70,8 @@ class Documentation::FeaturesController < Documentation::ApplicationController
   def new_feature_raw
     %{Feature: #{new_file_feature_name}}
   end
+
+  # TODO put to class feature
 
   def filename_invalid?
     (params[:name].blank? or params[:name].size < 4) ?
