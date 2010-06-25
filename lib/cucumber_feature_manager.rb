@@ -62,7 +62,7 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
     # use info to notify user
     # @info = 'aaaa'
     add_to_index(feature)
-    repo.commit_index(feature.filename)
+    repo.commit_index("spec-update: #{feature.filename}")
   end
 
   def send_to_remote

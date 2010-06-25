@@ -1,3 +1,4 @@
+* changing default commit message
 * checkbox'es in editor that allows to skip commit and push
 * refactoring config and adding conditional push and commit to feature save
 
