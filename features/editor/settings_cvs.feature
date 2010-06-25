@@ -1,4 +1,3 @@
-#:::mockup: http://cs3b-cucumber-fm.s3.amazonaws.com/editor.png
 Feature: Editor - Settings CVS
   To make possible to edit files but skip git commit or push - when this behaviour is not desirable
   developer
