@@ -117,7 +117,7 @@ describe CucumberFM::Feature do
     context "when push is set to false" do
       before(:each) do
         cfm = mock('cfm', :send_to_remote => true, :commit_change_on => true,
-                   :config => CucumberFM::Config.new({:cvs_push => false}))
+                   :config => CucumberFM::Config.new({:cvs_push => 0}))
         @feature = CucumberFM::Feature.new("", cfm)
       end
       it "should do commit" do
@@ -130,7 +130,7 @@ describe CucumberFM::Feature do
     context "when only commit is set to false" do
       before(:each) do
         cfm = mock('cfm', :send_to_remote => true, :commit_change_on => true,
-                   :config => CucumberFM::Config.new({:cvs_commit => false}))
+                   :config => CucumberFM::Config.new({:cvs_commit => 0}))
         @feature = CucumberFM::Feature.new("", cfm)
       end
       it "should skip commit" do
@@ -143,7 +143,7 @@ describe CucumberFM::Feature do
     context "when only commit and push are set to false" do
       before(:each) do
         cfm = mock('cfm', :send_to_remote => true, :commit_change_on => true,
-                   :config => CucumberFM::Config.new({:cvs_commit => false, :cvs_push => false}))
+                   :config => CucumberFM::Config.new({:cvs_commit => 0, :cvs_push => 0}))
         @feature = CucumberFM::Feature.new("", cfm)
       end
       it "should skip commit" do

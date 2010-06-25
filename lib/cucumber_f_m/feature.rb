@@ -71,11 +71,11 @@ module CucumberFM
     end
 
     def do_push?
-      cfm && cfm.respond_to?(:send_to_remote) && cfm.config.cvs_commit && cfm.config.cvs_push
+      cfm && cfm.respond_to?(:send_to_remote) && cfm.config.cvs_commit==1 && cfm.config.cvs_push==1
     end
 
     def do_commit?
-      cfm && cfm.respond_to?(:commit_change_on) && cfm.config.cvs_commit
+      cfm && cfm.respond_to?(:commit_change_on) && cfm.config.cvs_commit==1
     end
 
     def fetch_scenarios
