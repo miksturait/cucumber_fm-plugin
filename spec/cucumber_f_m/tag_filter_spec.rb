@@ -25,4 +25,8 @@ describe CucumberFM::TagFilter do
       @filter.pass?(['@tb', '@m1']).should be_true
     end
   end
+#
+#  context "logic and multiple tag expression" do
+#
+#  end
 end
