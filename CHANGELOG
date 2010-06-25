@@ -1,3 +1,5 @@
+* refactoring config and adding conditional push and commit to feature save
+
 0.0.11
 * moving syntax highlighting to next milestone
 * adding some validation for create feature
