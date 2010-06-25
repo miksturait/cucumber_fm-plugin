@@ -6,10 +6,10 @@ Feature: Editor - Settings CVS
   Background: In edit page
     Given I'm on the editor page for feature 'test.feature'
 
-  @_todo @m1 @i6
+  @_done @m1 @i6
   Scenario: By default all ticks should checked
 
-  @_todo @m1 @i6
+  @_done @m1 @i6
   Scenario: Skip push
     When I uncheck "push"
     And I make some change in content
@@ -18,7 +18,7 @@ Feature: Editor - Settings CVS
     And commit to local branch should be done
     But remote branch should not be updated
 
-  @_todo @m1 @i6
+  @_done @m1 @i6
   Scenario: Skip commit and push
     When I uncheck "commit"
     And I make some change in content
