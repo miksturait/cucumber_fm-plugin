@@ -49,6 +49,8 @@ class Documentation::FeaturesController < Documentation::ApplicationController
     @cfm ||= CucumberFeatureManager.new(feature_dir_path, git_dir_path, read_config)
   end
 
+  # TODO move this to save method in feature
+
   def cleanup_raw
     params[:raw].gsub!(/\r/, '')
   end
