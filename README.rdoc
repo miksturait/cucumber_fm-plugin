@@ -6,7 +6,7 @@ tool that supports scope management using cucumber features as specyfication
 
 do not use this in production
 
-For Know it only works when:
+For now it only works when:
 
 * you are using rails version 2.3.8
 * you have features directory inside your rails app
