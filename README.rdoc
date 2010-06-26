@@ -9,6 +9,8 @@ http://demo.cucumber.fm
 
 for user and pass leave empty
 
+it is very slow serwer (shared HDD access is about 1MB/sec :) so be nice ), but you will be able to try how it works
+
 == BETA BETA BETA BETA BETA
 
 do not use this in production
