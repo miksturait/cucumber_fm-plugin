@@ -1,84 +1,38 @@
 = Cucumber Feature Manager
 
-It's support tool to cope with many features written in cucumber.
+tool that supports scope management using cucumber features as specyfication
 
-== Project is driven by two constrains:
+== BETA BETA BETA BETA BETA
 
-* minimize manual work (with scope management) to lowest posible value
-* remove duplication of specification
+do not use this in production
 
-== Some examples how we want achieve this
+For Know it only works when:
 
-=== Storing specyfication direct in application repository
+* you are using rails version 2.3.8
+* you have features directory inside your rails app
 
-Yes, that's true that this is not problem for developers, but features and scenarios should be written by product owner. We had tested - in Selleo - many possibilities, first it was written in wiki, then in google page, excel, (...)  by product owner, then we have manualy copy&paste all information to our feature directory, and what product owner update something, we have to update this manualy once again.
+Any feedback would be valuable ( use github issue )
+ always provide information as:
+* os
+* ruby version
+* rails version
+* backtrace
 
-This force us to think about sollution to minimalize amount of our work (i'm not sure if you can say that copy and paste is some kind of work, but what ever). We don't want to force our customer to install git and all other stuff to be able to write specification, it has to be simple way.
+== Installation
 
-So we think about very simple editor with navigation for feature files - and this start working. What is more we also remove duplication of specyfication - now to update changes we use git facility of merging branches.
+    script/plugin install git://github.com/cs3b/cucumber_fm.git
+
+== Usage
+
+    /documentation/features
+
+You don't need to any password, just pres ok
 
 
-=== Preparing Estimation to project
+== Documentation
 
-Becasue estimation need to be done before starting milestone, so before we have features in repository we have to manually estimate each scenario (an it requires copy&paste scenario to spreadsheet nad add estimation) - It was nightmare.
+Hmn, in progress
 
-The sollutions came from tagging, we start using tags (@5 @4.5 @0.5) to asign hours to scenarios, what is more we add tags that represent milestone (@m1, @m2, @m0) in witch this scenarios should be done. Additional we add tags for each developer (@mc, @ak, @ao).
-As we have all this information gather in one place it was easy to implemented report generation that will take into account only scenarios that pass filter and summarize information about quantity and estimation per feature, developer, milestone. This make proces of estimation easiest.
+== ScreenShoots
 
-== Cucumber_fe
-
-This two features mention in earlier section was developed in cucumber_fe (http://github.com/cs3b/cucumber_fe)
-
-After i developed it, a realize how big potential it has, some of them:
-* attach link to wireframes for each feature
-* using tags to present status of scenario (@_todo, @_deprecated, @_done, @_qa, @_accepted)
-* generating - each day - burndow of done features for each developer or whole milestone
-
-So I make decision about redesigning, write from the beginig this is how idea about Cucumber FM born.
-
-= Status
-
-Base functionality of libraries are done
-
-Now i need to create user interface to allow user to interact with tool
-
-= Main Goals/Features
-
-It's base around three aspects of managing cukes
-
-== Dashboard
-
-* viewing all features [todo]
-* scoping by directory [todo]
-* filtering by tags [todo]
-* aggregating by one of tag type [backlog]
-
-== Editor facility
-
-* crating feature [todo]
-* editing content of feature [todo]
-* navigating through scenarios [todo]
-* see estimation per scenario [todo]
-
-== Control Version System Integration
-
-for non it only supports git
-
-* every save trigger commit [done]
-* setting remote branch [backlog]
-* setting push policy [backlog]
-* triggering push to remote [done]
-
-== Report facility
-
-=== graph reports
-
-* based on actual_data [backlog]
-* based on periodic data storing [backlog]
-
-=== Filter facility
-
-* filter scenarios by tags [todo]
-* have rules for categorizing tags [todo]
-* accept logical AND, OR, NOT for building filter [backlog]
-
+http://cs3b.github.com/cucumber_fm/gallery.html
