@@ -2,6 +2,13 @@
 
 tool that supports scope management using cucumber features as specyfication
 
+
+= DEMO
+
+http://demo.cucumber.fm
+
+for user and pass leave empty
+
 == BETA BETA BETA BETA BETA
 
 do not use this in production
@@ -12,7 +19,7 @@ For now it only works when:
 * you have features directory inside your rails app
 
 Any feedback would be valuable ( use github issue )
- always provide information as:
+always provide information as:
 * os
 * ruby version
 * rails version
