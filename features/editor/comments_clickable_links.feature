@@ -3,5 +3,5 @@ Feature: Editor - comments click able links
   as developer and product owner
   I want to be able to clikc attach links
 
-  @_backlog @m0
+  @_todo @m2
   Scenario: click  wireframe link

@@ -10,10 +10,10 @@ Feature: Filter basics
   Scenario: Filtering by two tags ( using and )
 
 
-  @_todo @m1 @i5
+  @_todo @m2
   Scenario: Filtering by group of tags ( using or - coma )  
 
-  @_todo @m1 @i5
+  @_todo @m2
   Scenario: Filtering by negation (~)
 
   @_done @m1 @i1 @p6

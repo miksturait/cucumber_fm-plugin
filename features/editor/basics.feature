@@ -10,25 +10,25 @@ Feature: Editor - Basics
   @_done @m1 @i2 @p3
   Scenario: Updating feature contennt
 
-  @_todo @m0
+  @_todo @m2
   Scenario: Moving feature to other directory
 
-  @_todo @m0
+  @_todo @m2
   Scenario: Renaming filename
 
-  @_todo @m0
+  @_todo @m2
   Scenario: Deleting feature
 
   @_done @m1 @i4
   Scenario: Navigating between scenarios
 
-  @_todo @m0
+  @_todo @m2
   Scenario: Showing estimation for each scenario in navigation list
   
-  @_todo @m0
+  @_todo @m2
   Scenario: Showing tags for each scenario in navigation list
   
-  @_todo @m0
-  Scenario: Grouping tags by status
+  @_todo @m2
+  Scenario: Grouping scenario by status tag
 
 
