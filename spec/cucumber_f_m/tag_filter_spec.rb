@@ -53,6 +53,20 @@ describe CucumberFM::TagFilter do
       @filter.pass?(['@tb', '@__user', '@m1']).should be_true
       @filter.pass?(['@mc', '@__user', '@m3']).should be_true
     end
+  end
+
+  context "negation" do
+    before(:each) do
+      @filter = CucumberFM::TagFilter.new('~@_done')
+    end
+
+     it "should return false if there is tag: @_done" do
+      @filter.pass?(['@_done', '@mc']).should be_false
+     end
+
+     it "should return true if there is no tag: @_done" do
+      @filter.pass?(['@_todo', '@mc']).should be_true
+    end
 
   end
 

@@ -1,4 +1,5 @@
-* filter ::: Scenario: Filtering by group of tags ( using or - coma ) 
+* filter ::: Scenario: Filtering by negation (~)
+* filter ::: Scenario: Filtering by group of tags ( using or - coma )
 * fix take only tags from feature that are not present in scenario
 * fix do not overwrite config git when using filter from business overview
 

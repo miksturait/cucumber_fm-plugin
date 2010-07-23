@@ -14,7 +14,7 @@ Feature: Filter basics
   @_done @m2 @i1
   Scenario: Filtering by group of tags ( using or - coma )  
 
-  @_todo @m2 @i1
+  @_done @m2 @i1
   Scenario: Filtering by negation (~)
 
   @_done @m1 @i1 @p6
