@@ -2,7 +2,6 @@ class Documentation::ApplicationController < ActionController::Base
   layout '/documentation/layouts/cucumber_fm'
   helper :all
 
-  before_filter :digest_authenticate
   before_filter :save_config
 
   helper_method :list_of_dirs
@@ -42,11 +41,4 @@ class Documentation::ApplicationController < ActionController::Base
     JSON.parse(cookies[:config])
   end
 
-  def digest_authenticate
-    unless session[:__documentation__authentication]
-      session[:__documentation__authentication] = authenticate_or_request_with_http_digest("Documentation") do |username, password|
-        username == 'some_app_name' && password == 'some_app_password'
-      end
-    end
-  end
 end
