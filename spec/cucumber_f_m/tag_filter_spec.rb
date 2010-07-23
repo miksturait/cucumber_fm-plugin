@@ -41,6 +41,18 @@ describe CucumberFM::TagFilter do
   end
 
   context "logic OR" do
+    before(:each) do
+      @filter = CucumberFM::TagFilter.new('@m1,@mc')
+    end
+
+    it "should return false if there is no tag like this" do
+      @filter.pass?(['@m2', '@tc', '@__ads']).should be_false
+    end
+
+    it "should return true if there is any tag like in expression" do
+      @filter.pass?(['@tb', '@__user', '@m1']).should be_true
+      @filter.pass?(['@mc', '@__user', '@m3']).should be_true
+    end
 
   end
 

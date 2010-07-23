@@ -3,7 +3,7 @@ module CucumberFM
     module Component
       module Tags
         LINE_PATTERN = /^\s*@\S.*$/
-        TAG_PATTERN = /@\S+/
+        TAG_PATTERN = /@[^,\s]+/
 
         PATTERN = {
                 :component => /@[a-z]\S{3,}\z/,
