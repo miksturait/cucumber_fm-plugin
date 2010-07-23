@@ -21,7 +21,7 @@ module CucumberFM
 
 
     # TODO - refactoring
-    
+
     def evaluate_expression(tags)
       buffer = nil
       buffer_array = []
@@ -38,6 +38,10 @@ module CucumberFM
               return(false) unless tags.include? buffer
               buffer = nil
             elsif !buffer_array.empty?
+              if buffer
+                buffer_array.push(buffer)
+                buffer = nil
+              end
               return(false) unless buffer_array.any? { |tag| tags.include? tag }
               buffer_array = []
             else
@@ -50,13 +54,16 @@ module CucumberFM
 
         text = token.post_match
       end
-      
+
       if buffer_array.empty? and buffer
         return(false) unless tags.include? buffer
         buffer = nil
         true
       elsif !buffer_array.empty?
-        buffer_array.push(buffer) if buffer
+        if buffer
+          buffer_array.push(buffer)
+          buffer = nil
+        end
         return(false) unless buffer_array.any? { |tag| tags.include? tag }
         buffer_array = []
         true

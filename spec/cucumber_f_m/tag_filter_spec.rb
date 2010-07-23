@@ -56,8 +56,31 @@ describe CucumberFM::TagFilter do
 
   end
 
-  context "compex examples" do
+  context "compex examples filter: @tb,@mc @m1,@m2 @user" do
+    before(:each) do
+      @filter = CucumberFM::TagFilter.new('@tb,@mc @m1,@m2 @user')
+    end
+    [
+            ['@mc', '@user'],
+            ['@m1', '@m2', '@user'],
+            ['@tb', '@m2', '@forum'],
+            [],
+    ].each do |tags|
+      it "should return false for: #{tags.join(', ')}" do
+        @filter.pass?(tags).should be_false
+      end
+    end
+
+    [
+            ['@mc', '@user', '@forum', '@m2'],
+            ['@mc', '@user', '@forum', '@m1'],
+            ['@tb', '@user', '@forum', '@m1']
+    ].each do |tags|
+      it "should return true for: #{tags.join(', ')}" do
+        @filter.pass?(tags).should be_true
+      end
+    end
+
 
   end
-
 end
