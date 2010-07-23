@@ -60,17 +60,17 @@ describe CucumberFM::TagFilter do
       @filter = CucumberFM::TagFilter.new('~@_done')
     end
 
-     it "should return false if there is tag: @_done" do
+    it "should return false if there is tag: @_done" do
       @filter.pass?(['@_done', '@mc']).should be_false
-     end
+    end
 
-     it "should return true if there is no tag: @_done" do
+    it "should return true if there is no tag: @_done" do
       @filter.pass?(['@_todo', '@mc']).should be_true
     end
 
   end
 
-  context "compex examples filter: @tb,@mc @m1,@m2 @user" do
+  context "complex examples filter: @tb,@mc @m1,@m2 @user" do
     before(:each) do
       @filter = CucumberFM::TagFilter.new('@tb,@mc @m1,@m2 @user')
     end
@@ -89,6 +89,37 @@ describe CucumberFM::TagFilter do
             ['@mc', '@user', '@forum', '@m2'],
             ['@mc', '@user', '@forum', '@m1'],
             ['@tb', '@user', '@forum', '@m1']
+    ].each do |tags|
+      it "should return true for: #{tags.join(', ')}" do
+        @filter.pass?(tags).should be_true
+      end
+    end
+
+  end
+
+
+  context "complex examples filter: @tb,@mc ~@m1,@m2 @user ~@ak" do
+    before(:each) do
+      @filter = CucumberFM::TagFilter.new('@tb,@mc ~@m1,@m2 @user ~@ak')
+    end
+    [
+
+            ['@tb', '@m2', '@forum'],
+            ['@mc', '@user', '@forum', '@m2'],
+            ['@mc', '@user', '@forum', '@m1'],
+            ['@tb', '@user', '@forum', '@m1'],
+            ['@mc', '@user', '@m3', '@ak'],
+            [],
+    ].each do |tags|
+      it "should return false for: #{tags.join(', ')}" do
+        @filter.pass?(tags).should be_false
+      end
+    end
+
+    [
+            ['@mc', '@user', '@m3'],
+            ['@tb', '@user', '@m4'],
+
     ].each do |tags|
       it "should return true for: #{tags.join(', ')}" do
         @filter.pass?(tags).should be_true
