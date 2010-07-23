@@ -9,7 +9,7 @@ describe CucumberFM::TagFilter do
       @filter.pass?(['@td', '@m2', '@i1']).should be_true
     end
   end
-  
+
   context "single tag expression" do
     before(:each) do
       @filter = CucumberFM::TagFilter.new('@m1')
@@ -25,8 +25,27 @@ describe CucumberFM::TagFilter do
       @filter.pass?(['@tb', '@m1']).should be_true
     end
   end
-#
-#  context "logic and multiple tag expression" do
-#
-#  end
+
+  context "logic AND" do
+    before(:each) do
+      @filter = CucumberFM::TagFilter.new('@m1 @mc')
+    end
+
+    it "should return false if there is no tag like this" do
+      @filter.pass?(['@m1', '@tc', '@__ads']).should be_false
+    end
+
+    it "should return true if there is tag like in expression" do
+      @filter.pass?(['@mc', '@__user', '@m1']).should be_true
+    end
+  end
+
+  context "logic OR" do
+
+  end
+
+  context "compex examples" do
+
+  end
+
 end
