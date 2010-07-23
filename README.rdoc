@@ -17,7 +17,7 @@ do not use this in production
 
 For now it only works when:
 
-* you are using rails version 2.3.8
+* you are using rails version 2.3.8 or 3.0.0
 * you have features directory inside your rails app
 
 Any feedback would be valuable ( use github issue )
