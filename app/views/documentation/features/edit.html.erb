@@ -40,6 +40,24 @@
         </li>
         <li><%= link_to "Back", documentation_features_path %></li>
       </ul>
+      <h3>File Management</h3>
+      <ul class="actions">
+        <li>
+          <% form_tag rename_documentation_feature_path(@feature.id) do %>
+              <%= text_field_tag :file_name %>
+              <%= submit_tag 'rename' %>
+          <% end %>
+        </li>
+        <li>
+          <% form_tag rename_documentation_feature_path(@feature.id) do %>
+              <%= select_tag 'new_dir', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
+              <%= submit_tag 'move' %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to 'Delete', documentation_feature_path(@feature.id), :method => 'delete', :confirm => "Do you really want to remove this feature?" %>
+        </li>
+      </ul>
       <h3>Navigatior</h3>
       <ul class="navigator_list">
       </ul>

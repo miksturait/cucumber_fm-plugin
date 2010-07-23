@@ -45,6 +45,12 @@ module CucumberFM
       push
     end
 
+    def destroy
+      File.delete(path)
+      remove_file_from_repo
+      push
+    end
+
     def filename
       path.split("/").last
     end
@@ -68,6 +74,10 @@ module CucumberFM
     # TODO we need to detect it in more clever way
     def push
       cfm.send_to_remote if do_push?
+    end
+
+    def remove_file_from_repo
+      cfm.remove_file_from_repo(relative_path) if do_commit?
     end
 
     def do_push?

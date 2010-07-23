@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
     doc.feature_update 'features/:id', :requirements => { :id => /.*[^(\/edit)]/}, :conditions => { :method => :post },
                        :controller => 'features',
                        :action => 'update'
-    doc.resources :features
+    doc.resources :features, :member => [:rename, :move]
     doc.resource :kanban, :controller => 'kanban'
     doc.connect "assets/:path", :controller => 'assets', :action => 'get',
                 :requirements => { :path => /.*/ }

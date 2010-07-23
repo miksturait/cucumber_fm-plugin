@@ -1,3 +1,5 @@
+* Editor - Basic ::: Scenario: Deleting feature
+
 0.1.1
 * filter ::: Scenario: Filtering by negation (~)
 * filter ::: Scenario: Filtering by group of tags ( using or - coma )

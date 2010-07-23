@@ -65,6 +65,10 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
     repo.commit_index("spec-update: #{feature.filename}")
   end
 
+  def remove_file_from_repo(relative_path)
+    `cd #{repo_path} && git rm #{relative_path}`
+  end
+
   def send_to_remote
     push_to_remote
   end
