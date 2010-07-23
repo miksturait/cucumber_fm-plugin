@@ -2,14 +2,20 @@
 @statistics @m2 @i4
 Feature: Statistics - Dashboard
 
+  @_todo
   Scenario: Overal stats
-  
+
+  @_todo  
   Scenario: Module stats
-  
+
+  @_todo
   Scenario: Bucket stats
   
+  @_todo
   Scenario: Status stats
   
+  @_todo
   Scenario: Developer stats
   
+  @_todo
   Scenario: Various stats

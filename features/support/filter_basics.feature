@@ -11,7 +11,7 @@ Feature: Filter basics
   Scenario: Filtering by two tags ( using and )
 
 
-  @_todo @m2 @i1
+  @_wip @m2 @i1
   Scenario: Filtering by group of tags ( using or - coma )  
 
   @_todo @m2 @i1
