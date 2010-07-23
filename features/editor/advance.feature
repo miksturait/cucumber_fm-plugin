@@ -1,3 +1,4 @@
+@editor
 Feature: Editor - advance
   In order to have better - in real time - collaboration
   As a manager and product owner
@@ -15,7 +16,7 @@ Feature: Editor - advance
     When Greg write "ario: "
     Then Tome should imediately see "Scenario: " within editor in his browser
 
-  @_todo @m2
+  @_todo @m2 @i5
   Scenario: Syntax highlighting
 
   @_backlog @m0

@@ -1,4 +1,5 @@
 #:::mockup: http://cs3b-cucumber-fm.s3.amazonaws.com/business.overview.png
+@business-dashboard
 Feature: Business Overview - dashboard
   In order to view stuff to do and see cost and value
   As project manager, product owner
@@ -23,3 +24,6 @@ Feature: Business Overview - dashboard
 
   @_done @m1 @i2
   Scenario: Agregating based on tag type
+  
+  @_todo @m2 @i5
+  Scenario: Sort tags that are use to aggregate

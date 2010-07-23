@@ -1,3 +1,4 @@
+@filter
 Feature: Filter basics
   In order to fetch only scenarios that i want
   as project manager, developer
@@ -10,10 +11,10 @@ Feature: Filter basics
   Scenario: Filtering by two tags ( using and )
 
 
-  @_todo @m2
+  @_todo @m2 @i1
   Scenario: Filtering by group of tags ( using or - coma )  
 
-  @_todo @m2
+  @_todo @m2 @i1
   Scenario: Filtering by negation (~)
 
   @_done @m1 @i1 @p6

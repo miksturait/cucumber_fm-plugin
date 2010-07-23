@@ -1,3 +1,5 @@
+* fix do not overwrite config git when using filter from business overview
+
 0.1.0
 * fix do not overwrite config[aggragate] when saving files
 * align scenario to left (Github@Issue#6)

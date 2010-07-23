@@ -32,6 +32,8 @@
               <h4>Scope by</h4>
 
               <ul class="form_fields">
+              <%= hidden_field_tag 'config[cvs_commit]', @cfm.config.cvs_commit %>
+              <%= hidden_field_tag 'config[cvs_push]', @cfm.config.cvs_push %>
                 <li>
                   <%= label_tag 'config[dir]', "Directory:" %>
                   <%= select_tag 'config[dir]', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
