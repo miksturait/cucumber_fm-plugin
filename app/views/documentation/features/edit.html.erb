@@ -18,6 +18,8 @@
 
               <%= hidden_field_tag 'config[tags]', @cfm.config.tags %>
               <%= hidden_field_tag 'config[dir]', @cfm.config.dir %>
+              <%= hidden_field_tag 'config[aggregate][]', @cfm.config.aggregate.first %>
+              <%= hidden_field_tag 'config[aggregate][]', @cfm.config.aggregate.last %>
 
               <ul class="form_fields">
                 <li>
