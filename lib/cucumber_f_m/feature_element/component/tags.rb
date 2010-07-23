@@ -2,7 +2,6 @@ module CucumberFM
   module FeatureElement
     module Component
       module Tags
-        # TODO think about priority in tags - those in scenario should have value than this in feature
         LINE_PATTERN = /^\s*@\S.*$/
         TAG_PATTERN = /@\S+/
 
@@ -49,7 +48,7 @@ module CucumberFM
         private
 
         def fetch_tags
-          this_tags + parent_tags
+          this_tags + parent_tags_without_duplicates
         end
 
         def this_tags
@@ -64,9 +63,19 @@ module CucumberFM
           respond_to?(:second_tags_source) ? second_tags_source.tags : []
         end
 
-        def find type
-          tags.detect do |tag|
+        def parent_tags_without_duplicates
+           parent_tags.collect { |p_tag| (type = detect_type(p_tag) and find(type, this_tags)) ? nil : p_tag }.compact
+        end
+
+        def find type, collection = tags
+          collection.detect do |tag|
             !TECHNICAL.include?(tag) and tag =~ PATTERN[type]
+          end
+        end
+
+        def detect_type tag
+          PATTERN.invert.each_pair do |pattern, type|
+            return(type) if tag =~ pattern   
           end
         end
 

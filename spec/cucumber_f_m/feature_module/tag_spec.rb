@@ -9,10 +9,10 @@ describe "Cucumber::FeatureElement::Component::Tags" do
   before(:each) do
     @test = TagTesting.new
   end
-  it "should find all tags" do
+  it "should find all tags without duplication" do
     @test.stub!(:raw).and_return("@aa @bb @24343 @dd")
-    @test.stub!(:parent_tags).and_return(['@mc', '@_done', '@aaa', '@4.5'])
-    @test.tags.should == %w(@aa @bb @24343 @dd @mc @_done @aaa @4.5)
+    @test.stub!(:parent_tags).and_return(['@mc', '@_done', '@component', '@4.5'])
+    @test.tags.should == %w(@aa @bb @24343 @dd @_done @component )
   end
 
   context "without need to look in feature" do
@@ -45,7 +45,7 @@ describe "Cucumber::FeatureElement::Component::Tags" do
       @test.stub!(:parent_tags).and_return(['@tb', '@_wip', '@m2b', '@4.5',
                                             '@__knowledge_base', '@_8', '@knowledge_base'])
     end
-{
+    {
             :component => '@knowledge_base',
             :milestone => '@m2b',
             :status => '@_wip',
@@ -59,4 +59,23 @@ describe "Cucumber::FeatureElement::Component::Tags" do
       end
     end
   end
+
+  context "scenario tags without duplicates" do
+
+    before(:each) do
+      @test.stub!(:raw).and_return("@mc @m2 @__ads @p1 @i2")
+      @test.stub!(:parent_tags).and_return(['@tb', '@_wip', '@m2b', '@4.5',
+                                            '@__knowledge_base', '@_8', '@knowledge_base'])
+    end
+    ['@tb', '@m2b', '@__knowledge_base'].each do |tag|
+      it "should not include tag: #{tag}" do
+        @test.tags.should_not include(tag)
+      end
+    end
+    it "should return 9 tags" do
+      @test.should have(9).tags
+    end
+  end
+
+  context "tag detecting"
 end

@@ -17,7 +17,7 @@ raw = %Q{#{@comment = "## wireframe::http://somelink"}
     @scenario.feature.should == @feature
   end
   it "should parse tags" do
-    @scenario.tags.should == %w(@_todo @2.5 @hash @wow @mc @_done @aaa @4.5)
+    @scenario.tags.should == %w(@_todo @2.5 @hash @wow)
   end
   it "should parse comments lines" do
     CucumberFM::FeatureElement::Comment.should_receive(:new).with(@scenario, @comment)
