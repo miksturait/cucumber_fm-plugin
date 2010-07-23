@@ -451,6 +451,10 @@ input, textarea, select
       background-color: #e3f4f4;
       }
 
+      tr.scenario_row:nth-of-type(2n) {
+        background-color: #fbfbfb;
+      }
+
       tr.level_2 td:first-child {
           padding-left: 45px;
       }

@@ -64,7 +64,7 @@ module Documentation
     def scenario_row(scenario)
       content_tag('tr', :class => 'scenario_row') do
         content_tag('td') <<
-                content_tag('td', scenario.title, :colspan => 3, :style => 'text-align: right;') <<
+                content_tag('td', scenario.title, :colspan => 3, :style => 'text-align: left; padding-left: 25px;') <<
                 content_tag('td', scenario.estimation, :style => 'text-align: center;')
       end
     end
