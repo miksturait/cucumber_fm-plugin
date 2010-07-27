@@ -33,11 +33,11 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
   attr_reader :info
 
   def features
-    @features ||= scan_features
+    scan_features
   end
 
   def scenarios
-    (features.collect {|feature| feature.scenarios }).flatten
+    (features.collect { |feature| feature.scenarios }).flatten
   end
 
   def config
@@ -48,10 +48,18 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
     @filter ||= CucumberFM::TagFilter.new(config.tags)
   end
 
+  def set_filter(filter_tags)
+    @filter = CucumberFM::TagFilter.new(filter_tags)
+  end
+
   def aggregate
     unless patterns_for_aggregator.empty?
-      @raport ||= CucumberFM::Aggregator.new(self, patterns_for_aggregator).collection
+      @raport ||= aggregate_by(patterns_for_aggregator)
     end
+  end
+
+  def aggregate_by(patterns)
+      CucumberFM::Aggregator.new(self, patterns).collection
   end
 
   def prefix
@@ -89,8 +97,8 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
       `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{capistrano_branch_name}`
     elsif last_stories_branch_name
       begin
-       response = `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{last_stories_branch_name}`
-       throw :not_fast_forward if response =~ /non\-fast\-forward/
+        response = `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{last_stories_branch_name}`
+        throw :not_fast_forward if response =~ /non\-fast\-forward/
       rescue => e
         `cd #{repo_path} && git push #{repo_remote_name} #{repo_current_branch}:#{new_branch_name}`
       end
@@ -100,10 +108,18 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
   end
 
   def scan_features
+    all_features.collect { |feature| feature if filter.pass?(feature.tags_all)}.compact
+  end
+
+  def all_features
+    @all_features ||= scan_all_features
+  end
+
+  def scan_all_features
     features = []
     Dir.glob("#{prefix}/**/*.feature").each do |full_path|
       feature = CucumberFM::Feature.new(full_path, self)
-      features.push(feature) if filter.pass?(feature.tags_all)
+      features.push(feature)
     end
     features
   end
@@ -129,7 +145,7 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
   end
 
   def last_stories_branch_name
-    repo.remotes.map(&:name).collect {|name| /stories_\d+/.match(name) }.compact.map(&:to_s).sort.last
+    repo.remotes.map(& :name).collect { |name| /stories_\d+/.match(name) }.compact.map(& :to_s).sort.last
   end
 
   def capistrano_branch_name

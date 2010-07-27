@@ -23,13 +23,13 @@ Feature: Editor - Basics
   @_done @m1 @i4
   Scenario: Navigating between scenarios
 
-  @_todo @m2 @i3
+  @_todo @m2 @i4
   Scenario: Showing estimation for each scenario in navigation list
   
-  @_todo @m2 @i3
+  @_todo @m2 @i4
   Scenario: Showing tags for each scenario in navigation list
   
-  @_todo @m2 @i3
+  @_todo @m2 @i4
   Scenario: Grouping scenario by status tag
 
 
