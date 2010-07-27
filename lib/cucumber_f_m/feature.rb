@@ -43,6 +43,7 @@ module CucumberFM
       write_content_to_file
       commit
       push
+      true
     end
 
     def destroy

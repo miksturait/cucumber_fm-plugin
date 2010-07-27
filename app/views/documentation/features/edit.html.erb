@@ -44,13 +44,13 @@
       <ul class="actions">
         <li>
           <% form_tag rename_documentation_feature_path(@feature.id) do %>
-              <%= text_field_tag :file_name %>
+              <%= text_field_tag :name %>
               <%= submit_tag 'rename' %>
           <% end %>
         </li>
         <li>
           <% form_tag rename_documentation_feature_path(@feature.id) do %>
-              <%= select_tag 'new_dir', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
+              <%= select_tag 'dir', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
               <%= submit_tag 'move' %>
           <% end %>
         </li>

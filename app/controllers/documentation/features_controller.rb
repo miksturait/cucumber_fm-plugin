@@ -1,6 +1,6 @@
 class Documentation::FeaturesController < Documentation::ApplicationController
 
-  before_filter :fetch_feature, :only => [:show, :edit, :update, :destroy]
+  before_filter :fetch_feature, :only => [:show, :edit, :update, :destroy, :rename]
   before_filter :cleanup_raw, :only => [:update]
 
   def index
@@ -38,6 +38,21 @@ class Documentation::FeaturesController < Documentation::ApplicationController
     @feature.destroy
     flash[:notice]= "File: #{@feature.filename} was removed"
     redirect_to :action => :index
+  end
+
+  def rename
+    if filename_invalid?
+      redirect_to :action => edit, :id => @feature.id
+      flash[:notice] = 'filename is invalid'
+    elsif File.exists?(new_file_path)
+      flash[:notice] = 'file with this name exist'
+      redirect_to edit_documentation_feature_path(@feature.id)
+    else
+      feature = CucumberFM::Feature.new(new_file_path, cfm)
+      feature.raw=(@feature.raw)
+      feature.save && @feature.destroy
+      redirect_to edit_documentation_feature_path(feature.id)
+    end
   end
 
   private

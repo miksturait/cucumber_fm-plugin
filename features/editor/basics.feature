@@ -14,7 +14,7 @@ Feature: Editor - Basics
   @_wip @m2 @i2
   Scenario: Moving feature to other directory
 
-  @_wip @m2 @i2
+  @_done @m2 @i2
   Scenario: Renaming filename
 
   @_done @m2 @i2
