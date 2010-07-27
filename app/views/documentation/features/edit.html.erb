@@ -49,7 +49,7 @@
           <% end %>
         </li>
         <li>
-          <% form_tag rename_documentation_feature_path(@feature.id) do %>
+          <% form_tag move_documentation_feature_path(@feature.id) do %>
               <%= select_tag 'dir', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
               <%= submit_tag 'move' %>
           <% end %>

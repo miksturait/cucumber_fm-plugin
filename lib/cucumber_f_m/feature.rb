@@ -53,7 +53,11 @@ module CucumberFM
     end
 
     def filename
-      path.split("/").last
+      File.basename(path)
+    end
+
+    def filename_without_extension
+      File.basename(path, '.feature')
     end
 
     private

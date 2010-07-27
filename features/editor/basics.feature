@@ -11,7 +11,7 @@ Feature: Editor - Basics
   @_done @m1 @i2 @p3
   Scenario: Updating feature contennt
 
-  @_wip @m2 @i2
+  @_done @m2 @i2
   Scenario: Moving feature to other directory
 
   @_done @m2 @i2

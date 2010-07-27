@@ -7,6 +7,18 @@ describe CucumberFM::Feature do
     feature.path.should == path
   end
 
+  it "should return filename" do
+    path = "/somedir/andanother/some_path_to_my.feature"
+    feature = CucumberFM::Feature.new(path)
+    feature.filename.should == 'some_path_to_my.feature'
+  end
+
+  it "should return filename without extension" do
+    path = "/somedir/andanother/some_path_to_my.feature"
+    feature = CucumberFM::Feature.new(path)
+    feature.filename_without_extension.should == 'some_path_to_my'
+  end
+
   it "should load file content" do
     feature = CucumberFM::Feature.new('spec/data/cucumber_f_m/feature/first.feature')
     feature.raw.should == %q{Feature: Edit feature content

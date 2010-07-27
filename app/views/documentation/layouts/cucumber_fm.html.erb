@@ -19,6 +19,7 @@
     </ul>
   </div>
     <%= content_tag('div', flash[:error], :class => 'error') if flash[:error] %>
+    <%= content_tag('div', flash[:notice], :class => 'notice') if flash[:notice] %>
   <div id="content">
     <%= yield %>
   </div>
