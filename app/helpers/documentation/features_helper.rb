@@ -19,7 +19,7 @@ module Documentation
     end
 
     def draw_aggregate(aggregate, level=1)
-      aggregate.keys.collect { |key|
+      aggregate.keys.sort.collect { |key|
         key.is_a?(CucumberFM::Feature) ?
                 draw_aggregate_feature(key, aggregate[key]) + scenario_rows(aggregate[key]) :
                 ( key =~ CucumberFM::FeatureElement::Component::Tags::PATTERN[:status] ?
