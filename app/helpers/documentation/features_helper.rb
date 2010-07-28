@@ -22,9 +22,9 @@ module Documentation
       aggregate.keys.sort.collect { |key|
         key.is_a?(CucumberFM::Feature) ?
                 draw_aggregate_feature(key, aggregate[key]) + scenario_rows(aggregate[key]) :
-                ( key =~ CucumberFM::FeatureElement::Component::Tags::PATTERN[:status] ?
+                (key =~ CucumberFM::FeatureElement::Component::Tags::PATTERN[:status] ?
                         report_header(aggregate[key], key, level) :
-                        report_header_with_percentage(aggregate[key], key, level)) << draw_aggregate(aggregate[key], level+1 )
+                        report_header_with_percentage(aggregate[key], key, level)) << draw_aggregate(aggregate[key], level+1)
       }.join(''.html_safe).html_safe
     end
 
@@ -63,7 +63,7 @@ module Documentation
 #                            end
 #                  end
 #                end <<
-                content_tag('td', collection.features.size, :style => "text-align:center;") <<
+        content_tag('td', collection.features.size, :style => "text-align:center;") <<
                 content_tag('td') do
                   content_tag('div', :class => 'progress_bar w170') do
                     content_tag('div', "#{collection.scenarios_done_percentage}% from #{collection.scenarios.size}",
@@ -118,6 +118,36 @@ module Documentation
     # menu highlighting
     def highlight(name)
       (@highlight == name) ? ' highlighted' : nil
+    end
+
+    # STATISTICS
+
+    def statistic_collection(collection)
+      collection.keys.sort.collect do |key|
+        statistic_row(collection[key], key)
+      end
+    end
+
+    def statistic_row(element, key)
+      content_tag('tr') do
+        content_tag('td', key) <<
+                content_tag('td') do
+                  content_tag('div', :class => 'progress_bar') do
+                    content_tag('div', "#{element.estimation_done_percentage}% from #{element.estimation}", :class => 'percent') <<
+                            content_tag('div', :class => 'bar_percent', :style => "width: #{element.estimation_done_percentage}%") do
+                              content_tag('div', '', :class => 'bar')
+                            end
+                  end
+                end <<
+                content_tag('td') do
+                  content_tag('div', :class => 'progress_bar') do
+                    content_tag('div', "#{element.scenarios_done_percentage}% from #{element.scenarios.size}", :class => 'percent') <<
+                            content_tag('div', :class => 'bar_percent', :style => "width: #{element.scenarios_done_percentage}%") do
+                              content_tag('div', '', :class => 'bar')
+                            end
+                  end
+                end
+      end
     end
   end
 end

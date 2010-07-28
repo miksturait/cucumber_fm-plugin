@@ -18,6 +18,7 @@ require 'cucumber_f_m/feature'
 require 'cucumber_f_m/tag_filter'
 require 'cucumber_f_m/config'
 require 'cucumber_f_m/aggregator'
+require 'cucumber_f_m/statistic'
 
 require 'cucumber_f_m/cvs/git'
 require 'grit/lib/grit'

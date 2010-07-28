@@ -3,14 +3,14 @@
   <div class="actions">
     <h2>Actions</h2>
   </div>
-  <h1>Showing milestone @m1</h1>
+  <h1>Showing: <i><%= @statistic.cfm.config.tags %></i></h1>
 </div>
 <div class="content two_columns">
 <div class="left">
 <table class="generic  statistic" cellpadding="0" cellspacing="0">
   <thead>
   <tr>
-    <th>Module / Bucket completion</th>
+    <th>Overal</th>
     <th style="width: 200px;">Estimation</th>
     <th style="width: 200px;">Number</th>
   </tr>
@@ -20,16 +20,18 @@
     <td>Completed estimation</td>
     <td>
       <div class="progress_bar">
-        <div class="percent">20%</div>
-        <div class="bar_percent" style="width:20%">
+        <div class="percent"><%= @statistic.overal.estimation_done_percentage %>%
+          from <%= @statistic.overal.estimation %></div>
+        <div class="bar_percent" style="width: <%= @statistic.overal.estimation_done_percentage -%>%">
           <div class="bar"></div>
         </div>
       </div>
     </td>
     <td>
       <div class="progress_bar">
-        <div class="percent">90%</div>
-        <div class="bar_percent" style="width: 90%">
+        <div class="percent"><%= @statistic.overal.scenarios_done_percentage %>%
+          from <%= @statistic.overal.scenarios.size %></div>
+        <div class="bar_percent" style="width: <%= @statistic.overal.scenarios_done_percentage %>%">
           <div class="bar"></div>
         </div>
       </div>
@@ -38,84 +40,60 @@
   </tbody>
 </table>
 
-
 <table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
   <thead>
   <tr>
-    <th>Milestone overal</th>
+    <th>Status iteration</th>
     <th style="width: 200px;">Estimation</th>
     <th style="width: 200px;">Number</th>
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td>@__users</td>
-
-    <td>
-      <div class="progress_bar">
-        <div class="percent">40%</div>
-        <div class="bar_percent" style="width:40%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-
-
-    <td>
-      <div class="progress_bar">
-        <div class="percent">35%</div>
-        <div class="bar_percent" style="width:35%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-
-  <tr>
-    <td>@__wie</td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent">10%</div>
-        <div class="bar_percent" style="width: 10%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-
-    <td>
-      <div class="progress_bar">
-        <div class="percent">20%</div>
-        <div class="bar_percent" style="width: 20%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-  <tr>
-    <td>@__tfs</td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent">0%</div>
-        <div class="bar_percent" style="width: 0%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-
-    <td>
-      <div class="progress_bar">
-        <div class="percent">0%</div>
-        <div class="bar_percent" style="width: 0%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-
+  <%= statistic_collection(@statistic.iteration) %>
   </tbody>
+
+
+<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
+  <thead>
+  <tr>
+    <th>Buckets</th>
+    <th style="width: 200px;">Estimation</th>
+    <th style="width: 200px;">Number</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%= statistic_collection(@statistic.bucket) %>
+  </tbody>
+
+</table>
+
+<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
+  <thead>
+  <tr>
+    <th>Status developer</th>
+    <th style="width: 200px;">Estimation</th>
+    <th style="width: 200px;">Number</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%= statistic_collection(@statistic.developer) %>
+  </tbody>
+
+</table>
+
+<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
+  <thead>
+  <tr>
+    <th>Component</th>
+    <th style="width: 200px;">Estimation</th>
+    <th style="width: 200px;">Number</th>
+  </tr>
+  </thead>
+  <tbody>
+  <%= statistic_collection(@statistic.component) %>
+  </tbody>
+
+</table>
 
 </table>
 
@@ -128,247 +106,40 @@
   </tr>
   </thead>
   <tbody>
-  <tr>
-    <td>@_backlog</td>
-
-    <td>
-      <div class="progress_bar">
-        <div class="percent">80%</div>
-        <div class="bar_percent" style="width:80%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-
-
-    <td>
-      <div class="progress_bar">
-        <div class="percent">82%</div>
-        <div class="bar_percent" style="width:82%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-
-  <tr>
-    <td>@_todo</td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent">2%</div>
-        <div class="bar_percent" style="width: 2%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-
-    <td>
-      <div class="progress_bar">
-        <div class="percent">1%</div>
-        <div class="bar_percent" style="width: 1%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-  <tr>
-    <td>@_spec</td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent">2%</div>
-        <div class="bar_percent" style="width: 2%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-
-    <td>
-      <div class="progress_bar">
-        <div class="percent">2%</div>
-        <div class="bar_percent" style="width: 2%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-
-  <tr>
-    <td>@_wip</td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent">10%</div>
-        <div class="bar_percent" style="width: 10%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-
-    <td>
-      <div class="progress_bar">
-        <div class="percent">10%</div>
-        <div class="bar_percent" style="width: 10%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-  <tr>
-    <td>@_done</td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent">2%</div>
-        <div class="bar_percent" style="width: 2%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-
-    <td>
-      <div class="progress_bar">
-        <div class="percent">2%</div>
-        <div class="bar_percent" style="width: 2%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-
-  <tr>
-    <td>@_qa</td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent">2%</div>
-        <div class="bar_percent" style="width: 2%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-
-    <td>
-      <div class="progress_bar">
-        <div class="percent">2%</div>
-        <div class="bar_percent" style="width: 2%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-  <tr>
-    <td>@_accepted</td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent">2%</div>
-        <div class="bar_percent" style="width: 2%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-
-    <td>
-      <div class="progress_bar">
-        <div class="percent">2%</div>
-        <div class="bar_percent" style="width: 2%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-
+  <%= statistic_collection(@statistic.status) %>
   </tbody>
 
 </table>
 
-
-<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
-  <thead>
-  <tr>
-    <th>Developer statistics</th>
-    <th style="width: 200px;">Estimation</th>
-    <th style="width: 200px;">Number</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="light_header">
-    <td><strong>@ao</strong></td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent">10% (59)</div>
-        <div class="bar_percent" style="width:10%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent">51% (50)</div>
-        <div class="bar_percent" style="width:51%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-  <tr class="light_header">
-    <td><strong>@mc</strong></td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent">80% (100)</div>
-        <div class="bar_percent" style="width:80%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent">100% (36)</div>
-        <div class="bar_percent" style="width:100%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-
-  </tbody>
-
-</table>
+<!--<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">-->
+  <!--<thead>-->
+  <!--<tr>-->
+    <!--<th>Various statistics</th>-->
+    <!--<th style="width: 425px"></th>-->
+  <!--</tr>-->
+  <!--</thead>-->
+  <!--<tbody>-->
+  <!--<tr>-->
+    <!--<td>@deprecated</td>-->
+    <!--<td class="ta_c"><span class="marker m_grey">0</span></td>-->
+  <!--</tr>-->
+  <!--<tr>-->
+    <!--<td>@added</td>-->
+    <!--<td class="ta_c"><span class="marker m_grey">0</span></td>-->
+  <!--</tr>-->
+  <!--<tr>-->
+    <!--<td>@nontestable</td>-->
+    <!--<td class="ta_c"><span class="marker m_grey">0</span></td>-->
+  <!--</tr>-->
+  <!--<tr>-->
+    <!--<td>@wirefreme-missing</td>-->
+    <!--<td class="ta_c"><span class="marker m_grey">0</span></td>-->
+  <!--</tr>-->
 
 
-<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
-  <thead>
-  <tr>
-    <th>Various statistics</th>
-    <th style="width: 425px"></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>@deprecated</td>
-    <td class="ta_c"><span class="marker m_grey">0</span></td>
-  </tr>
-  <tr>
-    <td>@added</td>
-    <td class="ta_c"><span class="marker m_grey">0</span></td>
-  </tr>
-  <tr>
-    <td>@nontestable</td>
-    <td class="ta_c"><span class="marker m_grey">0</span></td>
-  </tr>
-  <tr>
-    <td>@wirefreme-missing</td>
-    <td class="ta_c"><span class="marker m_grey">0</span></td>
-  </tr>
+  <!--</tbody>-->
 
-
-  </tbody>
-
-</table>
+<!--</table>-->
 
 
 </div>
