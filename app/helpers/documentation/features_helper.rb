@@ -10,7 +10,7 @@ module Documentation
     end
 
     def draw_features(features)
-      features.collect{|feature| draw_feature(feature, feature.scenarios)}.join
+      features.collect { |feature| draw_feature(feature, feature.scenarios) }.join
     end
 
     def draw_feature(feature, scenarios)
@@ -22,7 +22,7 @@ module Documentation
       aggregate.keys.collect { |key|
         key.is_a?(CucumberFM::Feature) ?
                 draw_aggregate_feature(key, aggregate[key]) + scenario_rows(aggregate[key]) :
-                report_header(aggregate[key], key, level) << draw_aggregate(aggregate[key], level+1)
+                report_header_with_percentage(aggregate[key], key, level) << draw_aggregate(aggregate[key], level+1)
       }.join(''.html_safe).html_safe
     end
 
@@ -47,6 +47,38 @@ module Documentation
       end
     end
 
+    # TODO make it a little bit cleaner
+    def report_header_with_percentage(collection, name, level)
+      warning_class = (name == '_undefined_' ? ' warning' : '')
+      content_tag 'tr', :class => "raport_header level_#{level}#{warning_class}" do
+        content_tag('td', name, :colspan => 2) <<
+                content_tag('td', content_tag('div',
+                                              content_tag('div',
+                                                          content_tag('div', "NaN% from #{collection.features.size}", :class => 'percent') <<
+                                                                  content_tag('div',
+                                                                              content_tag('div', '', :class => 'bar'),
+                                                                              :class => "bar_percent",
+                                                                              :style => "width: 0%")),
+                                              :class => 'progress_bar w170')) <<
+                content_tag('td', content_tag('div',
+                                              content_tag('div',
+                                                          content_tag('div', "#{collection.scenarios_done_percentage}% from #{collection.scenarios.size}", :class => 'percent') <<
+                                                                  content_tag('div',
+                                                                              content_tag('div', '', :class => 'bar'),
+                                                                              :class => "bar_percent",
+                                                                              :style => "width: #{collection.scenarios_done_percentage}%")),
+                                              :class => 'progress_bar w170')) <<
+                content_tag('td', content_tag('div',
+                                              content_tag('div',
+                                                          content_tag('div', "#{collection.estimation_done_percentage}% from #{collection.estimation}", :class => 'percent') <<
+                                                                  content_tag('div',
+                                                                              content_tag('div', '', :class => 'bar'),
+                                                                              :class => "bar_percent",
+                                                                              :style => "width: #{collection.estimation_done_percentage}%")),
+                                              :class => 'progress_bar w170'))
+      end
+    end
+
     def feature_header(feature)
       content_tag 'tr', :class => 'feature_header' do
         content_tag('td') <<
@@ -58,7 +90,7 @@ module Documentation
     end
 
     def scenario_rows(scenarios)
-      scenarios.inject("".html_safe) {|total, scenario| total << scenario_row(scenario) }
+      scenarios.inject("".html_safe) { |total, scenario| total << scenario_row(scenario) }
     end
 
     def scenario_row(scenario)
