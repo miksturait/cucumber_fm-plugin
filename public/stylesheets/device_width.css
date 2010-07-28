@@ -1,0 +1,56 @@
+@media all and (min-width: 1601px)
+{
+    #container
+    {
+        width: 1400px;
+    }
+
+
+    .frame .content .left
+    {
+        width: 1140px;
+    }
+
+}
+
+
+@media all and (max-width: 1600px) and (min-width: 1251px)
+{
+    #container
+    {
+        width: 1200px;
+    }
+
+    .frame .content .left
+    {
+        width: 940px;
+    }
+
+}
+
+
+
+@media all and (min-width: 1251px)
+{
+    .frame .head .actions
+    {
+        width: 260px;
+    }
+
+
+    .frame .two_columns
+    {
+        background: url(/documentation/assets/images//layout/frame_content_twocolumns_wider.png) repeat-y right top #fff;
+    }
+
+
+    .frame .content .right
+    {
+        width: 257px;
+    }
+
+
+
+}
+
+

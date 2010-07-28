@@ -12,13 +12,41 @@
         <tr>
           <th></th>
           <th></th>
-          <th>Features <span class="marker m_blue"><%= @cfm.features.size %></span></th>
-          <th>Scenarios <span class="marker m_magenta"><%= @cfm.scenarios.size %></span></th>
-          <th>Estimation <span class="marker m_grey"><%= @cfm.estimation %></span></th>
+          <th style="width: 170px">Features <span class="marker m_blue"><%= @cfm.features.size %></span></th>
+          <th style="width: 170px">Scenarios <span class="marker m_magenta"><%= @cfm.scenarios.size %></span></th>
+          <th style="width: 170px">Estimation <span class="marker m_grey"><%= @cfm.estimation %></span></th>
         </tr>
         </thead>
         <tbody>
-        <%=raw draw_report_rows(@cfm) %>
+        <tr class="raport_header level_1">
+          <td colspan="2">@m0</td>
+          <td>
+            <div class="progress_bar w170">
+              <div class="percent">51% (50)</div>
+              <div class="bar_percent" style="width:51%">
+                <div class="bar"></div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="progress_bar w170">
+              <div class="percent">51% (50)</div>
+              <div class="bar_percent" style="width:51%">
+                <div class="bar"></div>
+              </div>
+            </div>
+          </td>            
+          <td>
+            <div class="progress_bar w170">
+              <div class="percent">51% (50)</div>
+              <div class="bar_percent" style="width:51%">
+                <div class="bar"></div>
+              </div>
+            </div>
+          </td>            
+        </tr>
+
+        <%= raw draw_report_rows(@cfm) %>
         </tbody>
       </table>
     </div>
@@ -32,8 +60,8 @@
               <h4>Scope by</h4>
 
               <ul class="form_fields">
-              <%= hidden_field_tag 'config[cvs_commit]', @cfm.config.cvs_commit %>
-              <%= hidden_field_tag 'config[cvs_push]', @cfm.config.cvs_push %>
+                <%= hidden_field_tag 'config[cvs_commit]', @cfm.config.cvs_commit %>
+                <%= hidden_field_tag 'config[cvs_push]', @cfm.config.cvs_push %>
                 <li>
                   <%= label_tag 'config[dir]', "Directory:" %>
                   <%= select_tag 'config[dir]', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
@@ -66,16 +94,16 @@
 
         <li class="section_view">
           <ul class="form_fields">
-              <% form_tag documentation_features_path, :name => 'new_form', :method => 'post' do %>
-            <li>
-              <label>Feature title</label>
+            <% form_tag documentation_features_path, :name => 'new_form', :method => 'post' do %>
+                <li>
+                  <label>Feature title</label>
                   <%= text_field_tag 'name' %>
-            </li>
+                </li>
                 <li class="commit">
                   <%= submit_tag "Add" %>
                 </li>
 
-              <% end %>
+            <% end %>
           </ul>
         </li>
       </ul>
