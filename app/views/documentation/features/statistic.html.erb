@@ -1,158 +1,188 @@
 <div class="frame">
-<div class="head">
-  <div class="actions">
-    <h2>Actions</h2>
+  <div class="head">
+    <div class="actions">
+      <h2>Actions</h2>
+    </div>
+    <h1>Showing: <i><%= @statistic.cfm.config.tags %></i></h1>
   </div>
-  <h1>Showing: <i><%= @statistic.cfm.config.tags %></i></h1>
-</div>
-<div class="content two_columns">
-<div class="left">
-<table class="generic  statistic" cellpadding="0" cellspacing="0">
-  <thead>
-  <tr>
-    <th>Overal</th>
-    <th style="width: 200px;">Estimation</th>
-    <th style="width: 200px;">Number</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>Completed estimation</td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent"><%= @statistic.overal.estimation_done_percentage %>%
-          from <%= @statistic.overal.estimation %></div>
-        <div class="bar_percent" style="width: <%= @statistic.overal.estimation_done_percentage -%>%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="progress_bar">
-        <div class="percent"><%= @statistic.overal.scenarios_done_percentage %>%
-          from <%= @statistic.overal.scenarios.size %></div>
-        <div class="bar_percent" style="width: <%= @statistic.overal.scenarios_done_percentage %>%">
-          <div class="bar"></div>
-        </div>
-      </div>
-    </td>
-  </tr>
-  </tbody>
-</table>
+  <div class="content two_columns">
+    <div class="left">
+      <table class="generic  statistic" cellpadding="0" cellspacing="0">
+        <thead>
+        <tr>
+          <th>Overal</th>
+          <th style="width: 200px;">Estimation</th>
+          <th style="width: 200px;">Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Completed estimation</td>
+          <td>
+            <div class="progress_bar">
+              <div class="percent"><%= @statistic.overal.estimation_done_percentage %>%
+                from <%= @statistic.overal.estimation %></div>
+              <div class="bar_percent" style="width: <%= @statistic.overal.estimation_done_percentage -%>%">
+                <div class="bar"></div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="progress_bar">
+              <div class="percent"><%= @statistic.overal.scenarios_done_percentage %>%
+                from <%= @statistic.overal.scenarios.size %></div>
+              <div class="bar_percent" style="width: <%= @statistic.overal.scenarios_done_percentage %>%">
+                <div class="bar"></div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
 
-<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
-  <thead>
-  <tr>
-    <th>Status iteration</th>
-    <th style="width: 200px;">Estimation</th>
-    <th style="width: 200px;">Number</th>
-  </tr>
-  </thead>
-  <tbody>
-  <%= statistic_collection(@statistic.iteration) %>
-  </tbody>
+      <table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
+        <thead>
+        <tr>
+          <th>Status iteration</th>
+          <th style="width: 200px;">Estimation</th>
+          <th style="width: 200px;">Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= statistic_collection(@statistic.iteration) %>
+        </tbody>
 
 
-<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
-  <thead>
-  <tr>
-    <th>Buckets</th>
-    <th style="width: 200px;">Estimation</th>
-    <th style="width: 200px;">Number</th>
-  </tr>
-  </thead>
-  <tbody>
-  <%= statistic_collection(@statistic.bucket) %>
-  </tbody>
+        <table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
+          <thead>
+          <tr>
+            <th>Buckets</th>
+            <th style="width: 200px;">Estimation</th>
+            <th style="width: 200px;">Number</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%= statistic_collection(@statistic.bucket) %>
+          </tbody>
 
-</table>
+        </table>
 
-<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
-  <thead>
-  <tr>
-    <th>Status developer</th>
-    <th style="width: 200px;">Estimation</th>
-    <th style="width: 200px;">Number</th>
-  </tr>
-  </thead>
-  <tbody>
-  <%= statistic_collection(@statistic.developer) %>
-  </tbody>
+        <table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
+          <thead>
+          <tr>
+            <th>Status developer</th>
+            <th style="width: 200px;">Estimation</th>
+            <th style="width: 200px;">Number</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%= statistic_collection(@statistic.developer) %>
+          </tbody>
 
-</table>
+        </table>
 
-<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
-  <thead>
-  <tr>
-    <th>Component</th>
-    <th style="width: 200px;">Estimation</th>
-    <th style="width: 200px;">Number</th>
-  </tr>
-  </thead>
-  <tbody>
-  <%= statistic_collection(@statistic.component) %>
-  </tbody>
+        <table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
+          <thead>
+          <tr>
+            <th>Component</th>
+            <th style="width: 200px;">Estimation</th>
+            <th style="width: 200px;">Number</th>
+          </tr>
+          </thead>
+          <tbody>
+          <%= statistic_collection(@statistic.component) %>
+          </tbody>
 
-</table>
+        </table>
 
-</table>
+      </table>
 
-<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
-  <thead>
-  <tr>
-    <th>Status statistics</th>
-    <th style="width: 200px;">Estimation</th>
-    <th style="width: 200px;">Number</th>
-  </tr>
-  </thead>
-  <tbody>
-  <%= statistic_collection(@statistic.status) %>
-  </tbody>
+      <table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">
+        <thead>
+        <tr>
+          <th>Status statistics</th>
+          <th style="width: 200px;">Estimation</th>
+          <th style="width: 200px;">Number</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= statistic_collection(@statistic.status) %>
+        </tbody>
 
-</table>
+      </table>
 
-<!--<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">-->
-  <!--<thead>-->
-  <!--<tr>-->
-    <!--<th>Various statistics</th>-->
-    <!--<th style="width: 425px"></th>-->
-  <!--</tr>-->
-  <!--</thead>-->
-  <!--<tbody>-->
-  <!--<tr>-->
-    <!--<td>@deprecated</td>-->
-    <!--<td class="ta_c"><span class="marker m_grey">0</span></td>-->
-  <!--</tr>-->
-  <!--<tr>-->
-    <!--<td>@added</td>-->
-    <!--<td class="ta_c"><span class="marker m_grey">0</span></td>-->
-  <!--</tr>-->
-  <!--<tr>-->
-    <!--<td>@nontestable</td>-->
-    <!--<td class="ta_c"><span class="marker m_grey">0</span></td>-->
-  <!--</tr>-->
-  <!--<tr>-->
-    <!--<td>@wirefreme-missing</td>-->
-    <!--<td class="ta_c"><span class="marker m_grey">0</span></td>-->
-  <!--</tr>-->
-
-
-  <!--</tbody>-->
-
-<!--</table>-->
+      <!--<table class="generic statistic" cellpadding="0" cellspacing="0" style="padding-top: 20px;">-->
+      <!--<thead>-->
+      <!--<tr>-->
+      <!--<th>Various statistics</th>-->
+      <!--<th style="width: 425px"></th>-->
+      <!--</tr>-->
+      <!--</thead>-->
+      <!--<tbody>-->
+      <!--<tr>-->
+      <!--<td>@deprecated</td>-->
+      <!--<td class="ta_c"><span class="marker m_grey">0</span></td>-->
+      <!--</tr>-->
+      <!--<tr>-->
+      <!--<td>@added</td>-->
+      <!--<td class="ta_c"><span class="marker m_grey">0</span></td>-->
+      <!--</tr>-->
+      <!--<tr>-->
+      <!--<td>@nontestable</td>-->
+      <!--<td class="ta_c"><span class="marker m_grey">0</span></td>-->
+      <!--</tr>-->
+      <!--<tr>-->
+      <!--<td>@wirefreme-missing</td>-->
+      <!--<td class="ta_c"><span class="marker m_grey">0</span></td>-->
+      <!--</tr>-->
 
 
-</div>
+      <!--</tbody>-->
 
-<div class="right">
-
-  sss
-
-</div>
-
-<div class="clb"></div>
+      <!--</table>-->
 
 
-</div>
+    </div>
+
+    <div class="right">
+      <ul class="actions">
+        <li><%= link_to "Filter", "#" %></li>
+        <li class="section_view">
+
+          <% form_tag '', :method => :get do %>
+              <h4>Scope by</h4>
+
+              <ul class="form_fields">
+                <%= hidden_field_tag 'config[cvs_commit]', @cfm.config.cvs_commit %>
+                <%= hidden_field_tag 'config[cvs_push]', @cfm.config.cvs_push %>
+                <%= hidden_field_tag 'config[aggregate][]', @cfm.config.aggregate.first %>
+                <%= hidden_field_tag 'config[aggregate][]', @cfm.config.aggregate.last %>
+
+                <li>
+                  <%= label_tag 'config[dir]', "Directory:" %>
+                  <%= select_tag 'config[dir]', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
+                </li>
+                <li>
+                  <%= label_tag 'config[tags]', "Tags:" %>
+                  <%= text_field_tag 'config[tags]', @cfm.config.tags %>
+                </li>
+              </ul>
+
+              <ul class="form_fields">
+
+                <li class="commit">
+                  <%= submit_tag "Filter" %>
+                </li>
+              </ul>
+
+          <% end %>
+          </ul>
+
+    </div>
+
+    <div class="clb"></div>
+
+
+  </div>
 </div>
 

@@ -2,19 +2,22 @@
 @statistics @m2 @i3
 Feature: Statistics - Dashboard
 
-  @_todo
+  @_done
   Scenario: Overal stats
 
-  @_todo  
-  Scenario: Module stats
+  @_done
+  Scenario: Component stats
 
-  @_todo
+  @_done
+  Scenario: Iteration stats
+
+  @_done
   Scenario: Bucket stats
   
-  @_todo
+  @_done
   Scenario: Status stats
   
-  @_todo
+  @_done
   Scenario: Developer stats
   
   @_todo
