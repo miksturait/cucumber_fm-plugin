@@ -36,12 +36,13 @@ module CucumberFM
 
     def various
       # TODO
+      # @various ||= report(/(||)/)
     end
 
     private
 
-    def report(aggregate_by)
-      CucumberFM::Aggregator.new(cfm, patterns(aggregate_by)).collection
+    def report(aggregate_by, is_label=true)
+      CucumberFM::Aggregator.new(cfm, (is_label ? patterns(aggregate_by) : aggregate_by)).collection
     end
 
     def patterns(label)
