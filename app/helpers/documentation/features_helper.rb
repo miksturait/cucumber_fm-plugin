@@ -22,7 +22,9 @@ module Documentation
       aggregate.keys.collect { |key|
         key.is_a?(CucumberFM::Feature) ?
                 draw_aggregate_feature(key, aggregate[key]) + scenario_rows(aggregate[key]) :
-                report_header_with_percentage(aggregate[key], key, level) << draw_aggregate(aggregate[key], level+1)
+                ( key =~ CucumberFM::FeatureElement::Component::Tags::PATTERN[:status] ?
+                        report_header(aggregate[key], key, level) :
+                        report_header_with_percentage(aggregate[key], key, level)) << draw_aggregate(aggregate[key], level+1 )
       }.join(''.html_safe).html_safe
     end
 
@@ -52,14 +54,16 @@ module Documentation
       warning_class = (name == '_undefined_' ? ' warning' : '')
       content_tag 'tr', :class => "raport_header level_#{level}#{warning_class}" do
         content_tag('td', name, :colspan => 2) <<
-                content_tag('td') do
-                  content_tag('div', :class => 'progress_bar w170') do
-                    content_tag('div', "NaN% from #{collection.features.size}", :class => 'percent') <<
-                            content_tag('div', :class => "bar_percent", :style => "width: 0%") do
-                              content_tag('div', '', :class => 'bar')
-                            end
-                  end
-                end <<
+#  TODO calculate features complementary               
+#                content_tag('td') do
+#                  content_tag('div', :class => 'progress_bar w170') do
+#                    content_tag('div', "NaN% from #{collection.features.size}", :class => 'percent') <<
+#                            content_tag('div', :class => "bar_percent", :style => "width: 0%") do
+#                              content_tag('div', '', :class => 'bar')
+#                            end
+#                  end
+#                end <<
+                content_tag('td', collection.features.size, :style => "text-align:center;") <<
                 content_tag('td') do
                   content_tag('div', :class => 'progress_bar w170') do
                     content_tag('div', "#{collection.scenarios_done_percentage}% from #{collection.scenarios.size}",
