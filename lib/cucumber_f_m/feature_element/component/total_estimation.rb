@@ -15,7 +15,7 @@ module CucumberFM
         end
 
         def estimation_done_percentage
-          estimation > 0 ? ( estimation_done / estimation * 100 ).round : 0 
+          estimation > 0 ? ( estimation_done.to_f / estimation * 100 ).round : 0 
         end
 
         def scenarios_done
@@ -27,7 +27,7 @@ module CucumberFM
         end
 
         def scenarios_done_percentage
-          !scenarios.empty? ? ( scenarios_done / scenarios.size ).round : 0
+          !scenarios.empty? ? ( scenarios_done.to_f / scenarios.size * 100 ).round : 0
         end
 
         private

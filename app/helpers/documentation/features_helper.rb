@@ -52,30 +52,34 @@ module Documentation
       warning_class = (name == '_undefined_' ? ' warning' : '')
       content_tag 'tr', :class => "raport_header level_#{level}#{warning_class}" do
         content_tag('td', name, :colspan => 2) <<
-                content_tag('td', content_tag('div',
-                                              content_tag('div',
-                                                          content_tag('div', "NaN% from #{collection.features.size}", :class => 'percent') <<
-                                                                  content_tag('div',
-                                                                              content_tag('div', '', :class => 'bar'),
-                                                                              :class => "bar_percent",
-                                                                              :style => "width: 0%")),
-                                              :class => 'progress_bar w170')) <<
-                content_tag('td', content_tag('div',
-                                              content_tag('div',
-                                                          content_tag('div', "#{collection.scenarios_done_percentage}% from #{collection.scenarios.size}", :class => 'percent') <<
-                                                                  content_tag('div',
-                                                                              content_tag('div', '', :class => 'bar'),
-                                                                              :class => "bar_percent",
-                                                                              :style => "width: #{collection.scenarios_done_percentage}%")),
-                                              :class => 'progress_bar w170')) <<
-                content_tag('td', content_tag('div',
-                                              content_tag('div',
-                                                          content_tag('div', "#{collection.estimation_done_percentage}% from #{collection.estimation}", :class => 'percent') <<
-                                                                  content_tag('div',
-                                                                              content_tag('div', '', :class => 'bar'),
-                                                                              :class => "bar_percent",
-                                                                              :style => "width: #{collection.estimation_done_percentage}%")),
-                                              :class => 'progress_bar w170'))
+                content_tag('td') do
+                  content_tag('div', :class => 'progress_bar w170') do
+                    content_tag('div', "NaN% from #{collection.features.size}", :class => 'percent') <<
+                            content_tag('div', :class => "bar_percent", :style => "width: 0%") do
+                              content_tag('div', '', :class => 'bar')
+                            end
+                  end
+                end <<
+                content_tag('td') do
+                  content_tag('div', :class => 'progress_bar w170') do
+                    content_tag('div', "#{collection.scenarios_done_percentage}% from #{collection.scenarios.size}",
+                                :class => 'percent') <<
+                            content_tag('div', :class => "bar_percent",
+                                        :style => "width: #{collection.scenarios_done_percentage}%") do
+                              content_tag('div', '', :class => 'bar')
+                            end
+                  end
+                end <<
+                content_tag('td') do
+                  content_tag('div', :class => 'progress_bar w170') do
+                    content_tag('div', "#{collection.estimation_done_percentage}% from #{collection.estimation}",
+                                :class => 'percent') <<
+                            content_tag('div', :class => "bar_percent",
+                                        :style => "width: #{collection.estimation_done_percentage}%") do
+                              content_tag('div', '', :class => 'bar')
+                            end
+                  end
+                end
       end
     end
 
