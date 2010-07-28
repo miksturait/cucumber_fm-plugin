@@ -11,6 +11,10 @@ class Documentation::FeaturesController < Documentation::ApplicationController
   def show
   end
 
+  def statistic
+    @highlight = 'statistic'
+  end
+
   def edit
   end
 

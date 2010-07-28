@@ -15,7 +15,7 @@
     <ul>
       <li><%= link_to "business overview", documentation_features_path,
                       :class => "business#{highlight('business_overview')}" %></li>
-      <!--<li><%#= link_to "development overview", documentation_kanban_path, :class => "development" %></li>-->
+      <li><%= link_to "statistic", statistic_documentation_features_path, :class => "development#{highlight('statistic')}" %></li>
     </ul>
   </div>
     <%= content_tag('div', flash[:error], :class => 'error') if flash[:error] %>
