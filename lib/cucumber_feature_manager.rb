@@ -33,7 +33,7 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
   attr_reader :info
 
   def features
-    scan_features
+    @features ||= scan_features
   end
 
   def scenarios
@@ -48,18 +48,10 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
     @filter ||= CucumberFM::TagFilter.new(config.tags)
   end
 
-  def set_filter(filter_tags)
-    @filter = CucumberFM::TagFilter.new(filter_tags)
-  end
-
   def aggregate
     unless patterns_for_aggregator.empty?
-      @raport ||= aggregate_by(patterns_for_aggregator)
+      @raport ||= CucumberFM::Aggregator.new(self, patterns_for_aggregator).collection
     end
-  end
-
-  def aggregate_by(patterns)
-      CucumberFM::Aggregator.new(self, patterns).collection
   end
 
   def prefix
