@@ -13,6 +13,7 @@ class Documentation::FeaturesController < Documentation::ApplicationController
 
   def statistic
     @highlight = 'statistic'
+    @statistic = CucumberFM::Statistic.new(cfm)
   end
 
   def edit

@@ -25,5 +25,5 @@ Feature: Business Overview - dashboard
   @_done @m1 @i2
   Scenario: Agregating based on tag type
   
-  @_todo @m2 @i5
+  @_done @m2 @i3
   Scenario: Sort tags that are use to aggregate

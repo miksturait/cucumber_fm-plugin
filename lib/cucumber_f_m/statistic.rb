@@ -1,20 +1,52 @@
 module CucumberFM
   class Statistic < Struct.new(:cfm)
-    class Info < Struct.new(:label, :percentage_effort_done, :percentage_quantity_done)
+#    class Info < Struct.new(:scenario_total, :scenario_done, :estimation_total, :estimation_done)
+#      def scenario_percentage_done
+#        scenarios_total > 0 ? (scenarios_done.to_f / scenarios_total * 100).round : 0
+#      end
+#
+#      def estimation_percentage_done
+#        estimation_total > 0 ? (estimation_done.to_f / estimation_total * 100).round : 0
+#      end
+#    end
+
+    def overal
+      cfm
     end
 
-    def initialize(cfm)
-      @cfm = cfm
-      
+    def component
+      @module ||= report(:component)
     end
 
-    def total_estimation
-      @total_estimation ||= cfm.estimation
+    def bucket
+      @bucket ||= report(:bucket)
     end
 
-    def total_quantity
-      @total_quantity ||= cfm.scenarios.size
+    def status
+      @status ||= report(:status)
     end
 
+    def developer
+      @developer ||= report(:developer)
+    end
+
+    def iteration
+      @iteration ||= report(:iteration)
+    end
+
+    def various
+      # TODO
+      # @various ||= report(/(||)/)
+    end
+
+    private
+
+    def report(aggregate_by, is_label=true)
+      CucumberFM::Aggregator.new(cfm, (is_label ? patterns(aggregate_by) : aggregate_by)).collection
+    end
+
+    def patterns(label)
+      [CucumberFM::FeatureElement::Component::Tags::PATTERN[label]]
+    end
   end
 end

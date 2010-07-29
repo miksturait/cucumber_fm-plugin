@@ -1,3 +1,12 @@
+
+* Statistic - overal, component, iteration, developer, bucket, status
+* Busines Overview - alphabetic sorting aggregated headers
+* Busines Overview - progress bars on aggregated results
+* Percentage progress visualization by Rafał Bromirski from Selleo
+* Fluid Layout by Rafał Bromirski from Selleo
+* Layout Fixes ( browser compatibility ) by Rafał Bromirski from Selleo
+
+0.1.2
 * Editor - Basic ::: Scenario: Moving feature
 * Editor - Basic ::: Scenario: Renaming feature
 * Editor - Basic ::: Scenario: Deleting feature

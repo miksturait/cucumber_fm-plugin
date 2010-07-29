@@ -60,6 +60,10 @@ module CucumberFM
       File.basename(path, '.feature')
     end
 
+    def <=>(_f)
+      info.title <=> _f.info.title
+    end
+
     private
 
     def read_content_from_file

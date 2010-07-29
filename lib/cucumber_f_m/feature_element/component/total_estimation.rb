@@ -14,12 +14,20 @@ module CucumberFM
           end
         end
 
+        def estimation_done_percentage
+          estimation > 0 ? ( estimation_done.to_f / estimation * 100 ).round : 0 
+        end
+
         def scenarios_done
           scenarios.inject(0) do |sum, scenario|
             estimation_done_filter.pass?(scenario.tags) ?
                     sum + 1 :
                     sum
           end
+        end
+
+        def scenarios_done_percentage
+          !scenarios.empty? ? ( scenarios_done.to_f / scenarios.size * 100 ).round : 0
         end
 
         private
