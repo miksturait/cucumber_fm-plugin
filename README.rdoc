@@ -7,9 +7,6 @@ tool that supports scope management using cucumber features as specyfication
 
 http://demo.cucumber.fm
 
-for user and pass leave empty
-
-it is very slow serwer (shared HDD access is about 1MB/sec :) so be nice ), but you will be able to try how it works
 
 == BETA BETA BETA BETA BETA
 
@@ -31,16 +28,17 @@ always provide information as:
 
     script/plugin install git://github.com/cs3b/cucumber_fm.git
 
+    gem install diff-lcs
+
 == Usage
 
     /documentation/features
 
-You don't need to any password, just pres ok
-
-
 == Documentation
 
-Hmn, in progress
+The latest presentation (based on version 0.0.11) is accessible here: http://vimeo.com/13816531
+
+I have plan to make some screencasts after version 0.2.0 would be ready
 
 == ScreenShoots
 
