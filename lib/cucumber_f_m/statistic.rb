@@ -1,14 +1,5 @@
 module CucumberFM
   class Statistic < Struct.new(:cfm)
-#    class Info < Struct.new(:scenario_total, :scenario_done, :estimation_total, :estimation_done)
-#      def scenario_percentage_done
-#        scenarios_total > 0 ? (scenarios_done.to_f / scenarios_total * 100).round : 0
-#      end
-#
-#      def estimation_percentage_done
-#        estimation_total > 0 ? (estimation_done.to_f / estimation_total * 100).round : 0
-#      end
-#    end
 
     def overal
       cfm
@@ -48,12 +39,5 @@ module CucumberFM
       [CucumberFM::FeatureElement::Component::Tags::PATTERN[label]]
     end
 
-
-    class VariousCollection
-
-      def scenarios
-        
-      end
-    end
   end
 end
