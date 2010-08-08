@@ -122,6 +122,24 @@ module Documentation
 
     # STATISTICS
 
+    def statistic_table(name, collection)
+      content_tag('table', :class => 'generic statistic', :cellpadding => 0, :cellspacing => 0,
+                  :style => 'padding-top: 20px;') do
+        content_tag('thead') do
+          content_tag('tr') do
+            content_tag('th', name.to_s.humanize) <<
+                    content_tag('th', 'Estimation', :style => 'width: 200px') <<
+                    content_tag('th', "Number", :style => 'width: 200px')
+          end
+        end <<
+                content_tag('tbody') do
+                  collection.send(name).respond_to?(:keys) ?
+                          statistic_collection(collection.send(name)) :
+                          statistic_row(collection.send(name), name)
+                end
+      end
+    end
+
     def statistic_collection(collection)
       collection.keys.sort.collect do |key|
         statistic_row(collection[key], key)
