@@ -20,5 +20,5 @@ Feature: Statistics - Dashboard
   @_done
   Scenario: Developer stats
   
-  @_todo
+  @_done
   Scenario: Various stats

@@ -157,4 +157,23 @@ describe CucumberFM::Aggregator do
               }
     end
   end
+
+  context "multiple tags (one scenario can be aggregated many times" do
+    before(:each) do
+      @s22 = mock('scenario4', :feature => @f2, :tags => ['@mc', '@tb'], :estimation => 1)
+      @cfm = mock('cfm', :scenarios => [@s11, @s12, @s13, @s21, @s22])
+      @aggregator = CucumberFM::Aggregator.new(@cfm, nil, ['@mc', '@tb', '@ak'])
+      @collection = @aggregator.collection
+    end
+
+       it "should aggregate correctly" do
+      @collection.should ==
+              {
+                      '@mc' => [@s11, @s21, @s22],
+                      '@tb' => [@s22],
+                      '@ak' => [@s12, @s13]
+              }
+    end
+
+  end
 end

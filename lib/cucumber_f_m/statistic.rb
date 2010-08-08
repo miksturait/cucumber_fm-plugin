@@ -35,18 +35,25 @@ module CucumberFM
     end
 
     def various
-      # TODO
-      # @various ||= report(/(||)/)
+      @various ||= CucumberFM::Aggregator.new(cfm, nil, CucumberFM::FeatureElement::Component::Tags::TECHNICAL).collection
     end
 
     private
 
-    def report(aggregate_by, is_label=true)
-      CucumberFM::Aggregator.new(cfm, (is_label ? patterns(aggregate_by) : aggregate_by)).collection
+    def report(aggregate_by)
+      CucumberFM::Aggregator.new(cfm, (aggregate_by.is_a?(Regexp) ? aggregate_by : patterns(aggregate_by))).collection
     end
 
     def patterns(label)
       [CucumberFM::FeatureElement::Component::Tags::PATTERN[label]]
+    end
+
+
+    class VariousCollection
+
+      def scenarios
+        
+      end
     end
   end
 end

@@ -1,4 +1,6 @@
 
+0.1.3
+* Statisctic- various
 * Statistic - overal, component, iteration, developer, bucket, status
 * Busines Overview - alphabetic sorting aggregated headers
 * Busines Overview - progress bars on aggregated results (skipped on status aggregation)

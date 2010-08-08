@@ -1,15 +1,24 @@
 module CucumberFM
   class Aggregator
-    def initialize(cfm, aggregator)
-        @collection = Collection.nested_hash(aggregator.size)
-      if aggregator.size == 2
-        cfm.scenarios.each do |scenario|
-          @collection[label(aggregator.first, scenario.tags)][label(aggregator.last, scenario.tags)][scenario.feature].push scenario
+    def initialize(cfm, aggregator, multiple = false)
+      if multiple
+        @collection = Collection.nested_hash(0)
+        multiple.each do |tag|
+          cfm.scenarios.each do |scenario|
+            @collection[tag].push scenario if scenario.tags.include?(tag)
+          end
         end
       else
-        @collection = Collection.nested_hash(1)
-        cfm.scenarios.each do |scenario|
-          @collection[label(aggregator.first, scenario.tags)][scenario.feature].push scenario
+        @collection = Collection.nested_hash(aggregator.size)
+        if aggregator.size == 2
+          cfm.scenarios.each do |scenario|
+            @collection[label(aggregator.first, scenario.tags)][label(aggregator.last, scenario.tags)][scenario.feature].push scenario
+          end
+        else
+          @collection = Collection.nested_hash(1)
+          cfm.scenarios.each do |scenario|
+            @collection[label(aggregator.first, scenario.tags)][scenario.feature].push scenario
+          end
         end
       end
     end
@@ -21,7 +30,7 @@ module CucumberFM
     private
 
     def label(aggregate, tags)
-      tags.find {|tag| tag =~ aggregate} || '_undefined_' 
+      tags.find { |tag| tag =~ aggregate } || '_undefined_'
     end
 
     class Collection < Hash
