@@ -14,7 +14,8 @@ module CucumberFM
                 :developer => /@[a-z]{2,3}\z/,
                 :bucket => /@__[^\s\d]+/,
                 :effort => /@\d/,
-                :benefit => /@_\d/
+                :benefit => /@_\d/,
+                :something_todo => /@:::[a-z]{2,3}\z/
         }
 
         TECHNICAL = [

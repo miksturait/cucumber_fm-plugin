@@ -22,3 +22,6 @@ Feature: Statistics - Dashboard
   
   @_done
   Scenario: Various stats
+
+  @_done @i4
+  Scenario: Something todo stats
