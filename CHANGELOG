@@ -1,4 +1,5 @@
 
+* editor - scenario navigation with simply filtering functionality
 * editor - scenario navigation show now tags for each scenario
 * scenario on business view clickable - direct access to scenario in editor
 * updating bespin ( new name SkyWriter ) to 0.9a2
