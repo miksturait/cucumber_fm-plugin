@@ -1,165 +1,7846 @@
-if(typeof bespin==="undefined")bespin={};if(typeof document!=="undefined"){var link=document.getElementById("bespin_base");bespin.base="/documentation/assets/bespin/";}
-(function(){if("undefined"===typeof y)var y=function(){function j(w,m){v.push({m:w,a:m})}var v=[],A={isBootstrap:true,queue:v,register:function(w,m){if(w.match(/^tiki/)&&this.ENV)if(this.ENV.app==="tiki"&&this.ENV.mode==="test"){if(!m.dependencies)m.dependencies={};m.dependencies.core_test="~"}j("register",arguments);return this},module:function(w,m){if(w.match(/\:tiki$/))this.tikiFactory=m;j("module",arguments);return this},start:function(){var w={};this.tikiFactory(null,w,null);w=w.Browser.start(this.ENV,
-this.ARGS,v);v=null;return w}};if("undefined"!==typeof ENV)A.ENV=ENV;if("undefined"!==typeof ARGV)A.ARGS=ARGV;if("undefined"!==typeof ARGS)A.ARGS=ARGS;return A}();y.register("::tiki/1.0.0",{name:"tiki",version:"1.0.0"});y.module("::tiki/1.0.0:tiki",function(j,v){var A=/^::/,w=function(a){return!!A.exec(a)},m=function(){v.debug.apply(this,arguments)};v.debug=function(){var a=Array.prototype.join.call(arguments,"");j("sys").debug(a)};var d;d=Array.isArray?Array.isArray:function(a){if("object"!==typeof a)return false;
-if(a instanceof Array)return true;return a.constructor&&a.constructor.name==="Array"};v.isArray=d;var h;if(Object.create)h=Object.create;else{var k=function(){},x=k.prototype;h=function(a){if(!a)a=Object.prototype;k.prototype=a;var b=new k;b.prototype=a;k.prototype=x;return b}}v.createObject=h;var u,B,E;u=function(){return function(){return this.init?this.init.apply(this,arguments):this}};B=function(){return E(this)};E=function(a){var b=u();b.prototype=h(a.prototype);b.prototype.constructor=b;b.super_=
-a;b.extend=B;return b};v.extend=E;var f=function(a,b){if(b&&!b.displayName)b.displayName="parallel#fn";return function(c){if(a.length===0)return c(null,[]);var e=a.length,o=e,p=false,C,F=function(H){if(!p){if(H){p=true;return c(H)}--o<=0&&c()}};F.displayName="parallel#tail";for(C=0;C<e;C++)b(a[C],F)}};f.displayName="parallel";var i;i=Array.prototype.map?function(a,b){return a.map(b)}:function(a,b){var c,e=a.length,o=[];for(c=0;c<e;c++)o[c]=b(a[c],c);return o};i.displayName="map";var q=function(a,
-b){var c="pending",e=[],o=false,p=null,C=function(F){b||(b=this);switch(c){case "ready":F.apply(null,p);break;case "running":e.push(F);break;case "pending":e.push(F);c="running";a.call(b,function(){p=Array.prototype.slice.call(arguments);var H=e,M=p;if(o){c="pending";e=[];p=null;o=false}else{c="ready";e=null}H&&H.forEach(function(O){O.apply(null,M)})});break}return this};C.displayName="once#handler";C.reset=function(){switch(c){case "ready":c="pending";e=[];p=null;break;case "running":o=true;break}};
-C.reset.displayName="once#handler.reset";return C};v.once=q;var r=function(a,b){var c,e;for(c in a)if(a.hasOwnProperty(c)){e=a[c];if("function"===typeof e)if(!e.displayName){e.displayName=b?b+"."+c:c;r(e.prototype,e.displayName)}}return a},z=E(Error);z.prototype.init=function(a,b){a=a+" not found";if(b)a="string"===typeof b?a+" "+b:a+" in package "+(b.id||"(unknown)");this.message=a;return this};v.NotFound=z;var D=E(Error);D.prototype.init=function(a,b){if("undefined"!==typeof JSON)a=JSON.stringify(a);
-this.message="Invalid package definition. "+b+" "+a};v.InvalidPackageDef=D;var L=function(){var a=function(e){return e.charCodeAt(0)<=32},b=function(e){e=e.charCodeAt(0);return e>=48&&e<=57},c=function(e,o){for(var p=0,C=0,F=0,H,M;;C++,F++){H=e.charAt(C);M=o.charAt(F);if(!b(H)&&!b(M))return p;else if(b(H))if(b(M)){if(H<M)if(p===0)p=-1;else if(H>M)if(p===0)p=+1;else if(H===0&&M===0)return p}else return+1;else return-1}};return function(e,o){for(var p=0,C=0,F=0,H=0,M,O,W;;){F=H=0;M=e.charAt(p);for(O=
-o.charAt(C);a(M)||M=="0";){if(M=="0")F++;else F=0;M=e.charAt(++p)}for(;a(O)||O=="0";){if(O=="0")H++;else H=0;O=o.charAt(++C)}if(b(M)&&b(O))if((W=c(e.substring(p),o.substring(C)))!==0)return W;if(M===0&&O===0)return F-H;if(M<O)return-1;else if(M>O)return+1;++p;++C}}}();v.natcompare=L;var I=function(a){return new Error(""+a+" is an invalid version string")};I.displayName="invalidVers";var N=function(a,b,c,e){c=Number(c);e=Number(e);if(isNaN(c))throw I(a);if(isNaN(e))throw I(b);return c-e};N.displayName=
-"compareNum";var l,J={parse:function(a){a=a.match(/^(=|~)?([\d]+?)(\.([\d]+?)(\.(.+))?)?$/);if(!a)return null;return[a,a[2],a[4]||"0",a[6]||"0",a[1]]},major:function(a){return Number(l(a)[1])},minor:function(a){return Number(l(a)[2])},patch:function(a){a=l(a)[3];return isNaN(Number(a))?a:Number(a)},STRICT:"strict",NORMAL:"normal",mode:function(a){return l(a)[4]==="="?J.STRICT:J.NORMAL},comparePatch:function(a,b){var c,e;if(a===b)return 0;c=Number(a);e=Number(b);return isNaN(c)?isNaN(e)?L(a,b):-1:
-isNaN(e)?1:c<e?-1:c>e?1:0},compare:function(a,b){var c;if(a===b)return 0;if(a)a=l(a);if(b)b=l(b);if(!a&&!b)return 0;if(!a)return-1;if(!b)return 1;c=N(a[0],b[0],a[1],b[1]);if(c===0){c=N(a[0],b[0],a[2],b[2]);if(c===0)c=J.comparePatch(a[3],b[3])}return c<0?-1:c>0?1:0},compatible:function(a,b){if(!a)return true;if(a===b)return true;if(a&&!l(a))a=null;if(b&&!l(b))b=null;if(!a)return true;if(a===b)return true;if(J.mode(a)===J.STRICT)return b&&J.compare(a,b)===0;else{if(!b)return true;if(J.major(a)!==J.major(b))return false;
-return J.compare(a,b)<=0}},normalize:function(a){var b;if(!a||a.length===0)return null;a=J.parse(a);if(!a)return null;b=Number(a[3]);if(isNaN(b))b=a[3];return[Number(a[1]),Number(a[2]),b].join(".")}};v.semver=J;l=J.parse;var U=v.extend(Object);v.Factory=U;U.prototype.init=function(a,b,c){this.id=a;this.pkg=b;this.factory=c};U.prototype.call=function(a,b){var c=this.factory,e=this.__filename,o=this.__dirname;if("string"===typeof c)c=this.factory=U.compile(c,this.pkg.id+":"+this.id);a=a.createRequire(b);
-var p=b.exports;c.call(p,a,p,b,e,o);return b.exports};var R=["(function(require, exports, module) {",null,"\n});\n//@ sourceURL=",null,"\n"];U.compile=function(a,b){R[1]=a;R[3]=b||"(unknown module)";a=R.join("");a=eval(a);R[1]=R[3]=null;return a};v.Factory=U;var S=v.extend(Object);v.Module=S;S.prototype.init=function(a,b,c){this.id=a;this.ownerPackage=b;this.exports={};var e=this;this.resource=function(o){return c.resource(o,e.id,b)}};var Q=v.extend(Object);v.Package=Q;Q.prototype.init=function(a,
-b){w(a)||(a="::"+a);this.id=a;this.config=b;this.isReady=true};Q.prototype.get=function(a){return this.config?this.config[a]:undefined};Q.prototype.set=function(a,b){if(!this.config)this.config={};this.config[a]=b;return this};Q.prototype.requiredVersion=function(a){var b=this.get("dependencies");return b?b[a]:null};Q.prototype.canonicalPackageId=function(a,b){if(a===this.get("name")&&J.compatible(b,this.get("version")))return this.id;return null};Q.prototype.packageFor=function(a){if(a===this.id)return this;
-return null};Q.prototype.ensurePackage=function(a,b){return a===this.id?b():b(new z(a,this))};Q.prototype.catalogPackages=function(){return[this]};Q.prototype.exists=function(a){return!!(this.factories&&this.factories[a])};Q.prototype.load=function(a){return this.factories?this.factories[a]:null};var g=function(a,b){return a+":"+b},n=v.extend(Object);v.Loader=n;n.prototype.init=function(a){this.sources=a||[];this.clear()};n.prototype.clear=function(){this.factories={};this.canonicalIds={};this.packages=
-{};this.packageSources={};this.canonicalPackageIds={}};n.prototype.defaultPackage=new Q("default",{name:"default"});n.prototype.anonymousPackage=new Q("(anonymous)",{name:"(anonymous)"});n.prototype.canonical=function(a,b,c){var e,o,p,C;if(b&&"string"!==typeof b){c=b;b=null}if(w(a))return a;if(!c)c=this.anonymousPackage;a=this._resolve(a,b,c);if(w(a))return a;e=c?c.id:"(null)";b=this.canonicalIds;if(!b)b=this.canonicalIds={};b[e]||(b[e]={});b=b[e];if(b[a])return b[a];e=a;o=a.indexOf(":");if(o>=0){p=
-a.slice(0,o);a=a.slice(o+1);if(a[0]==="/")throw new Error("Absolute path not allowed with packageId");}o=null;if(p&&p.length>0){if(p=this._canonicalPackageId(p,null,c))o=g(p,a)}else{if(c&&c.exists(a))o=g(c.id,a);else{if(p=this._canonicalPackageId(a,null,c))C=this._packageFor(p,c);if(C)if(C.exists("index"))o=g(C.id,"index");else if(C.exists(a))o=g(C.id,a)}if(!o){if(this.defaultPackage)p=this.defaultPackage.id;else if(this.workingPackage)p=this.workingPackage.id;else if(this.anonymousPackage)p=this.anonymousPackage.id;
-else return null;if(p)o=g(p,a)}}return b[e]=o};n.prototype.load=function(a,b,c){var e,o,p;if(!b)b=this.anonymousPackage;e=this.factories;if(!e)e=this.factories={};if(e[a])return e[a];o=a.indexOf(":",2);p=a.slice(0,o);o=a.slice(o+1);(b=this._packageFor(p,b))||m("Loader#load - "+p+" not found for "+o);if(!b)return null;c=b.load(o,c);return e[a]=c};n.prototype.catalogPackages=function(a){if(!a)a=this.anonymousPackage;var b=[],c,e,o={};this.defaultPackage&&b.push(this.defaultPackage);var p=function(C){var F,
-H,M,O;if(C){H=C.length;for(F=0;F<H;F++){O=C[F];(M=o[O.get("name")])||(M=o[O.get("name")]={});if(!M[O.get("version")]){b.push(O);M[O.get("version")]=O}}}};a&&p(a.catalogPackages());a=this.sources;e=a.length;for(c=0;c<e;c++)p(a[c].catalogPackages());o=null;return b};n.prototype.canonicalPackageId=function(a,b,c){var e;if(a instanceof Q)return a.id;if(w(a)){e=a.indexOf(":",2);if(e>=0)a=a.slice(0,e);return a}if(b&&"string"!==typeof b){c=b;b=null}if(!c)c=this.anonymousPackage;e=a.indexOf(":");if(e>=0)a=
-a.slice(0,e);return this._canonicalPackageId(a,b,c)};n.prototype.packageFor=function(a,b){if(!b)b=this.anonymousPackage;var c=a.indexOf(":",2);if(c>=0)a=a.slice(0,c);return this._packageFor(a,b)};n.prototype.ready=function(a,b){if(!b)b=this.anonymousPackage;var c=a.indexOf(":",2),e;if(c>=0){e=a.slice(c+1);a=a.slice(0,c)}if(this._packageReady(a,b,{})){a=this._packageFor(a,b);if(!a)return false;return!!a.exists(e)}else return false};n.prototype.ensurePackage=function(a,b,c,e){if(b&&"string"!==typeof b){e=
-c;c=b;b=null}if(c&&"function"===typeof c){e=c;c=null}if(!c)c=this.anonymousPackage;this._ensurePackage(a,b,c,{},e)};n.prototype._ensurePackage=function(a,b,c,e,o){var p=this,C;C=this._canonicalPackageId(a,b,c);if(!C)return o(new z(a,c));if(e[C])return o();e[C]=true;a=this._sourceForCanonicalPackageId(C,c);if(!a)return o(new z(C,c));a.ensurePackage(C,function(F){var H,M,O;if(F)return o(F);H=p.packageFor(C,c);if(!H)return o(new z(C,c));F=H.get("dependencies");if(!F)return o();O=[];for(M in F)F.hasOwnProperty(M)&&
-O.push({packageId:M,vers:F[M]});f(O,function(W,V){p._ensurePackage(W.packageId,W.vers,H,e,V)})(o)})};n.prototype._canonicalPackageId=function(a,b,c){if(a instanceof Q)return a.id;if(w(a))return a;if(a==="default"&&this.defaultPackage)return this.defaultPackage.id;var e=this.canonicalPackageIds,o,p,C,F,H;if(!c)c=this.anonymousPackage;if(!c)throw new Error("working package is required");b||(b=c.requiredVersion(a));o=c.id;if(!e)e=this.canonicalPackageIds={};e[o]||(e[o]={});e=e[o];e[a]||(e[a]={});e=e[a];
-if(e[b])return e[b];o=this.sources;p=c.canonicalPackageId(a,b);H=c;if(!p)if(p=c.canonicalPackageId(a,null))throw new Error(c.get("name")+" contains an incompatible nested package "+a+" (expected: "+b+")");if(!p&&o){F=o.length;for(C=0;!p&&C<F;C++){H=o[C];p=H.canonicalPackageId(a,b)}}p&&this._cachePackageSource(p,c,H);return e[b]=p};n.prototype._cachePackageSource=function(a,b,c){var e=this.packageSources;b=b.id;if(!e)e=this.packageSources={};e[b]||(e[b]={});e=e[b];e[a]=c};n.prototype._sourceForCanonicalPackageId=
-function(a,b){var c=this.packageSources,e=b.id,o,p;if(!c)c=this.packageSources={};c[e]||(c[e]={});c=c[e];if(c[a])return c[a];e=this.sources;if(b)if(o=b.packageFor(a))p=b;if(!p&&e){b=e.length;for(o=0;!p&&o<b;o++){p=e[o];p.packageFor(a)||(p=null)}}return c[a]=p};n.prototype._packageFor=function(a,b){var c,e;if(this.defaultPackage&&a===this.defaultPackage.id)return this.defaultPackage;c=this.packages;if(!c)c=this.packages={};if(c[a])return c[a];if(b=this._sourceForCanonicalPackageId(a,b))e=b.packageFor(a);
-return c[a]=e};n.prototype._packageReady=function(a,b,c){var e;if(c[a])return true;c[a]=true;b=this._packageFor(a,b);if(!b)return false;a=b.get("dependencies");for(e in a)if(a.hasOwnProperty(e)){a=a[e];a=this._canonicalPackageId(e,a,b);if(!a)return false;return this._packageReady(a,b,c)}return true};n.prototype._resolve=function(a,b,c){var e,o,p,C;if(a[0]==="/"&&a.indexOf(":")<0)return this.anonymousPackage.id+":"+a;if(a.match(/(^\.\.?\/)|(\/\.\.?\/)|(\/\.\.?\/?$)/)){if((e=a.indexOf(":"))>=0){C=a.slice(0,
-e);a=a.slice(e+1);b=[]}else if(a.match(/^\.\.?\//)){if(!b)throw new Error("id required to resolve relative id: "+a);if(b.indexOf(":")>=0)throw new Error("current moduleId cannot contain packageId");if(c)C=c.id;b=b.split("/");b.pop()}else b=[];p=a.split("/");c=p.length;for(e=0;e<c;e++){o=p[e];if(o===".."){if(b.length<1)throw new Error("invalid path: "+a);b.pop()}else o!=="."&&b.push(o)}a=b.join("/");if(C)a=g(C,a)}return a};var t=v.extend(Object);v.Sandbox=t;t.prototype.init=function(a,b,c,e){this.loader=
-a;this.env=b;this.args=c;e&&this.main(e);this.clear()};t.prototype.catalogPackages=function(a){return this.loader.catalogPackages(a)};t.prototype.createRequire=function(a){var b=this,c=a.id,e=a.ownerPackage,o=function(p,C){if(C&&p.indexOf(":")<0){if(C.isPackage)C=C.id;p=C+":"+p}return b.require(p,c,e)};a=o.displayName=(c||"(unknown)")+"#require";o.nativeRequire=b.nativeRequire;o.ensure=function(p,C){if(!d(p)){p=Array.prototype.slice.call(arguments);C=p.pop()}f(p,function(F,H){b.ensure(F,c,e,H)})(function(F){if(F)return C(F);
-if(C.length<=1)return C();C(null,i(p,function(H){return b.require(H,c,e)}))})};o.ensure.displayName=a+".ensure";o.ready=function(p){var C,F;d(p)||(p=Array.prototype.slice.call(arguments));F=p.length;for(C=0;C<F;C++)if(!b.ready(p[C],c,e))return false;return true};o.ready.displayName=a+".ready";o.packageFor=function(p,C){return b.packageFor(p,C,e)};o.packageFor.displayName=a+".packageFor";o.ensurePackage=function(p,C,F){b.ensurePackage(p,C,e,function(H){if(H)return F(H);if(F.length<=1)return F();F(null,
-b.packageFor(p,C,e))})};o.ensurePackage.displayName=a+".ensurePackage.displayName";o.catalogPackages=function(){return b.catalogPackages(e)};o.main=b.main();o.env=b.env;o.args=b.args;o.sandbox=b;o.loader=b.loader;o.isTiki=true;return o};t.prototype.Module=S;t.prototype.module=function(a,b,c){var e,o,p;b=this.loader.canonical(a,b,c);if(!b)throw new z(a,c);e=this.modules;if(!e)e=this.modules={};if(a=e[b])return a;o=b.indexOf(":",2);a=b.slice(o+1);o=b.slice(0,o);p=this.loader.packageFor(o,c);if(!p)throw new z(o,
-c);return a=e[b]=new this.Module(a,p,this)};t.prototype.main=function(a,b){if(a!==undefined){this._mainModule=null;this._mainModuleId=a;this._mainModuleWorkingPackage=b;return this}else{if(!this._mainModule&&this._mainModuleId){b=this._mainModuleWorkingPackage;this._mainModule=this.module(this._mainModuleId,b)}return this._mainModule}};t.prototype.require=function(a,b,c){var e,o;b=this.loader.canonical(a,b,c);if(!b)throw new z(a,c);o=this.exports;a=this.usedExports;if(!o)o=this.exports={};if(!a)a=
-this.usedExports={};if(e=o[b]){e=e.exports;a[b]||(a[b]=e);return e}e=this.loader.load(b,c,this);if(!e)throw new z(b,c);c=this.module(b,c);o[b]=c;o=e.call(this,c);c.exports=o;if(a[b]&&a[b]!==o)throw new Error("cyclical requires() in "+b);return o};t.prototype.ready=function(a,b,c){return(a=this.loader.canonical(a,b,c))?this.loader.ready(a):false};t.prototype.ensure=function(a,b,c,e){var o,p,C;if(b&&"string"!==typeof b){e=c;c=b;b=null}if(c&&"function"===typeof c){e=c;c=null}b=this.loader.canonical(a,
-b,c);if(!b)return e(new z(a,c));C=b.indexOf(":",2);a=b.slice(C+1);p=b.slice(0,C);o=this.loader;o.ensurePackage(p,c,function(F){if(F)return e(F);F=o.packageFor(p,c);F.exists(a)?e():e(new z(a,F))})};t.prototype.packageFor=function(a,b,c){a=this.loader.canonicalPackageId(a,b,c);if(!a)return null;return this.loader.packageFor(a)};t.prototype.ensurePackage=function(a,b,c,e){if(b&&"string"!==typeof b){e=c;c=b;b=null}if(c&&"function"===typeof c){e=c;c=null}b=this.loader.canonicalPackageId(a,b,c);if(!b)return e(new z(a,
-c));this.loader.ensurePackage(b,e)};t.prototype.resource=function(a,b,c){if(!c.resource)return null;return c.resource(a,b)};t.prototype.clear=function(){this.exports={};this.modules={};this.usedExports={};return this};var s=v.extend(Object);v.Browser=s;s.prototype.init=function(){this._ready={};this._unload={};this.clear()};s.prototype.clear=function(){this.packageInfoByName={};this.packageInfoById={};this.packages={};this.factories={};this.stylesheetActions={};this.scriptActions={};this.ensureActions=
-{}};s.start=function(a,b,c){var e;e=new s;e.loader=new n([e]);e.sandbox=new t(e.loader,a,b);e.queue=c;e.require=e.sandbox.createRequire({id:"index",ownerPackage:e.loader.anonymousPackage});return e};s.prototype.replay=function(){var a=this.queue,b=a?a.length:0,c,e;this.queue=null;for(c=0;c<b;c++){e=a[c];this[e.m].apply(this,e.a)}return this};s.prototype.start=function(){return this};s.prototype.global=function(a){if(!P&&!X)return this;var b=function(){return this}(),c,e,o,p,C,F,H,M;c=this.globals;
-if(!c)c=this.globals={};e=this.packageFor(a);if(!e)throw new Error(a+" package not found");o=e.get("dependencies");if(!o)return this;for(p in o)if(o.hasOwnProperty(p)){a=this.loader.canonical(p,e);if(!c[a]){c[a]=true;if(this.sandbox.ready(p,e)){a=this.sandbox.require(p,e);if(C=a.__globals__){M=C.length;for(H=0;H<M;H++){F=C[H];b[F]=a[F]}}else for(F in a)if(a.hasOwnProperty(F))b[F]=a[F]}}}return this};var G=function(a){var b,c;if(a.length===1){b=null;c=a[0];a=Array.prototype.slice.call(a,1)}else{b=
-a[0];c=a[1];a=Array.prototype.slice.call(a,2)}return{target:b,method:c,args:a}},K=function(a,b,c){a[b]||(a[b]=[]);a[b].push(G(c))};s.prototype.addReadyListener=function(){if(this._ready&&this._ready.isReady)this._invoke(G(arguments));else{this._setupReadyListener();K(this._ready,"queue",arguments)}};s.prototype.addMainListener=function(){if(this._ready&&this._ready.isReady)this._invoke(G(arguments));else{this._setupReadyListener();K(this._ready,"mqueue",arguments)}};s.prototype.addUnloadListener=
-function(){if(this._unload&&this._unload.isUnloading)this._invoke(G(arguments));else{this._setupUnloadListener();K(this._unload,"queue",arguments)}};s.prototype._invoke=function(a){var b=a.target,c=a.method;if("string"===typeof b)b=this.require(b);if("string"===typeof c)c=b[c];c&&c.apply(b,a.args);a.target=a.method=a.args=null};s.prototype._setupReadyListener=function(){if(this._ready.setup)return this;this._ready.setup=true;var a=this._ready,b=this,c;c=function(){if(!a.isReady){a.isReady=true;a.cleanup&&
-a.cleanup();a.cleanup=null;var e,o,p;o=(e=a.queue)?e.length:0;a.queue=null;for(p=0;p<o;p++)b._invoke(e[p]);o=(e=a.mqueue)?e.length:0;a.mqueue=null;for(p=0;p<o;p++)b._invoke(e[p]);b._runMain()}};if("undefined"!==typeof document)if(document.addEventListener){a.cleanup=function(){document.removeEventListener("DOMContentLoaded",c,false);document.removeEventListener("load",c,false)};document.addEventListener("DOMContentLoaded",c,false);document.addEventListener("load",c,false)}else if(document.attachEvent){a.cleanup=
-function(){document.detachEvent("onreadystatechange",c);document.detachEvent("onload",c);a.ieHandler=null};document.attachEvent("onreadystatechange",c);document.attachEvent("onload",c);if(document.documentElement.doScroll&&window==window.top){a.ieHandler=function(){if(a.ieHandler&&!a.isReady)try{document.documentElement.doScroll("left")}catch(e){setTimeout(a.ieHandler,0);return}c()};a.ieHandler()}}};s._scheduleUnloadListener=function(){if(this._unload.setup)return this;this._unload.setup=true;var a=
-this._unload,b=this,c;a.isUnloading=false;c=function(){if(!a.isUnloading){a.isUnloading=true;a.cleanup&&a.cleanup();a.cleanup=null;var e=a.queue,o=e?e.length:0,p;a.queue=null;for(p=0;p<o;p++)b._invoke(e[p])}};if("undefined"!==typeof document)if(document.addEventListener){a.cleanup=function(){document.removeEventListener("unload",c)};document.addEventListener("unload",c,false)}else if(document.attachEvent){a.cleanup=function(){document.detachEvent("onunload",c)};document.attachEvent("unload",c)}};
-s.prototype.main=function(a,b){this.sandbox&&this.sandbox.main(a);this._setupReadyListener();this._main={id:a,method:b}};s.prototype._runMain=function(){if(this._main){var a=this._main.id,b=this._main.method,c=this.require;if(a&&c){this._main=null;c.ensure(a,function(e){if(e)throw e;e=c(a);if("string"===typeof b)b=e[b];b&&b.call(e)})}}};s.prototype._action=function(a){var b;return b=q(function(c){b.resolve=function(e,o){b.resolve=null;c(e,o)};a()})};s.prototype._resolve=function(a,b,c){if(a[b])a[b].resolve&&
-a[b].resolve(null,c);else a[b]=function(e){e(null,c)};return this};s.prototype._fail=function(a,b,c){a[b].resolve&&a[b].resolve(c)};s.prototype._normalize=function(a,b){w(b)||(b="::"+b);a.id=b;a.version=J.normalize(a.version);a["tiki:external"]=!!a["tiki:external"];a["tiki:private"]=!!a["tiki:private"];var c=a["tiki:base"];if(a["tiki:resources"])a["tiki:resources"]=i(a["tiki:resources"],function(p){if("string"===typeof p)p={id:b+":"+p,name:p};if(!p.name)throw new D(a,"resources must have a name");
-if(!p.id)p.id=b+":"+p.name;if(!w(p.id))p.id="::"+p.id;if(!p.type)p.type=p.name.match(/\.js$/)?"script":p.name.match(/\.css$/)?"stylesheet":"resource";if(!p.url)p.url=c?c+"/"+p.name:p.id+p.name;return p});if(!a.dependencies)a.dependencies={};var e=a["tiki:nested"],o;if(e)for(o in e){if(e.hasOwnProperty(o))w(e[o])||(e[o]="::"+e[o])}else a["tiki:nested"]={};return a};s.prototype.register=function(a,b){var c,e,o,p=-1;b=this._normalize(b,a);a=b.id;c=this.packageInfoById;if(!c)c=this.packageInfoById={};
-if(c[a]){if(!c[a]["tiki:external"])return this;e=c[a]}c[a]=b;if(b.name){a=b.name;o=b.version;c=this.packageInfoByName;if(!c)c=this.packageInfoByName={};c[a]||(c[a]={});c=c[a];if(!c[o]||c[o].length<=1)c[o]=[b];else{if(e)p=c[o].indexOf(e);if(p>=0)c[o]=c[o].slice(0,p).concat(c[o].slice(p+1));c[o].push(b)}}return this};s.prototype.module=function(a,b){w(a)||(a="::"+a);this.factories[a]=b;return this};s.prototype.script=function(a){w(a)||(a="::"+a);this._resolve(this.scriptActions,a,true)};s.prototype.stylesheet=
-function(a){w(a)||(a="::"+a);this._resolve(this.stylesheetActions,a,true)};var P="undefined"!==typeof document&&document.createElement,X="undefined"!==typeof XMLHttpRequest;s.prototype.xhr=!P;s.prototype.autowrap=false;var Z=function(a){if(!a)return null;for(var b=a.length;--b>=0;)if(!a[b]["tiki:private"])return a[b];return null};s.prototype.canonicalPackageId=function(a,b){a=this.packageInfoByName[a];var c,e,o;if(b)b=J.normalize(b);if(!a)return null;if(a[b]&&a[b].length===1)return a[b][0].id;for(e in a)if(a.hasOwnProperty(e))if(J.compatible(b,
-e))if(!c||J.compare(o,e)<0)if(c=Z(a[e]))o=e;return c?c.id:null};s.prototype.packageFor=function(a){var b=this.packages[a];if(b)return b;if((b=this.packageInfoById[a])&&!b["tiki:external"]){b=new this.Package(a,b,this);return this.packages[a]=b}return null};s.prototype.ensurePackage=function(a,b){var c=this.ensureActions[a];if(c)return c(b);var e=this.packageInfoById[a];if(!e)return b(new z(a,"browser package info"));var o=this;c=q(function(p){var C=1,F=false,H,M=function(Y){if(!H){if(Y){H=true;return p(Y)}C-=
-1;if(C<=0&&F)return p(null,e)}},O=e.dependencies,W=e["tiki:nested"],V,T;for(V in O)if(O.hasOwnProperty(V)){T=W[V];if(!T){T=O[V];T=o.canonicalPackageId(V,T)}if(T&&o.packageInfoById[a]){C++;o.ensurePackage(T,M)}}W=(O=e["tiki:resources"])?O.length:0;for(V=0;V<W;V++){T=O[V];if(T.type!=="resource")if(T.type==="script"){C++;o.ensureScript(T.id,T.url,M)}else if(T.type==="stylesheet"){C++;o.ensureStylesheet(T.id,T.url,M)}}F=true;M()});this.ensureActions[a]=c;c(b)};s.prototype.ensureScript=function(a,b,c){var e=
-this.scriptActions[a];if(e)return e(c);var o=this;e=this._action(function(){o._loadScript(a,b)});this.scriptActions[a]=e;return e(c)};s.prototype.ensureStylesheet=function(a,b,c){var e=this.stylesheetActions[a];if(e)return e(c);var o=this;e=this._action(function(){o._loadStylesheet(a,b)});this.stylesheetActions[a]=e;return e(c)};s.prototype._injectScript=function(a,b){var c;a=document.body;c=document.createElement("script");c.src=b;a.appendChild(c)};s.prototype._xhrScript=function(a,b){var c=this.autowrap,
-e=new XMLHttpRequest;e.open("GET",b,true);e.onreadystatechange=function(){if(!(e.readyState!==4||e.status!==200&&e.status!==0)){var o=e.responseText;if(c)o="tiki.module('"+a+"', function(require, exports, module) {"+o+"});tiki.script('"+a+"');";eval(o+"\n//@ sourceURL="+b)}};e.send(null)};s.prototype._loadScript=function(a,b){if(this.autowrap){this.xhr=true;X||m("Autowrap is on but XHR is not available. Danger ahead.")}if(X&&P)if(this.xhr)try{return this._xhrScript(a,b)}catch(c){return this._injectScript(a,
-b)}else try{return this._injectScript(a,b)}catch(e){return this._xhrScript(a,b)}else if(X)return this._xhrScript(a,b);else if(P)return this._injectScript(a,b);m("Browser#_loadScript() not supported on this platform.");this.script(a)};s.prototype._loadStylesheet=P?function(a,b){var c,e;c=document.getElementsByTagName("head")[0]||document.body;e=document.createElement("link");e.rel="stylesheet";e.href=b;e.type="text/css";c.appendChild(e);this.stylesheet(a)}:function(a){m("Browser#_loadStylesheet() not supported on this platform.");
-this.stylesheet(a)};S=Q.extend();s.prototype.Package=S;S.prototype.init=function(a,b,c){Q.prototype.init.call(this,a,b);this.source=c};S.prototype.canonicalPackageId=function(a,b){var c;if(c=Q.prototype.canonicalPackageId.call(this,a,b))return c;c=(this.get("tiki:nested")||{})[a];if(!c)return null;return(a=this.source.packageInfoById[c])&&J.compatible(b,a.version)?c:null};S.prototype.packageFor=function(a){var b=Q.prototype.packageFor.call(this,a);return b?b:this.source.packageFor(a)};S.prototype.ensurePackage=
-function(a,b){if(a===this.id)return b();this.source.ensurePackage(a,b)};S.prototype.catalogPackages=function(){var a=[this],b,c;b=this.get("tiki:nested")||{};for(c in b)b.hasOwnProperty(c)&&a.push(this.source.packageFor(b[c]));return a};S.prototype.exists=function(a){return!!this.source.factories[this.id+":"+a]};S.prototype.load=function(a){var b;return(b=this.source.factories[this.id+":"+a])?new this.Factory(a,this,b):null};S.prototype.Factory=U;r(v,"tiki")});y=y.start();y.replay();bespin.tiki=y})();
-bespin.tiki.register("::types",{name:"types",dependencies:{}});
-bespin.tiki.module("types:basic",function(y,j){var v=y("bespin:plugins").catalog,A=y("bespin:console").console,w=y("bespin:promise").Promise;j.text={isValid:function(m){return typeof m=="string"},toString:function(m){return m},fromString:function(m){return m}};j.number={isValid:function(m){if(isNaN(m))return false;if(m===null)return false;if(m===undefined)return false;if(m===Infinity)return false;return typeof m=="number"},toString:function(m){if(!m)return null;return""+m},fromString:function(m){if(!m)return null;
-var d=parseInt(m,10);if(isNaN(d))throw new Error("Can't convert \""+m+'" to a number.');return d}};j.bool={isValid:function(m){return typeof m=="boolean"},toString:function(m){return""+m},fromString:function(m){if(m===null)return null;if(!m.toLowerCase)return!!m;var d=m.toLowerCase();if(d=="true")return true;else if(d=="false")return false;return!!m}};j.object={isValid:function(m){return typeof m=="object"},toString:function(m){return JSON.stringify(m)},fromString:function(m){return JSON.parse(m)}};
-j.selection={isValid:function(m,d){if(typeof m!="string")return false;if(!d.data){A.error("Missing data on selection type extension. Skipping");return true}var h=false;d.data.forEach(function(k){if(m==k)h=true});return h},toString:function(m){return m},fromString:function(m){return m},resolveTypeSpec:function(m,d){var h=new w;if(d.data){m.data=d.data;h.resolve()}else if(d.pointer)v.loadObjectForPropertyPath(d.pointer).then(function(k){k=k(d);if(typeof k.then==="function")k.then(function(x){m.data=
-x;h.resolve()});else{m.data=k;h.resolve()}},function(k){h.reject(k)});else{A.warn("Missing data/pointer for selection",d);h.resolve()}return h}}});
-bespin.tiki.module("types:types",function(y,j){function v(d){var h=new m,k=w.getExtensionByKey("type",d.name);k?h.resolve({ext:k,typeSpec:d}):h.reject(new Error("Unknown type: "+d.name));return h}function A(d){if(typeof d==="string")return v({name:d});if(typeof d==="object")if(d.name==="deferred"){var h=new m;j.undeferTypeSpec(d).then(function(k){A(k).then(function(x){h.resolve(x)},function(x){h.reject(x)})});return h}else return v(d);throw new Error("Unknown typeSpec type: "+typeof d);}var w=y("bespin:plugins").catalog;
-y("bespin:console");var m=y("bespin:promise").Promise;j.getSimpleName=function(d){if(!d)throw new Error("null|undefined is not a valid typeSpec");if(typeof d=="string")return d;if(typeof d=="object"){if(!d.name)throw new Error("Missing name member to typeSpec");return d.name}throw new Error("Not a typeSpec: "+d);};j.equals=function(d,h){return j.getSimpleName(d)==j.getSimpleName(h)};j.undeferTypeSpec=function(d){var h=new m;if(!d.pointer){h.reject(new Error("Missing deferred pointer"));return h}w.loadObjectForPropertyPath(d.pointer).then(function(k){k=
-k(d);typeof k.then==="function"?k.then(function(x){h.resolve(x)},function(x){h.reject(x)}):h.resolve(k)},function(k){h.reject(k)});return h};j.resolveType=function(d){var h=new m;A(d).then(function(k){k.ext.load(function(x){typeof x.resolveTypeSpec==="function"?x.resolveTypeSpec(k.ext,k.typeSpec).then(function(){h.resolve({type:x,ext:k.ext})},function(u){h.reject(u)}):h.resolve({type:x,ext:k.ext})})},function(k){h.reject(k)});return h};j.fromString=function(d,h){var k=new m;j.resolveType(h).then(function(x){k.resolve(x.type.fromString(d,
-x.ext))});return k};j.toString=function(d,h){var k=new m;j.resolveType(h).then(function(x){k.resolve(x.type.toString(d,x.ext))});return k};j.isValid=function(d,h){var k=new m;j.resolveType(h).then(function(x){k.resolve(x.type.isValid(d,x.ext))});return k}});bespin.tiki.module("types:index",function(){});bespin.tiki.register("::bespin",{name:"bespin",dependencies:{}});bespin.bootLoaded=true;
-bespin.tiki.module("bespin:builtins",function(y,j){j.metadata={bespin:{provides:[{ep:"extensionpoint",name:"extensionpoint",indexOx:"name",register:"plugins#registerExtensionPoint",unregister:"plugins#unregisterExtensionPoint",description:"Defines a new extension point",params:[{name:"name",type:"string",description:"the extension point's name",required:true},{name:"description",type:"string",description:"description of what the extension point is for"},{name:"params",type:"array of objects",description:"parameters that provide the metadata for a given extension. Each object should have name and description, minimally. It can also have a 'type' (eg string, pointer, or array) and required to denote whether or not this parameter must be present on the extension."},
-{name:"indexOn",type:"string",description:"You can provide an 'indexOn' property to name a property of extensions through which you'd like to be able to easily look up the extension."},{name:"register",type:"pointer",description:"function that is called when a new extension is discovered. Note that this should be used sparingly, because it will cause your plugin to be loaded whenever a matching plugin appears."},{name:"unregister",type:"pointer",description:"function that is called when an extension is removed. Note that this should be used sparingly, because it will cause your plugin to be loaded whenever a matching plugin appears."}]},
-{ep:"extensionpoint",name:"extensionhandler",register:"plugins#registerExtensionHandler",unregister:"plugins#unregisterExtensionHandler",description:"Used to attach listeners ",params:[{name:"name",type:"string",description:"name of the extension point to listen to",required:true},{name:"register",type:"pointer",description:"function that is called when a new extension is discovered. Note that this should be used sparingly, because it will cause your plugin to be loaded whenever a matching plugin appears."},
-{name:"unregister",type:"pointer",description:"function that is called when an extension is removed. Note that this should be used sparingly, because it will cause your plugin to be loaded whenever a matching plugin appears."}]},{ep:"extensionpoint",name:"factory",description:"Provides a factory for singleton components. Each extension needs to provide a name, a pointer and an action. The action can be 'call' (if the pointer refers to a function), 'new' (if the pointer refers to a traditional JS object) or 'value' (if the pointer refers to the object itself that is the component).",
-indexOn:"name"},{ep:"factory",name:"hub",action:"create",pointer:"util/hub#Hub"},{ep:"extensionpoint",name:"command",description:"Editor commands/actions. TODO: list parameters here."}]}}});
-bespin.tiki.module("bespin:console",function(y,j){y=y("util/util");var v=function(){},A=["assert","count","debug","dir","dirxml","error","group","groupEnd","info","log","profile","profileEnd","time","timeEnd","trace","warn"];if(typeof window==="undefined"){var w={};A.forEach(function(m){w[m]=function(){var d=Array.prototype.slice.call(arguments);postMessage(JSON.stringify({op:"log",method:m,args:d}))}});j.console=w}else if(y.isSafari||y.isChrome)j.console=window.console;else{j.console={};A.forEach(function(m){j.console[m]=
-window.console&&window.console[m]?window.console[m].bind(window.console):v})}});
-bespin.tiki.module("bespin:globals",function(){if(!Object.defineProperty)Object.defineProperty=function(y,j,v){var A=Object.prototype.hasOwnProperty;if(typeof v=="object"&&y.__defineGetter__){if(A.call(v,"value")){if(!y.__lookupGetter__(j)&&!y.__lookupSetter__(j))y[j]=v.value;if(A.call(v,"get")||A.call(v,"set"))throw new TypeError("Object doesn't support this action");}else typeof v.get=="function"&&y.__defineGetter__(j,v.get);typeof v.set=="function"&&y.__defineSetter__(j,v.set)}return y};if(!Object.defineProperties)Object.defineProperties=
-function(y,j){for(var v in j)Object.prototype.hasOwnProperty.call(j,v)&&Object.defineProperty(y,v,j[v]);return y};(function(){if(!Array.isArray)Array.isArray=function(y){return y&&Object.prototype.toString.call(y)=="[object Array]"};if(!Object.keys)Object.keys=function(y){var j,v=[];for(j in y)y.hasOwnProperty(j)&&v.push(j);return v};if(!Function.prototype.bind)Function.prototype.bind=function(){var y=Array.prototype.slice.call(arguments),j=this,v=function(){return j.call.apply(j,y.concat(Array.prototype.slice.call(arguments)))};
-v.name=this.name;v.displayName=this.displayName;v.length=this.length;v.unbound=j;return v}})()});bespin.tiki.module("bespin:index",function(y,j){j.versionNumber="0.9a2";j.versionCodename="Edison";j.apiVersion="4"});
-bespin.tiki.module("bespin:plugins",function(y,j){y("globals");var v=y("promise").Promise,A=y("promise").group,w=y("builtins"),m=y("console").console,d=y("util/util");y("util/stacktrace");var h=y("proxy"),k=y.loader.sources[0],x=function(f,i){if(i){i=i.split("#");return{modName:i[0]?f+":"+i[0]:f,objName:i[1]}}},u=function(f){var i=y(f.modName);if(f.objName)return i[f.objName];return i};j.Extension=function(f){this.pluginName=null;for(property in f)if(f.hasOwnProperty(property))this[property]=f[property];
-this._observers=[]};j.Extension.prototype={load:function(f,i,q){q=q||j.catalog;var r=new v,z=function(I){f&&f(I);r.resolve(I)};i=this[i||"pointer"];if(d.isFunction(i)){z(i);return r}var D=x(this.pluginName,i);if(!D){m.error("Extension cannot be loaded because it has no 'pointer'");m.log(this);r.reject(new Error("Extension has no 'pointer' to call"));return r}var L=this.pluginName;q.loadPlugin(L).then(function(){y.ensure(D.modName,function(){var I=u(D);z(I)})},function(I){m.error("Failed to load plugin ",
-L,I)});return r},observe:function(f,i,q){this._observers.push({plugin:f,callback:i,property:q});this.load(i,q)},getPluginName:function(){return this.pluginName},_getLoaded:function(f){f=this._getPointer(f);return u(f)}};j.ExtensionPoint=function(f,i){this.name=f;this.catalog=i;this.indexOn=this.pluginName=undefined;this.extensions=[];this.handlers=[]};j.ExtensionPoint.prototype={getImplementingPlugins:function(){var f={};this.extensions.forEach(function(q){f[q.pluginName]=true});var i=Object.keys(f);
-i.sort();return i},getDefiningPluginName:function(){return this.pluginName},getByKey:function(f){var i=this.indexOn;if(i)for(var q=0;q<this.extensions.length;q++)if(this.extensions[q][i]==f)return this.extensions[q]},register:function(f){var i=this.catalog;this.extensions.push(f);this.handlers.forEach(function(q){q.register&&q.load(function(r){r?r(f,i):m.error("missing register function for pluginName=",f.pluginName,", extension=",f.name)},"register",i)})},unregister:function(f){var i=this.catalog;
-this.extensions.splice(this.extensions.indexOf(f),1);this.handlers.forEach(function(q){q.unregister&&q.load(function(r){r?r(f,i):m.error("missing unregister function for pluginName=",f.pluginName,", extension=",f.name)},"unregister",i)})},orderExtensions:function(f){for(var i=[],q=0;q<f.length;q++)for(var r=0;r!=this.extensions.length;)if(this.extensions[r].pluginName===f[q]){i.push(this.extensions[r]);this.extensions.splice(r,1)}else r++;this.extensions=i.concat(this.extensions)}};j.Plugin=function(f){this.name=
-this.catalog=null;this.provides=[];this.stylesheets=[];this.reloadPointer=this.reloadURL=null;for(property in f)if(f.hasOwnProperty(property))this[property]=f[property]};j.Plugin.prototype={register:function(){this.provides.forEach(function(f){this.catalog.getExtensionPoint(f.ep,true).register(f)},this)},unregister:function(){this.provides.forEach(function(f){this.catalog.getExtensionPoint(f.ep,true).unregister(f)},this)},_getObservers:function(){var f={};this.provides.forEach(function(i){m.log("ep: ",
-i.ep);m.log(i._observers);f[i.ep]=i._observers});return f},_findDependents:function(f,i,q){var r=this.name,z=this;f.forEach(function(D){if(D!=r){var L=z.catalog.plugins[D];if(L&&L.dependencies)for(dependName in L.dependencies)if(dependName==r&&!i[D]){i[D]={keepModule:false};q||L._findDependents(f,i)}}})},_cleanup:function(f){this.stylesheets.forEach(function(L){for(var I=document.getElementsByTagName("link"),N=0;N<I.length;N++)if(I[N].href.indexOf(L.url)!=-1){I[N].parentNode.removeChild(I[N]);break}});
-var i=this.name,q=new RegExp("^"+i+"$"),r=new RegExp("^::"+i+":");i=new RegExp("^::"+i+"$");var z=y.sandbox,D=y.loader;if(!f){E(r,D.factories);E(i,D.canonicalIds);E(i,D.canonicalPackageIds);E(i,D.packageSources);E(i,D.packages);E(q,k.packageInfoByName);E(r,k.factories);E(r,k.scriptActions);E(r,k.stylesheetActions);E(i,k.packages);E(i,k.ensureActions);E(i,k.packageInfoById)}E(r,z.exports);E(r,z.modules);E(r,z.usedExports)},reload:function(f){if(this.reloadURL){if(this.reloadPointer){var i=x(this.name,
-this.reloadPointer);if(func=u(i))func();else{m.error("Reload function could not be loaded. Aborting reload.");return}}var q={};this._findDependents(Object.keys(this.catalog.plugins),q);var r={pluginName:this.name,dependents:q};for(var z in q){i=this.catalog.plugins[z];if(i.preRefresh){i=x(z,i.preRefresh);if(func=u(i))q[z]=func(r)}}this.unregister();for(z in q)this.catalog.plugins[z].unregister();this._cleanup(this.name);i=[];var D=y.sandbox,L=Object.keys(D.modules),I=L.length,N=[];for(z in q)q[z].keepModule||
-N.push(new RegExp("^::"+z+":"));for(var l=new RegExp("^::"+this.name+":");--I>=0;){var J=L[I];if(l.exec(J))i.push(J);else for(var U=N.length;--U>=0;)if(N[U].exec(J)){i.push(J);break}}i.forEach(function(R){delete D.exports[R];delete D.modules[R];delete D.usedExports[R]});i=function(){this.catalog.loadPlugin(this.name).then(function(){for(z in q)this.catalog.plugins[z].register();for(z in q)if(q[z].callPointer){var R=x(z,q[z].callPointer);(R=u(R))&&R(r)}f&&f()}.bind(this))}.bind(this);L=function(){m.error("Failed to load metadata from "+
-this.reloadURL)}.bind(this);this.catalog.loadMetadataFromURL(this.reloadURL).then(i,L)}}};var B=function(f,i,q){i=i.split(".");f=f;var r=i.length-1;if(r>0)for(var z=0;z<r;z++)f=f[i[z]];f[r]=q};j.Catalog=function(){this.points={};this.plugins={};this.metadata={};this.USER_DEACTIVATED="USER";this.DEPENDS_DEACTIVATED="DEPENDS";this.deactivatedPlugins={};this._extensionsOrdering=[];this.instances={};this.instancesLoadPromises={};this._objectDescriptors={};this.children=[];this.getExtensionPoint("extensionpoint",
-true).indexOn="name";this.registerMetadata(w.metadata)};j.Catalog.prototype={shareExtension:function(f){return this.plugins[f.pluginName].share},isPluginLoaded:function(f){return Object.keys(y.sandbox.usedExports).some(function(i){return i.indexOf("::"+f+":")==0})},registerObject:function(f,i){this._objectDescriptors[f]=i},_setObject:function(f,i){this.instances[f]=i},createObject:function(f){if(this.instancesLoadPromises[f]!==undefined)return this.instancesLoadPromises[f];var i=this._objectDescriptors[f];
-if(i===undefined)throw new Error('Tried to create object "'+f+'" but that object is not registered.');var q=i.factory||f,r=this.getExtensionByKey("factory",q);if(r===undefined)throw new Error('When creating object "'+f+'", there is no factory called "'+q+'" available."');if(this.parent&&this.shareExtension(r))return this.instancesLoadPromises[f]=this.parent.createObject(f);var z=this.instancesLoadPromises[f]=new v,D=i.arguments||[];q=[];if(i.objects){i=i.objects;for(var L in i){var I=this.createObject(i[L]);
-q.push(I);I.location=L;I.then(function(N){B(D,I.location,N)})}}A(q).then(function(){r.load().then(function(N){var l=r.action;if(l==="call")N=N.apply(N,D);else if(l==="new"){if(D.length>1){z.reject(new Error("For object "+f+", create a simple factory function and change the action to call because JS cannot handle this case."));return}N=new N(D[0])}else if(l==="value")N=N;else{z.reject(new Error("Create action must be call|new|value. Found"+l));return}this.instances[f]=N;z.resolve(N)}.bind(this))}.bind(this));
-return z},getObject:function(f){return this.instances[f]||(this.parent?this.parent.getObject(f):undefined)},getExtensionPoint:function(f,i){if(i&&this.points[f]===undefined)this.points[f]=new j.ExtensionPoint(f,this);return this.points[f]},getExtensions:function(f){f=this.getExtensionPoint(f);if(f===undefined)return[];return f.extensions},orderExtensions:function(f){f=f||this._extensionsOrdering;for(name in this.points)this.points[name].orderExtensions(f);this._extensionsOrdering=f},getExtensionsOrdering:function(){return this._extensionsOrdering},
-getExtensionByKey:function(f,i){f=this.getExtensionPoint(f);if(f!==undefined)return f.getByKey(i)},_toposort:function(f){var i=[],q={},r=function(D){if(!(D in q||!(D in f))){q[D]=true;var L=f[D].dependencies;if(!d.none(L))for(var I in L)r(I);i.push(D)}};for(var z in f)r(z);return i},registerMetadata:function(f){if(this.parent)this.parent.registerMetadata(f);else{for(var i in f){var q=f[i];if(q.errors){m.error("Plugin ",i," has errors:");q.errors.forEach(function(r){m.error(r)});delete f[i]}else{if(q.dependencies)q.depends=
-Object.keys(q.dependencies);q.name=i;q.version=null;k.canonicalPackageId(i)===null&&k.register("::"+i,q)}}d.mixin(this.metadata,d.clone(f,true));this.children.forEach(function(r){r._registerMetadata(d.clone(f,true))});this._registerMetadata(d.clone(f,true))}},_registerMetadata:function(f){var i,q=this.plugins;this._toposort(f).forEach(function(r){if(this.plugins[r])if(this.isPluginLoaded(r))return;else{var z=this.plugins[r];z.unregister()}var D=f[r],L=!this.deactivatedPlugins[r];if(L&&D.depends&&
-D.depends.length!=0)if(!D.depends.some(function(l){return!this.deactivatedPlugins[l]},this)){this.deactivatedPlugins[r]="DEPENDS";L=false}D.catalog=this;D.name=r;z=new j.Plugin(D);q[r]=z;if(D.provides){z=D.provides;for(D=0;D<z.length;D++){var I=new j.Extension(z[D]);I.pluginName=r;z[D]=I;var N=I.ep;if(N=="extensionpoint"&&I.name=="extensionpoint")j.registerExtensionPoint(I,this,false);else if(L)this.getExtensionPoint(I.ep,true).register(I);else N=="extensionpoint"&&j.registerExtensionPoint(I,this,
-true)}}else D.provides=[]},this);for(i in f)this._checkLoops(i,q,[]);this.orderExtensions()},loadPlugin:function(f){var i=new v,q=this.plugins[f];if(q.objects){var r=[];q.objects.forEach(function(z){r.push(this.createObject(z))}.bind(this));A(r).then(function(){y.ensurePackage(f,function(){i.resolve()})})}else y.ensurePackage(f,function(z){z?i.reject(z):i.resolve()});return i},loadMetadataFromURL:function(f){var i=new v;h.xhr("GET",f,true).then(function(q){this.registerMetadata(JSON.parse(q));i.resolve()}.bind(this),
-function(q){i.reject(q)});return i},deactivatePlugin:function(f,i){var q=this.plugins[f];if(!q){i||(this.deactivatedPlugins[f]="USER");return'There is no plugin named "'+f+'" in this catalog.'}if(this.deactivatedPlugins[f]){i||(this.deactivatedPlugins[f]="USER");return'The plugin "'+f+'" is already deactivated'}this.deactivatedPlugins[f]=i?"DEPENDS":"USER";var r={},z=[];q._findDependents(Object.keys(this.plugins),r,true);Object.keys(r).forEach(function(D){D=this.deactivatePlugin(D,true);if(Array.isArray(D))z=
-z.concat(D)},this);q.unregister();i&&z.push(f);return z},activatePlugin:function(f,i){var q=this.plugins[f];if(!q)return'There is no plugin named "'+f+'" in this catalog.';if(!this.deactivatedPlugins[f])return'The plugin "'+f+'" is already activated';if(!(i&&this.deactivatedPlugins[f]==="USER")){if(q.depends&&q.depends.length!=0)if(!q.depends.some(function(D){return!this.deactivatedPlugins[D]},this)){this.deactivatedPlugins[f]="DEPENDS";return'Can not activate plugin "'+f+'" as some of its dependent plugins are not activated'}q.register();
-this.orderExtensions();delete this.deactivatedPlugins[f];var r=[],z={};q._findDependents(Object.keys(this.plugins),z,true);Object.keys(z).forEach(function(D){D=this.activatePlugin(D,true);if(Array.isArray(D))r=r.concat(D)},this);i&&r.push(f);return r}},removePlugin:function(f){var i=this.plugins[f];if(i==undefined)throw new Error("Attempted to remove plugin "+f+" which does not exist.");i.unregister();i._cleanup(true);delete this.metadata[f];delete this.plugins[f]},getResourceURL:function(f){var i=
-document.getElementById("bespin_base"),q="";if(i){q+=i.href;d.endsWith(q,"/")||(q+="/")}f=this.plugins[f];if(f!=undefined)return q+f.resourceURL},_checkLoops:function(f,i,q){var r=false;q.forEach(function(L){if(f===L){m.error("Circular dependency",f,q);r=true}});if(r)return true;q.push(f);if(i[f]){if(i[f].dependencies)for(var z in i[f].dependencies){var D=q.slice();if(this._checkLoops(z,i,D)){m.error("Errors found when looking at ",f);return true}}}else m.error("Missing metadata for ",f);return false},
-getPlugins:function(f){var i=[],q=f.onlyType;for(var r in this.plugins){var z=this.plugins[r];q&&z.type&&z.type!=q||z.name=="bespin"||i.push(z)}var D=f.sortBy;D||(D=["name"]);i.sort(function(L,I){for(var N=0;N<D.length;N++){r=D[N];if(L[r]<I[r])return-1;else if(I[r]<L[r])return 1}return 0});return i},loadObjectForPropertyPath:function(f,i){var q=new v,r=/^([^:]+):([^#]+)#(.*)$/.exec(f);if(r===null)throw new Error("loadObjectForPropertyPath: malformed path: '"+f+"'");r=r[1];if(r===""){if(d.none(i))throw new Error("loadObjectForPropertyPath: no plugin name supplied and no context is present");
-r=i}y.ensurePackage(r,function(){q.resolve(this.objectForPropertyPath(f))}.bind(this));return q},objectForPropertyPath:function(f,i,q){q=q==undefined?f.length:q;i||(i=window);var r=f.split("#");if(r.length!==1){i=y(r[0]);if(i===undefined)return;f=r[1];i=i;q-=r[0].length}for(var z=0;i&&z<q;){r=f.indexOf(".",z);if(r<0||r>q)r=q;z=f.slice(z,r);i=i[z];z=r+1}if(z<q)i=undefined;return i},publish:function(f,i,q,r){if(this.shareExtension(this.getExtensionPoint(i)))if(this.parent)this.parent.publish(f,i,q,
-r);else{this.children.forEach(function(z){z._publish(f,i,q,r)});this._publish(f,i,q,r)}else this._publish(f,i,q,r)},_publish:function(f,i,q,r){this.getExtensions(i).forEach(function(z){if(z.match&&!z.regexp)z.regexp=new RegExp(z.match);if(z.regexp&&z.regexp.test(q)||z.key===q||d.none(z.key)&&d.none(q))z.load().then(function(D){D(f,q,r)})})},registerExtension:function(f,i){i=new j.Extension(i);i.pluginName="__dynamic";this.getExtensionPoint(f).register(i)}};j.registerExtensionPoint=function(f,i,q){var r=
-i.getExtensionPoint(f.name,true);r.description=f.description;r.pluginName=f.pluginName;r.params=f.params;if(f.indexOn)r.indexOn=f.indexOn;if(!q&&(f.register||f.unregister))j.registerExtensionHandler(f,i)};j.registerExtensionHandler=function(f,i){if(!(i.parent&&i.shareExtension(f))){var q=i.getExtensionPoint(f.name,true);q.handlers.push(f);if(f.register){var r=d.clone(q.extensions);f.load(function(z){if(!z)throw f.name+" is not ready";r.forEach(function(D){z(D,i)})},"register",i)}}};j.unregisterExtensionPoint=
-function(f){if(f.register||f.unregister)j.unregisterExtensionHandler(f)};j.unregisterExtensionHandler=function(f,i){if(!(i.parent&&i.shareExtension(f))){i=i.getExtensionPoint(f.name,true);if(i.handlers.indexOf(f)!=-1){i.handlers.splice(i.handlers.indexOf(f),1);if(f.unregister){var q=d.clone(i.extensions);f.load(function(r){if(!r)throw f.name+" is not ready";q.forEach(function(z){r(z)})},"unregister")}}}};j.catalog=new j.Catalog;var E=function(f,i){for(var q=Object.keys(i),r=q.length;--r>0;)f.exec(q[r])&&
-delete i[q[r]]};j.getUserPlugins=function(){return j.catalog.getPlugins({onlyType:"user"})}});
-bespin.tiki.module("bespin:promise",function(y,j){var v=y("bespin:console").console;y("bespin:util/stacktrace");var A=0;j._outstanding=[];j._recent=[];j.Promise=function(){this._status=0;this._value=undefined;this._onSuccessHandlers=[];this._onErrorHandlers=[];this._id=A++;j._outstanding[this._id]=this};j.Promise.prototype.isPromise=true;j.Promise.prototype.isComplete=function(){return this._status!=0};j.Promise.prototype.isResolved=function(){return this._status==1};j.Promise.prototype.isRejected=
-function(){return this._status==-1};j.Promise.prototype.then=function(w,m){if(typeof w==="function")if(this._status===1)w.call(null,this._value);else this._status===0&&this._onSuccessHandlers.push(w);if(typeof m==="function")if(this._status===-1)m.call(null,this._value);else this._status===0&&this._onErrorHandlers.push(m);return this};j.Promise.prototype.chainPromise=function(w){var m=new j.Promise;m._chainedFrom=this;this.then(function(d){try{m.resolve(w(d))}catch(h){m.reject(h)}},function(d){m.reject(d)});
-return m};j.Promise.prototype.resolve=function(w){return this._complete(this._onSuccessHandlers,1,w,"resolve")};j.Promise.prototype.reject=function(w){return this._complete(this._onErrorHandlers,-1,w,"reject")};j.Promise.prototype._complete=function(w,m,d,h){if(this._status!=0){v.group("Promise already closed");v.error("Attempted "+h+"() with ",d);v.error("Previous status = ",this._status,", previous value = ",this._value);v.trace();if(this._completeTrace){v.error("Trace of previous completion:");
-this._completeTrace.log(5)}v.groupEnd();return this}this._status=m;this._value=d;w.forEach(function(k){k.call(null,this._value)},this);this._onSuccessHandlers.length=0;this._onErrorHandlers.length=0;delete j._outstanding[this._id];for(j._recent.push(this);j._recent.length>20;)j._recent.shift();return this};j.group=function(w){w instanceof Array||(w=Array.prototype.slice.call(arguments));if(w.length===0)return(new j.Promise).resolve([]);var m=new j.Promise,d=[],h=0,k=function(x){return function(u){d[x]=
-u;h++;m._status!==-1&&h===w.length&&m.resolve(d)}};w.forEach(function(x,u){u=k(u);var B=m.reject.bind(m);x.then(u,B)});return m};j.synchronizer=function(w,m){return function(){var d=w.apply(m,arguments);if(!d.isComplete())throw new Error("asynchronous function can't be synchronized");return d._value}}});
-bespin.tiki.module("bespin:proxy",function(y,j){y("util/util");var v=y("promise").Promise;j.xhr=function(A,w,m,d){var h=new v;if(!bespin.proxy||!bespin.proxy.xhr){var k=new XMLHttpRequest;k.onreadystatechange=function(){if(k.readyState===4){var x=k.status;if(x!==0&&x!==200){x=new Error(k.responseText+" (Status "+k.status+")");x.xhr=k;h.reject(x)}else h.resolve(k.responseText)}}.bind(this);k.open("GET",w,m);d&&d(k);k.send()}else bespin.proxy.xhr.call(this,A,w,m,d,h);return h};j.Worker=function(A){return!bespin.proxy||
-!bespin.proxy.worker?new Worker(A):new bespin.proxy.worker(A)}});
-bespin.tiki.module("bespin:sandbox",function(y,j){var v=y("tiki"),A=y("bespin:util/util"),w=y("bespin:plugins").catalog;if(w.parent)throw new Error("The sandbox module can't be used inside of a slave catalog!");y=function(){v.Sandbox.call(this,bespin.tiki.require.loader,{},[]);var m=this.require("bespin:plugins").catalog;m.parent=w;w.children.push(m);m.deactivatePlugin=A.clone(w.deactivatePlugin);m._extensionsOrdering=A.clone(w._extensionsOrdering);m._registerMetadata(A.clone(w.metadata,true))};y.prototype=
-new v.Sandbox;y.prototype.require=function(m,d,h){var k=this.loader.canonical(m,d,h).substring(2).split(":")[0];return w.plugins[k].share?bespin.tiki.sandbox.require(m,d,h):v.Sandbox.prototype.require.call(this,m,d,h)};j.Sandbox=y});
-bespin.tiki.module("bespin:util/cookie",function(y,j){var v=function(A,w){return A.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g,function(m){if(w&&w.indexOf(m)!=-1)return m;return"\\"+m})};j.get=function(A){A=new RegExp("(?:^|; )"+v(A)+"=([^;]*)");return(A=document.cookie.match(A))?decodeURIComponent(A[1]):undefined};j.set=function(A,w,m){m=m||{};if(typeof m.expires=="number"){var d=new Date;d.setTime(d.getTime()+m.expires*24*60*60*1E3);m.expires=d}if(m.expires&&m.expires.toUTCString)m.expires=m.expires.toUTCString();
-w=encodeURIComponent(w);A=A+"="+w;var h;for(h in m){A+="; "+h;w=m[h];if(w!==true)A+="="+w}document.cookie=A};j.remove=function(A){j.set(A,"",{expires:-1})};j.isSupported=function(){if(!("cookieEnabled"in navigator)){j.set("__djCookieTest__","CookiesAllowed");navigator.cookieEnabled=j.get("__djCookieTest__")=="CookiesAllowed";navigator.cookieEnabled&&j.remove("__djCookieTest__")}return navigator.cookieEnabled}});
-bespin.tiki.module("bespin:util/scratchcanvas",function(y,j){var v=y("bespin:util/util"),A=function(){this._canvas=document.getElementById("bespin-scratch-canvas");if(v.none(this._canvas)){this._canvas=document.createElement("canvas");this._canvas.id="bespin-scratch-canvas";this._canvas.width=400;this._canvas.height=300;this._canvas.style.position="absolute";this._canvas.style.top="-10000px";this._canvas.style.left="-10000px";document.body.appendChild(this._canvas)}};A.prototype.getContext=function(){return this._canvas.getContext("2d")};
-A.prototype.measureStringWidth=function(m,d){if(v.none(d))d="M";var h=this.getContext();h.save();h.font=m;m=h.measureText(d).width;h.restore();return m};var w=null;j.get=function(){if(w===null)w=new A;return w}});
-bespin.tiki.module("bespin:util/stacktrace",function(y,j){function v(u){for(var B=0;B<u.length;++B){var E=u[B];if(typeof E=="object")u[B]="#object";else if(typeof E=="function")u[B]="#function";else if(typeof E=="string")u[B]='"'+E+'"'}return u.join(",")}function A(){}var w=y("bespin:util/util"),m=y("bespin:console").console,d=function(){if(w.isMozilla)return"firefox";else if(w.isOpera)return"opera";else if(w.isSafari)return"other";try{0()}catch(u){if(u.arguments)return"chrome";if(u.stack)return"firefox";
-if(window.opera&&!("stacktrace"in u))return"opera"}return"other"}(),h={chrome:function(u){var B=u.stack;if(!B){m.log(u);return[]}return B.replace(/^.*?\n/,"").replace(/^.*?\n/,"").replace(/^.*?\n/,"").replace(/^[^\(]+?[\n$]/gm,"").replace(/^\s+at\s+/gm,"").replace(/^Object.<anonymous>\s*\(/gm,"{anonymous}()@").split("\n")},firefox:function(u){var B=u.stack;if(!B){m.log(u);return[]}B=B.replace(/(?:\n@:0)?\s+$/m,"");B=B.replace(/^\(/gm,"{anonymous}(");return B.split("\n")},opera:function(u){u=u.message.split("\n");
-var B=/Line\s+(\d+).*?script\s+(http\S+)(?:.*?in\s+function\s+(\S+))?/i,E,f,i;E=4;f=0;for(i=u.length;E<i;E+=2)if(B.test(u[E]))u[f++]=(RegExp.$3?RegExp.$3+"()@"+RegExp.$2+RegExp.$1:"{anonymous}()@"+RegExp.$2+":"+RegExp.$1)+" -- "+u[E+1].replace(/^\s+/,"");u.splice(f,u.length-f);return u},other:function(u){for(var B=/function\s*([\w\-$]+)?\s*\(/i,E=[],f=0,i,q;u&&E.length<10;){i=B.test(u.toString())?RegExp.$1||"{anonymous}":"{anonymous}";q=Array.prototype.slice.call(u.arguments);E[f++]=i+"("+v(q)+")";
-if(u===u.caller&&window.opera)break;u=u.caller}return E}};A.prototype={sourceCache:{},ajax:function(u){var B=this.createXMLHTTPObject();if(B){B.open("GET",u,false);B.setRequestHeader("User-Agent","XMLHTTP/1.0");B.send("");return B.responseText}},createXMLHTTPObject:function(){for(var u,B=[function(){return new XMLHttpRequest},function(){return new ActiveXObject("Msxml2.XMLHTTP")},function(){return new ActiveXObject("Msxml3.XMLHTTP")},function(){return new ActiveXObject("Microsoft.XMLHTTP")}],E=0;E<
-B.length;E++)try{u=B[E]();this.createXMLHTTPObject=B[E];return u}catch(f){}},getSource:function(u){u in this.sourceCache||(this.sourceCache[u]=this.ajax(u).split("\n"));return this.sourceCache[u]},guessFunctions:function(u){for(var B=0;B<u.length;++B){var E=u[B],f=/{anonymous}\(.*\)@(\w+:\/\/([-\w\.]+)+(:\d+)?[^:]+):(\d+):?(\d+)?/.exec(E);if(f){var i=f[1];f=f[4];if(i&&f){i=this.guessFunctionName(i,f);u[B]=E.replace("{anonymous}",i)}}}return u},guessFunctionName:function(u,B){try{return this.guessFunctionNameFromLines(B,
-this.getSource(u))}catch(E){return"getSource failed with url: "+u+", exception: "+E.toString()}},guessFunctionNameFromLines:function(u,B){for(var E=/function ([^(]*)\(([^)]*)\)/,f=/['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*(function|eval|new Function)/,i="",q=0;q<10;++q){i=B[u-q]+i;if(i!==undefined){var r=f.exec(i);if(r)return r[1];else r=E.exec(i);if(r&&r[1])return r[1]}}return"(?)"}};var k=new A,x=[/http:\/\/localhost:4020\/sproutcore.js:/];j.ignoreFramesMatching=function(u){x.push(u)};j.Trace=function(u,
-B){this._ex=u;this._stack=h[d](u);if(B)this._stack=k.guessFunctions(this._stack)};j.Trace.prototype.log=function(u){if(u<=0)u=999999999;for(var B=0,E=0;E<this._stack.length&&B<u;E++){var f=this._stack[E],i=true;x.forEach(function(q){if(q.test(f))i=false});if(i){m.debug(f);B++}}}});
-bespin.tiki.module("bespin:util/util",function(y,j){j.queryToObject=function(d,h){var k={};d=d.split(h||"&");var x=decodeURIComponent;d.forEach(function(u){if(u.length){var B=u.split("=");u=x(B.shift());B=x(B.join("="));if(j.isString(k[u]))k[u]=[k[u]];if(Array.isArray(k[u]))k[u].push(B);else k[u]=B}});return k};j.objectToQuery=function(d){var h=encodeURIComponent,k=[],x={};for(var u in d){var B=d[u];if(B!=x[u]){var E=h(u)+"=";if(B.isArray)for(var f=0;f<B.length;f++)k.push(E+h(B[f]));else k.push(E+
-h(B))}}return k.join("&")};var v=0,A={};j.rateLimit=function(d,h,k){if(d){var x=v++;return function(){A[x]&&clearTimeout(A[x]);A[x]=setTimeout(function(){k.apply(h,arguments);delete A[x]},d)}}};j.isString=function(d){return typeof d=="string"||d instanceof String};j.isBoolean=function(d){return typeof d=="boolean"};j.isNumber=function(d){return typeof d=="number"&&isFinite(d)};j.isObject=function(d){return d!==undefined&&(d===null||typeof d=="object"||Array.isArray(d)||j.isFunction(d))};j.isFunction=
-function(){var d=function(h){var k=typeof h;return h&&(k=="function"||h instanceof Function)&&!h.nodeType};return j.isSafari?function(h){if(typeof h=="function"&&h=="[object NodeList]")return false;return d(h)}:d}();j.endsWith=function(d,h){if(!d)return false;return d.match(new RegExp(h+"$"))};j.include=function(d,h){return d.indexOf(h)>-1};j.indexOfProperty=function(d,h,k){for(var x=0;x<d.length;x++)if(d[x][h]==k)return x;return null};j.last=function(d){if(Array.isArray(d))return d[d.length-1]};
-j.shrinkArray=function(d){var h=[],k=true;d.reverse().forEach(function(x){if(!(k&&x===undefined)){k=false;h.push(x)}});return h.reverse()};j.makeArray=function(d,h){if(d<1)return[];h||(h=" ");for(var k=[],x=0;x<d;x++)k.push(h);return k};j.repeatString=function(d,h){for(var k="",x=0;x<h;x++)k+=d;return k};j.leadingSpaces=function(d){for(var h=0,k=0;k<d.length;k++)if(d[k]==" "||d[k]==""||d[k]===undefined)h++;else return h;return h};j.leadingTabs=function(d){for(var h=0,k=0;k<d.length;k++)if(d[k]=="\t"||
-d[k]==""||d[k]===undefined)h++;else return h;return h};j.leadingWhitespace=function(d){for(var h=[],k=0;k<d.length;k++)if(d[k]==" "||d[k]=="\t"||d[k]==""||d[k]===undefined)h.push(d[k]);else return h;return h};j.englishFromCamel=function(d){d.replace(/([A-Z])/g,function(h){return" "+h.toLowerCase()}).trim()};j.OS={LINUX:"LINUX",MAC:"MAC",WINDOWS:"WINDOWS"};y=navigator.userAgent;var w=navigator.appVersion;j.isLinux=w.indexOf("Linux")>=0;j.isWindows=w.indexOf("Win")>=0;j.isWebKit=parseFloat(y.split("WebKit/")[1])||
-undefined;j.isChrome=parseFloat(y.split("Chrome/")[1])||undefined;j.isMac=w.indexOf("Macintosh")>=0;j.isMozilla=w.indexOf("Gecko/")>=0;if(y.indexOf("AdobeAIR")>=0)j.isAIR=1;var m=Math.max(w.indexOf("WebKit"),w.indexOf("Safari"),0);if(m&&!j.isChrome){j.isSafari=parseFloat(w.split("Version/")[1]);if(!j.isSafari||parseFloat(w.substr(m+7))<=419.3)j.isSafari=2}if(y.indexOf("Gecko")>=0&&!j.isWebKit)j.isMozilla=parseFloat(w);j.getOS=function(){return j.isMac?j.OS.MAC:j.isLinux?j.OS.LINUX:j.OS.WINDOWS};j.contains=
-typeof document!=="undefined"&&document.compareDocumentPosition?function(d,h){return d.compareDocumentPosition(h)&16}:function(d,h){return d!==h&&(d.contains?d.contains(h):true)};j.stopEvent=function(d){d.preventDefault();d.stopPropagation()};j.randomPassword=function(d){d=d||16;for(var h="",k=0;k<d;k++){var x=Math.floor(Math.random()*62);h+="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".charAt(x)}return h};j.isEmpty=function(d){for(var h in d)if(d.hasOwnProperty(h))return false;
-return true};j.isMyProject=function(d){return d.indexOf("+")==-1};j.formatDate=function(d){if(!d)return"Unknown";return d.getDate()+" "+j.formatDate.shortMonths[d.getMonth()]+" "+d.getFullYear()};j.formatDate.shortMonths=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];j.addClass=function(d,h){h=h.split(/\s+/);for(var k=" "+d.className+" ",x=0,u=h.length,B;x<u;++x)if((B=h[x])&&k.indexOf(" "+B+" ")<0)k+=B+" ";d.className=k.trim()};j.removeClass=function(d,h){if(h!==undefined){var k=
-h.split(/\s+/);h=" "+d.className+" ";for(var x=0,u=k.length;x<u;++x)h=h.replace(" "+k[x]+" "," ");h=h.trim()}else h="";if(d.className!=h)d.className=h};j.setClass=function(d,h,k){k?j.addClass(d,h):j.removeClass(d,h)};j.none=function(d){return d===null||d===undefined};j.clone=function(d,h){if(Array.isArray(d)&&!h)return d.slice();if(typeof d==="object"||Array.isArray(d)){if(d===null)return null;var k=Array.isArray(d)?[]:{};for(var x in d)k[x]=h&&(typeof d[x]==="object"||Array.isArray(d[x]))?j.clone(d[x],
-true):d[x];return k}if(d&&typeof d.clone==="function")return d.clone();return d};j.mixin=function(d,h){for(var k in h){var x=h.__lookupGetter__(k),u=h.__lookupSetter__(k);if(x||u){x&&d.__defineGetter__(k,x);u&&d.__defineSetter__(k,u)}else d[k]=h[k]}return d};j.replace=function(d,h,k,x){return d.slice(0,h).concat(x).concat(d.slice(h+k))};j.rectsEqual=function(d,h,k){if(!d||!h)return d==h;if(!k&&k!==0)k=0.1;if(d.y!=h.y&&Math.abs(d.y-h.y)>k)return false;if(d.x!=h.x&&Math.abs(d.x-h.x)>k)return false;
-if(d.width!=h.width&&Math.abs(d.width-h.width)>k)return false;if(d.height!=h.height&&Math.abs(d.height-h.height)>k)return false;return true}});bespin.tiki.register("::syntax_directory",{name:"syntax_directory",dependencies:{}});
-bespin.tiki.module("syntax_directory:index",function(y,j){function v(m){this.extension=m;this.name=m.name;this.fileExts=m.hasOwnProperty("fileexts")?m.fileexts:[];this.settings=m.settings!=null?m.settings:[]}function A(m){w.register(m)}y("bespin:plugins");var w={_fileExts:{},_syntaxInfo:{},get:function(m){return this._syntaxInfo[m]},hasSyntax:function(m){return this._syntaxInfo.hasOwnProperty(m)},register:function(m){var d=new v(m);this._syntaxInfo[d.name]=d;var h=this._fileExts;d.fileExts.forEach(function(k){h[k]=
-d.name})},syntaxForFileExt:function(m){m=m.toLowerCase();var d=this._fileExts;return d.hasOwnProperty(m)?d[m]:"plain"}};j.syntaxDirectory=w;j.discoveredNewSyntax=A});bespin.tiki.register("::underscore",{name:"underscore",dependencies:{}});
-bespin.tiki.module("underscore:index",function(y,j){(function(){var v=this,A=v._,w=typeof StopIteration!=="undefined"?StopIteration:"__break__",m=function(g){return g.replace(/([.*+?^${}()|[\]\/\\])/g,"\\$1")},d=Array.prototype,h=Object.prototype,k=d.slice,x=d.unshift,u=h.toString,B=h.hasOwnProperty,E=d.forEach,f=d.map,i=d.reduce,q=d.reduceRight,r=d.filter,z=d.every,D=d.some,L=d.indexOf,I=d.lastIndexOf;h=Array.isArray;var N=Object.keys,l=function(g){return new R(g)};if(typeof j!=="undefined")j._=
-l;v._=l;l.VERSION="1.0.2";var J=l.forEach=function(g,n,t){try{if(E&&g.forEach===E)g.forEach(n,t);else if(l.isNumber(g.length))for(var s=0,G=g.length;s<G;s++)n.call(t,g[s],s,g);else for(s in g)B.call(g,s)&&n.call(t,g[s],s,g)}catch(K){if(K!=w)throw K;}return g};l.map=function(g,n,t){if(f&&g.map===f)return g.map(n,t);var s=[];J(g,function(G,K,P){s.push(n.call(t,G,K,P))});return s};l.reduce=function(g,n,t,s){if(i&&g.reduce===i)return g.reduce(l.bind(t,s),n);J(g,function(G,K,P){n=t.call(s,n,G,K,P)});return n};
-l.reduceRight=function(g,n,t,s){if(q&&g.reduceRight===q)return g.reduceRight(l.bind(t,s),n);g=l.clone(l.toArray(g)).reverse();return l.reduce(g,n,t,s)};l.detect=function(g,n,t){var s;J(g,function(G,K,P){if(n.call(t,G,K,P)){s=G;l.breakLoop()}});return s};l.filter=function(g,n,t){if(r&&g.filter===r)return g.filter(n,t);var s=[];J(g,function(G,K,P){n.call(t,G,K,P)&&s.push(G)});return s};l.reject=function(g,n,t){var s=[];J(g,function(G,K,P){!n.call(t,G,K,P)&&s.push(G)});return s};l.every=function(g,n,
-t){n=n||l.identity;if(z&&g.every===z)return g.every(n,t);var s=true;J(g,function(G,K,P){(s=s&&n.call(t,G,K,P))||l.breakLoop()});return s};l.some=function(g,n,t){n=n||l.identity;if(D&&g.some===D)return g.some(n,t);var s=false;J(g,function(G,K,P){if(s=n.call(t,G,K,P))l.breakLoop()});return s};l.include=function(g,n){if(L&&g.indexOf===L)return g.indexOf(n)!=-1;var t=false;J(g,function(s){if(t=s===n)l.breakLoop()});return t};l.invoke=function(g,n){var t=l.rest(arguments,2);return l.map(g,function(s){return(n?
-s[n]:s).apply(s,t)})};l.pluck=function(g,n){return l.map(g,function(t){return t[n]})};l.max=function(g,n,t){if(!n&&l.isArray(g))return Math.max.apply(Math,g);var s={computed:-Infinity};J(g,function(G,K,P){K=n?n.call(t,G,K,P):G;K>=s.computed&&(s={value:G,computed:K})});return s.value};l.min=function(g,n,t){if(!n&&l.isArray(g))return Math.min.apply(Math,g);var s={computed:Infinity};J(g,function(G,K,P){K=n?n.call(t,G,K,P):G;K<s.computed&&(s={value:G,computed:K})});return s.value};l.sortBy=function(g,
-n,t){return l.pluck(l.map(g,function(s,G,K){return{value:s,criteria:n.call(t,s,G,K)}}).sort(function(s,G){s=s.criteria;G=G.criteria;return s<G?-1:s>G?1:0}),"value")};l.sortedIndex=function(g,n,t){t=t||l.identity;for(var s=0,G=g.length;s<G;){var K=s+G>>1;t(g[K])<t(n)?(s=K+1):(G=K)}return s};l.toArray=function(g){if(!g)return[];if(g.toArray)return g.toArray();if(l.isArray(g))return g;if(l.isArguments(g))return k.call(g);return l.values(g)};l.size=function(g){return l.toArray(g).length};l.first=function(g,
-n,t){return n&&!t?k.call(g,0,n):g[0]};l.rest=function(g,n,t){return k.call(g,l.isUndefined(n)||t?1:n)};l.last=function(g){return g[g.length-1]};l.compact=function(g){return l.filter(g,function(n){return!!n})};l.flatten=function(g){return l.reduce(g,[],function(n,t){if(l.isArray(t))return n.concat(l.flatten(t));n.push(t);return n})};l.without=function(g){var n=l.rest(arguments);return l.filter(g,function(t){return!l.include(n,t)})};l.uniq=function(g,n){return l.reduce(g,[],function(t,s,G){if(0==G||
-(n===true?l.last(t)!=s:!l.include(t,s)))t.push(s);return t})};l.intersect=function(g){var n=l.rest(arguments);return l.filter(l.uniq(g),function(t){return l.every(n,function(s){return l.indexOf(s,t)>=0})})};l.zip=function(){for(var g=l.toArray(arguments),n=l.max(l.pluck(g,"length")),t=new Array(n),s=0;s<n;s++)t[s]=l.pluck(g,String(s));return t};l.indexOf=function(g,n){if(L&&g.indexOf===L)return g.indexOf(n);for(var t=0,s=g.length;t<s;t++)if(g[t]===n)return t;return-1};l.lastIndexOf=function(g,n){if(I&&
-g.lastIndexOf===I)return g.lastIndexOf(n);for(var t=g.length;t--;)if(g[t]===n)return t;return-1};l.range=function(g,n,t){var s=l.toArray(arguments),G=s.length<=1;g=G?0:s[0];n=G?s[0]:s[1];t=s[2]||1;s=Math.ceil((n-g)/t);if(s<=0)return[];s=new Array(s);G=g;for(var K=0;;G+=t){if((t>0?G-n:n-G)>=0)return s;s[K++]=G}};l.bind=function(g,n){var t=l.rest(arguments,2);return function(){return g.apply(n||{},t.concat(l.toArray(arguments)))}};l.bindAll=function(g){var n=l.rest(arguments);if(n.length==0)n=l.functions(g);
-J(n,function(t){g[t]=l.bind(g[t],g)});return g};l.delay=function(g,n){var t=l.rest(arguments,2);return setTimeout(function(){return g.apply(g,t)},n)};l.defer=function(g){return l.delay.apply(l,[g,1].concat(l.rest(arguments)))};l.wrap=function(g,n){return function(){var t=[g].concat(l.toArray(arguments));return n.apply(n,t)}};l.compose=function(){var g=l.toArray(arguments);return function(){for(var n=l.toArray(arguments),t=g.length-1;t>=0;t--)n=[g[t].apply(this,n)];return n[0]}};l.keys=N||function(g){if(l.isArray(g))return l.range(0,
-g.length);var n=[];for(var t in g)B.call(g,t)&&n.push(t);return n};l.values=function(g){return l.map(g,l.identity)};l.functions=function(g){return l.filter(l.keys(g),function(n){return l.isFunction(g[n])}).sort()};l.extend=function(g){J(l.rest(arguments),function(n){for(var t in n)g[t]=n[t]});return g};l.clone=function(g){if(l.isArray(g))return g.slice(0);return l.extend({},g)};l.tap=function(g,n){n(g);return g};l.isEqual=function(g,n){if(g===n)return true;var t=typeof g;if(t!=typeof n)return false;
-if(g==n)return true;if(!g&&n||g&&!n)return false;if(g.isEqual)return g.isEqual(n);if(l.isDate(g)&&l.isDate(n))return g.getTime()===n.getTime();if(l.isNaN(g)&&l.isNaN(n))return true;if(l.isRegExp(g)&&l.isRegExp(n))return g.source===n.source&&g.global===n.global&&g.ignoreCase===n.ignoreCase&&g.multiline===n.multiline;if(t!=="object")return false;if(g.length&&g.length!==n.length)return false;t=l.keys(g);var s=l.keys(n);if(t.length!=s.length)return false;for(var G in g)if(!(G in n)||!l.isEqual(g[G],n[G]))return false;
-return true};l.isEmpty=function(g){if(l.isArray(g)||l.isString(g))return g.length===0;for(var n in g)if(B.call(g,n))return false;return true};l.isElement=function(g){return!!(g&&g.nodeType==1)};l.isArray=h||function(g){return!!(g&&g.concat&&g.unshift&&!g.callee)};l.isArguments=function(g){return g&&g.callee};l.isFunction=function(g){return!!(g&&g.constructor&&g.call&&g.apply)};l.isString=function(g){return!!(g===""||g&&g.charCodeAt&&g.substr)};l.isNumber=function(g){return g===+g||u.call(g)==="[object Number]"};
-l.isBoolean=function(g){return g===true||g===false};l.isDate=function(g){return!!(g&&g.getTimezoneOffset&&g.setUTCFullYear)};l.isRegExp=function(g){return!!(g&&g.test&&g.exec&&(g.ignoreCase||g.ignoreCase===false))};l.isNaN=function(g){return l.isNumber(g)&&isNaN(g)};l.isNull=function(g){return g===null};l.isUndefined=function(g){return typeof g=="undefined"};l.noConflict=function(){v._=A;return this};l.identity=function(g){return g};l.times=function(g,n,t){for(var s=0;s<g;s++)n.call(t,s)};l.breakLoop=
-function(){throw w;};l.mixin=function(g){J(l.functions(g),function(n){Q(n,l[n]=g[n])})};var U=0;l.uniqueId=function(g){var n=U++;return g?g+n:n};l.templateSettings={start:"<%",end:"%>",interpolate:/<%=(.+?)%>/g};l.template=function(g,n){var t=l.templateSettings,s=new RegExp("'(?=[^"+t.end.substr(0,1)+"]*"+m(t.end)+")","g");g=new Function("obj","var p=[],print=function(){p.push.apply(p,arguments);};with(obj){p.push('"+g.replace(/[\r\t\n]/g," ").replace(s,"\t").split("'").join("\\'").split("\t").join("'").replace(t.interpolate,
-"',$1,'").split(t.start).join("');").split(t.end).join("p.push('")+"');}return p.join('');");return n?g(n):g};l.each=l.forEach;l.foldl=l.inject=l.reduce;l.foldr=l.reduceRight;l.select=l.filter;l.all=l.every;l.any=l.some;l.head=l.first;l.tail=l.rest;l.methods=l.functions;var R=function(g){this._wrapped=g},S=function(g,n){return n?l(g).chain():g},Q=function(g,n){R.prototype[g]=function(){var t=l.toArray(arguments);x.call(t,this._wrapped);return S(n.apply(l,t),this._chain)}};l.mixin(l);J(["pop","push",
-"reverse","shift","sort","splice","unshift"],function(g){var n=d[g];R.prototype[g]=function(){n.apply(this._wrapped,arguments);return S(this._wrapped,this._chain)}});J(["concat","join","slice"],function(g){var n=d[g];R.prototype[g]=function(){return S(n.apply(this._wrapped,arguments),this._chain)}});R.prototype.chain=function(){this._chain=true;return this};R.prototype.value=function(){return this._wrapped}})();j._.noConflict()});bespin.tiki.register("::settings",{name:"settings",dependencies:{types:"0.0.0"}});
-bespin.tiki.module("settings:commands",function(y,j){y("bespin:plugins");y("environment");var v=y("settings").settings;j.setCommand=function(A,w){var m;if(A.setting)if(A.value===undefined)m="<strong>"+A.setting+"</strong> = "+v.get(A.setting);else{m="Setting: <strong>"+A.setting+"</strong> = "+A.value;v.set(A.setting,A.value)}else{A=v._list();m="";A.sort(function(d,h){return d.key<h.key?-1:d.key==h.key?0:1});A.forEach(function(d){m+='<a class="setting" href="https://wiki.mozilla.org/Labs/Bespin/Settings#'+
-d.key+'" title="View external documentation on setting: '+d.key+'" target="_blank">'+d.key+"</a> = "+d.value+"<br/>"})}w.done(m)};j.unsetCommand=function(A,w){v.resetValue(A.setting);w.done("Reset "+A.setting+" to default: "+v.get(A.setting))}});
-bespin.tiki.module("settings:cookie",function(y,j){var v=y("bespin:util/cookie");j.CookiePersister=function(){};j.CookiePersister.prototype={loadInitialValues:function(A){A._loadDefaultValues().then(function(){var w=v.get("settings");A._loadFromObject(JSON.parse(w))}.bind(this))},persistValue:function(A){try{var w={};A._getSettingNames().forEach(function(h){w[h]=A.get(h)});var m=JSON.stringify(w);v.set("settings",m)}catch(d){console.error("Unable to JSONify the settings! "+d)}}}});
-bespin.tiki.module("settings:index",function(y,j){var v=y("bespin:plugins").catalog,A=y("bespin:console").console,w=y("bespin:promise").Promise,m=y("bespin:promise").group,d=y("types:types");j.addSetting=function(h){y("settings").settings.addSetting(h)};j.getSettings=function(){return v.getExtensions("setting")};j.getTypeSpecFromAssignment=function(h){var k=h.assignments;h="text";if(k){var x=null;k.forEach(function(u){if(u.param.name==="setting")x=u});if(x)if((k=x.value)&&k!=="")if(k=v.getExtensionByKey("setting",
-k))h=k.type}return h};j.MemorySettings=function(){};j.MemorySettings.prototype={_values:{},_deactivated:{},setPersister:function(h){(this._persister=h)&&h.loadInitialValues(this)},get:function(h){return this._values[h]},set:function(h,k){var x=v.getExtensionByKey("setting",h);if(x)if(typeof k=="string"&&x.type=="string")this._values[h]=k;else{var u=false;d.fromString(k,x.type).then(function(B){u=true;this._values[h]=B;v.publish(this,"settingChange",h,B)}.bind(this),function(B){A.error("Error setting",
-h,": ",B)});if(!u){A.warn("About to set string version of ",h,"delaying typed set.");this._values[h]=k}}else{A.warn("Setting not defined: ",h,k);this._deactivated[h]=k}this._persistValue(h,k);return this},addSetting:function(h){if(h.name){!h.defaultValue===undefined&&A.error("Setting.defaultValue == undefined",h);d.isValid(h.defaultValue,h.type).then(function(k){k||A.warn("!Setting.isValid(Setting.defaultValue)",h);this.set(h.name,this._deactivated[h.name]||h.defaultValue)}.bind(this),function(k){A.error("Type error ",
-k," ignoring setting ",h)})}else A.error("Setting.name == undefined. Ignoring.",h)},resetValue:function(h){var k=v.getExtensionByKey("setting",h);k?this.set(h,k.defaultValue):A.log("ignore resetValue on ",h)},resetAll:function(){this._getSettingNames().forEach(function(h){this.resetValue(h)}.bind(this))},_getSettingNames:function(){var h=[];v.getExtensions("setting").forEach(function(k){h.push(k.name)});return h},_list:function(){var h=[];this._getSettingNames().forEach(function(k){h.push({key:k,
-value:this.get(k)})}.bind(this));return h},_persistValue:function(h,k){var x=this._persister;x&&x.persistValue(this,h,k)},_loadInitialValues:function(){var h=this._persister;h?h.loadInitialValues(this):this._loadDefaultValues()},_loadDefaultValues:function(){return this._loadFromObject(this._defaultValues())},_loadFromObject:function(h){var k=[],x=function(i){return function(q){this.set(i,q)}};for(var u in h)if(h.hasOwnProperty(u)){var B=h[u],E=v.getExtensionByKey("setting",u);if(E){B=d.fromString(B,
-E.type);E=x(u);B.then(E);k.push(B)}}var f=new w;m(k).then(function(){f.resolve()});return f},_saveToObject:function(){var h=[],k={};this._getSettingNames().forEach(function(u){var B=this.get(u),E=v.getExtensionByKey("setting",u);if(E){B=d.toString(B,E.type);B.then(function(f){k[u]=f});h.push(B)}}.bind(this));var x=new w;m(h).then(function(){x.resolve(k)});return x},_defaultValues:function(){var h={};v.getExtensions("setting").forEach(function(k){h[k.name]=k.defaultValue});return h}};j.settings=new j.MemorySettings});
-bespin.tiki.require("bespin:plugins").catalog.registerMetadata({bespin:{testmodules:[],resourceURL:"resources/bespin/",name:"bespin",environments:{main:true,worker:true},type:"plugins/boot"},underscore:{testmodules:[],type:"plugins/thirdparty",resourceURL:"resources/underscore/",description:"Functional Programming Aid for Javascript. Works well with jQuery.",name:"underscore"},syntax_directory:{resourceURL:"resources/syntax_directory/",name:"syntax_directory",environments:{main:true,worker:true},
-dependencies:{},testmodules:[],provides:[{register:"#discoveredNewSyntax",ep:"extensionhandler",name:"syntax"}],type:"plugins/supported",description:"Catalogs the available syntax engines"},types:{resourceURL:"resources/types/",description:"Defines parameter types for commands",testmodules:["tests/testBasic","tests/testTypes"],provides:[{indexOn:"name",description:"Commands can accept various arguments that the user enters or that are automatically supplied by the environment. Those arguments have types that define how they are supplied or completed. The pointer points to an object with methods convert(str value) and getDefault(). Both functions have `this` set to the command's `takes` parameter. If getDefault is not defined, the default on the command's `takes` is used, if there is one. The object can have a noInput property that is set to true to reflect that this type is provided directly by the system. getDefault must be defined in that case.",
-ep:"extensionpoint",name:"type"},{description:"Text that the user needs to enter.",pointer:"basic#text",ep:"type",name:"text"},{description:"A JavaScript number",pointer:"basic#number",ep:"type",name:"number"},{description:"A true/false value",pointer:"basic#bool",ep:"type",name:"boolean"},{description:"An object that converts via JavaScript",pointer:"basic#object",ep:"type",name:"object"},{description:"A string that is constrained to be one of a number of pre-defined values",pointer:"basic#selection",
-ep:"type",name:"selection"},{description:"A type which we don't understand from the outset, but which we hope context can help us with",ep:"type",name:"deferred"}],type:"plugins/supported",name:"types"},settings:{resourceURL:"resources/settings/",description:"Infrastructure and commands for managing user preferences",share:true,dependencies:{types:"0.0"},testmodules:[],provides:[{indexOn:"name",description:"A setting is something that the application offers as a way to customize how it works",register:"index#addSetting",
-ep:"extensionpoint",name:"setting"},{description:"A settingChange is a way to be notified of changes to a setting",ep:"extensionpoint",name:"settingChange"},{pointer:"commands#setCommand",description:"define and show settings",params:[{defaultValue:null,type:{pointer:"settings:index#getSettings",name:"selection"},name:"setting",description:"The name of the setting to display or alter"},{defaultValue:null,type:{pointer:"settings:index#getTypeSpecFromAssignment",name:"deferred"},name:"value",description:"The new value for the chosen setting"}],
-ep:"command",name:"set"},{pointer:"commands#unsetCommand",description:"unset a setting entirely",params:[{type:{pointer:"settings:index#getSettings",name:"selection"},name:"setting",description:"The name of the setting to return to defaults"}],ep:"command",name:"unset"}],type:"plugins/supported",name:"settings"}});typeof window==="undefined"?importScripts("BespinWorker.js"):function(){var y=document.createElement("script");y.setAttribute("src",bespin.base+"BespinMain.js");document.getElementsByTagName("head")[0].appendChild(y)}();
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+if (typeof(bespin) === 'undefined') {
+    bespin = {'base': '/documentation/assets/bespin/'};
+}
+
+
+(function() {
+/*! @license
+==========================================================================
+Tiki 1.0 - CommonJS Runtime
+copyright 2009-2010, Apple Inc., Sprout Systems Inc., and contributors.
+
+Permission is hereby granted, free of charge, to any person obtaining a 
+copy of this software and associated documentation files (the "Software"), 
+to deal in the Software without restriction, including without limitation 
+the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+and/or sell copies of the Software, and to permit persons to whom the 
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in 
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
+DEALINGS IN THE SOFTWARE.
+
+Tiki is part of the SproutCore project.
+
+SproutCore and the SproutCore logo are trademarks of Sprout Systems, Inc.
+
+For more information visit http://www.sproutcore.com/tiki
+
+==========================================================================
+@license */
+
+/*globals tiki ENV ARGV ARGS */
+
+"use modules false";
+"use loader false";
+
+/**
+  Implements a very simple handler for the loader registration API so that
+  additional scripts can load without throwing exceptions.  This loader can
+  also return module instances for modules registered with an actual factory
+  function.
+  
+  Note that this stub loader cannot be used on its own.  You must load the 
+  regular tiki package as well, which will replace this loader as soon as it
+  is fetched.
+*/
+if ("undefined" === typeof tiki) { var tiki = function() {
+  
+  var T_UNDEFINED = 'undefined',
+      queue = [];
+        
+  // save a registration method in a queue to be replayed later once the 
+  // real loader is available.
+  function _record(method, args) {
+    queue.push({ m: method, a: args });
+  }
+  
+  var tiki = {
+    
+    // used to detect when real loader should replace this one
+    isBootstrap: true,
+    
+    // log of actions to be replayed later
+    queue: queue, 
+    
+    // helpers just record into queue
+    register: function(packageId, opts) { 
+      
+      // this hack will make unit tests work for tiki by adding core_test to
+      // the list of dependencies.
+      if (packageId.match(/^tiki/) && this.ENV) {
+        if ((this.ENV.app === 'tiki') && (this.ENV.mode === 'test')) {
+          if (!opts.dependencies) opts.dependencies = {};
+          opts.dependencies['core_test'] = '~';
+        }
+      }
+      
+      _record('register', arguments);
+       return this;  
+    },
+    
+    // Keep these around just in case we need them in the end...
+    // script:   function() { 
+    //   _record('script', arguments); 
+    //   return this; 
+    // },
+    // 
+    // stylesheet: function() { 
+    //   _record('stylesheet', arguments); 
+    //   return this; 
+    // },
+
+    // modules actually get saved as well a recorded so you can use them.
+    module: function(moduleId, factory) {
+      if (moduleId.match(/\:tiki$/)) this.tikiFactory = factory;
+      _record('module', arguments);
+      return this ;
+    },
+
+    // load the tikiFactory 
+    start: function() {
+      var exp = {}, ret;
+      this.tikiFactory(null, exp, null); // no require or module!
+      ret = exp.Browser.start(this.ENV, this.ARGS, queue);
+      queue = null;
+      return ret ;
+    }
+    
+  };
+  
+  if (T_UNDEFINED !== typeof ENV) tiki.ENV = ENV;
+  if (T_UNDEFINED !== typeof ARGV) tiki.ARGS = ARGV; // for older versions
+  if (T_UNDEFINED !== typeof ARGS) tiki.ARGS = ARGS;
+  
+  return tiki;
+  
+}(); }
+
+
+tiki.register('::tiki/1.0.0', {
+"name": "tiki",
+"version": "1.0.0"
+});
+
+tiki.module('::tiki/1.0.0:tiki', function(require, exports, module) {
+// ==========================================================================
+// Project:   Tiki - CommonJS Runtime
+// Copyright: ©2009-2010 Apple Inc. All rights reserved.
+// License:   Licened under MIT license (see __preamble__.js)
+// ==========================================================================
+/*jslint evil:true */
+
+/**
+  @file 
+  
+  This file implements the core building blocks needed to implement the 
+  tiki runtime in an environment.  If you can require this one module, you can
+  setup a runtime that will load additional packages.
+  
+  It is important that this module NOT require() any other modules since a
+  functioning require() statement may not be available.  The module can 
+  populate, but not replace, the exports object.
+
+  To configure a Tiki runtime, you need to create a Sandbox and Loader 
+  instance from this API with one or more loader Sources.  The BrowserSource
+  object implements the basic source you need to work in the browser.  The
+  Repository object implemented in the server-side only 'file' API can be 
+  used to load from a local repository of packages.
+*/
+
+// used for type checking.  This allows the type strings to be minified.
+var T_FUNCTION = 'function',
+    T_STRING   = 'string',
+    T_UNDEFINED = 'undefined';
+    
+    
+var IS_CANONICAL = /^::/; // must begin with ::
+var isCanonicalId = function(id) {
+  return !!IS_CANONICAL.exec(id);
+};  
+
+var DEBUG = function() {
+  exports.debug.apply(this, arguments);
+};
+
+exports.debug = function() {
+  var msg = Array.prototype.join.call(arguments, '');
+  require('sys').debug(msg);
+};
+
+// ..........................................................
+// CORE UTILITIES
+// 
+
+var TMP_ARY = [];
+
+/**
+  Tests whether the passed object is an array or not.
+*/
+var isArray;
+
+if (Array.isArray) {
+  isArray = Array.isArray;
+} else {
+  isArray = function(obj) {
+    if ('object' !== typeof obj) return false;
+    if (obj instanceof Array) return true;
+    return obj.constructor && (obj.constructor.name==='Array');
+  };
+}
+exports.isArray = isArray;
+
+/**
+  Create a new object with the passed object as the prototype.
+*/
+var createObject;
+if (Object.create) {
+  createObject = Object.create;
+} else {
+  var K = function() {},
+      Kproto = K.prototype;
+  createObject = function(obj) {
+    if (!obj) obj = Object.prototype;
+    K.prototype = obj;
+    
+    var ret = new K();
+    ret.prototype = obj;
+    K.prototype = Kproto;
+    
+    return ret ;
+  };
+}
+exports.createObject = createObject;
+
+var _constructor, _extend, extend;
+
+// returns a new constructor function with clean closure...
+_constructor = function() {
+  return function() {
+    if (this.init) return this.init.apply(this, arguments);
+    else return this;
+  };
+};
+
+_extend = function() {
+  return extend(this);
+};
+
+/**
+  Creates a "subclass" of the passed constructor.  The default constructor
+  will call look for a local "init" method and call it.
+  
+  If you don't pass an initial constructor, this will create a new based 
+  object.
+*/
+extend = function(Constructor) {
+  var Ret = _constructor();
+  Ret.prototype = createObject(Constructor.prototype);
+  Ret.prototype.constructor = Ret;
+  Ret.super_ = Constructor;
+  Ret.extend = _extend;
+  return Ret;
+};
+exports.extend = extend;
+
+/**
+  Invokes the passed fn on each item in the array in parallel.  Invokes
+  done when finished.
+  
+  # Example
+  
+      parallel([1,2,3], function(item, done) {
+        // do something with item
+        done();
+      })(function(err) {
+        // invoked when done, err if there was an error
+      });
+      
+  @param {Array} array 
+    items to iterate
+    
+  @param {Function} fn
+    callback to invoke
+    
+  @returns {void}
+*/
+var parallel = function(array, fn) {
+  if (fn && !fn.displayName) fn.displayName = 'parallel#fn';
+  
+  return function(done) {
+    if (array.length === 0) return done(null, []);
+    
+    var len = array.length,
+        cnt = len,
+        cancelled = false,
+        idx;
+
+    var tail = function(err) {
+      if (cancelled) return; // nothing to do
+
+      if (err) {
+        cancelled = true;
+        return done(err);
+      }
+
+      if (--cnt <= 0) done(); 
+    };
+    tail.displayName = 'parallel#tail';
+
+    for(idx=0;idx<len;idx++) fn(array[idx], tail);
+  };
+};
+parallel.displayName = 'parallel';
+
+/**
+  @private
+  
+  Implements the sync map() on all platforms
+*/
+var map;
+if (Array.prototype.map) {
+  map = function(array, fn) {
+    return array.map(fn);
+  };
+
+} else {
+  map = function(array, fn) {
+    var idx, len = array.length, ret = [];
+    for(idx=0;idx<len;idx++) {
+      ret[idx] = fn(array[idx], idx);
+    }
+    return ret ;
+  };
+}
+map.displayName = 'map';
+
+
+var PENDING = 'pending',
+    READY   = 'ready',
+    RUNNING = 'running';
+    
+/**
+  Returns a function that will execute the continuable exactly once and 
+  then cache the result.  Invoking the same return function more than once
+  will simply return the old result. 
+  
+  This is a good replacement for promises in many cases.
+  
+  h3. Example
+  
+  {{{
+    // load a file only once
+    var loadit = Co.once(Co.fs.loadFile(pathToFile));
+
+    loadit(function(content) { 
+      // loads the file
+    });
+    
+    loadit(function(content) {
+      // if already loaded, just invokes with past content
+    });
+    
+  }}}
+  
+  @param {Function} cont
+    Continuable to invoke 
+    
+  @returns {Function} 
+    A new continuable that will only execute once then returns the cached
+    result.
+*/
+var once = function(action, context) {
+  var state = PENDING,
+      queue = [],
+      makePending = false,
+      args  = null;
+
+  var ret = function(callback) {
+    if (!context) context = this;
+    
+    // cont has already finished, just invoke callback based on result
+    switch(state) {
+      
+      // already resolved, invoke callback immediately
+      case READY:
+        callback.apply(null, args);
+        break;
+
+      // action has started running but hasn't finished yet
+      case RUNNING:
+        queue.push(callback);
+        break;
+        
+      // action has not started yet
+      case PENDING:
+        queue.push(callback);
+        state = RUNNING;
+
+        action.call(context, function(err) {
+          args  = Array.prototype.slice.call(arguments);
+          
+          var oldQueue = queue, oldArgs = args;
+
+          if (makePending) {
+            state = PENDING;
+            queue = [];
+            args  = null; 
+            makePending = false;
+
+          } else {
+            state = READY;
+            queue = null;
+          }
+          
+          if (oldQueue) {
+            oldQueue.forEach(function(q) { q.apply(null, oldArgs); });
+          }
+        });
+        break;
+    }
+    return this;
+  };
+  ret.displayName = 'once#handler';
+
+  // allow the action to be reset so it is called again
+  ret.reset = function() {
+    switch(state) {
+      
+      // already run, need to reset
+      case READY: 
+        state = PENDING;
+        queue = [];
+        args  = null;
+        break;
+        
+      // in process - set makePending so that resolving will reset to pending
+      case RUNNING:
+        makePending = true;
+        break;
+        
+      // otherwise ignore pending since there is nothing to reset
+    }
+  };
+  ret.reset.displayName = 'once#handler.reset';
+  
+  return ret ;
+};
+exports.once = once;
+
+
+/**
+  Iterate over a property, setting display names on functions as needed.
+  Call this on your own exports to setup display names for debugging.
+*/
+var displayNames = function(obj, root) {
+  var k,v;
+  for(k in obj) {
+    if (!obj.hasOwnProperty(k)) continue ;
+    v = obj[k];
+    if ('function' === typeof v) {
+      if (!v.displayName) {
+        v.displayName = root ? (root+'.'+k) : k;
+        displayNames(v.prototype, v.displayName);
+      }
+      
+    }
+  }
+  return obj;
+};
+
+// ..........................................................
+// ERRORS
+// 
+
+var NotFound = extend(Error);
+NotFound.prototype.init = function(canonicalId, pkgId) {
+  var msg = canonicalId+' not found';
+  if (pkgId) {
+    if (T_STRING === typeof pkgId) msg = msg+' '+pkgId;
+    else msg = msg+' in package '+(pkgId.id || '(unknown)');
+  }
+  this.message = msg;
+  return this;
+};
+exports.NotFound = NotFound;
+
+var InvalidPackageDef = extend(Error);
+InvalidPackageDef.prototype.init = function(def, reason) {
+  if ('undefined' !== typeof JSON) def = JSON.stringify(def);
+  this.message = "Invalid package definition. "+reason+" "+def;
+};
+exports.InvalidPackageDef = InvalidPackageDef;
+
+// ..........................................................
+// semver
+// 
+
+// ..........................................................
+// NATCOMPARE
+// 
+// Used with thanks to Kristof Coomans 
+// Find online at http://sourcefrog.net/projects/natsort/natcompare.js
+// Cleaned up JSLint errors
+
+/*
+natcompare.js -- Perform 'natural order' comparisons of strings in JavaScript.
+Copyright (C) 2005 by SCK-CEN (Belgian Nucleair Research Centre)
+Written by Kristof Coomans <kristof[dot]coomans[at]sckcen[dot]be>
+
+Based on the Java version by Pierre-Luc Paour, of which this is more or less a straight conversion.
+Copyright (C) 2003 by Pierre-Luc Paour <natorder@paour.com>
+
+The Java version was based on the C version by Martin Pool.
+Copyright (C) 2000 by Martin Pool <mbp@humbug.org.au>
+
+This software is provided 'as-is', without any express or implied
+warranty.  In no event will the authors be held liable for any damages
+arising from the use of this software.
+
+Permission is granted to anyone to use this software for any purpose,
+including commercial applications, and to alter it and redistribute it
+freely, subject to the following restrictions:
+
+1. The origin of this software must not be misrepresented; you must not
+claim that you wrote the original software. If you use this software
+in a product, an acknowledgment in the product documentation would be
+appreciated but is not required.
+2. Altered source versions must be plainly marked as such, and must not be
+misrepresented as being the original software.
+3. This notice may not be removed or altered from any source distribution.
+*/
+var natcompare = function() {
+  
+  var isWhitespaceChar = function(a) {
+    var charCode = a.charCodeAt(0);
+    return charCode <= 32;
+  };
+
+  var isDigitChar = function(a) {
+    var charCode = a.charCodeAt(0);
+    return ( charCode >= 48  && charCode <= 57 );
+  };
+
+  var compareRight = function(a,b) {
+    var bias = 0,
+        ia   = 0,
+        ib   = 0,
+        ca, cb;
+
+    // The longest run of digits wins.  That aside, the greatest
+    // value wins, but we can't know that it will until we've scanned
+    // both numbers to know that they have the same magnitude, so we
+    // remember it in BIAS.
+    for (;; ia++, ib++) {
+      ca = a.charAt(ia);
+      cb = b.charAt(ib);
+
+      if (!isDigitChar(ca) && !isDigitChar(cb)) return bias;
+      else if (!isDigitChar(ca)) return -1;
+      else if (!isDigitChar(cb)) return +1;
+      else if (ca < cb) if (bias === 0) bias = -1;
+      else if (ca > cb) if (bias === 0) bias = +1;
+      else if (ca === 0 && cb === 0) return bias;
+    }
+  };
+
+  var natcompare = function(a,b) {
+
+    var ia  = 0, 
+    ib  = 0,
+    nza = 0, 
+    nzb = 0,
+    ca, cb, result;
+
+    while (true) {
+      // only count the number of zeroes leading the last number compared
+      nza = nzb = 0;
+
+      ca = a.charAt(ia);
+      cb = b.charAt(ib);
+
+      // skip over leading spaces or zeros
+      while ( isWhitespaceChar( ca ) || ca =='0' ) {
+        if (ca == '0') nza++;
+        else nza = 0; // only count consecutive zeroes
+        ca = a.charAt(++ia);
+      }
+
+      while ( isWhitespaceChar( cb ) || cb == '0') {
+        if (cb == '0') nzb++;
+        else nzb = 0; // only count consecutive zeroes
+        cb = b.charAt(++ib);
+      }
+
+      // process run of digits
+      if (isDigitChar(ca) && isDigitChar(cb)) {
+        if ((result = compareRight(a.substring(ia), b.substring(ib))) !== 0) {
+          return result;
+        }
+      }
+
+      // The strings compare the same.  Perhaps the caller
+      // will want to call strcmp to break the tie.
+      if (ca === 0 && cb === 0) return nza - nzb;
+
+      if (ca < cb) return -1;
+      else if (ca > cb) return +1;
+
+      ++ia; ++ib;
+    }
+  };
+
+  return natcompare;
+}();
+exports.natcompare = natcompare;
+
+// ..........................................................
+// PUBLIC API
+// 
+
+// Support Methods
+var invalidVers = function(vers) {
+  return new Error('' + vers + ' is an invalid version string');
+};
+invalidVers.displayName = 'invalidVers';
+
+var compareNum = function(vers1, vers2, num1, num2) {
+  num1 = Number(num1);
+  num2 = Number(num2);
+  if (isNaN(num1)) throw invalidVers(vers1);
+  if (isNaN(num2)) throw invalidVers(vers2);
+  return num1 - num2 ;
+};
+compareNum.displayName = 'compareNum';
+
+
+var vparse;
+var semver = {
+  
+  /**
+    Parse the version number into its components.  Returns result of a regex.
+  */
+  parse: function(vers) {
+    var ret = vers.match(/^(=|~)?([\d]+?)(\.([\d]+?)(\.(.+))?)?$/);
+    if (!ret) return null; // no match
+    return [ret, ret[2], ret[4] || '0', ret[6] || '0', ret[1]];
+  },
+
+
+  /**
+    Returns the major version number of a version string. 
+
+    @param {String} vers
+      version string
+
+    @returns {Number} version number or null if could not be parsed
+  */
+  major: function(vers) {
+    return Number(vparse(vers)[1]);
+  },
+
+  /**
+    Returns the minor version number of a version string
+
+
+    @param {String} vers
+      version string
+
+    @returns {Number} version number or null if could not be parsed
+  */
+  minor: function(vers) {
+    return Number(vparse(vers)[2]);
+  },
+
+  /**
+    Returns the patch of a version string.  The patch value is always a string
+    not a number
+  */
+  patch: function(vers) {
+    var ret = vparse(vers)[3];
+    return isNaN(Number(ret)) ? ret : Number(ret);
+  },
+
+  STRICT: 'strict',
+  NORMAL: 'normal',
+
+  /**
+    Returns the comparison mode.  Will be one of NORMAL or STRICT
+  */
+  mode: function(vers) {
+    var ret = vparse(vers)[4];
+    return ret === '=' ? semver.STRICT : semver.NORMAL;
+  },
+
+  /**
+    Compares two patch strings using the proper matching formula defined by
+    semver.org.  Returns:
+    
+    @param {String} patch1 first patch to compare
+    @param {String} patch2 second patch to compare
+    @returns {Number} -1 if patch1 < patch2, 1 if patch1 > patch2, 0 if equal 
+  */
+  comparePatch: function(patch1, patch2) {
+    var num1, num2;
+
+    if (patch1 === patch2) return 0; // equal
+
+    num1   = Number(patch1);
+    num2   = Number(patch2);
+
+    if (isNaN(num1)) {
+      if (isNaN(num2)) {
+        // do lexigraphic comparison
+        return natcompare(patch1, patch2);
+
+      } else return -1; // num2 is a number therefore num1 < num2
+
+    // num1 is a number but num2 is not so num1 > num2
+    } else if (isNaN(num2)) {
+      return 1 ;
+    } else {
+      return num1<num2 ? -1 : (num1>num2 ? 1 : 0) ;
+    }
+  },
+
+  /**
+    Compares two version strings, using natural sorting for the patch.
+  */
+  compare: function(vers1, vers2) {
+    var ret ;
+
+    if (vers1 === vers2) return 0;
+    if (vers1) vers1 = vparse(vers1);
+    if (vers2) vers2 = vparse(vers2);
+
+    if (!vers1 && !vers2) return 0;
+    if (!vers1) return -1; 
+    if (!vers2) return 1; 
+
+
+    ret = compareNum(vers1[0], vers2[0], vers1[1], vers2[1]);
+    if (ret === 0) {
+      ret = compareNum(vers1[0], vers2[0], vers1[2], vers2[2]);
+      if (ret === 0) ret = semver.comparePatch(vers1[3], vers2[3]);
+    }
+
+    return (ret < 0) ? -1 : (ret>0 ? 1 : 0);
+  },
+
+  /**
+    Returns true if the second version string represents a version compatible 
+    with the first version.  In general this means the second version must be
+    greater than or equal to the first version but its major version must not 
+    be different.
+  */
+  compatible: function(reqVers, curVers) {
+    if (!reqVers) return true; // always compatible with no version
+    if (reqVers === curVers) return true; // fast path
+
+    // make sure these parse - or else treat them like null
+    if (reqVers && !vparse(reqVers)) reqVers = null;
+    if (curVers && !vparse(curVers)) curVers = null;
+
+    // try fast paths again in case they changed state
+    if (!reqVers) return true; // always compatible with no version
+    if (reqVers === curVers) return true; // fast path
+    
+    // strict mode, must be an exact (semantic) match
+    if (semver.mode(reqVers) === semver.STRICT) {
+      return curVers && (semver.compare(reqVers, curVers)===0);
+
+    } else {
+      if (!curVers) return true; // if no vers, always assume compat
+
+      // major vers
+      if (semver.major(reqVers) !== semver.major(curVers)) return false; 
+      return semver.compare(reqVers, curVers) <= 0;
+    }
+  },
+
+  /**
+    Normalizes version numbers so that semantically equivalent will be treated 
+    the same.
+  */
+  normalize: function(vers) {
+    var patch;
+
+    if (!vers || vers.length===0) return null;
+    vers = semver.parse(vers);
+    if (!vers) return null;
+
+    patch = Number(vers[3]);
+    if (isNaN(patch)) patch = vers[3];
+
+    return [Number(vers[1]), Number(vers[2]), patch].join('.');
+  }
+  
+};
+exports.semver = semver;
+vparse = semver.parse;
+
+
+// ..........................................................
+// FACTORY
+// 
+
+/**
+  @constructor
+  
+  A factory knows how to instantiate a new module for a sandbox, including 
+  generating the require() method used by the module itself.  You can return
+  custom factories when you install a plugin.  Your module should export
+  loadFactory().
+  
+  The default factory here actually expects to receive a module descriptor
+  as generated by the build tools.
+*/
+var Factory = exports.extend(Object);
+exports.Factory = Factory;
+
+Factory.prototype.init = function(moduleId, pkg, factory) {
+  this.id  = moduleId;
+  this.pkg = pkg;
+  this.factory = factory;
+};
+
+/**
+  Actually generates a new set of exports for the named sandbox.  The sandbox
+  must return a module object that can be used to generate the factory.
+  
+  If the current value of the local factory is a string, then we will actually
+  eval/compile the factory as well.
+  
+  @param sandbox {Sandbox}
+    The sandbox the will own the module instance
+    
+  @param module {Module}
+    The module object the exports will belong to
+    
+  @returns {Hash} exports from instantiated module
+*/
+Factory.prototype.call = function(sandbox, module) {
+
+  // get the factory function, evaluate if needed
+  var func = this.factory,
+      filename = this.__filename,
+      dirname  = this.__dirname;
+      
+  if (T_STRING === typeof(func)) {
+    func = this.factory = Factory.compile(func, this.pkg.id+':'+this.id);
+  }
+
+  // generate a nested require for this puppy
+  var req = sandbox.createRequire(module),
+      exp = module.exports;
+  func.call(exp, req, exp, module, filename, dirname);
+  return module.exports;
+};
+
+
+// standard wrapper around a module.  replace item[1] with a string and join.
+var MODULE_WRAPPER = [
+  '(function(require, exports, module) {',
+  null,
+  '\n});\n//@ sourceURL=',
+  null,
+  '\n'];
+
+/**
+  Evaluates the passed string.  Returns a function.
+  
+  @param moduleText {String}
+    The module text to compile
+    
+  @param moduleId {String}
+    Optional moduleId.  If provided will be used for debug
+    
+  @returns {Function} compiled factory
+*/
+Factory.compile = function(moduleText, moduleId) {
+  var ret;
+  
+  MODULE_WRAPPER[1] = moduleText;
+  MODULE_WRAPPER[3] = moduleId || '(unknown module)';
+  
+  ret = MODULE_WRAPPER.join('');
+  ret = eval(ret);
+  
+  MODULE_WRAPPER[1] = MODULE_WRAPPER[3] = null;
+  return ret;
+};
+
+exports.Factory = Factory;
+
+// ..........................................................
+// MODULE
+// 
+
+/**
+  A Module describes a single module, including its id, ownerPackage, and
+  the actual module exports once the module has been instantiated.  It also
+  implements the resource() method which can lookup a resource on the module's
+  package.
+*/
+var Module = exports.extend(Object);
+exports.Module = Module;
+
+Module.prototype.init = function(id, ownerPackage, sandbox) {
+  this.id           = id;
+  this.ownerPackage = ownerPackage;
+  this.exports      = {};
+  var module        = this;
+  
+  /**
+    Lookup a resource on the module's ownerPackage.  Returns a URL or path 
+    for the discovered resource.  The method used to detect the module or 
+    package is implemented in the package.
+    
+    Note that this method is generated for each module we create because some
+    code will try to pluck this method off of the module and call it in a
+    different context.
+    
+    @param resourceId {String}
+      Full or partial name of resource to retrieve
+      
+    @param done {Function}
+      Optional.  Makes the resource discovery asyncronous
+      
+    @returns {String} url or path if not called async
+  */
+  this.resource = function(id) {
+    return sandbox.resource(id, module.id, ownerPackage);
+  };
+};
+
+// ..........................................................
+// PACKAGE
+// 
+
+/**
+  Package expects you to register the package with a config having the 
+  following keys:
+  
+    {
+      "name": "name-of-package" (vs canonical id)
+      "version": current version of package (if known)
+      
+      // these are dependencies you require to run.  If the package is 
+      // async loaded, these will be the ones loaded
+      "dependencies": {
+         "package-name": "version"
+      },
+      
+      // these map a specific package-name/version to a canonicalId that must
+      // be registered for the package to be loaded.  You may include 
+      // additional packages here that may be referenced but are not required
+      // to run (for example - lazy loaded packages)
+      //
+      // This also forms the universe of packages this particular package can
+      // reference.
+      //
+      "tiki:packages": {
+        "package-name": [
+          { "version": "1.0.0", "id": "canonicalId", "url": "url" }
+        ]
+      },
+
+      // ids mapped to urls.  all of these scripts must be loaded for this 
+      // package to be considered ready 
+      "tiki:scripts": {
+        "id": "url"
+      },
+      
+      // stylesheets that must be loaded for this package to be considered
+      // ready.  The id is used so that the URL can load from a relative path
+      // that may move around and still be accurate.
+      "tiki:stylesheets": {
+        "id": "url",
+        "id": "url"
+      },
+      
+      // maps asset paths for non-JS and non-CSS assets to URLs.  Used to 
+      // progrmatically load images, etc.
+      "tiki:resources": {
+        "asset/path": "url",
+        "asset/path": "url"
+      }
+    }
+
+  This registration ensures that the package and it's related assets are 
+  loaded.
+*/
+     
+var Package = exports.extend(Object);
+exports.Package = Package;
+
+Package.prototype.init = function(id, config) {
+  if (!isCanonicalId(id)) id = '::'+id; // normalize
+  this.id = id;
+  this.config = config;
+  this.isReady = true;
+};
+
+// ..........................................................
+// Package Configs
+// 
+
+/**
+  Retrieves the named config property.  This method can be overidden by 
+  subclasses to perform more advanced processing on the key data
+  
+  @param {String} key
+    The key to retrieve
+    
+  @returns {Object} the key value or undefined
+*/
+Package.prototype.get = function(key) {
+  return this.config ? this.config[key] : undefined;
+};
+
+/**
+  Updates the named config property.
+
+  @param {String} key
+    The key to update
+    
+  @param {Object} value
+    The object value to change
+    
+  @returns {Package} receiver
+*/
+Package.prototype.set = function(key, value) {
+  if (!this.config) this.config = {};
+  this.config[key] = value;
+  return this;
+};
+
+/**
+  Determines the required version of the named packageId, if any, specified
+  in this package.
+  
+  @param {String} packageId
+    The packageId to lookup
+    
+  @returns {String} The required version or null (meaning any)
+*/
+Package.prototype.requiredVersion = function(packageId) { 
+  var deps = this.get('dependencies');
+  return deps ? deps[packageId] : null;
+};
+
+// ..........................................................
+// Nested Packages
+// 
+
+/**
+  Attempts to match the passed packageId and version to the receiver or a 
+  nested package inside the receiver.  If a match is found, returns the 
+  packages canonicalId.  Otherwise returns null.  
+  
+  This does not search remote sources for the package.  It only looks at 
+  what packages are available locally.
+  
+  This method is called after a package version has been checked for 
+  compatibility with the package dependencies.  It is not necessary to 
+  validate the requested version against any dependencies.
+  
+  @param {String} packageId
+    The package id to look up
+
+  @param {String} vers
+    The expected version.  If null, then return the newest version for the 
+    package.
+    
+  @param {String} Canonical packageId or null
+*/
+Package.prototype.canonicalPackageId = function(packageId, vers) {
+  if ((packageId === this.get('name')) && 
+      semver.compatible(vers, this.get('version'))) {
+      return this.id;
+  }
+  return null;
+};
+
+/**
+  Returns the receiver or an instance of a nested package if it matches the
+  canonicalId passed here.  This method will only be called with a canonicalId
+  returned from a previous call to Package#canonicalPackageId.
+  
+  If the package identified by the canonicalId is not available locally for
+  some reason, return null.
+  
+  @param {String} canonicalId 
+    The canonical packageId.
+    
+  @returns {Package} a package instance or null
+*/
+Package.prototype.packageFor = function(canonicalId) {
+  if (canonicalId === this.id) return this;
+  return null;
+};
+
+/**
+  Verifies that the package identified by the passed canonical id is available
+  locally and ready for use.  If it is not available, this method should 
+  attempt to download the package from a remote source.
+  
+  Invokes the `done` callback when complete.
+  
+  If for some reason you cannot download and install the package you should
+  invoke the callback with an error object describing the reason.  There are
+  a number of standard errors defined on Package such as NotFound.
+  
+  @param {String} canonicalId
+    The canonical packageId
+    
+  @param {Function} done
+    Callback to invoke with result.  Pass an error object if the package 
+    could not be loaded for some reason.  Otherwise invoke with no params
+    
+  @returns {void}
+*/
+Package.prototype.ensurePackage = function(canonicalId, done) {
+  if (canonicalId === this.id) return done();
+  else return done(new NotFound(canonicalId, this));
+};
+
+/**
+  Returns all packages in the package including the package itself and any 
+  nested packages.  Default just returns self.
+*/
+Package.prototype.catalogPackages = function() {
+  return [this];
+};
+
+// ..........................................................
+// Package Module Loading
+// 
+
+/**
+  Detects whether the moduleId exists in the current package.
+  
+  @param {String} moduleId
+    The moduleId to check
+    
+  @returns {Boolean} true if the module exists
+*/
+Package.prototype.exists = function(moduleId) {
+  return !!(this.factories && this.factories[moduleId]);
+};
+
+/**
+  Returns a Factory object for the passed moduleId or null if no matching
+  factory could be found.
+  
+  @param {String} moduleId
+    The moduleId to check
+    
+  @returns {Factory} factory object
+*/
+Package.prototype.load = function(moduleId) {
+  return this.factories ? this.factories[moduleId] : null;
+};
+
+// ..........................................................
+// LOADER
+// 
+
+// potentially optimize to avoid memory churn.
+var joinPackageId = function joinPackageId(packageId, moduleId) {
+  return packageId+':'+moduleId;
+};
+
+/**
+  A loader is responsible for finding and loading factory functions.  The 
+  primary purpose of the loader is to find packages and modules in those 
+  packages.  The loader typically relies on one or more sources to actually
+  find a particular package.
+*/
+var Loader = exports.extend(Object);
+exports.Loader = Loader;
+
+Loader.prototype.init = function(sources) {
+  this.sources = sources || [];
+  this.clear();
+};
+
+/**
+  Clear caches in the loader causing future requests to go back to the 
+  sources.
+*/
+Loader.prototype.clear = function() {
+  this.factories = {};
+  this.canonicalIds = {};
+  this.packages ={};
+  this.packageSources = {};
+  this.canonicalPackageIds = {};
+};
+
+/**
+  The default package.  This can be replaced but normally it is empty, meaning
+  it will never match a module.
+  
+  @property {Package}
+*/
+Loader.prototype.defaultPackage = new Package('default', { 
+  name: "default" 
+});
+
+/**
+  The anonymous package.  This can be used when loading files outside of a 
+  package.
+  
+  @property {Package}
+*/
+Loader.prototype.anonymousPackage = new Package('(anonymous)', { 
+  name: "(anonymous)"
+});
+
+
+/**
+
+  Discovers the canonical id for a module.  A canonicalId is a valid URN that
+  can be used to uniquely identify a module.
+  that looks like:
+  
+    ::packageId:moduleId
+    
+  For example:
+  
+    ::sproutcore-runtime/1.2.0:mixins/enumerable
+  
+  Canonical Ids are discovered according to the following algorithm:
+  
+  1.  If you pass in an already canonicalId, return it
+  2.  If you pass in a relative moduleId, it will be expanded and attached
+      to the workingPackage.
+  3.  If you pass in a moduleId with a packageId embedded, lookup the latest
+      version of the package that is compatible with the passed workingPackage
+  4.  If you pass a moduleId with no packageId embedded, then first look
+      for the module on the workingPackage.  
+  5.  If not found there, look for a packageId with the same name.  If that is 
+      found, return either packageId:index or packageId:packageId as module.  
+  6.  Otherwise, assume it is part of the default package. 
+
+  @param {String} moduleId
+    The moduleId to lookup.  May be a canonicalId, packageId:moduleId, 
+    absolute moduleId or relative moduleId
+    
+  @param {String} curModuleId
+    Optional.  moduleId of the module requesting the lookup.  Only needed if
+    the moduleId param might be relative.
+    
+  @param {Package} workingPackage
+    The working package making the request.  When searching for a package,
+    only use packages that are compatible with the workingPackage.
+    
+    This parameter is also optional, though if you omit it, this method 
+    assumes the anonymousPackage.
+    
+  @returns {void}
+*/
+Loader.prototype.canonical = function(moduleId, curModuleId, workingPackage) {
+  
+  var cache, cacheId, idx, packageId, canonicalId, pkg, ret; 
+  
+  // NORMALIZE PARAMS
+  // normalize params - curModuleId can be omitted (though relative ids won't)
+  // work
+  if (curModuleId && (T_STRING !== typeof curModuleId)) {
+    workingPackage = curModuleId;
+    curModuleId = null;
+  }
+  
+  // return immediately if already canonical
+  if (isCanonicalId(moduleId)) return moduleId;
+  
+  // if no workingPackage, assume anonymous
+  if (!workingPackage) workingPackage = this.anonymousPackage;
+  
+  // Resolve moduleId - may return canonical
+  moduleId = this._resolve(moduleId, curModuleId, workingPackage);
+  if (isCanonicalId(moduleId)) return moduleId;
+  
+  // then lookup in cache
+  cacheId = workingPackage ? workingPackage.id : '(null)';
+  cache = this.canonicalIds;
+  if (!cache) cache = this.canonicalIds = {};
+  if (!cache[cacheId]) cache[cacheId] = {};
+  cache = cache[cacheId];
+  if (cache[moduleId]) return cache[moduleId];
+  cacheId = moduleId; // save for later
+
+  // Not Found in Cache.  Do a lookup
+  idx = moduleId.indexOf(':');
+  if (idx>=0) {
+    packageId = moduleId.slice(0,idx);
+    moduleId  = moduleId.slice(idx+1);
+    if (moduleId[0]==='/') {
+      throw new Error('Absolute path not allowed with packageId');
+    }
+  }
+
+  // if packageId is provided, just resolve packageId to a canonicalId
+  ret = null;
+  if (packageId && (packageId.length>0)) {
+    canonicalId = this._canonicalPackageId(packageId, null, workingPackage);
+    if (canonicalId) ret = joinPackageId(canonicalId, moduleId);
+
+  // no packageId is provided, we'll need to do a little more searching
+  } else {
+
+    // first look in workingPackage for match...
+    if (workingPackage && workingPackage.exists(moduleId)) {
+      ret = joinPackageId(workingPackage.id, moduleId);
+      
+    // not in working package, look for packageId:index or
+    // packageId:packageId
+    } else {
+      canonicalId = this._canonicalPackageId(moduleId, null, workingPackage);
+      if (canonicalId) pkg = this._packageFor(canonicalId, workingPackage);
+      if (pkg) {
+        if (pkg.exists('index')) ret = joinPackageId(pkg.id, 'index');
+        else if (pkg.exists(moduleId)) ret = joinPackageId(pkg.id,moduleId);
+      }
+    }
+    
+    // not in working package and isn't a package itself, assume default
+    // package.  If there is no defaultPackage, return with the working
+    // package.  This will fail but at least the error will be more 
+    // helpful
+    if (!ret) {
+      if (this.defaultPackage) packageId = this.defaultPackage.id;
+      else if (this.workingPackage) packageId = this.workingPackage.id;
+      else if (this.anonymousPackage) packageId = this.anonymousPackage.id;
+      else return packageId = null;
+      
+      if (packageId) ret = joinPackageId(packageId, moduleId);
+    }
+  }
+
+  // save to cache and return
+  cache[cacheId] = ret;
+  return ret ;
+};
+  
+/**
+
+  Loads a factory for the named canonical module Id.  If you did not obtain
+  the canonical module id through the loader's canonical() method, then you
+  must also pass a workingPackage property so that the loader can locate the
+  package that owns the module.
+  
+  The returns factory function can be used to actually generate a module.
+  
+  @param {String} canonicalId
+    A canonical module id
+    
+  @param {Package} workingPackage
+    Optional working package.  Only required if you pass in a canonical id
+    that you did not obtain from the loader's canonical() method.
+    
+  @returns {void}
+  
+*/
+Loader.prototype.load = function(canonicalId, workingPackage, sandbox) {
+
+  var cache, ret, idx, packageId, moduleId, pkg;
+  
+  if (!workingPackage) workingPackage = this.anonymousPackage;
+  
+  cache = this.factories;
+  if (!cache) cache = this.factories = {};
+  if (cache[canonicalId]) return cache[canonicalId];
+
+  // not in cache - load from package
+  idx       = canonicalId.indexOf(':',2);
+  packageId = canonicalId.slice(0,idx);
+  moduleId  = canonicalId.slice(idx+1);
+
+  pkg = this._packageFor(packageId, workingPackage);
+  
+//@if(debug)
+  if (!pkg) DEBUG('Loader#load - '+packageId+' not found for '+moduleId);
+//@endif
+
+  if (!pkg) return null; // not found
+  
+  ret = pkg.load(moduleId, sandbox);
+  cache[canonicalId] = ret;
+  return ret ;
+};
+
+/**
+  Returns a catalog of all known packages visible to the workingPackage.
+  The catalog is simply an array of package objects in no particular order
+*/
+Loader.prototype.catalogPackages = function(workingPackage) {
+  if (!workingPackage) workingPackage = this.anonymousPackage;
+  var catalog = [], sources, idx, len, seen = {};
+  if (this.defaultPackage) catalog.push(this.defaultPackage);
+  
+  // anonymous package is never visible unless it is working..
+  //if (this.anonymousPackage) ret.push(this.anonymousPackage);
+
+  // append any packages with versions that haven't been seen already
+  var append = function(packages) {
+    var idx, len, check, cur;
+    
+    if (!packages) return; // nothing to do
+    len = packages.length;
+    for(idx=0;idx<len;idx++) {
+      cur = packages[idx];
+      check = seen[cur.get('name')];
+      if (!check) check = seen[cur.get('name')] = {};      
+      if (!check[cur.get('version')]) {
+        catalog.push(cur);
+        check[cur.get('version')] = cur;
+      }
+    }
+  };
+  
+  if (workingPackage) append(workingPackage.catalogPackages());
+
+  sources = this.sources;
+  len = sources.length;
+  for(idx=0;idx<len;idx++) append(sources[idx].catalogPackages());
+  
+  seen = null; // no longer needed.
+  return catalog;
+};
+
+/**
+  Discovers the canonical id for a package.  A cnaonicalID is a URN that can
+  be used to uniquely identify a package.  It looks like: 
+  
+    ::packageId
+  
+  for example:
+  
+    ::sproutcore-datastore/1.2.0/1ef3ab23ce23ff938
+
+  If you need to perform some low-level operation on a package, this method
+  is the best way to identify the package you want to work with specifically.
+  
+  ## Examples
+  
+  Find a compatible package named 'foo' in the current owner module:
+  
+      loader.canonicalPackage('foo', ownerPackage, function(err, pkg) {
+        // process response
+      });
+      
+  Find the package named 'foo', exactly version '1.0.0'.  This may return a
+  packes nested in the ownerPackage:
+  
+      loader.canonicalPackage('foo', '=1.0.0', ownerPackage, function(err, pkg) {
+        // process response
+      });
+  
+  Find the latest version of 'foo' installed in the system - not specific to 
+  any particular package
+  
+      loader.canonicalPackage('foo', loader.anonymousPackage, function(err, pkg) {
+        // process result
+      });
+      
+  @param {String|Package} packageId
+    The packageId to load.  If you pass a package, the package itself will
+    be returned.
+    
+  @param {String} vers 
+    The required version.  Pass null or omit this parameter to use the latest
+    version (compatible with the workingPackage).
+    
+  @param {Package} workingPackage
+    The working package.  This method will search in this package first for
+    nested packages.  It will also consult the workingPackage to determine 
+    the required version if you don't name a version explicitly.
+    
+    You may pass null or omit this parameter, in which case the anonymous
+    package will be used for context.
+    
+  @param {Function} done 
+    Callback.  Invoked with an error and the loaded package.  If no matching
+    package can be found, invoked with null for the package.
+
+  @returns {void}
+*/
+Loader.prototype.canonicalPackageId = function(packageId, vers, workingPackage) {
+
+  var idx;
+
+  // fast path in case you pass in a package already
+  if (packageId instanceof Package) return packageId.id;
+
+  // fast path packageId is already canonical - slice of moduleId first
+  if (isCanonicalId(packageId)) {
+    idx = packageId.indexOf(':', 2);
+    if (idx>=0) packageId = packageId.slice(0,idx);
+    return packageId;
+  }
+  
+  // normalize the params.  vers may be omitted
+  if (vers && (T_STRING !== typeof vers)) {
+    workingPackage = vers;
+    vers = null;
+  }  
+
+  // must always have a package
+  if (!workingPackage) workingPackage = this.anonymousPackage;
+  
+  // if packageId includes a moduleId, slice it off
+  idx = packageId.indexOf(':');
+  if (idx>=0) packageId = packageId.slice(0, idx);
+  
+  // now we can just pass onto internal primitive
+  return this._canonicalPackageId(packageId, vers, workingPackage);
+};
+
+
+/**
+  Primitive returns the package instance for the named canonicalId.  You can
+  pass in a canonicalId for a package only or a package and module.  In either
+  case, this method will only return the package instance itself.
+  
+  Note that to load a canonicalId that was not resolved through the 
+  canonicalPackageId() or canonical() method, you will need to also pass in
+  a workingPackage so the loader can find the package.
+  
+  @param {String} canonicalId
+    The canonicalId to load a package for.  May contain only the packageId or
+    a moduleId as well.
+    
+  @param {Package} workingPackage
+    Optional workingPackage used to locate the package.  This is only needed
+    if you request a canonicalId that you did not obtain through the 
+    canonical*() methods on the loader.
+
+  @returns {void}
+*/
+Loader.prototype.packageFor = function(canonicalId, workingPackage){
+
+  if (!workingPackage) workingPackage = this.anonymousPackage;
+  
+  // remove moduleId
+  var idx = canonicalId.indexOf(':', 2);
+  if (idx>=0) canonicalId = canonicalId.slice(0, idx);
+
+  return this._packageFor(canonicalId, workingPackage);
+};
+
+/**
+  Verifies that the named canonicalId is ready for use, including any of its
+  dependencies.  You can pass in either a canonical packageId only or a 
+  moduleId.   In either case, this method will actually only check the package
+  properties for dependency resolution since dependencies are not tracked for
+  individual modules.
+  
+  @param {String} canonicalId
+    The canonicalId to use for lookup
+    
+  @param 
+*/
+Loader.prototype.ready = function(canonicalId, workingPackage) {
+
+  if (!workingPackage) workingPackage = this.anonymousPackage;
+  
+  // strip out moduleId
+  var idx = canonicalId.indexOf(':', 2), 
+      moduleId, pkg;
+  
+  if (idx >= 0) {
+    moduleId    = canonicalId.slice(idx+1);
+    canonicalId = canonicalId.slice(0, idx);
+  }
+  
+  if (this._packageReady(canonicalId, workingPackage, {})) {
+    pkg = this._packageFor(canonicalId, workingPackage);
+    if (!pkg) return false;
+    return !!pkg.exists(moduleId);
+  } else return false;
+  
+};
+
+/**
+  Ensures the package that maps to the passed packageId/vers combo and all
+  of its known dependencies are loaded and ready for use.  If anything is not
+  loaded, it will load them also.  
+  
+  Invokes the passed callback when loading is complete.
+  
+  This method ends up calling ensurePackage() on one or more of its sources
+  to get the actual packages to load.
+  
+  @param {String} packageId
+    The packageID to load.  May be a packageId name or a canonical packageId
+    
+  @param {String} vers
+    Optional version used to constrain the compatible package
+    
+  @param {Package} workingPackage
+    Optional working package used to match the packageId.  If the package 
+    might be nested you should always pass a workingPackage.  Default assumes
+    anonymousPackage.
+    
+  @param {Function} done
+    Callback invoked when package is loaded.  Passes an error if there was an
+    error.  Otherwise no params.
+    
+  @returns {void}
+*/
+Loader.prototype.ensurePackage = function(packageId, vers, workingPackage, done) {
+
+  // normalize params
+  if (vers && (T_STRING !== typeof vers)) {
+    done = workingPackage ;
+    workingPackage = vers;
+    vers = null;
+  }
+
+  if (workingPackage && (T_FUNCTION === typeof workingPackage)) {
+    done = workingPackage;
+    workingPackage = null;
+  }
+  
+  if (!workingPackage) workingPackage = this.anonymousPackage;
+
+  this._ensurePackage(packageId, vers, workingPackage, {}, done);
+};
+
+/**
+  @private
+  
+  Primitive for ensurePackage().  Does no param normalization.  Called 
+  recursively for dependencies.
+*/
+Loader.prototype._ensurePackage = function(packageId, vers, workingPackage, seen, done) {
+
+  var loader = this, canonicalId, source;
+  
+  // find the canonicalId and source to ask to ensure...
+  canonicalId = this._canonicalPackageId(packageId, vers, workingPackage);
+  if (!canonicalId) {
+    return done(new NotFound(packageId, workingPackage));
+  }
+
+  if (seen[canonicalId]) return done(); // success
+  seen[canonicalId] = true;
+
+  source = this._sourceForCanonicalPackageId(canonicalId, workingPackage);
+  if (!source) {
+    return done(new NotFound(canonicalId, workingPackage));
+  }
+
+  source.ensurePackage(canonicalId, function(err) {
+    var pkg, deps, packageId, packageIds;
+
+    if (err) return done(err);
+    pkg = loader.packageFor(canonicalId, workingPackage);
+    if (!pkg) {
+      return done(new NotFound(canonicalId, workingPackage));
+    }
+
+    deps = pkg.get('dependencies');
+    if (!deps) return done(); // nothing to do
+    
+    // map deps to array to we can process in parallel
+    packageIds = [];
+    for(packageId in deps) {
+      if (!deps.hasOwnProperty(packageId)) continue;
+      packageIds.push({ packageId: packageId, vers: deps[packageId] });
+    }
+    
+    parallel(packageIds, function(info, done) {
+      loader._ensurePackage(info.packageId, info.vers, pkg, seen, done);
+    })(done);
+
+  });
+  
+};
+
+/**
+  @private
+  
+  Discovers the canonical packageId for the named packageId, version and 
+  working package.  This will also store in cache the source where you can
+  locare and load the associated package, if needed.
+  
+  This primitive is used by all other package methods to resolve a package
+  into a canonicalId that can be used to reference a specific package instance
+  
+  It does not perform any error checking on passed in parameters which is why
+  it should never be called directly outside of the Loader itself.
+  
+  @param {String|Package} packageId
+    The packageId to load.  If you pass a package, the package itself will
+    be returned.
+    
+  @param {String} vers 
+    The required version.  Pass null or omit this parameter to use the latest
+    version (compatible with the workingPackage).
+    
+  @param {Package} workingPackage
+    The working package.  This method will search in this package first for
+    nested packages.  It will also consult the workingPackage to determine 
+    the required version if you don't name a version explicitly.
+    
+  @returns {String}
+*/
+Loader.prototype._canonicalPackageId = function(packageId, vers, workingPackage) {
+  
+  // fast paths
+  if (packageId instanceof Package) return packageId.id;
+  if (isCanonicalId(packageId)) return packageId;
+  if ((packageId === 'default') && this.defaultPackage) {
+    return this.defaultPackage.id;
+  }
+  
+  var cache = this.canonicalPackageIds,
+      cacheId, sources, ret, idx, len, source;
+  // use anonymousPackage if no workingPackage is provided
+  if (!workingPackage) workingPackage = this.anonymousPackage;
+  if (!workingPackage) throw new Error('working package is required');
+
+  // if packageId is already canonical, vers must be null, otherwise lookup
+  // vers in working package
+  if (!vers) vers = workingPackage.requiredVersion(packageId);
+  
+  // look in cache...
+  cacheId = workingPackage.id;
+  if (!cache) cache = this.canonicalPackageIds = {};
+  if (!cache[cacheId]) cache[cacheId] = {};
+  cache = cache[cacheId];
+  if (!cache[packageId]) cache[packageId] = {};
+  cache = cache[packageId];
+  if (cache[vers]) return cache[vers];
+
+  sources = this.sources;
+
+  // first, ask the workingPackage  
+  ret = workingPackage.canonicalPackageId(packageId, vers);
+  source = workingPackage;
+  
+
+  // not found - make sure there isn't another incompatible version in 
+  // workingPackage.  nested packages superceed all other packages so if there
+  // is an incompatible nested version we need to throw an error.
+  if (!ret) {
+    ret = workingPackage.canonicalPackageId(packageId, null);
+    if (ret) {
+      throw new Error(
+        workingPackage.get('name')+" contains an incompatible nested"+
+        " package "+packageId+" (expected: "+vers+")");
+    }
+  }
+  
+    
+  // next, if not found in the workingPackage, then ask each of our 
+  // sources in turn until a match is found.  When found, return
+  if (!ret && sources) {
+    len = sources.length;
+    for(idx=0;!ret && (idx<len);idx++) {
+      source = sources[idx];
+      ret = source.canonicalPackageId(packageId, vers);
+    }
+  }
+  
+  if (ret) this._cachePackageSource(ret, workingPackage, source);
+  cache[vers] = ret;
+  return ret ;
+};
+
+// add a function to the cache that will immediately return the source
+Loader.prototype._cachePackageSource = function(id, workingPackage, source) {
+  var scache = this.packageSources, pkgId = workingPackage.id;
+  
+  if (!scache) scache = this.packageSources = {};
+  if (!scache[pkgId]) scache[pkgId] = {};
+  scache = scache[pkgId];
+  scache[id] = source;
+};
+
+/**
+  Looks up the source for the named canonicalId in the cache.  Returns null
+  if no match is found.
+*/
+Loader.prototype._sourceForCanonicalPackageId = function(canonicalId, workingPackage) {
+  var scache = this.packageSources, 
+      wpackageId = workingPackage.id, 
+      pkg, sources, len, idx, ret;
+
+  if (!scache) scache = this.packageSources = {};
+  if (!scache[wpackageId]) scache[wpackageId] = {};
+  scache = scache[wpackageId];
+  if (scache[canonicalId]) return scache[canonicalId];
+  
+  sources = this.sources;
+    
+  // first, ask the workingPackage to find any matching package (since it 
+  // can only have one version).  Then check the returned version against 
+  // the expected version.  
+  if (workingPackage) {
+    pkg = workingPackage.packageFor(canonicalId);
+    if (pkg) ret = workingPackage; 
+  }
+  
+  if (!ret && sources) {
+    len = sources.length;
+    for(idx=0;!ret && (idx<len); idx++) {
+      ret = sources[idx];
+      if (!ret.packageFor(canonicalId)) ret = null;
+    }
+  }
+  
+  scache[canonicalId] = ret;
+  return ret ;
+};
+
+/**
+  Primitive actually loads a package from a canonicalId.  Throws an exception
+  if source for package is not already in cache.  Also caches loaded package.
+*/
+Loader.prototype._packageFor = function(canonicalId, workingPackage) {
+  var cache, source, ret;
+
+  // special case - if default packageId just get the default package.
+  if (this.defaultPackage && (canonicalId === this.defaultPackage.id)) {
+    return this.defaultPackage;
+  }
+  
+  // try to resolve out of cache
+  cache = this.packages;
+  if (!cache) cache = this.packages = {};
+  if (cache[canonicalId]) return cache[canonicalId];
+
+  source = this._sourceForCanonicalPackageId(canonicalId, workingPackage);
+  if (source) ret = source.packageFor(canonicalId);
+  cache[canonicalId] = ret;
+  return ret ;
+};
+
+/**
+  Primitive simply checks to see if the named canonicalId is ready or not
+  along with any dependencies
+*/
+Loader.prototype._packageReady = function(canonicalId, workingPackage, seen) {
+  var cache = this.packages, pkg, deps, packageId, vers;
+
+  // if we've already seen this package, exit immediately
+  if (seen[canonicalId]) return true;
+  seen[canonicalId] = true;
+  
+  // first try to find the package for the receiver
+  pkg = this._packageFor(canonicalId, workingPackage);
+  if (!pkg) return false; // nothing to do.
+
+  // look at dependencies. make sure they are also loaded
+  deps = pkg.get('dependencies');
+  for(packageId in deps) {
+    if (!deps.hasOwnProperty(packageId)) continue;
+    vers = deps[packageId];
+    canonicalId = this._canonicalPackageId(packageId, vers, pkg);
+    if (!canonicalId) return false;
+    return this._packageReady(canonicalId, pkg, seen);
+  }
+  
+  return true;
+};
+
+/**
+  Take a relative or fully qualified module name as well as an optional
+  base module Id name and returns a fully qualified module name.  If you 
+  pass a relative module name and no baseId, throws an exception.
+
+  Any embedded package name will remain in-tact.
+
+  resolve('foo', 'bar', 'my_package') => 'foo'
+  resolve('./foo', 'bar/baz', 'my_package') => 'my_package:bar/foo'
+  resolve('/foo/bar/baz', 'bar/baz', 'my_package') => 'default:/foo/bar/baz'
+  resolve('foo/../bar', 'baz', 'my_package') => 'foo/bar'
+  resolve('your_package:foo', 'baz', 'my_package') => 'your_package:foo'
+
+  If the returned id does not include a packageId then the canonical() 
+  method will attempt to resolve the ID by searching the default package, 
+  then the current package, then looking for a package by the same name.
+
+  @param {String} moduleId relative or fully qualified module id
+  @param {String} baseId fully qualified base id
+  @returns {String} fully qualified name
+*/
+Loader.prototype._resolve = function(moduleId, curModuleId, pkg){
+  var path, len, idx, part, parts, packageId, err;
+
+  // if id does not contain a packageId and it starts with a / then 
+  // return with anonymous package id.
+  if (moduleId[0]==='/' && moduleId.indexOf(':')<0) {
+    return this.anonymousPackage.id + ':' + moduleId;
+  }
+
+  // contains relative components?
+  if (moduleId.match(/(^\.\.?\/)|(\/\.\.?\/)|(\/\.\.?\/?$)/)) {
+
+    // if we have a packageId embedded, get that first
+    if ((idx=moduleId.indexOf(':'))>=0) {
+      packageId = moduleId.slice(0,idx);
+      moduleId  = moduleId.slice(idx+1);
+      path      = []; // path must always be absolute.
+
+    // if no package ID, then use baseId if first component is . or ..
+    } else if (moduleId.match(/^\.\.?\//)) {
+      if (!curModuleId) {
+        throw new Error("id required to resolve relative id: "+moduleId);
+      }
+
+      // if base moduleId contains a packageId return an error
+      if (curModuleId.indexOf(':')>=0) {
+        throw new Error("current moduleId cannot contain packageId");
+      }
+        
+      // use the pkg.id (which will be canonical)
+      if (pkg) packageId = pkg.id;
+
+      // work from current moduleId as base.  Ignore current module name
+      path = curModuleId.split('/');
+      path.pop(); 
+
+    } else path = [];
+
+    // iterate through path components and update path
+    parts = moduleId.split('/');
+    len   = parts.length;
+    for(idx=0;idx<len;idx++) {
+      part = parts[idx];
+      if (part === '..') {
+        if (path.length<1) throw new Error("invalid path: "+moduleId);
+        path.pop();
+
+      } else if (part !== '.') path.push(part);
+    }
+
+    moduleId = path.join('/');
+    if (packageId) moduleId = joinPackageId(packageId, moduleId);
+  }
+
+  return moduleId ;
+};
+
+
+// ..........................................................
+// SANDBOX
+// 
+
+/**
+  A Sandbox maintains a cache of instantiated modules.  Whenever a modules 
+  is instantiated, it will always be owned by a single sandbox.  This way
+  when you required the same module more than once, you will always get the
+  same module.
+  
+  Each sandbox is owned by a single loader, which is responsible for providing
+  the sandbox with Factory objects to instantiate new modules.
+  
+  A sandbox can also have a 'main' module which can be used as a primary
+  entry point for finding other related modules.
+  
+*/
+var Sandbox = exports.extend(Object);
+exports.Sandbox = Sandbox;
+
+Sandbox.prototype.init = function(loader, env, args, mainModuleId) {
+  this.loader = loader;
+  this.env    = env;
+  this.args   = args;
+  if (mainModuleId) this.main(mainModuleId);
+
+  this.clear();
+};
+
+Sandbox.prototype.catalogPackages = function(workingPackage) {
+  return this.loader.catalogPackages(workingPackage);
+};
+
+Sandbox.prototype.createRequire = function(module) {
+  
+  var sandbox = this,
+      curId   = module.id,
+      curPkg  = module.ownerPackage,
+      reqd;
+      
+  // basic synchronous require
+  var req = function(moduleId, packageId) {
+    if (packageId && moduleId.indexOf(':')<0) {
+      if (packageId.isPackage) packageId = packageId.id;
+      moduleId = packageId+':'+moduleId;
+    }
+    return sandbox.require(moduleId, curId, curPkg);
+  };
+  reqd = req.displayName = (curId||'(unknown)')+'#require';
+
+  // expose any native require.  Mostly used by seed
+  req.nativeRequire = sandbox.nativeRequire;
+  
+  // async version - packageId is optional
+  req.ensure = function(moduleIds, done) {
+    // always normalize moduleId to an array
+    if (!isArray(moduleIds)) {
+      moduleIds = Array.prototype.slice.call(arguments);
+      done = moduleIds.pop();
+    }
+
+    // ensure each module is loaded 
+    parallel(moduleIds, function(moduleId, done) {
+      sandbox.ensure(moduleId, curId, curPkg, done);
+
+    })(function(err) { 
+      if (err) return done(err);
+      if (done.length<=1) return done(); // don't lookup modules themselves
+      
+      done(null, map(moduleIds, function(moduleId) {
+        return sandbox.require(moduleId, curId, curPkg);
+      }));
+    });
+  };
+  req.ensure.displayName = reqd+'.ensure';
+  
+  // return true if the passed module or modules are ready for use right now
+  // this is like calling ensure() but it won't load anything that isn't 
+  // actually ready
+  req.ready = function(moduleIds) {
+    var idx, len ;
+    
+    // always normalize moduleId to an array
+    if (!isArray(moduleIds)) {
+      moduleIds = Array.prototype.slice.call(arguments);
+    }
+
+    len = moduleIds.length;
+    for(idx=0;idx<len;idx++) {
+      if (!sandbox.ready(moduleIds[idx], curId, curPkg)) return false;
+    }
+    return true;
+  };
+  req.ready.displayName = reqd+'.ready';
+
+  /**
+    Returns the package for the named packageId and optional version from
+    the perspective of the current package.  This invokes a similar method 
+    on the sandbox, which will pass it along to the loader, though a secure
+    sandbox may actually wrap the responses as well.
+    
+    This method only acts on packages available locally.  To get possibly
+    remote packages, you must first call require.ensurePackage() to ensure
+    the package and its dependencies have been loaded.
+    
+    @param {String} packageId
+      The packageId to load
+      
+    @param {String} vers
+      Optional version
+      
+    @returns {Package} the package or null
+  */
+  req.packageFor = function(packageId, vers) {
+    return sandbox.packageFor(packageId, vers, curPkg);
+  };
+  req.packageFor.displayName = reqd+'.packageFor';
+  
+  /**
+    Asynchronously loads the named package and any dependencies if needed.
+    This is only required if you suspect your package may not be available 
+    locally.  If your callback accepts only one parameter, then the packages
+    will be loaded but not instantiated. The first parameter is always an 
+    error object or null.
+    
+    If your callback accepts more than one parameter, then the packages will
+    be instantiated and passed to your callback as well.
+  
+    If a package cannot be loaded for some reason, your callback will be 
+    invoked with an error of type NotFound.
+    
+    @param {String} packageId
+      The packageId to load
+    
+    @param {String} vers
+      Optional version
+
+    @param {Function} done
+      Callback invoked once packages have loaded.
+    
+    @returns {Package} the package or null
+  */
+  req.ensurePackage = function(packageId, vers, done) {
+    sandbox.ensurePackage(packageId, vers, curPkg, function(err) {
+      if (err) return done(err);
+      if (done.length <= 1) return done();
+      done(null, sandbox.packageFor(packageId, vers, curPkg));
+    });
+  };
+  req.ensurePackage.displayName = reqd+'.ensurePackage.displayName';
+  
+  /**
+    Returns a catalog of all packages visible to the current module without
+    any additional loading.  This may be an expensive operation; you should
+    only use it when necessary to detect plugins, etc.
+  */
+  req.catalogPackages = function() {
+    return sandbox.catalogPackages(curPkg);
+  };
+  
+  // mark main module in sandbox
+  req.main = sandbox.main();
+  req.env  = sandbox.env;
+  req.args = sandbox.args;
+  req.sandbox = sandbox;
+  req.loader  = sandbox.loader;
+  
+  req.isTiki = true; // walk like a duck
+  
+  return req;
+};
+
+// ..........................................................
+// RESOLVING MODULE IDS
+// 
+
+Sandbox.prototype.Module = Module;
+
+/**
+  Retrieves a module object for the passed moduleId.  You can also pass 
+  optional package information, including an optional curModuleId and a
+  workingPackage.  You MUST pass at least a workingPackage.
+  
+  The returned module object represents the module but the module exports may
+  not yet be instantiated.  Use require() to retrieve the module exports.
+  
+  @param {String} moduleId
+    The module id to lookup.  Should include a nested packageId
+    
+  @param {String} curModuleId
+    Optional current module id to resolve relative modules.
+    
+  @param {Package} workingPackage
+    The working package making the request
+    
+  @returns {void}
+*/
+Sandbox.prototype.module = function(moduleId, curModuleId, workingPackage) {
+
+  var ret, canonicalId, cache, packageId, idx, pkg;
+  
+  // assume canonicalId will normalize params
+  canonicalId = this.loader.canonical(moduleId, curModuleId, workingPackage);
+  if (!canonicalId) throw(new NotFound(moduleId, workingPackage));
+
+  // get out of cache first
+  cache = this.modules;
+  if (!cache) cache = this.modules = {};
+  if (ret = cache[canonicalId]) return ret;
+  
+  // not in cache...add it
+  idx       = canonicalId.indexOf(':', 2);
+  moduleId  = canonicalId.slice(idx+1);
+  packageId = canonicalId.slice(0, idx);
+  pkg = this.loader.packageFor(packageId, workingPackage);
+  if (!pkg) throw(new NotFound(packageId, workingPackage));
+  ret = cache[canonicalId] = new this.Module(moduleId, pkg, this);
+  
+  return ret ;
+};
+
+/**
+  Returns the main module for the sandbox.  This should only be called 
+  from the factory when it is setting main on itself.  Otherwise the main
+  module may not exist yet.
+  
+  Note that the mainModule will be resolved using the anonymousPackage so
+  the named module must be visible from there.
+*/
+Sandbox.prototype.main = function(newMainModuleId, workingPackage) {
+  if (newMainModuleId !== undefined) {
+    this._mainModule = null;
+    this._mainModuleId = newMainModuleId;
+    this._mainModuleWorkingPackage = workingPackage;
+    return this;
+    
+  } else {
+    if (!this._mainModule && this._mainModuleId) {
+      workingPackage = this._mainModuleWorkingPackage;
+      this._mainModule = this.module(this._mainModuleId, workingPackage);
+    }
+    return this._mainModule;
+  }
+};
+
+/**
+  Returns the exports for the named module.
+
+  @param {String} moduleId
+    The module id to lookup.  Should include a nested packageId
+  
+  @param {String} curModuleId
+    Optional current module id to resolve relative modules.
+  
+  @param {Package} workingPackage
+    The working package making the request
+  
+  @param {Function} done
+    Callback to invoke when the module has been retrieved.
+  
+  @returns {void}
+*/
+Sandbox.prototype.require = function(moduleId, curModuleId, workingPackage) {
+
+  var ret, canonicalId, cache, used, factory, module, exp;
+  
+  // assume canonical() will normalize params
+  canonicalId = this.loader.canonical(moduleId, curModuleId, workingPackage);
+  if (!canonicalId) throw new NotFound(moduleId, workingPackage);
+
+  // return out of cache
+  cache = this.exports; used  = this.usedExports;
+  if (!cache) cache = this.exports = {};
+  if (!used)  used  = this.usedExports = {};
+  if (ret = cache[canonicalId]) {
+    ret = ret.exports;
+    if (!used[canonicalId]) used[canonicalId] = ret;
+    return ret;
+  }
+
+  // not in cache, get factory, module, and run function...
+  factory = this.loader.load(canonicalId, workingPackage, this);
+  if (!factory) throw(new NotFound(canonicalId, workingPackage));
+
+  module  = this.module(canonicalId, workingPackage);
+  cache[canonicalId] = module;
+
+  exp = factory.call(this, module);
+  module.exports = exp;
+  
+  // check for cyclical refs
+  if (used[canonicalId] && (used[canonicalId] !== exp)) {
+    throw new Error("cyclical requires() in "+canonicalId);
+  }
+
+  return exp;
+};
+
+/**
+  Returns true if the given module is ready. This checks the local cache 
+  first then hands this off to the loader.
+*/
+Sandbox.prototype.ready = function(moduleId, curModuleId, workingPackage) {
+  // assume canonicalPackageId() will normalize params
+  var id = this.loader.canonical(moduleId, curModuleId, workingPackage);
+  return id ? this.loader.ready(id) : false;
+};
+
+/**
+  Ensures the passed moduleId and all of its dependencies are available in
+  the local domain.  If any dependencies are not available locally, attempts
+  to retrieve them from a remote server.
+  
+  You don't usually call this method directly.  Instead you should call the 
+  require.ensure() method defined on a module's local require() method.
+  
+*/
+Sandbox.prototype.ensure = function(moduleId, curModuleId, workingPackage, done) {
+
+  var id, loader, packageId, idx;
+  
+  // normalize params so that done is in right place
+  if (curModuleId && (T_STRING !== typeof curModuleId)) {
+    done = workingPackage;
+    workingPackage = curModuleId;
+    curModuleId = null;
+  }
+  
+  if (workingPackage && (T_FUNCTION === typeof workingPackage)) {
+    done = workingPackage ;
+    workingPackage = null;
+  }
+  
+  id = this.loader.canonical(moduleId, curModuleId, workingPackage);
+  if (!id) return done(new NotFound(moduleId, workingPackage));
+  
+  idx       = id.indexOf(':', 2);
+  moduleId  = id.slice(idx+1);
+  packageId = id.slice(0, idx);
+  loader    = this.loader;
+
+  loader.ensurePackage(packageId, workingPackage, function(err) {
+    if (err) return done(err);
+    var pkg = loader.packageFor(packageId, workingPackage);
+    if (!pkg.exists(moduleId)) done(new NotFound(moduleId, pkg));
+    else done(); // all clear
+  });
+};
+
+/**
+  TODO: document
+*/
+Sandbox.prototype.packageFor = function(packageId, vers, workingPackage) {
+
+  // assume canonicalPackageId() will normalize params
+  var id = this.loader.canonicalPackageId(packageId, vers, workingPackage);
+  if (!id) return null;
+  return this.loader.packageFor(id);
+};
+
+/** 
+  TODO: document
+*/
+Sandbox.prototype.ensurePackage = function(packageId, vers, workingPackage, done) {
+
+  // normalize params so that done is in right place
+  if (vers && (T_STRING !== typeof vers)) {
+    done = workingPackage;
+    workingPackage = vers;
+    vers = null;
+  }
+  
+  if (workingPackage && (T_FUNCTION === typeof workingPackage)) {
+    done = workingPackage ;
+    workingPackage = null;
+  }
+  
+  var id = this.loader.canonicalPackageId(packageId, vers, workingPackage);
+  if (!id) return done(new NotFound(packageId, workingPackage));
+  this.loader.ensurePackage(id, done);
+};
+
+
+/**
+  Returns the path or URL to a resource in the named package. 
+*/
+Sandbox.prototype.resource = function(resourceId, moduleId, ownerPackage) {
+  if (!ownerPackage.resource) return null;
+  return ownerPackage.resource(resourceId, moduleId);
+};
+
+/**
+  Clears the sandbox.  requiring modules will cause them to be reinstantied
+*/
+Sandbox.prototype.clear = function() {
+  this.exports = {};
+  this.modules = {};
+  this.usedExports = {};
+  return this;
+};
+
+// ..........................................................
+// BROWSER
+// 
+
+// Implements a default loader source for use in the browser.  This object
+// should also be set as the "require" global on the browser to allow for
+// module registrations
+
+var Browser = exports.extend(Object);
+exports.Browser = Browser;
+
+Browser.prototype.init = function() {
+  this._ready  = {};
+  this._unload = {};
+  
+  this.clear();
+};
+
+/**
+  Reset the browser caches.  This would require all packages and modules 
+  to register themselves.  You should also clear the associated loader and
+  sandbox if you use this.
+*/
+Browser.prototype.clear = function() {
+  this.packageInfoByName = {}; // stores package info sorted by name/version
+  this.packageInfoById   = {}; // stores package info sorted by id
+  this.packages    = {}; // instantiated packages
+  this.factories   = {}; // registered module factories by id
+
+  this.stylesheetActions = {}; // resolvable stylesheet load actions
+  this.scriptActions     = {}; // resolvable script actions
+  this.ensureActions     = {}; // resolvable package actions
+};
+
+/**
+  Configures a basic sandbox environment based on the browser.  Now you can
+  register and require from it.
+  
+  @returns {Browser} new instance
+*/
+Browser.start = function(env, args, queue) {
+  // build new chain of objects and setup require.
+  var browser, len, idx, action;
+  
+  browser         = new Browser();
+  browser.loader  = new Loader([browser]);
+  browser.sandbox = new Sandbox(browser.loader, env, args);
+  browser.queue   = queue;
+
+  var mod = { 
+    id: 'index', 
+    ownerPackage: browser.loader.anonymousPackage 
+  };
+
+  browser.require = browser.sandbox.createRequire(mod);
+  // TODO: amend standard CommonJS methods for loading modules when they
+  // are standardized
+  
+  return browser;
+};
+
+Browser.prototype.replay = function() {
+  var queue = this.queue,
+      len   = queue ? queue.length : 0,
+      idx, action;
+      
+  this.queue = null;
+  for(idx=0;idx<len;idx++) {
+    action = queue[idx];
+    this[action.m].apply(this, action.a);
+  }
+  
+  return this;
+};
+
+// safe - in place of preamble start()
+Browser.prototype.start = function() {
+  return this;
+};
+
+/**
+  Makes all dependencies of the passed canonical packageId global.  Used
+  for backwards compatibility with non-CommonJS libraries.
+*/
+Browser.prototype.global = function(canonicalId) {
+  if (!domAvailable && !xhrAvailable) return this;  // don't work out of brsr
+  var GLOBAL = (function() { return this; })();
+  
+  var globals, pkg, deps, packageId, exports, keys, key, idx, len;
+  
+  globals = this.globals;
+  if (!globals) globals = this.globals = {};
+
+  pkg = this.packageFor(canonicalId);
+  if (!pkg) throw new Error(canonicalId+' package not found');
+  
+  deps = pkg.get('dependencies');
+  if (!deps) return this; // nothing to do
+  
+  for(packageId in deps) {
+    if (!deps.hasOwnProperty(packageId)) continue;
+    canonicalId  = this.loader.canonical(packageId, pkg);
+    if (globals[canonicalId]) continue;
+    globals[canonicalId] = true;
+    
+    // some cases a dependency refers to a package that is itself not 
+    // using modules.  In this case just ignore
+    if (!this.sandbox.ready(packageId, pkg)) continue;
+    
+    exports = this.sandbox.require(packageId, pkg);
+    if (keys = exports.__globals__) {
+      len = keys.length;
+      for(idx=0;idx<len;idx++) {
+        key = keys[idx];
+        GLOBAL[key] = exports[key];
+      }
+
+    // no __globals__ key is defined so just iterate through any exported
+    // properties. this should actually be the more common case
+    } else {
+      for(key in exports) {
+        if (!exports.hasOwnProperty(key)) continue;
+        GLOBAL[key] = exports[key];
+      }
+    }
+    
+  }
+
+  return this;
+};
+
+// ..........................................................
+// Ready & Unload Handlers
+// 
+
+var buildInvocation = function(args) {
+  var context, method;
+  
+  if (args.length === 1) {
+    context = null;
+    method  = args[0];
+    args = Array.prototype.slice.call(args, 1);
+  } else {
+    context = args[0];
+    method  = args[1];
+    args    = Array.prototype.slice.call(args, 2);
+  }
+
+  return { target: context, method: method, args: args };
+};
+
+var queueListener = function(base, queueName, args) {
+  if (!base[queueName]) base[queueName] = [];
+  base[queueName].push(buildInvocation(args));
+};
+
+/**
+  Invoke the passed callback when the document is ready.  You can pass 
+  either an object/function or a moduleId and property name plus additional
+  arguments.
+*/
+Browser.prototype.addReadyListener = function(context, method) {
+  if (this._ready && this._ready.isReady) {
+    this._invoke(buildInvocation(arguments));
+  } else {
+    this._setupReadyListener();
+    queueListener(this._ready, 'queue', arguments);
+  }
+};
+
+/**
+  Invoke the passed callback just after any ready listeners have fired but
+  just before the main moduleId is required.  This is primarily provided as 
+  a way for legacy environments to hook in their own main function.
+*/
+Browser.prototype.addMainListener = function(context, method) {
+  if (this._ready && this._ready.isReady) {
+    this._invoke(buildInvocation(arguments));
+  } else {
+    this._setupReadyListener();
+    queueListener(this._ready, 'mqueue', arguments);
+  }
+};
+
+/**
+  Invoke the passed callback when the browser is about to unload.
+*/
+Browser.prototype.addUnloadListener = function(context, method) {
+  if (this._unload && this._unload.isUnloading) {
+    this._invoke(buildInvocation(arguments));
+  } else {
+    this._setupUnloadListener();
+    queueListener(this._unload, 'queue', arguments);
+  }
+};
+
+
+Browser.prototype._invoke = function(inv) {
+  var target = inv.target, method = inv.method;
+  if (T_STRING === typeof target) target = this.require(target);
+  if (T_STRING === typeof method) method = target[method];
+  if (method) method.apply(target, inv.args);
+  inv.target = inv.method = inv.args = null;
+};
+
+Browser.prototype._setupReadyListener = function() {
+  if (this._ready.setup) return this;
+  this._ready.setup =true;
+  
+  var ready = this._ready, source = this, fire;
+  
+  fire = function() {
+    if (ready.isReady) return;
+    ready.isReady = true;
+    
+    // first cleanup any listeners so they don't fire again
+    if (ready.cleanup) ready.cleanup();
+    ready.cleanup = null;
+    
+    var q, len, idx;
+    
+    q = ready.queue;
+    len = q ? q.length : 0;
+    ready.queue = null;
+    for(idx=0;idx<len;idx++) source._invoke(q[idx]);
+    
+    q = ready.mqueue;
+    len = q ? q.length : 0 ;
+    ready.mqueue = null;
+    for(idx=0;idx<len;idx++) source._invoke(q[idx]);
+
+    source._runMain(); // get main module.
+  };
+      
+  // always listen for onready event - detect based on platform
+  // those code is derived from jquery 1.3.1
+  // server-side JS
+  if (T_UNDEFINED === typeof document) {
+    // TODO: handler server-side JS cases here
+
+  // Mozilla, Opera, webkit nightlies
+  } else if (document.addEventListener) {
+
+    // cleanup handler to be called whenever any registered listener fires
+    // should prevent additional listeners from firing
+    ready.cleanup = function() {
+      document.removeEventListener('DOMContentLoaded', fire, false);
+      document.removeEventListener('load', fire, false);
+    };
+
+    // register listeners
+    document.addEventListener('DOMContentLoaded', fire, false);
+    document.addEventListener('load', fire, false);
+
+  // IE
+  } else if (document.attachEvent) {
+
+    // cleanup handler - should cleanup all registered listeners
+    ready.cleanup = function() {
+      document.detachEvent('onreadystatechange', fire);
+      document.detachEvent('onload', fire);
+      ready.ieHandler = null; // will stop the ieHandler from firing again
+    };
+
+    // listen for readystate and load events
+    document.attachEvent('onreadystatechange', fire);
+    document.attachEvent('onload', fire);
+
+    // also if IE and no an iframe, continually check to see if the document 
+    // is ready
+    // NOTE: DO NOT CHANGE TO ===, FAILS IN IE.
+    if ( document.documentElement.doScroll && window == window.top ) {
+      ready.ieHandler = function() {
+
+        // If IE is used, use the trick by Diego Perini
+        // http://javascript.nwbox.com/IEContentLoaded/
+        if (ready.ieHandler && !ready.isReady) {
+          try {
+            document.documentElement.doScroll("left");
+          } catch( error ) {
+            setTimeout( ready.ieHandler, 0 );
+            return;
+          }
+        }
+
+        // and execute any waiting functions
+        fire();
+      };
+
+      ready.ieHandler();
+    }
+
+  }  
+};
+
+Browser._scheduleUnloadListener = function() {
+  if (this._unload.setup) return this;
+  this._unload.setup =true;
+  
+  var unload = this._unload, source = this, fire;
+
+  unload.isUnloading = false;
+  fire = function() { 
+    if (unload.isUnloading) return;
+    unload.isUnloading = true;
+    
+    if (unload.cleanup) unload.cleanup();
+    unload.cleanup = null;
+    
+    var q = unload.queue,
+        len = q ? q.length : 0,
+        idx, inv;
+        
+    unload.queue = null;
+    for(idx=0;idx<len;idx++) source._invoke(q[idx]);
+  };
+
+  if (T_UNDEFINED === typeof document) {
+    // TODO: Handle server-side JS mode
+    
+  } else if (document.addEventListener) {
+    unload.cleanup = function() {
+      document.removeEventListener('unload', fire);
+    };
+    document.addEventListener('unload', fire, false);
+    
+  } else if (document.attachEvent) {
+    unload.cleanup = function() {
+      document.detachEvent('onunload', fire);
+    };
+    document.attachEvent('unload', fire);
+  }
+  
+};
+
+// ..........................................................
+// Registration API
+// 
+
+/**
+  Sets the main moduleId on the sandbox.  This module will be automatically
+  required after all other ready and main handlers have run when the document
+  is ready.
+  
+  @param {String} moduleId
+    A moduleId with packageId included ideally.  Can be canonicalId.
+    
+  @returns {void}
+*/
+Browser.prototype.main = function(moduleId, method) {
+  if (this.sandbox) this.sandbox.main(moduleId);
+  this._setupReadyListener(); // make sure we listen for ready event
+  this._main = { id: moduleId, method: method };
+};
+
+Browser.prototype._runMain = function() {
+  if (!this._main) return ;
+  
+  var moduleId = this._main.id,
+      method   = this._main.method,
+      req      = this.require;
+  
+  if (!moduleId || !req) return ;
+  this._main = null;
+
+  // async load any main module dependencies if needed then require
+  req.ensure(moduleId, function(err) {
+    if (err) throw err;
+    var exp = req(moduleId);
+    if (T_STRING === typeof method) method = exp[method];
+    if (method) method.call(exp);
+  });
+};
+
+
+// creates a new action that will invoke the passed value then setup the
+// resolve() method to wait on response
+Browser.prototype._action  = function(action) {
+  var ret;
+  
+  ret = once(function(done) {
+    ret.resolve = function(err, val) {
+      ret.resolve = null; // no more...
+      done(err, val);
+    };
+    action(); 
+  });
+  return ret;
+  
+};
+
+Browser.prototype._resolve = function(dict, key, value) {
+  
+  // for pushed content, just create the action function
+  if (!dict[key]) dict[key] = function(done) { done(null, value); };
+  
+  // if a value already exists, call resolve if still valid
+  else if (dict[key].resolve) dict[key].resolve(null, value);
+  return this;
+};
+
+Browser.prototype._fail = function(dict, key, err) {
+  if (dict[key].resolve) dict[key].resolve(err);
+};
+
+var T_SCRIPT     = 'script',
+    T_STYLESHEET = 'stylesheet',
+    T_RESOURCE   = 'resource';
+    
+/**
+  Normalizes package info, expanding some compacted items out to full 
+  info needed.
+*/
+Browser.prototype._normalize = function(def, packageId) {
+  if (!isCanonicalId(packageId)) packageId = '::'+packageId;
+  def.id = packageId;
+  def.version = semver.normalize(def.version);
+  def['tiki:external'] = !!def['tiki:external']; 
+  def['tiki:private']  = !!def['tiki:private'];  // ditto
+
+  // expand list of resources
+  var base = def['tiki:base']; 
+  if (def['tiki:resources']) {
+
+    def['tiki:resources'] = map(def['tiki:resources'], function(item) {
+      
+      // expand a simple string into a default entry
+      if (T_STRING === typeof item) {
+        item = { 
+          id: packageId+':'+item,
+          name: item 
+        };
+      }
+
+      // must have an item name or you can't lookup the resource
+      if (!item.name) {
+        throw new InvalidPackageDef(def, 'resources must have a name');
+      }
+
+      if (!item.id) {
+        item.id = packageId+':'+item.name;
+      }
+      if (!isCanonicalId(item.id)) item.id = '::'+item.id;
+      
+      // assume type from ext if one is provided
+      if (!item.type) {
+        if (item.name.match(/\.js$/)) item.type = T_SCRIPT;
+        else if (item.name.match(/\.css$/)) item.type = T_STYLESHEET;
+        else item.type = T_RESOURCE;
+      }
+      
+      if (!item.url) {
+        if (base) item.url = base+'/'+item.name;
+        else item.url = item.id+item.name;
+      }
+      
+      return item;
+    });
+  }
+   
+  // always have a nested and dependencies hash, even if it is empty
+  if (!def.dependencies) def.dependencies = {};
+
+  var nested = def['tiki:nested'], key;
+  if (nested) {
+    for(key in nested) {
+      if (!nested.hasOwnProperty(key)) continue;
+      if (!isCanonicalId(nested[key])) nested[key] = '::'+nested[key];
+    }
+    
+  } else def['tiki:nested'] = {};
+  
+  return def;
+};
+
+/**
+  Register new package information.
+*/
+Browser.prototype.register = function(packageId, def) {
+  var reg, replace, name, vers, idx = -1;
+  
+  // normalize some basics...
+  def = this._normalize(def, packageId);
+  packageId = def.id; // make sure to get normalized packageId
+
+  // see if a pkg with same id is registered.  if so, replace it only if 
+  // the new one is not external and the old one is
+  reg = this.packageInfoById;
+  if (!reg) reg = this.packageInfoById = {};
+  if (reg[packageId]) {
+    if (!reg[packageId]['tiki:external']) return this;
+    replace = reg[packageId];
+  }
+  reg[packageId] = def;
+  
+  if (def.name) {
+    name = def.name;
+    vers = def.version;
+    
+    reg = this.packageInfoByName;
+    if (!reg) reg = this.packageInfoByName = {};
+    if (!reg[name]) reg[name] = {};
+    reg = reg[name];
+    
+    // update list of packageIds matching version...
+    if (!reg[vers] || (reg[vers].length<=1)) {
+      reg[vers] = [def];
+    } else {
+      if (replace) idx = reg[vers].indexOf(replace);
+      if (idx>=0) {
+        reg[vers] = reg[vers].slice(0, idx).concat(reg[vers].slice(idx+1));
+      }
+      reg[vers].push(def);
+    }
+    
+  }
+  
+  return this;
+};
+
+/**
+  Main registration API for all modules.  Simply registers a module for later
+  use by a package.
+*/
+Browser.prototype.module = function(key, def) {
+  if (!isCanonicalId(key)) key = '::'+key;
+  this.factories[key] = def;
+  return this; 
+};
+
+/**
+  Register a script that has loaded
+*/
+Browser.prototype.script = function(scriptId) {
+  if (!isCanonicalId(scriptId)) scriptId = '::'+scriptId;
+  this._resolve(this.scriptActions, scriptId, true);
+};
+
+/**
+  Register a stylesheet that has loaded.
+*/
+Browser.prototype.stylesheet = function(stylesheetId) {
+  if (!isCanonicalId(stylesheetId)) stylesheetId = '::'+stylesheetId;
+  this._resolve(this.stylesheetActions, stylesheetId, true);
+};
+
+// ..........................................................
+// Called by Loader
+//
+
+var domAvailable = T_UNDEFINED !== typeof document && document.createElement;
+var xhrAvailable = T_UNDEFINED !== typeof XMLHttpRequest;
+
+/**
+  Whether to use XHR by default. If true, XHR is tried first to fetch script
+  resources; script tag injection is only used as a fallback if XHR fails. If
+  false (the default if the DOM is available), script tag injection is tried
+  first, and XHR is used as the fallback.
+*/
+Browser.prototype.xhr = !domAvailable;
+
+/**
+  Whether to automatically wrap the fetched JavaScript in tiki.module() and
+  tiki.script() calls. With this on, CommonJS modules will "just work" without
+  preprocessing. Setting this to true requires, and implies, that XHR will be
+  used to fetch the files.
+*/
+Browser.prototype.autowrap = false;
+
+var findPublicPackageInfo = function(infos) {
+  if (!infos) return null;
+  
+  var loc = infos.length;
+  while(--loc>=0) {
+    if (!infos[loc]['tiki:private']) return infos[loc];
+  }
+  return null;
+};
+
+/**
+  Find the canonical package ID for the passed package ID and optional 
+  version.  This will look through all the registered package infos, only
+  searching those that are not private, but including external references.
+*/
+Browser.prototype.canonicalPackageId = function(packageId, vers) {
+  var info = this.packageInfoByName[packageId],
+      ret, cur, cvers, rvers;
+  
+  if (vers) vers = semver.normalize(vers);
+  if (!info) return null; // not found
+  
+  // see if we have caught a lucky break
+  if (info[vers] && (info[vers].length===1)) return info[vers][0].id;
+
+  // need to search...
+  for(cvers in info) {
+    if (!info.hasOwnProperty(cvers)) continue;
+    if (!semver.compatible(vers, cvers)) continue;
+    if (!ret || (semver.compare(rvers, cvers)<0)) {
+      ret = findPublicPackageInfo(info[cvers]);
+      if (ret) rvers = cvers; 
+    }
+  }
+  
+  return ret ? ret.id : null;
+};
+
+// get package for canonicalId, instantiate if needed
+Browser.prototype.packageFor = function(canonicalId) {
+  var ret = this.packages[canonicalId];
+  if (ret) return ret ;
+
+  // instantiate if needed
+  ret = this.packageInfoById[canonicalId];
+  if (ret && !ret['tiki:external']) { // external refs can't be instantiated
+    ret = new this.Package(canonicalId, ret, this);
+    this.packages[canonicalId] = ret;
+    return ret ;
+  }
+
+  return null ; // not found
+};
+
+/**
+  Ensures the named canonical packageId and all of its dependent scripts are
+  loaded.
+*/
+Browser.prototype.ensurePackage = function(canonicalId, done) {
+  var action = this.ensureActions[canonicalId];
+  if (action) return action(done); // add another listener
+  
+  // no action get - get the package info and start one.
+  var info = this.packageInfoById[canonicalId];
+  if (!info) {
+    return done(new NotFound(canonicalId, 'browser package info'));
+  }
+  
+  var source = this;
+  
+  action = once(function(done) {
+    var cnt = 1, ready = false, cancelled;
+    
+    // invoked when an action finishes.  Will resolve this action
+    // when all of them finish.
+    var cleanup = function(err) {
+      if (cancelled) return;
+      if (err) {
+        cancelled = true;
+        return done(err);
+      }
+      
+      cnt = cnt-1;
+      if (cnt<=0 && ready) return done(null, info);
+    };
+
+    // proactively kick off any known packages.  If a dependent package
+    // is not known here just skip it for now.  This is just an optimization
+    // anyway.  The Loader will take care of ensuring all dependencies are
+    // really met.
+    var dependencies = info.dependencies,
+        nested       = info['tiki:nested'],
+        packageId, vers, depInfo, curId;
+
+    for(packageId in dependencies) {
+      if (!dependencies.hasOwnProperty(packageId)) continue;
+      curId = nested[packageId];
+      if (!curId) {
+        vers = dependencies[packageId];
+        curId = source.canonicalPackageId(packageId, vers);
+      }
+      
+      if (curId && source.packageInfoById[canonicalId]) {
+        cnt++;
+        source.ensurePackage(curId, cleanup);
+      }
+    }
+    
+    // step through resources and kick off each script and stylesheet
+    var resources = info['tiki:resources'], 
+        lim = resources ? resources.length : 0,
+        loc, rsrc;
+    for(loc=0;loc<lim;loc++) {
+      rsrc = resources[loc];
+      if (rsrc.type === T_RESOURCE) continue;
+      if (rsrc.type === T_SCRIPT) {
+        cnt++;
+        source.ensureScript(rsrc.id, rsrc.url, cleanup);
+      } else if (rsrc.type === T_STYLESHEET) {
+        cnt++;
+        source.ensureStylesheet(rsrc.id, rsrc.url, cleanup);
+      }
+    }
+      
+    // done, set ready to true so that the final handler can fire
+    ready = true;
+    cleanup(); 
+    
+  });
+  
+  this.ensureActions[canonicalId] = action;
+  action(done); // kick off
+};
+
+Browser.prototype.ensureScript = function(id, url, done) {
+  var action = this.scriptActions[id];
+  if (action) return action(done);
+  
+  var source = this;
+  action = this._action(function() {
+    source._loadScript(id, url);
+  });
+  
+  this.scriptActions[id] = action;
+  return action(done);
+};
+
+Browser.prototype.ensureStylesheet = function(id, url, done) {
+  var action = this.stylesheetActions[id];
+  if (action) return action(done);
+  
+  var source = this;
+  action = this._action(function() {
+    source._loadStylesheet(id, url);
+  });
+
+  this.stylesheetActions[id] = action;
+  return action(done);
+};
+
+Browser.prototype._injectScript = function(id, url) {
+  var body, el;
+
+  body = document.body;
+  el = document.createElement('script');
+  el.src = url;
+  body.appendChild(el);
+  body = el = null;
+};
+
+Browser.prototype._xhrScript = function(id, url) {
+  var autowrap = this.autowrap;
+
+  var req = new XMLHttpRequest();
+  req.open('GET', url, true);
+  req.onreadystatechange = function(evt) {
+    // Accept 200 or 0 for local file requests.
+    if (req.readyState !== 4 || (req.status !== 200 && req.status !== 0)) {
+      return;
+    }
+
+    var src = req.responseText;
+    if (autowrap) {
+      src = "tiki.module('" + id + "', function(require, exports, module) {" +
+        src + "});" + "tiki.script('" + id + "');";
+    }
+
+    // Add a Firebug-style sourceURL parameter to help debugging.
+    eval(src + "\n//@ sourceURL=" + url);
+
+    // Immediately return after the eval. The script may have stomped all over
+    // our local state.
+  };
+
+  req.send(null);
+};
+
+Browser.prototype._loadScript = function(id, url) {
+    if (this.autowrap) {
+        this.xhr = true;
+        if (!xhrAvailable) {
+            DEBUG('Autowrap is on but XHR is not available. Danger ahead.');
+        }
+    }
+
+    if (xhrAvailable && domAvailable) {
+        if (this.xhr) {
+            try {
+                return this._xhrScript(id, url);
+            } catch (e) {
+                return this._injectScript(id, url);
+            }
+        } else {
+            try {
+                return this._injectScript(id, url);
+            } catch (e) {
+                return this._xhrScript(id, url);
+            }
+        }
+    } else if (xhrAvailable) {
+        return this._xhrScript(id, url);
+    } else if (domAvailable) {
+        return this._injectScript(id, url);
+    }
+
+    DEBUG('Browser#_loadScript() not supported on this platform.');
+    this.script(id);
+};
+
+if (domAvailable) {
+  // actually loads the stylesheet.  separated out to ease unit testing
+  Browser.prototype._loadStylesheet = function(id, url) {
+    var body, el;
+    
+    body = document.getElementsByTagName('head')[0] || document.body;
+    el   = document.createElement('link');
+    el.rel = 'stylesheet';
+    el.href = url;
+    el.type = 'text/css';
+    body.appendChild(el);
+    el = body = null;
+
+    this.stylesheet(id); // no onload support - just notify now.
+  };
+} else {
+  // actually loads the stylesheet.  separated out to ease unit testing
+  Browser.prototype._loadStylesheet = function(id, url) {
+    DEBUG('Browser#_loadStylesheet() not supported on this platform.');
+    this.stylesheet(id);
+  };
+}
+
+
+
+// ..........................................................
+// BROWSER PACKAGE
+// 
+
+/**
+  Special edition of Package designed to work with the Browser source.  This
+  kind of package knows how to get its data out of the Browser source on 
+  demand.
+*/
+var BrowserPackage = Package.extend();
+Browser.prototype.Package = BrowserPackage;
+
+BrowserPackage.prototype.init = function(id, config, source) {
+  Package.prototype.init.call(this, id, config);
+  this.source = source;
+};
+
+// if not self, look for nested packages
+BrowserPackage.prototype.canonicalPackageId = function(packageId, vers) {
+  var ret, nested, info;
+  
+  ret = Package.prototype.canonicalPackageId.call(this, packageId, vers);
+  if (ret) return ret ;
+  
+  nested = this.get('tiki:nested') || {}; 
+  ret = nested[packageId];
+  if (!ret) return null;
+
+  info = this.source.packageInfoById[ret];
+  return info && semver.compatible(vers,info.version) ? ret : null;
+};
+
+BrowserPackage.prototype.packageFor = function(canonicalId) {
+  var ret = Package.prototype.packageFor.call(this, canonicalId);
+  return ret ? ret : this.source.packageFor(canonicalId);
+};
+
+BrowserPackage.prototype.ensurePackage = function(canonicalId, done) {
+  if (canonicalId === this.id) return done(); 
+  this.source.ensurePackage(canonicalId, done);
+};
+
+BrowserPackage.prototype.catalogPackages = function() {
+  var ret = [this], nested, key;
+
+  nested = this.get('tiki:nested') || {};
+  for(key in nested) {
+    if (!nested.hasOwnProperty(key)) continue;
+    ret.push(this.source.packageFor(nested[key]));
+  }
+  
+  return ret ;
+};
+
+BrowserPackage.prototype.exists = function(moduleId) {
+  var canonicalId = this.id+':'+moduleId;
+  return !!this.source.factories[canonicalId];
+};
+
+BrowserPackage.prototype.load = function(moduleId) {
+  var canonicalId, factory;
+  
+  canonicalId = this.id+':'+moduleId;
+  factory  = this.source.factories[canonicalId];
+  return factory ? new this.Factory(moduleId, this, factory) : null;
+};
+
+BrowserPackage.prototype.Factory = Factory;
+
+
+displayNames(exports, 'tiki');
+
+});
+// ==========================================================================
+// Project:   Tiki - CommonJS Runtime
+// Copyright: ©2009-2010 Apple Inc. All rights reserved.
+// License:   Licened under MIT license (see __preamble__.js)
+// ==========================================================================
+/*globals tiki ENV ARGS */
+
+// This postamble runs when the loader and supporting modules are all 
+// registered, allowing the real loader to replace the bootstrap version.
+// it is not wrapped as a module so that it can run immediately.
+"use modules false";
+"use loader false";
+
+// note that the loader.start method is safe so that calling this more than
+// once will only setup the default loader once.
+tiki = tiki.start();
+tiki.replay(); // replay queue
+
+bespin.tiki = tiki;
+})();
+
+;bespin.tiki.register("::bespin", {
+    name: "bespin",
+    dependencies: {  }
+});bespin.bootLoaded = true;
+bespin.tiki.module("bespin:builtins",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+exports.metadata =
+{
+    "bespin":
+    {
+        "provides":
+        [
+            {
+                "ep": "extensionpoint",
+                "name": "extensionpoint",
+                "indexOx": "name",
+                "register": "plugins#registerExtensionPoint",
+                "unregister": "plugins#unregisterExtensionPoint",
+                "description": "Defines a new extension point",
+                "params": [
+                    {
+                        "name": "name",
+                        "type": "string",
+                        "description": "the extension point's name",
+                        "required": true
+                    },
+                    {
+                        "name": "description",
+                        "type": "string",
+                        "description": "description of what the extension point is for"
+                    },
+                    {
+                        "name": "params",
+                        "type": "array of objects",
+                        "description": "parameters that provide the metadata for a given extension. Each object should have name and description, minimally. It can also have a 'type' (eg string, pointer, or array) and required to denote whether or not this parameter must be present on the extension."
+                    },
+                    {
+                        "name": "indexOn",
+                        "type": "string",
+                        "description": "You can provide an 'indexOn' property to name a property of extensions through which you'd like to be able to easily look up the extension."
+                    },
+                    {
+                        "name": "register",
+                        "type": "pointer",
+                        "description": "function that is called when a new extension is discovered. Note that this should be used sparingly, because it will cause your plugin to be loaded whenever a matching plugin appears."
+                    },
+                    {
+                        "name": "unregister",
+                        "type": "pointer",
+                        "description": "function that is called when an extension is removed. Note that this should be used sparingly, because it will cause your plugin to be loaded whenever a matching plugin appears."
+                    }
+                ]
+            },
+            {
+                "ep": "extensionpoint",
+                "name": "extensionhandler",
+                "register": "plugins#registerExtensionHandler",
+                "unregister": "plugins#unregisterExtensionHandler",
+                "description": "Used to attach listeners ",
+                "params": [
+                    {
+                        "name": "name",
+                        "type": "string",
+                        "description": "name of the extension point to listen to",
+                        "required": true
+                    },
+                    {
+                        "name": "register",
+                        "type": "pointer",
+                        "description": "function that is called when a new extension is discovered. Note that this should be used sparingly, because it will cause your plugin to be loaded whenever a matching plugin appears."
+                    },
+                    {
+                        "name": "unregister",
+                        "type": "pointer",
+                        "description": "function that is called when an extension is removed. Note that this should be used sparingly, because it will cause your plugin to be loaded whenever a matching plugin appears."
+                    }
+                ]
+            },
+            {
+                "ep": "extensionpoint",
+                "name": "factory",
+                "description": "Provides a factory for singleton components. Each extension needs to provide a name, a pointer and an action. The action can be 'call' (if the pointer refers to a function), 'new' (if the pointer refers to a traditional JS object) or 'value' (if the pointer refers to the object itself that is the component).",
+                "indexOn": "name"
+            },
+            {
+                "ep": "factory",
+                "name": "hub",
+                "action": "create",
+                "pointer": "util/hub#Hub"
+            },
+            {
+                "ep": "extensionpoint",
+                "name": "command",
+                "description": "Editor commands/actions. TODO: list parameters here."
+            }
+        ]
+    }
+};
+
+});
+
+bespin.tiki.module("bespin:util/stacktrace",function(require,exports,module) {
+// Changed to suit the specific needs of running within Bespin
+
+// Domain Public by Eric Wendelin http://eriwen.com/ (2008)
+//                  Luke Smith http://lucassmith.name/ (2008)
+//                  Loic Dachary <loic@dachary.org> (2008)
+//                  Johan Euphrosine <proppy@aminche.com> (2008)
+//                  Øyvind Sean Kinsey http://kinsey.no/blog
+//
+// Information and discussions
+// http://jspoker.pokersource.info/skin/test-printstacktrace.html
+// http://eriwen.com/javascript/js-stack-trace/
+// http://eriwen.com/javascript/stacktrace-update/
+// http://pastie.org/253058
+// http://browsershots.org/http://jspoker.pokersource.info/skin/test-printstacktrace.html
+//
+
+//
+// guessFunctionNameFromLines comes from firebug
+//
+// Software License Agreement (BSD License)
+//
+// Copyright (c) 2007, Parakey Inc.
+// All rights reserved.
+//
+// Redistribution and use of this software in source and binary forms, with or without modification,
+// are permitted provided that the following conditions are met:
+//
+// * Redistributions of source code must retain the above
+//   copyright notice, this list of conditions and the
+//   following disclaimer.
+//
+// * Redistributions in binary form must reproduce the above
+//   copyright notice, this list of conditions and the
+//   following disclaimer in the documentation and/or other
+//   materials provided with the distribution.
+//
+// * Neither the name of Parakey Inc. nor the names of its
+//   contributors may be used to endorse or promote products
+//   derived from this software without specific prior
+//   written permission of Parakey Inc.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+// IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
+// IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+// OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+var util = require('bespin:util/util');
+var console = require("bespin:console").console;
+
+/**
+ * Different browsers create stack traces in different ways.
+ * <strike>Feature</strike> Browser detection baby ;).
+ */
+var mode = (function() {
+
+    // We use SC's browser detection here to avoid the "break on error"
+    // functionality provided by Firebug. Firebug tries to do the right
+    // thing here and break, but it happens every time you load the page.
+    // bug 554105
+    if (util.isMozilla) {
+        return 'firefox';
+    } else if (util.isOpera) {
+        return 'opera';
+    } else if (util.isSafari) {
+        return 'other';
+    }
+
+    // SC doesn't do any detection of Chrome at this time.
+
+    // this is the original feature detection code that is used as a
+    // fallback.
+    try {
+        (0)();
+    } catch (e) {
+        if (e.arguments) {
+            return 'chrome';
+        }
+        if (e.stack) {
+            return 'firefox';
+        }
+        if (window.opera && !('stacktrace' in e)) { //Opera 9-
+            return 'opera';
+        }
+    }
+    return 'other';
+})();
+
+/**
+ *
+ */
+function stringifyArguments(args) {
+    for (var i = 0; i < args.length; ++i) {
+        var argument = args[i];
+        if (typeof argument == 'object') {
+            args[i] = '#object';
+        } else if (typeof argument == 'function') {
+            args[i] = '#function';
+        } else if (typeof argument == 'string') {
+            args[i] = '"' + argument + '"';
+        }
+    }
+    return args.join(',');
+}
+
+/**
+ * Extract a stack trace from the format emitted by each browser.
+ */
+var decoders = {
+    chrome: function(e) {
+        var stack = e.stack;
+        if (!stack) {
+            console.log(e);
+            return [];
+        }
+        return stack.replace(/^.*?\n/, '').
+                replace(/^.*?\n/, '').
+                replace(/^.*?\n/, '').
+                replace(/^[^\(]+?[\n$]/gm, '').
+                replace(/^\s+at\s+/gm, '').
+                replace(/^Object.<anonymous>\s*\(/gm, '{anonymous}()@').
+                split('\n');
+    },
+
+    firefox: function(e) {
+        var stack = e.stack;
+        if (!stack) {
+            console.log(e);
+            return [];
+        }
+        // stack = stack.replace(/^.*?\n/, '');
+        stack = stack.replace(/(?:\n@:0)?\s+$/m, '');
+        stack = stack.replace(/^\(/gm, '{anonymous}(');
+        return stack.split('\n');
+    },
+
+    // Opera 7.x and 8.x only!
+    opera: function(e) {
+        var lines = e.message.split('\n'), ANON = '{anonymous}',
+            lineRE = /Line\s+(\d+).*?script\s+(http\S+)(?:.*?in\s+function\s+(\S+))?/i, i, j, len;
+
+        for (i = 4, j = 0, len = lines.length; i < len; i += 2) {
+            if (lineRE.test(lines[i])) {
+                lines[j++] = (RegExp.$3 ? RegExp.$3 + '()@' + RegExp.$2 + RegExp.$1 : ANON + '()@' + RegExp.$2 + ':' + RegExp.$1) +
+                ' -- ' +
+                lines[i + 1].replace(/^\s+/, '');
+            }
+        }
+
+        lines.splice(j, lines.length - j);
+        return lines;
+    },
+
+    // Safari, Opera 9+, IE, and others
+    other: function(curr) {
+        var ANON = '{anonymous}', fnRE = /function\s*([\w\-$]+)?\s*\(/i, stack = [], j = 0, fn, args;
+
+        var maxStackSize = 10;
+        while (curr && stack.length < maxStackSize) {
+            fn = fnRE.test(curr.toString()) ? RegExp.$1 || ANON : ANON;
+            args = Array.prototype.slice.call(curr['arguments']);
+            stack[j++] = fn + '(' + stringifyArguments(args) + ')';
+
+            //Opera bug: if curr.caller does not exist, Opera returns curr (WTF)
+            if (curr === curr.caller && window.opera) {
+                //TODO: check for same arguments if possible
+                break;
+            }
+            curr = curr.caller;
+        }
+        return stack;
+    }
+};
+
+/**
+ *
+ */
+function NameGuesser() {
+}
+
+NameGuesser.prototype = {
+
+    sourceCache: {},
+
+    ajax: function(url) {
+        var req = this.createXMLHTTPObject();
+        if (!req) {
+            return;
+        }
+        req.open('GET', url, false);
+        req.setRequestHeader('User-Agent', 'XMLHTTP/1.0');
+        req.send('');
+        return req.responseText;
+    },
+
+    createXMLHTTPObject: function() {
+	    // Try XHR methods in order and store XHR factory
+        var xmlhttp, XMLHttpFactories = [
+            function() {
+                return new XMLHttpRequest();
+            }, function() {
+                return new ActiveXObject('Msxml2.XMLHTTP');
+            }, function() {
+                return new ActiveXObject('Msxml3.XMLHTTP');
+            }, function() {
+                return new ActiveXObject('Microsoft.XMLHTTP');
+            }
+        ];
+        for (var i = 0; i < XMLHttpFactories.length; i++) {
+            try {
+                xmlhttp = XMLHttpFactories[i]();
+                // Use memoization to cache the factory
+                this.createXMLHTTPObject = XMLHttpFactories[i];
+                return xmlhttp;
+            } catch (e) {}
+        }
+    },
+
+    getSource: function(url) {
+        if (!(url in this.sourceCache)) {
+            this.sourceCache[url] = this.ajax(url).split('\n');
+        }
+        return this.sourceCache[url];
+    },
+
+    guessFunctions: function(stack) {
+        for (var i = 0; i < stack.length; ++i) {
+            var reStack = /{anonymous}\(.*\)@(\w+:\/\/([-\w\.]+)+(:\d+)?[^:]+):(\d+):?(\d+)?/;
+            var frame = stack[i], m = reStack.exec(frame);
+            if (m) {
+                var file = m[1], lineno = m[4]; //m[7] is character position in Chrome
+                if (file && lineno) {
+                    var functionName = this.guessFunctionName(file, lineno);
+                    stack[i] = frame.replace('{anonymous}', functionName);
+                }
+            }
+        }
+        return stack;
+    },
+
+    guessFunctionName: function(url, lineNo) {
+        try {
+            return this.guessFunctionNameFromLines(lineNo, this.getSource(url));
+        } catch (e) {
+            return 'getSource failed with url: ' + url + ', exception: ' + e.toString();
+        }
+    },
+
+    guessFunctionNameFromLines: function(lineNo, source) {
+        var reFunctionArgNames = /function ([^(]*)\(([^)]*)\)/;
+        var reGuessFunction = /['"]?([0-9A-Za-z_]+)['"]?\s*[:=]\s*(function|eval|new Function)/;
+        // Walk backwards from the first line in the function until we find the line which
+        // matches the pattern above, which is the function definition
+        var line = '', maxLines = 10;
+        for (var i = 0; i < maxLines; ++i) {
+            line = source[lineNo - i] + line;
+            if (line !== undefined) {
+                var m = reGuessFunction.exec(line);
+                if (m) {
+                    return m[1];
+                }
+                else {
+                    m = reFunctionArgNames.exec(line);
+                }
+                if (m && m[1]) {
+                    return m[1];
+                }
+            }
+        }
+        return '(?)';
+    }
+};
+
+var guesser = new NameGuesser();
+
+var frameIgnorePatterns = [
+    /http:\/\/localhost:4020\/sproutcore.js:/
+];
+
+exports.ignoreFramesMatching = function(regex) {
+    frameIgnorePatterns.push(regex);
+};
+
+/**
+ * Create a stack trace from an exception
+ * @param ex {Error} The error to create a stacktrace from (optional)
+ * @param guess {Boolean} If we should try to resolve the names of anonymous functions
+ */
+exports.Trace = function Trace(ex, guess) {
+    this._ex = ex;
+    this._stack = decoders[mode](ex);
+
+    if (guess) {
+        this._stack = guesser.guessFunctions(this._stack);
+    }
+};
+
+/**
+ * Log to the console a number of lines (default all of them)
+ * @param lines {number} Maximum number of lines to wrote to console
+ */
+exports.Trace.prototype.log = function(lines) {
+    if (lines <= 0) {
+        // You aren't going to have more lines in your stack trace than this
+        // and it still fits in a 32bit integer
+        lines = 999999999;
+    }
+
+    var printed = 0;
+    for (var i = 0; i < this._stack.length && printed < lines; i++) {
+        var frame = this._stack[i];
+        var display = true;
+        frameIgnorePatterns.forEach(function(regex) {
+            if (regex.test(frame)) {
+                display = false;
+            }
+        });
+        if (display) {
+            console.debug(frame);
+            printed++;
+        }
+    }
+};
+
+});
+
+bespin.tiki.module("bespin:util/cookie",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+/**
+ * Adds escape sequences for special characters in regular expressions
+ * @param {String} str a String with special characters to be left unescaped
+ */
+var escapeString = function(str, except){
+    return str.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, function(ch){
+        if(except && except.indexOf(ch) != -1){
+            return ch;
+        }
+        return "\\" + ch;
+    });
+};
+
+/**
+ * Get a cookie value by name
+ * @param {String} name The cookie value to retrieve
+ * @return The value, or undefined if the cookie was not found
+ */
+exports.get = function(name) {
+    var matcher = new RegExp("(?:^|; )" + escapeString(name) + "=([^;]*)");
+    var matches = document.cookie.match(matcher);
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+};
+
+/**
+ * Set a cookie value
+ * @param {String} name The cookie value to alter
+ * @param {String} value The new value for the cookie
+ * @param {Object} props (Optional) cookie properties. One of:<ul>
+ * <li>expires: Date|String|Number|null If a number, the number of days from
+ * today at which the cookie will expire. If a date, the date past which the
+ * cookie will expire. If expires is in the past, the cookie will be deleted.
+ * If expires is omitted or is 0, the cookie will expire either directly (ff3)
+ * or when the browser closes
+ * <li>path: String|null The path to use for the cookie.
+ * <li>domain: String|null The domain to use for the cookie.
+ * <li>secure: Boolean|null Whether to only send the cookie on secure connections
+ * </ul>
+ */
+exports.set = function(name, value, props) {
+    props = props || {};
+
+    if (typeof props.expires == "number") {
+        var date = new Date();
+        date.setTime(date.getTime() + props.expires * 24 * 60 * 60 * 1000);
+        props.expires = date;
+    }
+    if (props.expires && props.expires.toUTCString) {
+        props.expires = props.expires.toUTCString();
+    }
+
+    value = encodeURIComponent(value);
+    var updatedCookie = name + "=" + value, propName;
+    for (propName in props) {
+        updatedCookie += "; " + propName;
+        var propValue = props[propName];
+        if (propValue !== true) {
+            updatedCookie += "=" + propValue;
+        }
+    }
+
+    document.cookie = updatedCookie;
+};
+
+/**
+ * Remove a cookie by name. Depending on the browser, the cookie will either
+ * be deleted directly or at browser close.
+ * @param {String} name The cookie value to retrieve
+ */
+exports.remove = function(name) {
+    exports.set(name, "", { expires: -1 });
+};
+
+/**
+ * Use to determine if the current browser supports cookies or not.
+ * @return Returns true if user allows cookies, false otherwise
+ */
+exports.isSupported = function() {
+    if (!("cookieEnabled" in navigator)) {
+        exports.set("__djCookieTest__", "CookiesAllowed");
+        navigator.cookieEnabled = exports.get("__djCookieTest__") == "CookiesAllowed";
+        if (navigator.cookieEnabled) {
+            exports.remove("__djCookieTest__");
+        }
+    }
+    return navigator.cookieEnabled;
+};
+
+});
+
+bespin.tiki.module("bespin:util/util",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+/**
+ * Create an object representing a de-serialized query section of a URL.
+ * Query keys with multiple values are returned in an array.
+ * <p>Example: The input "foo=bar&foo=baz&thinger=%20spaces%20=blah&zonk=blarg&"
+ * Produces the output object:
+ * <pre>{
+ *   foo: [ "bar", "baz" ],
+ *   thinger: " spaces =blah",
+ *   zonk: "blarg"
+ * }
+ * </pre>
+ * <p>Note that spaces and other urlencoded entities are correctly handled
+ * @see dojo.queryToObject()
+ * While dojo.queryToObject() is mainly for URL query strings, this version
+ * allows to specify a separator character
+ */
+exports.queryToObject = function(str, seperator) {
+    var ret = {};
+    var qp = str.split(seperator || "&");
+    var dec = decodeURIComponent;
+    qp.forEach(function(item) {
+        if (item.length) {
+            var parts = item.split("=");
+            var name = dec(parts.shift());
+            var val = dec(parts.join("="));
+            if (exports.isString(ret[name])){
+                ret[name] = [ret[name]];
+            }
+            if (Array.isArray(ret[name])){
+                ret[name].push(val);
+            } else {
+                ret[name] = val;
+            }
+        }
+    });
+    return ret;
+};
+
+/**
+ * Takes a name/value mapping object and returns a string representing a
+ * URL-encoded version of that object for use in a GET request
+ * <p>For example, given the input:
+ * <code>{ blah: "blah", multi: [ "thud", "thonk" ] }</code>
+ * The following string would be returned:
+ * <code>"blah=blah&multi=thud&multi=thonk"</code>
+ * @param map {Object} The object to convert
+ * @return {string} A URL-encoded version of the input
+ */
+exports.objectToQuery = function(map) {
+    // FIXME: need to implement encodeAscii!!
+    var enc = encodeURIComponent;
+    var pairs = [];
+    var backstop = {};
+    for (var name in map) {
+        var value = map[name];
+        if (value != backstop[name]) {
+            var assign = enc(name) + "=";
+            if (value.isArray) {
+                for (var i = 0; i < value.length; i++) {
+                    pairs.push(assign + enc(value[i]));
+                }
+            } else {
+                pairs.push(assign + enc(value));
+            }
+        }
+    }
+    return pairs.join("&");
+};
+
+/**
+ * Holds the count to keep a unique value for setTimeout
+ * @private See rateLimit()
+ */
+var nextRateLimitId = 0;
+
+/**
+ * Holds the timeouts so they can be cleared later
+ * @private See rateLimit()
+ */
+var rateLimitTimeouts = {};
+
+/**
+ * Delay calling some function to check that it's not called again inside a
+ * maxRate. The real function is called after maxRate ms unless the return
+ * value of this function is called before, in which case the clock is restarted
+ */
+exports.rateLimit = function(maxRate, scope, func) {
+    if (maxRate) {
+        var rateLimitId = nextRateLimitId++;
+
+        return function() {
+            if (rateLimitTimeouts[rateLimitId]) {
+                clearTimeout(rateLimitTimeouts[rateLimitId]);
+            }
+
+            rateLimitTimeouts[rateLimitId] = setTimeout(function() {
+                func.apply(scope, arguments);
+                delete rateLimitTimeouts[rateLimitId];
+            }, maxRate);
+        };
+    }
+};
+
+/**
+ * Return true if it is a String
+ */
+exports.isString = function(it) {
+    return (typeof it == "string" || it instanceof String);
+};
+
+/**
+ * Returns true if it is a Boolean.
+ */
+exports.isBoolean = function(it) {
+    return (typeof it == 'boolean');
+};
+
+/**
+ * Returns true if it is a Number.
+ */
+exports.isNumber = function(it) {
+    return (typeof it == 'number' && isFinite(it));
+};
+
+/**
+ * Hack copied from dojo.
+ */
+exports.isObject = function(it) {
+    return it !== undefined &&
+        (it === null || typeof it == "object" ||
+        Array.isArray(it) || exports.isFunction(it));
+};
+
+/**
+ * Is the passed object a function?
+ * From dojo.isFunction()
+ */
+exports.isFunction = (function() {
+    var _isFunction = function(it) {
+        var t = typeof it; // must evaluate separately due to bizarre Opera bug. See #8937
+        //Firefox thinks object HTML element is a function, so test for nodeType.
+        return it && (t == "function" || it instanceof Function) && !it.nodeType; // Boolean
+    };
+
+    return exports.isSafari ?
+        // only slow this down w/ gratuitious casting in Safari (not WebKit)
+        function(/*anything*/ it) {
+            if (typeof it == "function" && it == "[object NodeList]") {
+                return false;
+            }
+            return _isFunction(it); // Boolean
+        } : _isFunction;
+})();
+
+/**
+ * A la Prototype endsWith(). Takes a regex excluding the '$' end marker
+ */
+exports.endsWith = function(str, end) {
+    if (!str) {
+        return false;
+    }
+    return str.match(new RegExp(end + "$"));
+};
+
+/**
+ * A la Prototype include().
+ */
+exports.include = function(array, item) {
+    return array.indexOf(item) > -1;
+};
+
+/**
+ * Like include, but useful when you're checking for a specific
+ * property on each object in the list...
+ *
+ * Returns null if the item is not in the list, otherwise
+ * returns the index of the item.
+ */
+exports.indexOfProperty = function(array, propertyName, item) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i][propertyName] == item) {
+            return i;
+        }
+    }
+    return null;
+};
+
+/**
+ * A la Prototype last().
+ */
+exports.last = function(array) {
+    if (Array.isArray(array)) {
+        return array[array.length - 1];
+    }
+};
+
+/**
+ * Knock off any undefined items from the end of an array
+ */
+exports.shrinkArray = function(array) {
+    var newArray = [];
+
+    var stillAtBeginning = true;
+    array.reverse().forEach(function(item) {
+        if (stillAtBeginning && item === undefined) {
+            return;
+        }
+
+        stillAtBeginning = false;
+
+        newArray.push(item);
+    });
+
+    return newArray.reverse();
+};
+
+/**
+ * Create an array
+ * @param number The size of the new array to create
+ * @param character The item to put in the array, defaults to ' '
+ */
+exports.makeArray = function(number, character) {
+    if (number < 1) {
+        return []; // give us a normal number please!
+    }
+    if (!character){character = ' ';}
+
+    var newArray = [];
+    for (var i = 0; i < number; i++) {
+        newArray.push(character);
+    }
+    return newArray;
+};
+
+/**
+ * Repeat a string a given number of times.
+ * @param string String to repeat
+ * @param repeat Number of times to repeat
+ */
+exports.repeatString = function(string, repeat) {
+    var newstring = '';
+
+    for (var i = 0; i < repeat; i++) {
+        newstring += string;
+    }
+
+    return newstring;
+};
+
+/**
+ * Given a row, find the number of leading spaces.
+ * E.g. an array with the string "  aposjd" would return 2
+ * @param row The row to hunt through
+ */
+exports.leadingSpaces = function(row) {
+    var numspaces = 0;
+    for (var i = 0; i < row.length; i++) {
+        if (row[i] == ' ' || row[i] == '' || row[i] === undefined) {
+            numspaces++;
+        } else {
+            return numspaces;
+        }
+    }
+    return numspaces;
+};
+
+/**
+ * Given a row, find the number of leading tabs.
+ * E.g. an array with the string "\t\taposjd" would return 2
+ * @param row The row to hunt through
+ */
+exports.leadingTabs = function(row) {
+    var numtabs = 0;
+    for (var i = 0; i < row.length; i++) {
+        if (row[i] == '\t' || row[i] == '' || row[i] === undefined) {
+            numtabs++;
+        } else {
+            return numtabs;
+        }
+    }
+    return numtabs;
+};
+
+/**
+ * Given a row, extract a copy of the leading spaces or tabs.
+ * E.g. an array with the string "\t    \taposjd" would return an array with the
+ * string "\t    \t".
+ * @param row The row to hunt through
+ */
+exports.leadingWhitespace = function(row) {
+    var leading = [];
+    for (var i = 0; i < row.length; i++) {
+        if (row[i] == ' ' || row[i] == '\t' || row[i] == '' || row[i] === undefined) {
+            leading.push(row[i]);
+        } else {
+            return leading;
+        }
+    }
+    return leading;
+};
+
+/**
+ * Given a camelCaseWord convert to "Camel Case Word"
+ */
+exports.englishFromCamel = function(camel) {
+    camel.replace(/([A-Z])/g, function(str) {
+        return " " + str.toLowerCase();
+    }).trim();
+};
+
+/**
+ * I hate doing this, but we need some way to determine if the user is on a Mac
+ * The reason is that users have different expectations of their key combinations.
+ *
+ * Take copy as an example, Mac people expect to use CMD or APPLE + C
+ * Windows folks expect to use CTRL + C
+ */
+exports.OS = {
+    LINUX: 'LINUX',
+    MAC: 'MAC',
+    WINDOWS: 'WINDOWS'
+};
+
+var ua = navigator.userAgent;
+var av = navigator.appVersion;
+
+/** Is the user using a browser that identifies itself as Linux */
+exports.isLinux = av.indexOf("Linux") >= 0;
+
+/** Is the user using a browser that identifies itself as Windows */
+exports.isWindows = av.indexOf("Win") >= 0;
+
+/** Is the user using a browser that identifies itself as WebKit */
+exports.isWebKit = parseFloat(ua.split("WebKit/")[1]) || undefined;
+
+/** Is the user using a browser that identifies itself as Chrome */
+exports.isChrome = parseFloat(ua.split("Chrome/")[1]) || undefined;
+
+/** Is the user using a browser that identifies itself as Mac OS */
+exports.isMac = av.indexOf("Macintosh") >= 0;
+
+/* Is this Firefox or related? */
+exports.isMozilla = av.indexOf('Gecko/') >= 0;
+
+if (ua.indexOf("AdobeAIR") >= 0) {
+    exports.isAIR = 1;
+}
+
+/**
+ * Is the user using a browser that identifies itself as Safari
+ * See also:
+ * - http://developer.apple.com/internet/safari/faq.html#anchor2
+ * - http://developer.apple.com/internet/safari/uamatrix.html
+ */
+var index = Math.max(av.indexOf("WebKit"), av.indexOf("Safari"), 0);
+if (index && !exports.isChrome) {
+    // try to grab the explicit Safari version first. If we don't get
+    // one, look for less than 419.3 as the indication that we're on something
+    // "Safari 2-ish".
+    exports.isSafari = parseFloat(av.split("Version/")[1]);
+    if (!exports.isSafari || parseFloat(av.substr(index + 7)) <= 419.3) {
+        exports.isSafari = 2;
+    }
+}
+
+if (ua.indexOf("Gecko") >= 0 && !exports.isWebKit) {
+    exports.isMozilla = parseFloat(av);
+}
+
+/**
+ * Return a exports.OS constant
+ */
+exports.getOS = function() {
+    if (exports.isMac) {
+        return exports.OS['MAC'];
+    } else if (exports.isLinux) {
+        return exports.OS['LINUX'];
+    } else {
+        return exports.OS['WINDOWS'];
+    }
+};
+
+/** Returns true if the DOM element "b" is inside the element "a". */
+if (typeof(document) !== 'undefined' && document.compareDocumentPosition) {
+    exports.contains = function(a, b) {
+        return a.compareDocumentPosition(b) & 16;
+    };
+} else {
+    exports.contains = function(a, b) {
+        return a !== b && (a.contains ? a.contains(b) : true);
+    };
+}
+
+/**
+ * Prevents propagation and clobbers the default action of the passed event
+ */
+exports.stopEvent = function(ev) {
+    ev.preventDefault();
+    ev.stopPropagation();
+};
+
+/**
+ * Create a random password of the given length (default 16 chars)
+ */
+exports.randomPassword = function(length) {
+    length = length || 16;
+    var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    var pass = "";
+    for (var x = 0; x < length; x++) {
+        var charIndex = Math.floor(Math.random() * chars.length);
+        pass += chars.charAt(charIndex);
+    }
+    return pass;
+};
+
+/**
+ * Is the passed object free of members, i.e. are there any enumerable
+ * properties which the objects claims as it's own using hasOwnProperty()
+ */
+exports.isEmpty = function(object) {
+    for (var x in object) {
+        if (object.hasOwnProperty(x)) {
+            return false;
+        }
+    }
+    return true;
+};
+
+/**
+ * Does the name of a project indicate that it is owned by someone else
+ * TODO: This is a major hack. We really should have a File object that include
+ * separate owner information.
+ */
+exports.isMyProject = function(project) {
+    return project.indexOf("+") == -1;
+};
+
+/**
+ * Format a date as dd MMM yyyy
+ */
+exports.formatDate = function (date) {
+    if (!date) {
+        return "Unknown";
+    }
+    return date.getDate() + " " +
+        exports.formatDate.shortMonths[date.getMonth()] + " " +
+        date.getFullYear();
+};
+
+/**
+ * Month data for exports.formatDate
+ */
+exports.formatDate.shortMonths = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ];
+
+/**
+ * Add a CSS class to the list of classes on the given node
+ */
+exports.addClass = function(node, className) {
+    var parts = className.split(/\s+/);
+    var cls = " " + node.className + " ";
+    for (var i = 0, len = parts.length, c; i < len; ++i) {
+        c = parts[i];
+        if (c && cls.indexOf(" " + c + " ") < 0) {
+            cls += c + " ";
+        }
+    }
+    node.className = cls.trim();
+};
+
+/**
+ * Remove a CSS class from the list of classes on the given node
+ */
+exports.removeClass = function(node, className) {
+    var cls;
+    if (className !== undefined) {
+        var parts = className.split(/\s+/);
+        cls = " " + node.className + " ";
+        for (var i = 0, len = parts.length; i < len; ++i) {
+            cls = cls.replace(" " + parts[i] + " ", " ");
+        }
+        cls = cls.trim();
+    } else {
+        cls = "";
+    }
+    if (node.className != cls) {
+        node.className = cls;
+    }
+};
+
+/**
+ * Add or remove a CSS class from the list of classes on the given node
+ * depending on the value of <tt>include</tt>
+ */
+exports.setClass = function(node, className, include) {
+    if (include) {
+        exports.addClass(node, className);
+    } else {
+        exports.removeClass(node, className);
+    }
+};
+
+/**
+ * Is the passed object either null or undefined (using ===)
+ */
+exports.none = function(obj) {
+    return obj === null || obj === undefined;
+};
+
+/**
+ * Creates a clone of the passed object.  This function can take just about
+ * any type of object and create a clone of it, including primitive values
+ * (which are not actually cloned because they are immutable).
+ * If the passed object implements the clone() method, then this function
+ * will simply call that method and return the result.
+ *
+ * @param object {Object} the object to clone
+ * @param deep {Boolean} do a deep clone?
+ * @returns {Object} the cloned object
+ */
+exports.clone = function(object, deep) {
+    if (Array.isArray(object) && !deep) {
+        return object.slice();
+    }
+
+    if (typeof object === 'object' || Array.isArray(object)) {
+        if (object === null) {
+            return null;
+        }
+
+        var reply = (Array.isArray(object) ? [] : {});
+        for (var key in object) {
+            if (deep && (typeof object[key] === 'object'
+                            || Array.isArray(object[key]))) {
+                reply[key] = exports.clone(object[key], true);
+            } else {
+                 reply[key] = object[key];
+            }
+        }
+        return reply;
+    }
+
+    if (object && typeof(object.clone) === 'function') {
+        return object.clone();
+    }
+
+    // That leaves numbers, booleans, undefined. Doesn't it?
+    return object;
+};
+
+
+/**
+ * Helper method for extending one object with another
+ * Copies all properties from source to target. Returns the extended target
+ * object.
+ * Taken from John Resig, http://ejohn.org/blog/javascript-getters-and-setters/.
+ */
+exports.mixin = function(a, b) {
+    for (var i in b) {
+        var g = b.__lookupGetter__(i);
+        var s = b.__lookupSetter__(i);
+
+        if (g || s) {
+            if (g) {
+                a.__defineGetter__(i, g);
+            }
+            if (s) {
+                a.__defineSetter__(i, s);
+            }
+        } else {
+            a[i] = b[i];
+        }
+    }
+
+    return a;
+};
+
+/**
+ * Basically taken from Sproutcore.
+ * Replaces the count items from idx with objects.
+ */
+exports.replace = function(arr, idx, amt, objects) {
+    return arr.slice(0, idx).concat(objects).concat(arr.slice(idx + amt));
+};
+
+/**
+ * Return true if the two frames match.  You can also pass only points or sizes.
+ * @param r1 {Rect} the first rect
+ * @param r2 {Rect} the second rect
+ * @param delta {Float} an optional delta that allows for rects that do not match exactly. Defaults to 0.1
+ * @returns {Boolean} true if rects match
+ */
+exports.rectsEqual = function(r1, r2, delta) {
+    if (!r1 || !r2) {
+        return r1 == r2;
+    }
+
+    if (!delta && delta !== 0) {
+        delta = 0.1;
+    }
+
+    if ((r1.y != r2.y) && (Math.abs(r1.y - r2.y) > delta)) {
+        return false;
+    }
+
+    if ((r1.x != r2.x) && (Math.abs(r1.x - r2.x) > delta)) {
+        return false;
+    }
+
+    if ((r1.width != r2.width) && (Math.abs(r1.width - r2.width) > delta)) {
+        return false;
+    }
+
+    if ((r1.height != r2.height) && (Math.abs(r1.height - r2.height) > delta)) {
+        return false;
+    }
+
+    return true;
+};
+
+});
+
+bespin.tiki.module("bespin:util/scratchcanvas",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var util = require('bespin:util/util');
+
+/**
+ * A invisible singleton canvas on the page, useful whenever a canvas context
+ * is needed (e.g. for computing text sizes), but an actual canvas isn't handy
+ * at the moment.
+ * @constructor
+ */
+var ScratchCanvas = function() {
+    this._canvas = document.getElementById('bespin-scratch-canvas');
+
+    // It's possible that another ScratchCanvas instance in another sandbox
+    // exists on the page. If so, we assume they're compatible, and use
+    // that one.
+    if (util.none(this._canvas)) {
+        this._canvas = document.createElement('canvas');
+        this._canvas.id = 'bespin-scratch-canvas';
+        this._canvas.width = 400;
+        this._canvas.height = 300;
+        this._canvas.style.position = 'absolute';
+        this._canvas.style.top = "-10000px";
+        this._canvas.style.left = "-10000px";
+        document.body.appendChild(this._canvas);
+    }
+};
+
+ScratchCanvas.prototype.getContext = function() {
+    return this._canvas.getContext('2d');
+};
+
+/**
+ * Returns the width in pixels of the given string ("M", by default) in the
+ * given font.
+ */
+ScratchCanvas.prototype.measureStringWidth = function(font, str) {
+    if (util.none(str)) {
+        str = "M";
+    }
+
+    var context = this.getContext();
+    context.save();
+    context.font = font;
+    var width = context.measureText(str).width;
+    context.restore();
+    return width;
+};
+
+var singleton = null;
+
+/**
+ * Returns the instance of the scratch canvas on the page, creating it if
+ * necessary.
+ */
+exports.get = function() {
+    if (singleton === null) {
+        singleton = new ScratchCanvas();
+    }
+    return singleton;
+};
+
+});
+
+bespin.tiki.module("bespin:plugins",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+require("globals");
+
+var Promise = require("promise").Promise;
+var group = require("promise").group;
+var builtins = require("builtins");
+var console = require("console").console;
+var util = require("util/util");
+var Trace = require("util/stacktrace").Trace;
+var proxy = require('proxy');
+
+var r = require;
+
+var loader = require.loader;
+var browser = loader.sources[0];
+
+var USER_DEACTIVATED    = 'USER';
+var DEPENDS_DEACTIVATED = 'DEPENDS';
+
+/**
+ * Split an extension pointer from module/path#objectName into an object of the
+ * type { modName:"module/path", objName:"objectName" } using a pluginName
+ * as the base to which roots the pointer
+ */
+var _splitPointer = function(pluginName, pointer) {
+    if (!pointer) {
+        return undefined;
+    }
+
+    var parts = pointer.split("#");
+    var modName;
+
+    // this allows syntax like #foo
+    // which is equivalent to PluginName:index#foo
+    if (parts[0]) {
+        modName = pluginName + ":" + parts[0];
+    } else {
+        modName = pluginName;
+    }
+
+    return {
+        modName: modName,
+        objName: parts[1]
+    };
+};
+
+var _retrieveObject = function(pointerObj) {
+    var module = r(pointerObj.modName);
+    if (pointerObj.objName) {
+        return module[pointerObj.objName];
+    }
+    return module;
+};
+
+/**
+ * An Extension represents some code that can be lazy-loaded when needed.
+ * @constructor
+ */
+exports.Extension = function(metadata) {
+    this.pluginName = null;
+
+    for (property in metadata) {
+        if (metadata.hasOwnProperty(property)) {
+            this[property] = metadata[property];
+        }
+    }
+
+    this._observers = [];
+};
+
+exports.Extension.prototype = {
+    /**
+     * Asynchronously load the actual code represented by this Extension
+     * @param callback Function to call when the load has finished (deprecated)
+     * @param property Extension property to load (default 'pointer')
+     * @returns A promise to be fulfilled on completion. Preferred over using the
+     * <tt>callback</tt> parameter.
+     */
+    load: function(callback, property, catalog) {
+        catalog = catalog || exports.catalog;
+        var promise = new Promise();
+
+        var onComplete = function(func) {
+            if (callback) {
+                callback(func);
+            }
+            promise.resolve(func);
+        };
+
+        var pointerVal = this[property || 'pointer'];
+        if (util.isFunction(pointerVal)) {
+            onComplete(pointerVal);
+            return promise;
+        }
+
+        var pointerObj = _splitPointer(this.pluginName, pointerVal);
+
+        if (!pointerObj) {
+            console.error('Extension cannot be loaded because it has no \'pointer\'');
+            console.log(this);
+
+            promise.reject(new Error('Extension has no \'pointer\' to call'));
+            return promise;
+        }
+
+        var pluginName = this.pluginName;
+        catalog.loadPlugin(pluginName).then(function() {
+            require.ensure(pointerObj.modName, function() {
+                var func = _retrieveObject(pointerObj);
+                onComplete(func);
+
+                // TODO: consider caching 'func' to save looking it up again
+                // Something like: this._setPointer(property, data);
+            });
+        }, function(err) {
+            console.error('Failed to load plugin ', pluginName, err);
+        });
+
+        return promise;
+    },
+
+    /**
+     * Loads this extension and passes the result to the callback.
+     * Any time this extension changes, the callback is called with the new value.
+     * Note that if this extension goes away, the callback will be called with
+     * undefined.
+     * <p>observingPlugin is required, because if that plugin is torn down,
+     * all of its observing callbacks need to be torn down as well.
+     */
+    observe: function(observingPlugin, callback, property) {
+        this._observers.push({
+            plugin: observingPlugin,
+            callback: callback,
+            property: property
+        });
+        this.load(callback, property);
+    },
+
+    /**
+     * Returns the name of the plugin that provides this extension.
+     */
+    getPluginName: function() {
+        return this.pluginName;
+    },
+
+    /**
+     *
+     */
+    _getLoaded: function(property) {
+        var pointerObj = this._getPointer(property);
+        return _retrieveObject(pointerObj);
+    }
+};
+
+/**
+ * An ExtensionPoint is a get of Extensions grouped under the same name
+ * for fast access.
+ * @constructor
+ */
+exports.ExtensionPoint = function(name, catalog) {
+    this.name = name;
+    this.catalog = catalog;
+
+    this.pluginName = undefined;
+    this.indexOn = undefined;
+
+    this.extensions = [];
+    this.handlers = [];
+};
+
+/**
+ * Implementation of ExtensionPoint
+ */
+exports.ExtensionPoint.prototype = {
+    /**
+    * Retrieves the list of plugins which provide extensions
+    * for this extension point.
+    */
+    getImplementingPlugins: function() {
+        var pluginSet = {};
+        this.extensions.forEach(function(ext) {
+            pluginSet[ext.pluginName] = true;
+        });
+        var matches = Object.keys(pluginSet);
+        matches.sort();
+        return matches;
+    },
+
+    /**
+     * Get the name of the plugin that defines this extension point.
+     */
+    getDefiningPluginName: function() {
+        return this.pluginName;
+    },
+
+    /**
+     * If we are keeping an index (an indexOn property is set on the
+     * extension point), you can look up an extension by key.
+     */
+    getByKey: function(key) {
+        var indexOn = this.indexOn;
+
+        if (!indexOn) {
+            return undefined;
+        }
+
+        for (var i = 0; i < this.extensions.length; i++) {
+            if (this.extensions[i][indexOn] == key) {
+                return this.extensions[i];
+            }
+        }
+        return undefined;
+    },
+
+    register: function(extension) {
+        var catalog = this.catalog;
+        this.extensions.push(extension);
+        this.handlers.forEach(function(handler) {
+            if (handler.register) {
+                handler.load(function(register) {
+                    if (!register) {
+                        console.error('missing register function for pluginName=', extension.pluginName, ", extension=", extension.name);
+                    } else {
+                         register(extension, catalog);
+                    }
+                }, "register", catalog);
+            }
+        });
+    },
+
+    unregister: function(extension) {
+        var catalog = this.catalog;
+        this.extensions.splice(this.extensions.indexOf(extension), 1);
+        this.handlers.forEach(function(handler) {
+            if (handler.unregister) {
+                handler.load(function(unregister) {
+                    if (!unregister) {
+                        console.error('missing unregister function for pluginName=', extension.pluginName, ", extension=", extension.name);
+                    } else {
+                         unregister(extension, catalog);
+                    }
+                }, "unregister", catalog);
+            }
+        });
+    },
+
+    /**
+     * Order the extensions by a plugin order.
+     */
+    orderExtensions: function(pluginOrder) {
+        var orderedExt = [];
+
+        for (var i = 0; i < pluginOrder.length; i++) {
+            var n = 0;
+            while (n != this.extensions.length) {
+                if (this.extensions[n].pluginName === pluginOrder[i]) {
+                    orderedExt.push(this.extensions[n]);
+                    this.extensions.splice(n, 1);
+                } else {
+                    n ++;
+                }
+            }
+        }
+
+        this.extensions = orderedExt.concat(this.extensions);
+    }
+};
+
+/**
+ * A Plugin is a set of Extensions that are loaded as a unit
+ * @constructor
+ */
+exports.Plugin = function(metadata) {
+    // Should be provided in the metadata
+    this.catalog = null;
+    this.name = null;
+    this.provides = [];
+    this.stylesheets = [];
+    this.reloadURL = null;
+    this.reloadPointer = null;
+
+    for (property in metadata) {
+        if (metadata.hasOwnProperty(property)) {
+            this[property] = metadata[property];
+        }
+    }
+};
+
+/**
+ * Implementation of Plugin
+ */
+exports.Plugin.prototype = {
+    register: function() {
+        this.provides.forEach(function(extension) {
+            var ep = this.catalog.getExtensionPoint(extension.ep, true);
+            ep.register(extension);
+        }, this);
+    },
+
+    unregister: function() {
+        this.provides.forEach(function(extension) {
+            var ep = this.catalog.getExtensionPoint(extension.ep, true);
+            ep.unregister(extension);
+        }, this);
+    },
+
+    _getObservers: function() {
+        var result = {};
+        this.provides.forEach(function(extension) {
+            console.log('ep: ', extension.ep);
+            console.log(extension._observers);
+            result[extension.ep] = extension._observers;
+        });
+        return result;
+    },
+
+    /**
+     * Figure out which plugins depend on a given plugin. This
+     * will allow the reload behavior to unregister/reregister
+     * all of the plugins that depend on the one being reloaded.
+     * If firstLevelOnly is true, only direct dependent plugins are listed.
+     */
+    _findDependents: function(pluginList, dependents, firstLevelOnly) {
+        var pluginName = this.name;
+        var self = this;
+        pluginList.forEach(function(testPluginName) {
+            if (testPluginName == pluginName) {
+                return;
+            }
+            var plugin = self.catalog.plugins[testPluginName];
+            if (plugin && plugin.dependencies) {
+                for (dependName in plugin.dependencies) {
+                    if (dependName == pluginName && !dependents[testPluginName]) {
+                        dependents[testPluginName] = {
+                            keepModule: false
+                        };
+                        if (!firstLevelOnly) {
+                            plugin._findDependents(pluginList, dependents);
+                        }
+                    }
+                }
+            }
+        });
+    },
+
+    /**
+     * Removes the plugin from Tiki's registries.
+     * As with the new multiple Bespins, this only clears the current sandbox.
+     */
+    _cleanup: function(leaveLoader) {
+        // Remove the css files.
+        this.stylesheets.forEach(function(stylesheet) {
+            var links = document.getElementsByTagName('link');
+            for (var i = 0; i < links.length; i++) {
+                if (links[i].href.indexOf(stylesheet.url) != -1) {
+                    links[i].parentNode.removeChild(links[i]);
+                    break;
+                }
+            }
+        });
+
+        // Remove all traces of the plugin.
+        var pluginName = this.name;
+
+        var nameMatch = new RegExp("^" + pluginName + '$');
+        var moduleMatch = new RegExp('^::' + pluginName + ':');
+        var packageMatch = new RegExp("^::" + pluginName + '$');
+
+        var sandbox = require.sandbox;
+        var loader = require.loader;
+        var source = browser;
+
+        if (!leaveLoader) {
+            // Clear the loader.
+            _removeFromObject(moduleMatch, loader.factories);
+            _removeFromObject(packageMatch, loader.canonicalIds);
+            _removeFromObject(packageMatch, loader.canonicalPackageIds);
+            _removeFromObject(packageMatch, loader.packageSources);
+            _removeFromObject(packageMatch, loader.packages);
+
+            // Clear the source.
+            _removeFromObject(nameMatch, source.packageInfoByName);
+            _removeFromObject(moduleMatch, source.factories);
+            _removeFromObject(moduleMatch, source.scriptActions);
+            _removeFromObject(moduleMatch, source.stylesheetActions);
+            _removeFromObject(packageMatch, source.packages);
+            _removeFromObject(packageMatch, source.ensureActions);
+            _removeFromObject(packageMatch, source.packageInfoById);
+        }
+
+        // Clear the sandbox.
+        _removeFromObject(moduleMatch, sandbox.exports);
+        _removeFromObject(moduleMatch, sandbox.modules);
+        _removeFromObject(moduleMatch, sandbox.usedExports);
+    },
+
+    /**
+     * reloads the plugin and reinitializes all
+     * dependent plugins
+     */
+    reload: function(callback) {
+        // TODO: Broken. Needs to be updated to the latest Tiki.
+
+        // All reloadable plugins will have a reloadURL
+        if (!this.reloadURL) {
+            return;
+        }
+
+        if (this.reloadPointer) {
+            var pointer = _splitPointer(this.name, this.reloadPointer);
+            func = _retrieveObject(pointer);
+            if (func) {
+                func();
+            } else {
+                console.error("Reload function could not be loaded. Aborting reload.");
+                return;
+            }
+        }
+
+        // find all of the dependents recursively so that
+        // they can all be unregistered
+        var dependents = {};
+
+        var pluginList = Object.keys(this.catalog.plugins);
+
+        this._findDependents(pluginList, dependents);
+
+        var reloadDescription = {
+            pluginName: this.name,
+            dependents: dependents
+        };
+
+        for (var dependName in dependents) {
+            var plugin = this.catalog.plugins[dependName];
+            if (plugin.preRefresh) {
+                var parts = _splitPointer(dependName, plugin.preRefresh);
+                func = _retrieveObject(parts);
+                if (func) {
+                    // the preRefresh call can return an object
+                    // that includes attributes:
+                    // keepModule (true to keep the module object)
+                    // callPointer (pointer to call at the end of reloading)
+                    dependents[dependName] = func(reloadDescription);
+                }
+            }
+        }
+
+        // notify everyone that this plugin is going away
+        this.unregister();
+
+        for (dependName in dependents) {
+            this.catalog.plugins[dependName].unregister();
+        }
+
+        this._cleanup(this.name);
+
+        // clear the sandbox of modules from all of the dependent plugins
+        var fullModList = [];
+        var sandbox = require.sandbox;
+
+        var modulesKey = Object.keys(sandbox.modules);
+        var i = modulesKey.length;
+        var dependRegexes = [];
+        for (dependName in dependents) {
+            // check to see if the module stated that it shouldn't be
+            // refreshed
+            if (!dependents[dependName].keepModule) {
+                dependRegexes.push(new RegExp("^::" + dependName + ":"));
+            }
+        }
+
+        var nameMatch = new RegExp("^::" + this.name + ":");
+
+        while (--i >= 0) {
+            var item = modulesKey[i];
+            if (nameMatch.exec(item)) {
+                fullModList.push(item);
+            } else {
+                var j = dependRegexes.length;
+                while (--j >= 0) {
+                    if (dependRegexes[j].exec(item)) {
+                        fullModList.push(item);
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Remove the modules of the dependent plugins from the sandbox.
+        fullModList.forEach(function(item) {
+            delete sandbox.exports[item];
+            delete sandbox.modules[item];
+            delete sandbox.usedExports[item];
+        });
+
+        // reload the plugin metadata
+        var onLoad = function() {
+            // actually load the plugin, so that it's ready
+            // for any dependent plugins
+            this.catalog.loadPlugin(this.name).then(function() {
+                // re-register all of the dependent plugins
+                for (dependName in dependents) {
+                    this.catalog.plugins[dependName].register();
+                }
+
+                for (dependName in dependents) {
+                    if (dependents[dependName].callPointer) {
+                        var parts = _splitPointer(dependName,
+                            dependents[dependName].callPointer);
+                        var func = _retrieveObject(parts);
+                        if (func) {
+                            func(reloadDescription);
+                        }
+                    }
+                }
+
+                if (callback) {
+                    // at long last, reloading is done.
+                    callback();
+                }
+            }.bind(this));
+        }.bind(this);
+
+        // TODO: There should be more error handling then just logging
+        // to the command line.
+        var onError = function() {
+            console.error('Failed to load metadata from ' + this.reloadURL);
+        }.bind(this);
+
+        this.catalog.loadMetadataFromURL(this.reloadURL).then(onLoad, onError);
+    }
+};
+
+var _setPath = function(root, path, value) {
+    var segments = path.split('.');
+    var current = root;
+    var top = segments.length - 1;
+    if (top > 0) {
+        for (var i = 0; i < top; i++) {
+            current = current[segments[i]];
+        }
+    }
+    current[top] = value;
+};
+
+exports.Catalog = function() {
+    this.points = {};
+    this.plugins = {};
+    this.metadata = {};
+
+    this.USER_DEACTIVATED = USER_DEACTIVATED;
+    this.DEPENDS_DEACTIVATED = DEPENDS_DEACTIVATED;
+
+    // Stores the deactivated plugins. Plugins deactivated by the user have the
+    // value USER_DEACTIVATED. If a plugin is deactivated because a required
+    // plugin is deactivated, then the value is a DEPENDS_DEACTIVATED.
+    this.deactivatedPlugins = {};
+    this._extensionsOrdering = [];
+    this.instances = {};
+    this.instancesLoadPromises = {};
+    this._objectDescriptors = {};
+
+    // Stores the child catalogs.
+    this.children = [];
+
+    // set up the "extensionpoint" extension point.
+    // it indexes on name.
+    var ep = this.getExtensionPoint("extensionpoint", true);
+    ep.indexOn = "name";
+    this.registerMetadata(builtins.metadata);
+};
+
+exports.Catalog.prototype = {
+
+    /**
+     * Returns true if the extension is shared.
+     */
+    shareExtension: function(ext) {
+        return this.plugins[ext.pluginName].share;
+    },
+
+    /**
+     * Returns true, if the plugin is loaded (checks if there is a module in the
+     * current sandbox).
+     */
+    isPluginLoaded: function(pluginName) {
+        var usedExports = Object.keys(require.sandbox.usedExports);
+
+        return usedExports.some(function(item) {
+            return item.indexOf('::' + pluginName + ':') == 0;
+        });
+    },
+
+    /**
+     * Registers information about an instance that will be tracked
+     * by the catalog. The first parameter is the name used for looking up
+     * the object. The descriptor should contain:
+     * - factory (optional): name of the factory extension used to create the
+     *                       object. defaults to the same value as the name
+     *                       property.
+     * - arguments (optional): array that is passed in if the factory is a
+     *                      function.
+     * - objects (optional): object that describes other objects that are
+     *                      required when constructing this one (see below)
+     *
+     * The objects object defines objects that must be created before this
+     * one and how they should be passed in. The key defines how they
+     * are passed in, and the value is the name of the object to pass in.
+     * You define how they are passed in relative to the arguments
+     * array, using a very simple interface of dot separated keys.
+     * For example, if you have an arguments array of [null, {foo: null}, "bar"]
+     * you can have an object array like this:
+     * {
+     *  "0": "myCoolObject",
+     *  "1.foo": "someOtherObject"
+     * }
+     *
+     * which will result in arguments like this:
+     * [myCoolObject, {foo: someOtherObject}, "bar"]
+     * where myCoolObject and someOtherObject are the actual objects
+     * created elsewhere.
+     *
+     * If the plugin containing the factory is reloaded, the object will
+     * be recreated. The object will also be recreated if objects passed in
+     * are reloaded.
+     *
+     * This method returns nothing and does not actually create the objects.
+     * The objects are created via the createObject method and retrieved
+     * via the getObject method.
+     */
+    registerObject: function(name, descriptor) {
+        this._objectDescriptors[name] = descriptor;
+    },
+
+    /**
+     * Stores an object directly in the instance cache. This should
+     * not generally be used because reloading cannot work with
+     * these objects.
+     */
+    _setObject: function(name, obj) {
+        this.instances[name] = obj;
+    },
+
+    /**
+     * Creates an object with a previously registered descriptor.
+     *
+     * Returns a promise that will be resolved (with the created object)
+     * once the object has been made. The promise will be resolved
+     * immediately if the instance is already there.
+     *
+     * throws an exception if the object is not registered or if
+     * the factory cannot be found.
+     */
+    createObject: function(name) {
+        // console.log("Creating", name);
+
+        // If there is already a loading promise for this instance, then
+        // return this one.
+        if (this.instancesLoadPromises[name] !== undefined) {
+            // console.log("Already have one (it's very nice)");
+            return this.instancesLoadPromises[name];
+        }
+
+        var descriptor = this._objectDescriptors[name];
+        if (descriptor === undefined) {
+            throw new Error('Tried to create object "' + name +
+                '" but that object is not registered.');
+        }
+
+        var factoryName = descriptor.factory || name;
+        var ext = this.getExtensionByKey("factory", factoryName);
+        if (ext === undefined) {
+            throw new Error('When creating object "' + name +
+                '", there is no factory called "' + factoryName +
+                '" available."');
+        }
+
+        // If this is a child catalog and the extension is shared, then
+        // as the master/parent catalog to create the object.
+        if (this.parent && this.shareExtension(ext)) {
+            return this.instancesLoadPromises[name] = this.parent.createObject(name);
+        }
+
+        // Otherwise create a new loading promise (which is returned at the
+        // end of the function) and create the instance.
+        var pr = this.instancesLoadPromises[name] = new Promise();
+
+        var factoryArguments = descriptor.arguments || [];
+        var argumentPromises = [];
+        if (descriptor.objects) {
+            var objects = descriptor.objects;
+            for (var key in objects) {
+                var objectName = objects[key];
+                var ropr = this.createObject(objectName);
+                argumentPromises.push(ropr);
+                // key is changing, so we need to hang onto the
+                // current value
+                ropr.location = key;
+                ropr.then(function(obj) {
+                    _setPath(factoryArguments, ropr.location, obj);
+                });
+            }
+        }
+
+        group(argumentPromises).then(function() {
+            ext.load().then(function(factory) {
+                // console.log("Got factory for ", name);
+                var action = ext.action;
+                var obj;
+
+                if (action === "call") {
+                    obj = factory.apply(factory, factoryArguments);
+                } else if (action === "new") {
+                    if (factoryArguments.length > 1) {
+                        pr.reject(new Error('For object ' + name + ', create a simple factory function and change the action to call because JS cannot handle this case.'));
+                        return;
+                    }
+                    obj = new factory(factoryArguments[0]);
+                } else if (action === "value") {
+                    obj = factory;
+                } else {
+                    pr.reject(new Error("Create action must be call|new|value. " +
+                            "Found" + action));
+                    return;
+                }
+
+                this.instances[name] = obj;
+                pr.resolve(obj);
+            }.bind(this));
+        }.bind(this));
+
+        return pr;
+    },
+
+    /**
+     * Retrieve a registered object. Returns undefined
+     * if the instance has not been created.
+     */
+    getObject: function(name) {
+        return this.instances[name] || (this.parent ? this.parent.getObject(name) : undefined);
+    },
+
+    /** Retrieve an extension point object by name, optionally creating it if it
+    * does not exist.
+    */
+    getExtensionPoint: function(name, create) {
+        if (create && this.points[name] === undefined) {
+            this.points[name] = new exports.ExtensionPoint(name, this);
+        }
+        return this.points[name];
+    },
+
+    /**
+     * Retrieve the list of extensions for the named extension point.
+     * If none are defined, this will return an empty array.
+     */
+    getExtensions: function(name) {
+        var ep = this.getExtensionPoint(name);
+        if (ep === undefined) {
+            return [];
+        }
+        return ep.extensions;
+    },
+
+    /**
+     * Sets the order of the plugin's extensions. Note that this orders *only*
+     * Extensions and nothing else (load order of CSS files e.g.)
+     */
+    orderExtensions: function(pluginOrder) {
+        pluginOrder = pluginOrder || this._extensionsOrdering;
+
+        for (name in this.points) {
+            this.points[name].orderExtensions(pluginOrder);
+        }
+        this._extensionsOrdering = pluginOrder;
+    },
+
+    /**
+     * Returns the current plugin exentions ordering.
+     */
+    getExtensionsOrdering: function() {
+        return this._extensionsOrdering;
+    },
+
+    /**
+     * Look up an extension in an indexed extension point by the given key. If
+     * the extension point or the key are unknown, undefined will be returned.
+     */
+    getExtensionByKey: function(name, key) {
+        var ep = this.getExtensionPoint(name);
+        if (ep === undefined) {
+            return undefined;
+        }
+
+        return ep.getByKey(key);
+    },
+
+    // Topological sort algorithm from Wikipedia, credited to Tarjan 1976.
+    //     http://en.wikipedia.org/wiki/Topological_sort
+    _toposort: function(metadata) {
+        var sorted = [];
+        var visited = {};
+        var visit = function(key) {
+            if (key in visited || !(key in metadata)) {
+                return;
+            }
+
+            visited[key] = true;
+            var depends = metadata[key].dependencies;
+            if (!util.none(depends)) {
+                for (var dependName in depends) {
+                    visit(dependName);
+                }
+            }
+
+            sorted.push(key);
+        };
+
+        for (var key in metadata) {
+            visit(key);
+        }
+
+        return sorted;
+    },
+
+    /**
+     * Register new metadata. If the current catalog is not the master catalog,
+     * then the master catalog registerMetadata function is called. The master
+     * catalog then makes some basic operations on the metadata and calls the
+     * _registerMetadata function on all the child catalogs and for itself as
+     * well.
+     */
+    registerMetadata: function(metadata) {
+        // If we are the master catalog, then store the metadata.
+        if (this.parent) {
+            this.parent.registerMetadata(metadata);
+        } else {
+            for (var pluginName in metadata) {
+                var md = metadata[pluginName];
+                if (md.errors) {
+                    console.error("Plugin ", pluginName, " has errors:");
+                    md.errors.forEach(function(error) {
+                        console.error(error);
+                    });
+                    delete metadata[pluginName];
+                    continue;
+                }
+
+                if (md.dependencies) {
+                    md.depends = Object.keys(md.dependencies);
+                }
+
+                md.name = pluginName;
+                md.version = null;
+
+                var packageId = browser.canonicalPackageId(pluginName);
+                if (packageId === null) {
+                    browser.register('::' + pluginName, md);
+                    continue;
+                }
+            }
+
+            // Save the new metadata.
+            util.mixin(this.metadata, util.clone(metadata, true));
+
+            // Tell every child about the new metadata.
+            this.children.forEach(function(child) {
+                child._registerMetadata(util.clone(metadata, true));
+            });
+            // Register the metadata in the master catalog as well.
+            this._registerMetadata(util.clone(metadata, true));
+        }
+    },
+
+    /**
+     * Registers plugin metadata. See comments inside of the function.
+     */
+    _registerMetadata: function(metadata) {
+        var pluginName, plugin;
+        var plugins = this.plugins;
+
+        this._toposort(metadata).forEach(function(name) {
+            // If the plugin is already registered.
+            if (this.plugins[name]) {
+                // Check if the plugin is loaded.
+                if (this.isPluginLoaded(name)) {
+                    // If the plugin is loaded, then the metadata/plugin/extensions
+                    // have to stay the way they are at the moment.
+                    return;
+                } else {
+                    // If the plugin is not loaded and the plugin is already
+                    // registerd, then remove the plugin.
+                    //
+                    // Reason: As new metadata arrives, this might also mean,
+                    // that the factory in the tiki.loader has changed. If the
+                    // old plugins/extensions would stay, they might not fit to
+                    // the new factory. As such, the plugin has to be updated,
+                    // which is achieved by unregister the plugin and then add it
+                    // later in this function again.
+                    var plugin = this.plugins[name];
+                    plugin.unregister();
+                }
+            }
+
+            var md = metadata[name];
+            var activated = !(this.deactivatedPlugins[name]);
+
+            // Check if all plugins this one depends on are activated as well.
+            if (activated && md.depends && md.depends.length != 0) {
+                var works = md.depends.some(function(name) {
+                    return !(this.deactivatedPlugins[name]);
+                }, this);
+                // At least one depending plugin is not activated -> this plugin
+                // can't be activated. Mark this plugin as deactivated.
+                if (!works) {
+                    this.deactivatedPlugins[name] = DEPENDS_DEACTIVATED;
+                    activated = false;
+                }
+            }
+
+            md.catalog = this;
+            md.name = name;
+            plugin = new exports.Plugin(md);
+            plugins[name] = plugin;
+
+            // Skip if the plugin is not activated.
+            if (md.provides) {
+                var provides = md.provides;
+                for (var i = 0; i < provides.length; i++) {
+                    var extension = new exports.Extension(provides[i]);
+                    extension.pluginName = name;
+                    provides[i] = extension;
+
+                    var epname = extension.ep;
+                    // This special treatment is required for the extension point
+                    // definition. TODO: Refactor the code so that this is no
+                    // longer necessary.
+                    if (epname == "extensionpoint" && extension.name == 'extensionpoint') {
+                        exports.registerExtensionPoint(extension, this, false);
+                    } else {
+                        // Only register the extension if the plugin is activated.
+                        // TODO: This should handle extension points and
+                        if (activated) {
+                            var ep = this.getExtensionPoint(extension.ep, true);
+                            ep.register(extension);
+
+                        // Even if the plugin is deactivated, the ep need to
+                        // be registered. Call the registerExtensionPoint
+                        // function manually, but pass as third argument 'true'
+                        // which indicates, that the plugin is deactivated and
+                        // prevents the handlers on the ep to get registered.
+                        } else if (epname == "extensionpoint") {
+                            exports.registerExtensionPoint(extension, this, true);
+                        }
+                    }
+                }
+            } else {
+                md.provides = [];
+            }
+        }, this);
+
+        for (pluginName in metadata) {
+            this._checkLoops(pluginName, plugins, []);
+        }
+
+        this.orderExtensions();
+    },
+
+    /**
+     * Loads the named plugin, returning a promise called
+     * when the plugin is loaded. This function is a convenience
+     * for unusual situations and debugging only. Generally,
+     * you should load plugins by calling load() on an Extension
+     * object.
+     */
+    loadPlugin: function(pluginName) {
+        var pr = new Promise();
+        var plugin = this.plugins[pluginName];
+        if (plugin.objects) {
+            var objectPromises = [];
+            plugin.objects.forEach(function(objectName) {
+                objectPromises.push(this.createObject(objectName));
+            }.bind(this));
+            group(objectPromises).then(function() {
+                require.ensurePackage(pluginName, function() {
+                    pr.resolve();
+                });
+            });
+        } else {
+            require.ensurePackage(pluginName, function(err) {
+                if (err) {
+                    pr.reject(err);
+                } else {
+                    pr.resolve();
+                }
+            });
+        }
+        return pr;
+    },
+
+    /**
+     * Retrieve metadata from the server. Returns a promise that is
+     * resolved when the metadata has been loaded.
+     */
+    loadMetadataFromURL: function(url, type) {
+        var pr = new Promise();
+        proxy.xhr('GET', url, true).then(function(response) {
+            this.registerMetadata(JSON.parse(response));
+            pr.resolve();
+        }.bind(this), function(err) {
+            pr.reject(err);
+        });
+
+        return pr;
+    },
+
+    /**
+     * Dactivates a plugin. If no plugin was deactivated, then a string is
+     * returned which contains the reason why deactivating was not possible.
+     * Otherwise the plugin is deactivated as well as all plugins that depend on
+     * this plugin and a array is returned holding all depending plugins that were
+     * deactivated.
+     *
+     * @param pluginName string Name of the plugin to deactivate
+     * @param recursion boolean True if the funciton is called recursive.
+     */
+    deactivatePlugin: function(pluginName, recursion) {
+        var plugin = this.plugins[pluginName];
+        if (!plugin) {
+            // Deactivate the plugin only if the user called the function.
+            if (!recursion) {
+                this.deactivatedPlugins[pluginName] = USER_DEACTIVATED;
+            }
+            return 'There is no plugin named "' + pluginName + '" in this catalog.';
+        }
+
+        if (this.deactivatedPlugins[pluginName]) {
+            // If the plugin is already deactivated but the user explicip wants
+            // to deactivate the plugin, then store true as deactivation reason.
+            if (!recursion) {
+                this.deactivatedPlugins[pluginName] = USER_DEACTIVATED;
+            }
+            return 'The plugin "' + pluginName + '" is already deactivated';
+        }
+
+        // If the function is called within a recursion, then mark the plugin
+        // as DEPENDS_DEACTIVATED otherwise as USER_DEACTIVATED.
+        this.deactivatedPlugins[pluginName] = (recursion ? DEPENDS_DEACTIVATED
+                                                          : USER_DEACTIVATED);
+
+        // Get all plugins that depend on this plugin.
+        var dependents = {};
+        var deactivated = [];
+        plugin._findDependents(Object.keys(this.plugins), dependents, true);
+
+        // Deactivate all dependent plugins.
+        Object.keys(dependents).forEach(function(plugin) {
+            var ret = this.deactivatePlugin(plugin, true);
+            if (Array.isArray(ret)) {
+                deactivated = deactivated.concat(ret);
+            }
+        }, this);
+
+        // Deactivate this plugin.
+        plugin.unregister();
+
+        if (recursion) {
+            deactivated.push(pluginName);
+        }
+
+        return deactivated;
+    },
+
+    /**
+     * Activates a plugin. If the plugin can't be activated a string is returned
+     * explaining why. Otherwise the plugin is activated, all plugins that depend
+     * on this plugin are tried to activated and an array with all the activated
+     * depending plugins is returned.
+     * Note: Depending plugins are not activated if they user called
+     * deactivatePlugin on them to deactivate them explicit.
+     *
+     * @param pluginName string Name of the plugin to activate.
+     * @param recursion boolean True if the funciton is called recursive.
+     */
+    activatePlugin: function(pluginName, recursion) {
+        var plugin = this.plugins[pluginName];
+        if (!plugin) {
+            return 'There is no plugin named "' + pluginName + '" in this catalog.';
+        }
+
+        if (!this.deactivatedPlugins[pluginName]) {
+            return 'The plugin "' + pluginName + '" is already activated';
+        }
+
+        // Don't activate this plugin if the user explicip deactivated this one
+        // and the plugin activation call is called beacuse another plugin
+        // this one depended on was activated.
+        if (recursion && this.deactivatedPlugins[pluginName] === USER_DEACTIVATED) {
+            return;
+        }
+
+        // Check if all dependent plugins are activated.
+        if (plugin.depends && plugin.depends.length != 0) {
+            var works = plugin.depends.some(function(plugin) {
+                return !this.deactivatedPlugins[plugin];
+            }, this);
+
+            if (!works) {
+                // The user activated the plugin but some of the dependent
+                // plugins are still deactivated. Change the deactivation reason
+                // to DEPENDS_DEACTIVATED.
+                this.deactivatedPlugins[pluginName] = DEPENDS_DEACTIVATED;
+                return 'Can not activate plugin "' + pluginName +
+                        '" as some of its dependent plugins are not activated';
+            }
+        }
+
+        // Activate this plugin.
+        plugin.register();
+        this.orderExtensions();
+        delete this.deactivatedPlugins[pluginName];
+
+        // Try to activate all the plugins that depend on this one.
+        var activated = [];
+        var dependents = {};
+        plugin._findDependents(Object.keys(this.plugins), dependents, true);
+        Object.keys(dependents).forEach(function(pluginName) {
+            var ret = this.activatePlugin(pluginName, true);
+            if (Array.isArray(ret)) {
+                activated = activated.concat(ret);
+            }
+        }, this);
+
+        if (recursion) {
+            activated.push(pluginName);
+        }
+
+        return activated;
+    },
+
+    /**
+     * Removes a plugin, unregistering it and cleaning up.
+     */
+    removePlugin: function(pluginName) {
+        var plugin = this.plugins[pluginName];
+        if (plugin == undefined) {
+            throw new Error("Attempted to remove plugin " + pluginName
+                                            + " which does not exist.");
+        }
+
+        plugin.unregister();
+        plugin._cleanup(true /* leaveLoader */);
+        delete this.metadata[pluginName];
+        delete this.plugins[pluginName];
+    },
+
+    /**
+     * for the given plugin, get the first part of the URL required to
+     * get at that plugin's resources (images, etc.).
+     */
+    getResourceURL: function(pluginName) {
+        var link = document.getElementById("bespin_base");
+        var base = "";
+        if (link) {
+            base += link.href;
+            if (!util.endsWith(base, "/")) {
+                base += "/";
+            }
+        }
+        var plugin = this.plugins[pluginName];
+        if (plugin == undefined) {
+            return undefined;
+        }
+        return base + plugin.resourceURL;
+    },
+
+    /**
+     * Check the dependency graph to ensure we don't have cycles.
+     */
+    _checkLoops: function(pluginName, data, trail) {
+        var circular = false;
+        trail.forEach(function(node) {
+            if (pluginName === node) {
+                console.error("Circular dependency", pluginName, trail);
+                circular = true;
+            }
+        });
+        if (circular) {
+            return true;
+        }
+        trail.push(pluginName);
+        if (!data[pluginName]) {
+            console.error("Missing metadata for ", pluginName);
+        } else {
+            if (data[pluginName].dependencies) {
+                for (var dependency in data[pluginName].dependencies) {
+                    var trailClone = trail.slice();
+                    var errors = this._checkLoops(dependency, data, trailClone);
+                    if (errors) {
+                        console.error("Errors found when looking at ", pluginName);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    },
+
+    /**
+     * Retrieve an array of the plugin objects.
+     * The opts object can include the following options:
+     * onlyType (string): only include plugins of this type
+     * sortBy (array): list of keys to sort by (the primary sort is first).
+     *                 default is sorted alphabetically by name.
+     */
+    getPlugins: function(opts) {
+        var result = [];
+        var onlyType = opts.onlyType;
+
+        for (var key in this.plugins) {
+            var plugin = this.plugins[key];
+
+            // apply the filter
+            if ((onlyType && plugin.type && plugin.type != onlyType)
+                || plugin.name == "bespin") {
+                continue;
+            }
+
+            result.push(plugin);
+        }
+
+        var sortBy = opts.sortBy;
+        if (!sortBy) {
+            sortBy = ["name"];
+        }
+
+        var sortfunc = function(a, b) {
+            for (var i = 0; i < sortBy.length; i++) {
+                key = sortBy[i];
+                if (a[key] < b[key]) {
+                    return -1;
+                } else if (b[key] < a[key]) {
+                    return 1;
+                }
+            }
+            return 0;
+        };
+
+        result.sort(sortfunc);
+        return result;
+    },
+
+    /**
+     * Returns a promise to retrieve the object at the given property path,
+     * loading the plugin if necessary.
+     */
+    loadObjectForPropertyPath: function(path, context) {
+        var promise = new Promise();
+        var parts = /^([^:]+):([^#]+)#(.*)$/.exec(path);
+        if (parts === null) {
+            throw new Error("loadObjectForPropertyPath: malformed path: '" +
+                path + "'");
+        }
+
+        var pluginName = parts[1];
+        if (pluginName === "") {
+            if (util.none(context)) {
+                throw new Error("loadObjectForPropertyPath: no plugin name " +
+                    "supplied and no context is present");
+            }
+
+            pluginName = context;
+        }
+
+        require.ensurePackage(pluginName, function() {
+            promise.resolve(this.objectForPropertyPath(path));
+        }.bind(this));
+
+        return promise;
+    },
+
+    /**
+     * Finds the object for the passed path or array of path components.  This is
+     * the standard method used in SproutCore to traverse object paths.
+     * @param path {String} the path
+     * @param root {Object} optional root object.  window is used otherwise
+     * @param stopAt {Integer} optional point to stop searching the path.
+     * @returns {Object} the found object or undefined.
+     */
+    objectForPropertyPath: function(path, root, stopAt) {
+        stopAt = (stopAt == undefined) ? path.length : stopAt;
+        if (!root) {
+            root = window;
+        }
+
+        var hashed = path.split("#");
+        if (hashed.length !== 1) {
+            var module = require(hashed[0]);
+            if (module === undefined) {
+                return undefined;
+            }
+
+            path = hashed[1];
+            root = module;
+            stopAt = stopAt - hashed[0].length;
+        }
+
+        var loc = 0;
+        while (root && loc < stopAt) {
+            var nextDotAt = path.indexOf('.', loc);
+            if (nextDotAt < 0 || nextDotAt > stopAt) {
+                nextDotAt = stopAt;
+            }
+            var key = path.slice(loc, nextDotAt);
+            root = root[key];
+            loc = nextDotAt + 1;
+        }
+
+        if (loc < stopAt) {
+            root = undefined; // hit a dead end. :(
+        }
+
+        return root;
+    },
+
+    /**
+     * Publish <tt>value</tt> to all plugins that match both <tt>ep</tt> and
+     * <tt>key</tt>.
+     * @param source {object} The source calling the publish function.
+     * @param epName {string} An extension point (indexed by the catalog) to which
+     * we publish the information.
+     * @param key {string} A key to which we publish (linearly searched, allowing
+     * for regex matching).
+     * @param value {object} The data to be passed to the subscribing function.
+     */
+    publish: function(source, epName, key, value) {
+        var ep = this.getExtensionPoint(epName);
+
+        if (this.shareExtension(ep)) {
+            if (this.parent) {
+                this.parent.publish(source, epName, key, value);
+            } else {
+                this.children.forEach(function(child) {
+                    child._publish(source, epName, key, value);
+                });
+                this._publish(source, epName, key, value);
+            }
+        } else {
+            this._publish(source, epName, key, value);
+        }
+    },
+
+    _publish: function(source, epName, key, value) {
+        var subscriptions = this.getExtensions(epName);
+        subscriptions.forEach(function(sub) {
+            // compile regexes only once
+            if (sub.match && !sub.regexp) {
+                sub.regexp = new RegExp(sub.match);
+            }
+            if (sub.regexp && sub.regexp.test(key)
+                    || sub.key === key
+                    || (util.none(sub.key) && util.none(key))) {
+                sub.load().then(function(handler) {
+                    handler(source, key, value);
+                });
+            }
+        });
+    },
+
+    /**
+     * The subscribe side of #publish for use when the object which will
+     * publishes is created dynamically.
+     * @param ep The extension point name to subscribe to
+     * @param metadata An object containing:
+     * <ul>
+     * <li>pointer: A function which should be called on matching publish().
+     * This can also be specified as a pointer string, however if you can do
+     * that, you should be placing the metadata in package.json.
+     * <li>key: A string that exactly matches the key passed to the publish()
+     * function. For smarter matching, you can use 'match' instead...
+     * <li>match: A regexp to be used in place of key
+     * </ul>
+     */
+    registerExtension: function(ep, metadata) {
+        var extension = new exports.Extension(metadata);
+        extension.pluginName = '__dynamic';
+        this.getExtensionPoint(ep).register(extension);
+    }
+};
+
+/**
+ * Register handler for extension points.
+ * The argument `deactivated` is set to true or false when this method is called
+ * by the _registerMetadata function.
+ */
+exports.registerExtensionPoint = function(extension, catalog, deactivated) {
+    var ep = catalog.getExtensionPoint(extension.name, true);
+    ep.description = extension.description;
+    ep.pluginName = extension.pluginName;
+    ep.params = extension.params;
+    if (extension.indexOn) {
+        ep.indexOn = extension.indexOn;
+    }
+
+    if (!deactivated && (extension.register || extension.unregister)) {
+        exports.registerExtensionHandler(extension, catalog);
+    }
+};
+
+/**
+ * Register handler for extension handler.
+ */
+exports.registerExtensionHandler = function(extension, catalog) {
+    // Don't add the extension handler if there is a master/partent catalog
+    // and this plugin is shared. The extension handlers are only added
+    // inside of the master catalog.
+    if (catalog.parent && catalog.shareExtension(extension)) {
+        return;
+    }
+
+    var ep = catalog.getExtensionPoint(extension.name, true);
+    ep.handlers.push(extension);
+    if (extension.register) {
+        // Store the current extensions to this extension point. We can't
+        // use the ep.extensions array within the load-callback-function, as
+        // the array at that point in time also contains extensions that got
+        // registered by calling the handler.register function directly.
+        // As such, using the ep.extensions in the load-callback-function
+        // would result in calling the handler's register function on a few
+        // extensions twice.
+        var extensions = util.clone(ep.extensions);
+
+        extension.load(function(register) {
+            if (!register) {
+                throw extension.name + " is not ready";
+            }
+            extensions.forEach(function(ext) {
+                // console.log('call register on:', ext)
+                register(ext, catalog);
+            });
+        }, "register", catalog);
+    }
+};
+
+/**
+ * Unregister handler for extension point.
+ */
+exports.unregisterExtensionPoint = function(extension, catalog) {
+    // Note: When an extensionPoint is unregistered, the extension point itself
+    // stays but the handler goes away.
+    // DISCUSS: Is this alright? The other option is to remove the ep completly.
+    // The downside of this is, that when the ep arrives later again, it has
+    // to look for extension handlers bound to this ep and add them all again.
+    if (extension.register || extension.unregister) {
+        exports.unregisterExtensionHandler(extension);
+    }
+};
+
+/**
+ * Unregister handler for extension handler.
+ */
+exports.unregisterExtensionHandler = function(extension, catalog) {
+    // Don't remove the extension handler if there is a master/partent catalog
+    // and this plugin is shared. The extension handlers are only added
+    // inside of the master catalog.
+    if (catalog.parent && catalog.shareExtension(extension)) {
+        return;
+    }
+
+    var ep = catalog.getExtensionPoint(extension.name, true);
+    if (ep.handlers.indexOf(extension) == -1) {
+        return;
+    }
+    ep.handlers.splice(ep.handlers.indexOf(extension), 1);
+    if (extension.unregister) {
+        // Store the current extensions to this extension point. We can't
+        // use the ep.extensions array within the load-callback-function, as
+        // the array at that point in time also contains extensions that got
+        // registered by calling the handler.register function directly.
+        // As such, using the ep.extensions in the load-callback-function
+        // would result in calling the handler's register function on a few
+        // extensions twice.
+        var extensions = util.clone(ep.extensions);
+
+        extension.load(function(unregister) {
+            if (!unregister) {
+                throw extension.name + " is not ready";
+            }
+            extensions.forEach(function(ext) {
+                // console.log('call register on:', ext)
+                unregister(ext);
+            });
+        }, "unregister");
+    }
+};
+
+exports.catalog = new exports.Catalog();
+
+var _removeFromList = function(regex, array, matchFunc) {
+    var i = 0;
+    while (i < array.length) {
+        if (regex.exec(array[i])) {
+            var item = array.splice(i, 1);
+            if (matchFunc) {
+                matchFunc(item);
+            }
+            continue;
+        }
+        i++;
+    }
+};
+
+var _removeFromObject = function(regex, obj) {
+    var keys = Object.keys(obj);
+    var i = keys.length;
+    while (--i > 0) {
+        if (regex.exec(keys[i])) {
+            delete obj[keys[i]];
+        }
+    }
+};
+
+exports.getUserPlugins = function() {
+    return exports.catalog.getPlugins({ onlyType: 'user' });
+};
+
+});
+
+bespin.tiki.module("bespin:promise",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var console = require('bespin:console').console;
+var Trace = require('bespin:util/stacktrace').Trace;
+
+/**
+ * A promise can be in one of 2 states.
+ * The ERROR and SUCCESS states are terminal, the PENDING state is the only
+ * start state.
+ */
+var ERROR = -1;
+var PENDING = 0;
+var SUCCESS = 1;
+
+/**
+ * We give promises and ID so we can track which are outstanding
+ */
+var _nextId = 0;
+
+/**
+ * Debugging help if 2 things try to complete the same promise.
+ * This can be slow (especially on chrome due to the stack trace unwinding) so
+ * we should leave this turned off in normal use.
+ */
+var _traceCompletion = false;
+
+/**
+ * Outstanding promises. Handy list for debugging only.
+ */
+exports._outstanding = [];
+
+/**
+ * Recently resolved promises. Also for debugging only.
+ */
+exports._recent = [];
+
+/**
+ * Create an unfulfilled promise
+ */
+exports.Promise = function () {
+    this._status = PENDING;
+    this._value = undefined;
+    this._onSuccessHandlers = [];
+    this._onErrorHandlers = [];
+
+    // Debugging help
+    this._id = _nextId++;
+    //this._createTrace = new Trace(new Error());
+    exports._outstanding[this._id] = this;
+};
+
+/**
+ * Yeay for RTTI.
+ */
+exports.Promise.prototype.isPromise = true;
+
+/**
+ * Have we either been resolve()ed or reject()ed?
+ */
+exports.Promise.prototype.isComplete = function() {
+    return this._status != PENDING;
+};
+
+/**
+ * Have we resolve()ed?
+ */
+exports.Promise.prototype.isResolved = function() {
+    return this._status == SUCCESS;
+};
+
+/**
+ * Have we reject()ed?
+ */
+exports.Promise.prototype.isRejected = function() {
+    return this._status == ERROR;
+};
+
+/**
+ * Take the specified action of fulfillment of a promise, and (optionally)
+ * a different action on promise rejection.
+ */
+exports.Promise.prototype.then = function(onSuccess, onError) {
+    if (typeof onSuccess === 'function') {
+        if (this._status === SUCCESS) {
+            onSuccess.call(null, this._value);
+        } else if (this._status === PENDING) {
+            this._onSuccessHandlers.push(onSuccess);
+        }
+    }
+
+    if (typeof onError === 'function') {
+        if (this._status === ERROR) {
+            onError.call(null, this._value);
+        } else if (this._status === PENDING) {
+            this._onErrorHandlers.push(onError);
+        }
+    }
+
+    return this;
+};
+
+/**
+ * Like then() except that rather than returning <tt>this</tt> we return
+ * a promise which
+ */
+exports.Promise.prototype.chainPromise = function(onSuccess) {
+    var chain = new exports.Promise();
+    chain._chainedFrom = this;
+    this.then(function(data) {
+        try {
+            chain.resolve(onSuccess(data));
+        } catch (ex) {
+            chain.reject(ex);
+        }
+    }, function(ex) {
+        chain.reject(ex);
+    });
+    return chain;
+};
+
+/**
+ * Supply the fulfillment of a promise
+ */
+exports.Promise.prototype.resolve = function(data) {
+    return this._complete(this._onSuccessHandlers, SUCCESS, data, 'resolve');
+};
+
+/**
+ * Renege on a promise
+ */
+exports.Promise.prototype.reject = function(data) {
+    return this._complete(this._onErrorHandlers, ERROR, data, 'reject');
+};
+
+/**
+ * Internal method to be called on resolve() or reject().
+ * @private
+ */
+exports.Promise.prototype._complete = function(list, status, data, name) {
+    // Complain if we've already been completed
+    if (this._status != PENDING) {
+        console.group('Promise already closed');
+        console.error('Attempted ' + name + '() with ', data);
+        console.error('Previous status = ', this._status,
+                ', previous value = ', this._value);
+        console.trace();
+
+        if (this._completeTrace) {
+            console.error('Trace of previous completion:');
+            this._completeTrace.log(5);
+        }
+        console.groupEnd();
+        return this;
+    }
+
+    if (_traceCompletion) {
+        this._completeTrace = new Trace(new Error());
+    }
+
+    this._status = status;
+    this._value = data;
+
+    // Call all the handlers, and then delete them
+    list.forEach(function(handler) {
+        handler.call(null, this._value);
+    }, this);
+    this._onSuccessHandlers.length = 0;
+    this._onErrorHandlers.length = 0;
+
+    // Remove the given {promise} from the _outstanding list, and add it to the
+    // _recent list, pruning more than 20 recent promises from that list.
+    delete exports._outstanding[this._id];
+    exports._recent.push(this);
+    while (exports._recent.length > 20) {
+        exports._recent.shift();
+    }
+
+    return this;
+};
+
+/**
+ * Takes an array of promises and returns a promise that that is fulfilled once
+ * all the promises in the array are fulfilled
+ * @param group The array of promises
+ * @return the promise that is fulfilled when all the array is fulfilled
+ */
+exports.group = function(promiseList) {
+    if (!(promiseList instanceof Array)) {
+        promiseList = Array.prototype.slice.call(arguments);
+    }
+
+    // If the original array has nothing in it, return now to avoid waiting
+    if (promiseList.length === 0) {
+        return new exports.Promise().resolve([]);
+    }
+
+    var groupPromise = new exports.Promise();
+    var results = [];
+    var fulfilled = 0;
+
+    var onSuccessFactory = function(index) {
+        return function(data) {
+            results[index] = data;
+            fulfilled++;
+            // If the group has already failed, silently drop extra results
+            if (groupPromise._status !== ERROR) {
+                if (fulfilled === promiseList.length) {
+                    groupPromise.resolve(results);
+                }
+            }
+        };
+    };
+
+    promiseList.forEach(function(promise, index) {
+        var onSuccess = onSuccessFactory(index);
+        var onError = groupPromise.reject.bind(groupPromise);
+        promise.then(onSuccess, onError);
+    });
+
+    return groupPromise;
+};
+
+/**
+ * Take an asynchronous function (i.e. one that returns a promise) and
+ * return a synchronous version of the same function.
+ * Clearly this is impossible without blocking or busy waiting (both evil).
+ * In this case we make the assumption that the called function is only
+ * theoretically asynchronous (which is actually common with Bespin, because the
+ * most common cause of asynchronaity is the lazy loading module system which
+ * can sometimes be proved to be synchronous in use, even though in theory
+ * there is the potential for asynch behaviour)
+ */
+exports.synchronizer = function(func, scope) {
+    return function() {
+        var promise = func.apply(scope, arguments);
+        if (!promise.isComplete()) {
+            throw new Error('asynchronous function can\'t be synchronized');
+        }
+        return promise._value;
+    };
+};
+
+});
+
+bespin.tiki.module("bespin:sandbox",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var tiki = require('tiki');
+var util = require('bespin:util/util');
+var catalog = require('bespin:plugins').catalog;
+
+/**
+ * A sandbox can only be used from inside of the `master` catalog.
+ */
+if (catalog.parent) {
+    throw new Error('The sandbox module can\'t be used inside of a slave catalog!');
+}
+
+/**
+ * A special Bespin subclass of the tiki sandbox class. When the sandbox is
+ * created, the catalog for the new sandbox is setup based on the catalog
+ * data that is already in the so called `master` catalog.
+ */
+var Sandbox = function() {
+    // Call the default constructor. This creates a new tiki sandbox.
+    tiki.Sandbox.call(this, bespin.tiki.require.loader, {}, []);
+
+    // Register the plugins from the main catalog in the sandbox catalog.
+    var sandboxCatalog = this.require('bespin:plugins').catalog;
+
+    // Set the parent catalog for the sandbox catalog. This makes the sandbox
+    // be a slave catalog of the master catalog.
+    sandboxCatalog.parent = catalog;
+    catalog.children.push(sandboxCatalog);
+
+    // Copy over a few things from the master catalog.
+    sandboxCatalog.deactivatePlugin = util.clone(catalog.deactivatePlugin);
+    sandboxCatalog._extensionsOrdering = util.clone(catalog._extensionsOrdering);
+
+    // Register the metadata from the master catalog.
+    sandboxCatalog._registerMetadata(util.clone(catalog.metadata, true));
+};
+
+Sandbox.prototype = new tiki.Sandbox();
+
+/**
+ * Overrides the standard tiki.Sandbox.require function. If the requested
+ * module/plugin is shared between the sandboxes, then the require function
+ * on the `master` sandbox is called. Otherwise it calls the overridden require
+ * function.
+ */
+Sandbox.prototype.require = function(moduleId, curModuleId, workingPackage) {
+    // assume canonical() will normalize params
+    var canonicalId = this.loader.canonical(moduleId, curModuleId, workingPackage);
+    // Get the plugin name.
+    var pluginName = canonicalId.substring(2).split(':')[0];
+
+    // Check if this module should be shared.
+    if (catalog.plugins[pluginName].share) {
+        // The module is shared, so require it from the main sandbox.
+        return bespin.tiki.sandbox.require(moduleId, curModuleId, workingPackage);
+    } else {
+        // This module is not shared, so use the normal require function.
+        return tiki.Sandbox.prototype.require.call(this, moduleId,
+                                                    curModuleId, workingPackage);
+    }
+}
+
+// Expose the sandbox.
+exports.Sandbox = Sandbox;
+
+});
+
+bespin.tiki.module("bespin:index",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+// BEGIN VERSION BLOCK
+/** The core version of the Bespin system */
+exports.versionNumber = 'tip';
+
+/** The version number to display to users */
+exports.versionCodename = 'DEVELOPMENT MODE';
+
+/** The version number of the API (to ensure that the client and server are talking the same language) */
+exports.apiVersion = 'dev';
+
+// END VERSION BLOCK
+
+
+});
+
+bespin.tiki.module("bespin:proxy",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var util = require("util/util");
+var Promise = require("promise").Promise;
+
+exports.xhr = function(method, url, async, beforeSendCallback) {
+    var pr = new Promise();
+
+    if (!bespin.proxy || !bespin.proxy.xhr) {
+        var req = new XMLHttpRequest();
+        req.onreadystatechange = function() {
+            if (req.readyState !== 4) {
+                return;
+            }
+
+            var status = req.status;
+            if (status !== 0 && status !== 200) {
+                var error = new Error(req.responseText + ' (Status ' + req.status + ")");
+                error.xhr = req;
+                pr.reject(error);
+                return;
+            }
+
+            pr.resolve(req.responseText);
+        }.bind(this);
+
+        req.open("GET", url, async);
+        if (beforeSendCallback) {
+            beforeSendCallback(req);
+        }
+        req.send();
+    } else {
+        bespin.proxy.xhr.call(this, method, url, async, beforeSendCallback, pr);
+    }
+
+    return pr;
+};
+
+exports.Worker = function(url) {
+    if (!bespin.proxy || !bespin.proxy.worker) {
+        return new Worker(url);
+    } else {
+        return new bespin.proxy.worker(url);
+    }
+};
+
+});
+
+bespin.tiki.module("bespin:console",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+var util = require("util/util");
+
+/**
+ * This object represents a "safe console" object that forwards debugging
+ * messages appropriately without creating a dependency on Firebug in Firefox.
+ */
+
+// We could prefer to copy the methods on window.console to exports.console
+// one by one because then we could be sure of using the safe subset that is
+// implemented on all browsers, however this doesn't work properly everywhere
+// ...
+
+var noop = function() {
+};
+
+// These are the functions that are available in Chrome 4/5, Safari 4
+// and Firefox 3.6. Don't add to this list without checking browser support
+var NAMES = [
+    "assert", "count", "debug", "dir", "dirxml", "error", "group", "groupEnd",
+    "info", "log", "profile", "profileEnd", "time", "timeEnd", "trace", "warn"
+];
+
+if (typeof(window) === 'undefined') {
+    // We're in a web worker. Forward to the main thread so the messages
+    // will show up.
+    var console = {};
+    NAMES.forEach(function(name) {
+        console[name] = function() {
+            var args = Array.prototype.slice.call(arguments);
+            var msg = { op: 'log', method: name, args: args };
+            postMessage(JSON.stringify(msg));
+        };
+    });
+
+    exports.console = console;
+} else if (util.isSafari || util.isChrome) {
+    // Webkit's output functions are bizarre because they get confused if 'this'
+    // is not window.console, so we just copy it all across
+    exports.console = window.console;
+} else {
+    // So we're not in Webkit, but we may still be no console object (in the
+    // case of Firefox without Firebug)
+    exports.console = { };
+
+    // For each of the console functions, copy them if they exist, stub if not
+    NAMES.forEach(function(name) {
+        if (window.console && window.console[name]) {
+            exports.console[name] = window.console[name].bind(window.console);
+        } else {
+            exports.console[name] = noop;
+        }
+    });
+}
+
+
+});
+
+bespin.tiki.module("bespin:globals",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+/*
+* Installs ES5 and SproutCore monkeypatches as needed.
+*/
+var installGlobals = function() {
+    /**
+     * Array detector.
+     * Firefox 3.5 and Safari 4 have this already. Chrome 4 however ...
+     * Note to Dojo - your isArray is still broken: instanceof doesn't work with
+     * Arrays taken from a different frame/window.
+     */
+    if (!Array.isArray) {
+        Array.isArray = function(data) {
+            return (data && Object.prototype.toString.call(data) == "[object Array]");
+        };
+    }
+
+    /**
+     * Retrieves the list of keys on an object.
+     */
+    if (!Object.keys) {
+        Object.keys = function(obj) {
+            var k, ret = [];
+            for (k in obj) {
+                if (obj.hasOwnProperty(k)) {
+                    ret.push(k);
+                }
+            }
+            return ret;
+        };
+    }
+
+    if (!Function.prototype.bind) {
+        // From Narwhal
+        Function.prototype.bind = function () {
+            var args = Array.prototype.slice.call(arguments);
+            var self = this;
+            var bound = function () {
+                return self.call.apply(
+                    self,
+                    args.concat(
+                        Array.prototype.slice.call(arguments)
+                    )
+                );
+            };
+            bound.name = this.name;
+            bound.displayName = this.displayName;
+            bound.length = this.length;
+            bound.unbound = self;
+            return bound;
+        };
+    }
+};
+
+// Narwhal's shim for ES5 defineProperty
+
+// ES5 15.2.3.6
+if (!Object.defineProperty) {
+    Object.defineProperty = function(object, property, descriptor) {
+        var has = Object.prototype.hasOwnProperty;
+        if (typeof descriptor == "object" && object.__defineGetter__) {
+            if (has.call(descriptor, "value")) {
+                if (!object.__lookupGetter__(property) && !object.__lookupSetter__(property)) {
+                    // data property defined and no pre-existing accessors
+                    object[property] = descriptor.value;
+                }
+                if (has.call(descriptor, "get") || has.call(descriptor, "set")) {
+                    // descriptor has a value property but accessor already exists
+                    throw new TypeError("Object doesn't support this action");
+                }
+            }
+            // fail silently if "writable", "enumerable", or "configurable"
+            // are requested but not supported
+            /*
+            // alternate approach:
+            if ( // can't implement these features; allow false but not true
+            !(has.call(descriptor, "writable") ? descriptor.writable : true) ||
+            !(has.call(descriptor, "enumerable") ? descriptor.enumerable : true) ||
+            !(has.call(descriptor, "configurable") ? descriptor.configurable : true)
+            )
+            throw new RangeError(
+            "This implementation of Object.defineProperty does not " +
+            "support configurable, enumerable, or writable."
+            );
+            */
+            else if (typeof descriptor.get == "function") {
+                object.__defineGetter__(property, descriptor.get);
+            }
+            if (typeof descriptor.set == "function") {
+                object.__defineSetter__(property, descriptor.set);
+            }
+        }
+        return object;
+    };
+}
+
+// ES5 15.2.3.7
+if (!Object.defineProperties) {
+    Object.defineProperties = function(object, properties) {
+        for (var property in properties) {
+            if (Object.prototype.hasOwnProperty.call(properties, property)) {
+                Object.defineProperty(object, property, properties[property]);
+            }
+        }
+        return object;
+    };
+}
+
+
+
+installGlobals();
+
+});
+;bespin.tiki.register("::syntax_directory", {
+    name: "syntax_directory",
+    dependencies: {  }
+});
+bespin.tiki.module("syntax_directory:index",function(require,exports,module) {
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+"define metadata";
+({
+    "description": "Catalogs the available syntax engines",
+    "dependencies": {},
+    "environments": { "main": true, "worker": true },
+    "provides": [
+        {
+            "ep": "extensionhandler",
+            "name": "syntax",
+            "register": "#discoveredNewSyntax"
+        }
+    ]
+});
+"end";
+
+var plugins = require("bespin:plugins");
+
+function SyntaxInfo(ext) {
+    this.extension = ext;
+    this.name = ext.name;
+    this.fileExts = ext.hasOwnProperty('fileexts') ? ext.fileexts : [];
+    this.settings = ext.settings != null ? ext.settings : [];
+}
+
+/**
+ * Stores metadata for all of the syntax plugins.
+ *
+ * @exports syntaxDirectory as syntax_directory:syntaxDirectory
+ */
+var syntaxDirectory = {
+    _fileExts: {},
+    _syntaxInfo: {},
+
+    get: function(syntaxName) {
+        return this._syntaxInfo[syntaxName];
+    },
+
+    hasSyntax: function(syntax) {
+        return this._syntaxInfo.hasOwnProperty(syntax);
+    },
+
+    register: function(extension) {
+        var syntaxInfo = new SyntaxInfo(extension);
+        this._syntaxInfo[syntaxInfo.name] = syntaxInfo;
+
+        var fileExts = this._fileExts;
+        syntaxInfo.fileExts.forEach(function(fileExt) {
+            fileExts[fileExt] = syntaxInfo.name;
+        });
+    },
+
+    syntaxForFileExt: function(fileExt) {
+        fileExt = fileExt.toLowerCase();
+        var fileExts = this._fileExts;
+        return fileExts.hasOwnProperty(fileExt) ? fileExts[fileExt] : 'plain';
+    }
+};
+
+function discoveredNewSyntax(syntaxExtension) {
+    syntaxDirectory.register(syntaxExtension);
+}
+
+exports.syntaxDirectory = syntaxDirectory;
+exports.discoveredNewSyntax = discoveredNewSyntax;
+
+
+});
+;bespin.tiki.register("::underscore", {
+    name: "underscore",
+    dependencies: {  }
+});
+bespin.tiki.module("underscore:index",function(require,exports,module) {
+// Underscore.js
+// (c) 2010 Jeremy Ashkenas, DocumentCloud Inc.
+// Underscore is freely distributable under the terms of the MIT license.
+// Portions of Underscore are inspired by or borrowed from Prototype.js,
+// Oliver Steele's Functional, and John Resig's Micro-Templating.
+// For all details and documentation:
+// http://documentcloud.github.com/underscore
+
+"define metadata";
+({
+    "description": "Functional Programming Aid for Javascript. Works well with jQuery."
+});
+"end";
+
+(function() {
+  // ------------------------- Baseline setup ---------------------------------
+
+  // Establish the root object, "window" in the browser, or "global" on the server.
+  var root = this;
+
+  // Save the previous value of the "_" variable.
+  var previousUnderscore = root._;
+
+  // Establish the object that gets thrown to break out of a loop iteration.
+  var breaker = typeof StopIteration !== 'undefined' ? StopIteration : '__break__';
+
+  // Quick regexp-escaping function, because JS doesn't have RegExp.escape().
+  var escapeRegExp = function(s) { return s.replace(/([.*+?^${}()|[\]\/\\])/g, '\\$1'); };
+
+  // Save bytes in the minified (but not gzipped) version:
+  var ArrayProto = Array.prototype, ObjProto = Object.prototype;
+
+  // Create quick reference variables for speed access to core prototypes.
+  var slice                 = ArrayProto.slice,
+      unshift               = ArrayProto.unshift,
+      toString              = ObjProto.toString,
+      hasOwnProperty        = ObjProto.hasOwnProperty,
+      propertyIsEnumerable  = ObjProto.propertyIsEnumerable;
+
+  // All ECMA5 native implementations we hope to use are declared here.
+  var
+    nativeForEach      = ArrayProto.forEach,
+    nativeMap          = ArrayProto.map,
+    nativeReduce       = ArrayProto.reduce,
+    nativeReduceRight  = ArrayProto.reduceRight,
+    nativeFilter       = ArrayProto.filter,
+    nativeEvery        = ArrayProto.every,
+    nativeSome         = ArrayProto.some,
+    nativeIndexOf      = ArrayProto.indexOf,
+    nativeLastIndexOf  = ArrayProto.lastIndexOf,
+    nativeIsArray      = Array.isArray,
+    nativeKeys         = Object.keys;
+
+  // Create a safe reference to the Underscore object for use below.
+  var _ = function(obj) { return new wrapper(obj); };
+
+  // Export the Underscore object for CommonJS.
+  if (typeof exports !== 'undefined') exports._ = _;
+
+  // Export underscore to global scope.
+  root._ = _;
+
+  // Current version.
+  _.VERSION = '1.0.2';
+
+  // ------------------------ Collection Functions: ---------------------------
+
+  // The cornerstone, an each implementation.
+  // Handles objects implementing forEach, arrays, and raw objects.
+  // Delegates to JavaScript 1.6's native forEach if available.
+  var each = _.forEach = function(obj, iterator, context) {
+    try {
+      if (nativeForEach && obj.forEach === nativeForEach) {
+        obj.forEach(iterator, context);
+      } else if (_.isNumber(obj.length)) {
+        for (var i = 0, l = obj.length; i < l; i++) iterator.call(context, obj[i], i, obj);
+      } else {
+        for (var key in obj) {
+          if (hasOwnProperty.call(obj, key)) iterator.call(context, obj[key], key, obj);
+        }
+      }
+    } catch(e) {
+      if (e != breaker) throw e;
+    }
+    return obj;
+  };
+
+  // Return the results of applying the iterator to each element.
+  // Delegates to JavaScript 1.6's native map if available.
+  _.map = function(obj, iterator, context) {
+    if (nativeMap && obj.map === nativeMap) return obj.map(iterator, context);
+    var results = [];
+    each(obj, function(value, index, list) {
+      results.push(iterator.call(context, value, index, list));
+    });
+    return results;
+  };
+
+  // Reduce builds up a single result from a list of values, aka inject, or foldl.
+  // Delegates to JavaScript 1.8's native reduce if available.
+  _.reduce = function(obj, memo, iterator, context) {
+    if (nativeReduce && obj.reduce === nativeReduce) return obj.reduce(_.bind(iterator, context), memo);
+    each(obj, function(value, index, list) {
+      memo = iterator.call(context, memo, value, index, list);
+    });
+    return memo;
+  };
+
+  // The right-associative version of reduce, also known as foldr. Uses
+  // Delegates to JavaScript 1.8's native reduceRight if available.
+  _.reduceRight = function(obj, memo, iterator, context) {
+    if (nativeReduceRight && obj.reduceRight === nativeReduceRight) return obj.reduceRight(_.bind(iterator, context), memo);
+    var reversed = _.clone(_.toArray(obj)).reverse();
+    return _.reduce(reversed, memo, iterator, context);
+  };
+
+  // Return the first value which passes a truth test.
+  _.detect = function(obj, iterator, context) {
+    var result;
+    each(obj, function(value, index, list) {
+      if (iterator.call(context, value, index, list)) {
+        result = value;
+        _.breakLoop();
+      }
+    });
+    return result;
+  };
+
+  // Return all the elements that pass a truth test.
+  // Delegates to JavaScript 1.6's native filter if available.
+  _.filter = function(obj, iterator, context) {
+    if (nativeFilter && obj.filter === nativeFilter) return obj.filter(iterator, context);
+    var results = [];
+    each(obj, function(value, index, list) {
+      iterator.call(context, value, index, list) && results.push(value);
+    });
+    return results;
+  };
+
+  // Return all the elements for which a truth test fails.
+  _.reject = function(obj, iterator, context) {
+    var results = [];
+    each(obj, function(value, index, list) {
+      !iterator.call(context, value, index, list) && results.push(value);
+    });
+    return results;
+  };
+
+  // Determine whether all of the elements match a truth test.
+  // Delegates to JavaScript 1.6's native every if available.
+  _.every = function(obj, iterator, context) {
+    iterator = iterator || _.identity;
+    if (nativeEvery && obj.every === nativeEvery) return obj.every(iterator, context);
+    var result = true;
+    each(obj, function(value, index, list) {
+      if (!(result = result && iterator.call(context, value, index, list))) _.breakLoop();
+    });
+    return result;
+  };
+
+  // Determine if at least one element in the object matches a truth test.
+  // Delegates to JavaScript 1.6's native some if available.
+  _.some = function(obj, iterator, context) {
+    iterator = iterator || _.identity;
+    if (nativeSome && obj.some === nativeSome) return obj.some(iterator, context);
+    var result = false;
+    each(obj, function(value, index, list) {
+      if (result = iterator.call(context, value, index, list)) _.breakLoop();
+    });
+    return result;
+  };
+
+  // Determine if a given value is included in the array or object using '==='.
+  _.include = function(obj, target) {
+    if (nativeIndexOf && obj.indexOf === nativeIndexOf) return obj.indexOf(target) != -1;
+    var found = false;
+    each(obj, function(value) {
+      if (found = value === target) _.breakLoop();
+    });
+    return found;
+  };
+
+  // Invoke a method with arguments on every item in a collection.
+  _.invoke = function(obj, method) {
+    var args = _.rest(arguments, 2);
+    return _.map(obj, function(value) {
+      return (method ? value[method] : value).apply(value, args);
+    });
+  };
+
+  // Convenience version of a common use case of map: fetching a property.
+  _.pluck = function(obj, key) {
+    return _.map(obj, function(value){ return value[key]; });
+  };
+
+  // Return the maximum item or (item-based computation).
+  _.max = function(obj, iterator, context) {
+    if (!iterator && _.isArray(obj)) return Math.max.apply(Math, obj);
+    var result = {computed : -Infinity};
+    each(obj, function(value, index, list) {
+      var computed = iterator ? iterator.call(context, value, index, list) : value;
+      computed >= result.computed && (result = {value : value, computed : computed});
+    });
+    return result.value;
+  };
+
+  // Return the minimum element (or element-based computation).
+  _.min = function(obj, iterator, context) {
+    if (!iterator && _.isArray(obj)) return Math.min.apply(Math, obj);
+    var result = {computed : Infinity};
+    each(obj, function(value, index, list) {
+      var computed = iterator ? iterator.call(context, value, index, list) : value;
+      computed < result.computed && (result = {value : value, computed : computed});
+    });
+    return result.value;
+  };
+
+  // Sort the object's values by a criterion produced by an iterator.
+  _.sortBy = function(obj, iterator, context) {
+    return _.pluck(_.map(obj, function(value, index, list) {
+      return {
+        value : value,
+        criteria : iterator.call(context, value, index, list)
+      };
+    }).sort(function(left, right) {
+      var a = left.criteria, b = right.criteria;
+      return a < b ? -1 : a > b ? 1 : 0;
+    }), 'value');
+  };
+
+  // Use a comparator function to figure out at what index an object should
+  // be inserted so as to maintain order. Uses binary search.
+  _.sortedIndex = function(array, obj, iterator) {
+    iterator = iterator || _.identity;
+    var low = 0, high = array.length;
+    while (low < high) {
+      var mid = (low + high) >> 1;
+      iterator(array[mid]) < iterator(obj) ? low = mid + 1 : high = mid;
+    }
+    return low;
+  };
+
+  // Convert anything iterable into a real, live array.
+  _.toArray = function(iterable) {
+    if (!iterable)                return [];
+    if (iterable.toArray)         return iterable.toArray();
+    if (_.isArray(iterable))      return iterable;
+    if (_.isArguments(iterable))  return slice.call(iterable);
+    return _.values(iterable);
+  };
+
+  // Return the number of elements in an object.
+  _.size = function(obj) {
+    return _.toArray(obj).length;
+  };
+
+  // -------------------------- Array Functions: ------------------------------
+
+  // Get the first element of an array. Passing "n" will return the first N
+  // values in the array. Aliased as "head". The "guard" check allows it to work
+  // with _.map.
+  _.first = function(array, n, guard) {
+    return n && !guard ? slice.call(array, 0, n) : array[0];
+  };
+
+  // Returns everything but the first entry of the array. Aliased as "tail".
+  // Especially useful on the arguments object. Passing an "index" will return
+  // the rest of the values in the array from that index onward. The "guard"
+   //check allows it to work with _.map.
+  _.rest = function(array, index, guard) {
+    return slice.call(array, _.isUndefined(index) || guard ? 1 : index);
+  };
+
+  // Get the last element of an array.
+  _.last = function(array) {
+    return array[array.length - 1];
+  };
+
+  // Trim out all falsy values from an array.
+  _.compact = function(array) {
+    return _.filter(array, function(value){ return !!value; });
+  };
+
+  // Return a completely flattened version of an array.
+  _.flatten = function(array) {
+    return _.reduce(array, [], function(memo, value) {
+      if (_.isArray(value)) return memo.concat(_.flatten(value));
+      memo.push(value);
+      return memo;
+    });
+  };
+
+  // Return a version of the array that does not contain the specified value(s).
+  _.without = function(array) {
+    var values = _.rest(arguments);
+    return _.filter(array, function(value){ return !_.include(values, value); });
+  };
+
+  // Produce a duplicate-free version of the array. If the array has already
+  // been sorted, you have the option of using a faster algorithm.
+  _.uniq = function(array, isSorted) {
+    return _.reduce(array, [], function(memo, el, i) {
+      if (0 == i || (isSorted === true ? _.last(memo) != el : !_.include(memo, el))) memo.push(el);
+      return memo;
+    });
+  };
+
+  // Produce an array that contains every item shared between all the
+  // passed-in arrays.
+  _.intersect = function(array) {
+    var rest = _.rest(arguments);
+    return _.filter(_.uniq(array), function(item) {
+      return _.every(rest, function(other) {
+        return _.indexOf(other, item) >= 0;
+      });
+    });
+  };
+
+  // Zip together multiple lists into a single array -- elements that share
+  // an index go together.
+  _.zip = function() {
+    var args = _.toArray(arguments);
+    var length = _.max(_.pluck(args, 'length'));
+    var results = new Array(length);
+    for (var i = 0; i < length; i++) results[i] = _.pluck(args, String(i));
+    return results;
+  };
+
+  // If the browser doesn't supply us with indexOf (I'm looking at you, MSIE),
+  // we need this function. Return the position of the first occurence of an
+  // item in an array, or -1 if the item is not included in the array.
+  // Delegates to JavaScript 1.8's native indexOf if available.
+  _.indexOf = function(array, item) {
+    if (nativeIndexOf && array.indexOf === nativeIndexOf) return array.indexOf(item);
+    for (var i = 0, l = array.length; i < l; i++) if (array[i] === item) return i;
+    return -1;
+  };
+
+
+  // Delegates to JavaScript 1.6's native lastIndexOf if available.
+  _.lastIndexOf = function(array, item) {
+    if (nativeLastIndexOf && array.lastIndexOf === nativeLastIndexOf) return array.lastIndexOf(item);
+    var i = array.length;
+    while (i--) if (array[i] === item) return i;
+    return -1;
+  };
+
+  // Generate an integer Array containing an arithmetic progression. A port of
+  // the native Python range() function. See:
+  // http://docs.python.org/library/functions.html#range
+  _.range = function(start, stop, step) {
+    var a     = _.toArray(arguments);
+    var solo  = a.length <= 1;
+    var start = solo ? 0 : a[0], stop = solo ? a[0] : a[1], step = a[2] || 1;
+    var len   = Math.ceil((stop - start) / step);
+    if (len <= 0) return [];
+    var range = new Array(len);
+    for (var i = start, idx = 0; true; i += step) {
+      if ((step > 0 ? i - stop : stop - i) >= 0) return range;
+      range[idx++] = i;
+    }
+  };
+
+  // ----------------------- Function Functions: ------------------------------
+
+  // Create a function bound to a given object (assigning 'this', and arguments,
+  // optionally). Binding with arguments is also known as 'curry'.
+  _.bind = function(func, obj) {
+    var args = _.rest(arguments, 2);
+    return function() {
+      return func.apply(obj || {}, args.concat(_.toArray(arguments)));
+    };
+  };
+
+  // Bind all of an object's methods to that object. Useful for ensuring that
+  // all callbacks defined on an object belong to it.
+  _.bindAll = function(obj) {
+    var funcs = _.rest(arguments);
+    if (funcs.length == 0) funcs = _.functions(obj);
+    each(funcs, function(f) { obj[f] = _.bind(obj[f], obj); });
+    return obj;
+  };
+
+  // Delays a function for the given number of milliseconds, and then calls
+  // it with the arguments supplied.
+  _.delay = function(func, wait) {
+    var args = _.rest(arguments, 2);
+    return setTimeout(function(){ return func.apply(func, args); }, wait);
+  };
+
+  // Defers a function, scheduling it to run after the current call stack has
+  // cleared.
+  _.defer = function(func) {
+    return _.delay.apply(_, [func, 1].concat(_.rest(arguments)));
+  };
+
+  // Returns the first function passed as an argument to the second,
+  // allowing you to adjust arguments, run code before and after, and
+  // conditionally execute the original function.
+  _.wrap = function(func, wrapper) {
+    return function() {
+      var args = [func].concat(_.toArray(arguments));
+      return wrapper.apply(wrapper, args);
+    };
+  };
+
+  // Returns a function that is the composition of a list of functions, each
+  // consuming the return value of the function that follows.
+  _.compose = function() {
+    var funcs = _.toArray(arguments);
+    return function() {
+      var args = _.toArray(arguments);
+      for (var i=funcs.length-1; i >= 0; i--) {
+        args = [funcs[i].apply(this, args)];
+      }
+      return args[0];
+    };
+  };
+
+  // ------------------------- Object Functions: ------------------------------
+
+  // Retrieve the names of an object's properties.
+  // Delegates to ECMA5's native Object.keys
+  _.keys = nativeKeys || function(obj) {
+    if (_.isArray(obj)) return _.range(0, obj.length);
+    var keys = [];
+    for (var key in obj) if (hasOwnProperty.call(obj, key)) keys.push(key);
+    return keys;
+  };
+
+  // Retrieve the values of an object's properties.
+  _.values = function(obj) {
+    return _.map(obj, _.identity);
+  };
+
+  // Return a sorted list of the function names available on the object.
+  _.functions = function(obj) {
+    return _.filter(_.keys(obj), function(key){ return _.isFunction(obj[key]); }).sort();
+  };
+
+  // Extend a given object with all the properties in passed-in object(s).
+  _.extend = function(obj) {
+    each(_.rest(arguments), function(source) {
+      for (var prop in source) obj[prop] = source[prop];
+    });
+    return obj;
+  };
+
+  // Create a (shallow-cloned) duplicate of an object.
+  _.clone = function(obj) {
+    if (_.isArray(obj)) return obj.slice(0);
+    return _.extend({}, obj);
+  };
+
+  // Invokes interceptor with the obj, and then returns obj.
+  // The primary purpose of this method is to "tap into" a method chain, in order to perform operations on intermediate results within the chain.
+  _.tap = function(obj, interceptor) {
+    interceptor(obj);
+    return obj;
+  };
+
+  // Perform a deep comparison to check if two objects are equal.
+  _.isEqual = function(a, b) {
+    // Check object identity.
+    if (a === b) return true;
+    // Different types?
+    var atype = typeof(a), btype = typeof(b);
+    if (atype != btype) return false;
+    // Basic equality test (watch out for coercions).
+    if (a == b) return true;
+    // One is falsy and the other truthy.
+    if ((!a && b) || (a && !b)) return false;
+    // One of them implements an isEqual()?
+    if (a.isEqual) return a.isEqual(b);
+    // Check dates' integer values.
+    if (_.isDate(a) && _.isDate(b)) return a.getTime() === b.getTime();
+    // Both are NaN?
+    if (_.isNaN(a) && _.isNaN(b)) return true;
+    // Compare regular expressions.
+    if (_.isRegExp(a) && _.isRegExp(b))
+      return a.source     === b.source &&
+             a.global     === b.global &&
+             a.ignoreCase === b.ignoreCase &&
+             a.multiline  === b.multiline;
+    // If a is not an object by this point, we can't handle it.
+    if (atype !== 'object') return false;
+    // Check for different array lengths before comparing contents.
+    if (a.length && (a.length !== b.length)) return false;
+    // Nothing else worked, deep compare the contents.
+    var aKeys = _.keys(a), bKeys = _.keys(b);
+    // Different object sizes?
+    if (aKeys.length != bKeys.length) return false;
+    // Recursive comparison of contents.
+    for (var key in a) if (!(key in b) || !_.isEqual(a[key], b[key])) return false;
+    return true;
+  };
+
+  // Is a given array or object empty?
+  _.isEmpty = function(obj) {
+    if (_.isArray(obj) || _.isString(obj)) return obj.length === 0;
+    for (var key in obj) if (hasOwnProperty.call(obj, key)) return false;
+    return true;
+  };
+
+  // Is a given value a DOM element?
+  _.isElement = function(obj) {
+    return !!(obj && obj.nodeType == 1);
+  };
+
+  // Is a given value an array?
+  // Delegates to ECMA5's native Array.isArray
+  _.isArray = nativeIsArray || function(obj) {
+    return !!(obj && obj.concat && obj.unshift && !obj.callee);
+  };
+
+  // Is a given variable an arguments object?
+  _.isArguments = function(obj) {
+    return obj && obj.callee;
+  };
+
+  // Is a given value a function?
+  _.isFunction = function(obj) {
+    return !!(obj && obj.constructor && obj.call && obj.apply);
+  };
+
+  // Is a given value a string?
+  _.isString = function(obj) {
+    return !!(obj === '' || (obj && obj.charCodeAt && obj.substr));
+  };
+
+  // Is a given value a number?
+  _.isNumber = function(obj) {
+    return (obj === +obj) || (toString.call(obj) === '[object Number]');
+  };
+
+  // Is a given value a boolean?
+  _.isBoolean = function(obj) {
+    return obj === true || obj === false;
+  };
+
+  // Is a given value a date?
+  _.isDate = function(obj) {
+    return !!(obj && obj.getTimezoneOffset && obj.setUTCFullYear);
+  };
+
+  // Is the given value a regular expression?
+  _.isRegExp = function(obj) {
+    return !!(obj && obj.test && obj.exec && (obj.ignoreCase || obj.ignoreCase === false));
+  };
+
+  // Is the given value NaN -- this one is interesting. NaN != NaN, and
+  // isNaN(undefined) == true, so we make sure it's a number first.
+  _.isNaN = function(obj) {
+    return _.isNumber(obj) && isNaN(obj);
+  };
+
+  // Is a given value equal to null?
+  _.isNull = function(obj) {
+    return obj === null;
+  };
+
+  // Is a given variable undefined?
+  _.isUndefined = function(obj) {
+    return typeof obj == 'undefined';
+  };
+
+  // -------------------------- Utility Functions: ----------------------------
+
+  // Run Underscore.js in noConflict mode, returning the '_' variable to its
+  // previous owner. Returns a reference to the Underscore object.
+  _.noConflict = function() {
+    root._ = previousUnderscore;
+    return this;
+  };
+
+  // Keep the identity function around for default iterators.
+  _.identity = function(value) {
+    return value;
+  };
+
+  // Run a function n times.
+  _.times = function (n, iterator, context) {
+    for (var i = 0; i < n; i++) iterator.call(context, i);
+  };
+
+  // Break out of the middle of an iteration.
+  _.breakLoop = function() {
+    throw breaker;
+  };
+
+  // Add your own custom functions to the Underscore object, ensuring that
+  // they're correctly added to the OOP wrapper as well.
+  _.mixin = function(obj) {
+    each(_.functions(obj), function(name){
+      addToWrapper(name, _[name] = obj[name]);
+    });
+  };
+
+  // Generate a unique integer id (unique within the entire client session).
+  // Useful for temporary DOM ids.
+  var idCounter = 0;
+  _.uniqueId = function(prefix) {
+    var id = idCounter++;
+    return prefix ? prefix + id : id;
+  };
+
+  // By default, Underscore uses ERB-style template delimiters, change the
+  // following template settings to use alternative delimiters.
+  _.templateSettings = {
+    start       : '<%',
+    end         : '%>',
+    interpolate : /<%=(.+?)%>/g
+  };
+
+  // JavaScript templating a-la ERB, pilfered from John Resig's
+  // "Secrets of the JavaScript Ninja", page 83.
+  // Single-quote fix from Rick Strahl's version.
+  // With alterations for arbitrary delimiters.
+  _.template = function(str, data) {
+    var c  = _.templateSettings;
+    var endMatch = new RegExp("'(?=[^"+c.end.substr(0, 1)+"]*"+escapeRegExp(c.end)+")","g");
+    var fn = new Function('obj',
+      'var p=[],print=function(){p.push.apply(p,arguments);};' +
+      'with(obj){p.push(\'' +
+      str.replace(/[\r\t\n]/g, " ")
+         .replace(endMatch,"\t")
+         .split("'").join("\\'")
+         .split("\t").join("'")
+         .replace(c.interpolate, "',$1,'")
+         .split(c.start).join("');")
+         .split(c.end).join("p.push('")
+         + "');}return p.join('');");
+    return data ? fn(data) : fn;
+  };
+
+  // ------------------------------- Aliases ----------------------------------
+
+  _.each     = _.forEach;
+  _.foldl    = _.inject       = _.reduce;
+  _.foldr    = _.reduceRight;
+  _.select   = _.filter;
+  _.all      = _.every;
+  _.any      = _.some;
+  _.head     = _.first;
+  _.tail     = _.rest;
+  _.methods  = _.functions;
+
+  // ------------------------ Setup the OOP Wrapper: --------------------------
+
+  // If Underscore is called as a function, it returns a wrapped object that
+  // can be used OO-style. This wrapper holds altered versions of all the
+  // underscore functions. Wrapped objects may be chained.
+  var wrapper = function(obj) { this._wrapped = obj; };
+
+  // Helper function to continue chaining intermediate results.
+  var result = function(obj, chain) {
+    return chain ? _(obj).chain() : obj;
+  };
+
+  // A method to easily add functions to the OOP wrapper.
+  var addToWrapper = function(name, func) {
+    wrapper.prototype[name] = function() {
+      var args = _.toArray(arguments);
+      unshift.call(args, this._wrapped);
+      return result(func.apply(_, args), this._chain);
+    };
+  };
+
+  // Add all of the Underscore functions to the wrapper object.
+  _.mixin(_);
+
+  // Add all mutator Array functions to the wrapper.
+  each(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(name) {
+    var method = ArrayProto[name];
+    wrapper.prototype[name] = function() {
+      method.apply(this._wrapped, arguments);
+      return result(this._wrapped, this._chain);
+    };
+  });
+
+  // Add all accessor Array functions to the wrapper.
+  each(['concat', 'join', 'slice'], function(name) {
+    var method = ArrayProto[name];
+    wrapper.prototype[name] = function() {
+      return result(method.apply(this._wrapped, arguments), this._chain);
+    };
+  });
+
+  // Start chaining a wrapped Underscore object.
+  wrapper.prototype.chain = function() {
+    this._chain = true;
+    return this;
+  };
+
+  // Extracts the result from a wrapped and chained object.
+  wrapper.prototype.value = function() {
+    return this._wrapped;
+  };
+
+})();
+
+exports._.noConflict();
+});
+
+bespin.tiki.require("bespin:plugins").catalog.registerMetadata({"bespin": {"testmodules": [], "resourceURL": "resources/bespin/", "name": "bespin", "environments": {"main": true, "worker": true}, "type": "plugins/boot"}, "syntax_directory": {"resourceURL": "resources/syntax_directory/", "name": "syntax_directory", "environments": {"main": true, "worker": true}, "dependencies": {}, "testmodules": [], "provides": [{"register": "#discoveredNewSyntax", "ep": "extensionhandler", "name": "syntax"}], "type": "plugins/supported", "description": "Catalogs the available syntax engines"}, "underscore": {"testmodules": [], "type": "plugins/thirdparty", "resourceURL": "resources/underscore/", "description": "Functional Programming Aid for Javascript. Works well with jQuery.", "name": "underscore"}});
+/* ***** BEGIN LICENSE BLOCK *****
+ * Version: MPL 1.1/GPL 2.0/LGPL 2.1
+ *
+ * The contents of this file are subject to the Mozilla Public License Version
+ * 1.1 (the "License"); you may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at
+ * http://www.mozilla.org/MPL/
+ *
+ * Software distributed under the License is distributed on an "AS IS" basis,
+ * WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ * for the specific language governing rights and limitations under the
+ * License.
+ *
+ * The Original Code is Bespin.
+ *
+ * The Initial Developer of the Original Code is
+ * Mozilla.
+ * Portions created by the Initial Developer are Copyright (C) 2009
+ * the Initial Developer. All Rights Reserved.
+ *
+ * Contributor(s):
+ *   Bespin Team (bespin@mozilla.com)
+ *
+ * Alternatively, the contents of this file may be used under the terms of
+ * either the GNU General Public License Version 2 or later (the "GPL"), or
+ * the GNU Lesser General Public License Version 2.1 or later (the "LGPL"),
+ * in which case the provisions of the GPL or the LGPL are applicable instead
+ * of those above. If you wish to allow use of your version of this file only
+ * under the terms of either the GPL or the LGPL, and not to allow others to
+ * use your version of this file under the terms of the MPL, indicate your
+ * decision by deleting the provisions above and replace them with the notice
+ * and other provisions required by the GPL or the LGPL. If you do not delete
+ * the provisions above, a recipient may use your version of this file under
+ * the terms of any one of the MPL, the GPL or the LGPL.
+ *
+ * ***** END LICENSE BLOCK ***** */
+
+// Responsible for loading the second script (BespinMain 
+// or BespinWorker)
+
+// check to see if we're in a worker
+if (typeof(window) === "undefined") {
+    importScripts("BespinWorker.js");
+} else {
+    (function() {
+        var mainscript = document.createElement("script");
+        mainscript.setAttribute("src", bespin.base + "BespinMain.js");
+        var head = document.getElementsByTagName("head")[0];
+        head.appendChild(mainscript);
+    })();
+}
