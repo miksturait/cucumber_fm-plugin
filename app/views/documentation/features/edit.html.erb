@@ -73,7 +73,8 @@
           </li>
         </ul>
       </div>
-      <h3>Navigation</h3>
+      <h3>Navigation <%= text_field_tag 'navigation_query', '',
+                                        :style => "width: 7em; margin-left: 0.5em;", :onKeyUp => 'navigationFilter();' %></h3>
       <ul class="navigator_list">
       </ul>
     </div>
@@ -109,7 +110,7 @@
     function navigationElement(line_number, title, scenario_tags, estimation) {
         return("<li><h5><a onclick=\"scrollTo(" + line_number + ");; return false;\" href=\"#\">" + title + "</a></h5>\
        <p>" + scenario_tags + "</p>\
-       <span class=\"marker m_magenta\" style=\"position:absolute; top: 13px; right: 5px;\">"+estimation+"</span> </li>");
+       <span class=\"marker m_magenta\" style=\"position:absolute; top: 13px; right: 5px;\">" + estimation + "</span> </li>");
     }
 
     function navigationRedraw() {
@@ -122,9 +123,9 @@
         $.each(editorLines(), function(index, line) {
             if (line_before.match(/^\s*@.+/)) {
                 tags_line = line_before;
-                if (tags_line.match(/@\d+/)){
-                   var estimation_tag = tags_line.match(/@\d+/)
-                   estimation = estimation_tag[0].replace('@','');
+                if (tags_line.match(/@\d+/)) {
+                    var estimation_tag = tags_line.match(/@\d+/)
+                    estimation = estimation_tag[0].replace('@', '');
                 }
             }
             else {
@@ -138,6 +139,7 @@
             line_before = line;
         });
         $('.navigator_list').html(navigation);
+        navigationFilter();
     }
 
     function scrollTo(number) {
@@ -159,6 +161,31 @@
 
     function scrollToFirstMatchingLine(text) {
         scrollTo(findLineWithText(text));
+    }
+
+    function showOnlyScenariosThatPassFilterOnNavigationList(filter) {
+        if (filter != null || filter != "") {
+            var jqueryExpression = "";
+            $.each(filter.split(/\s+/), function(index, word) {
+                if (word.match(/^~/)) {
+                    jqueryExpression += ':not(:contains(\'' + word.replace('~','') + '\'))';
+                }
+                else {
+                    jqueryExpression += ':contains(\'' + word + '\')';
+                }
+            })
+
+            var show_expression = "ul.navigator_list > li" + jqueryExpression;
+            $("ul.navigator_list > li").hide();
+            $(show_expression).show();
+        }
+        else {
+            $("ul.navigator_list > li").show();
+        }
+    }
+
+    function navigationFilter() {
+        showOnlyScenariosThatPassFilterOnNavigationList($('#navigation_query').attr('value'));
     }
 
 </script>
