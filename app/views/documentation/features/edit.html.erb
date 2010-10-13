@@ -3,7 +3,8 @@
     <div class="actions">
       <h2>Actions</h2>
     </div>
-    <h1><%= @feature.info.title %> - <i><%= @feature.relative_path %></i></h1>
+    <h1>[ <%= @feature.info.tags.join(" ") %> ] ::: <%= @feature.info.title %> - <i><%= @feature.relative_path %></i>
+    </h1>
   </div>
   <div class="content two_columns">
     <div class="left">
@@ -13,52 +14,66 @@
     <div class="right">
       <ul class="actions">
         <li>
-          <% form_tag documentation_feature_path(@feature.id), :name => 'edit_form' do %>
-              <%= hidden_field_tag 'raw', '' %>
+          <div style="height: 2.3em; width: 100%;">
+            <div style="float: left;">
+              <%= link_to_function "Save", "document.getElementById('raw').value= editor.value; document.edit_form.submit();",
+                                   :style => "width: 5em;" %>
+            </div>
+            <div style="float: right;">
+              <%= link_to_function '[+]', '$("#actions_more").toggle();', :style => "width: 1.5em;" %>
+            </div>
+          </div>
 
-              <%= hidden_field_tag 'config[tags]', @cfm.config.tags %>
-              <%= hidden_field_tag 'config[dir]', @cfm.config.dir %>
-              <%= hidden_field_tag 'config[aggregate][]', @cfm.config.aggregate.first %>
-              <%= hidden_field_tag 'config[aggregate][]', @cfm.config.aggregate.last %>
+          <div id="actions_more" style="display: none; float:none; margin-top: 5%;">
+            <% form_tag documentation_feature_path(@feature.id), :name => 'edit_form' do %>
+                <%= hidden_field_tag 'raw', '' %>
 
-              <ul class="form_fields">
-                <li>
-                  <label for="config_cvs_commit">
-                    <%= hidden_field_tag 'config[cvs_commit]', 0 %>
-                    <%= check_box_tag 'config[cvs_commit]', 1, @cfm.config.cvs_commit=='1' %>
-                    Commit
-                  </label>
-                  <label for="config_cvs_push">
-                    <%= hidden_field_tag 'config[cvs_push]', 0 %>
-                    <%= check_box_tag 'config[cvs_push]', 1, @cfm.config.cvs_push=='1' %>
-                    Push
-                  </label>
-                </li>
-              </ul>
-          <% end %>
-          <%= link_to_function "Save", "document.getElementById('raw').value= editor.value; document.edit_form.submit();" %>
+                <%= hidden_field_tag 'config[tags]', @cfm.config.tags %>
+                <%= hidden_field_tag 'config[dir]', @cfm.config.dir %>
+                <%= hidden_field_tag 'config[aggregate][]', @cfm.config.aggregate.first %>
+                <%= hidden_field_tag 'config[aggregate][]', @cfm.config.aggregate.last %>
+
+                <ul class="form_fields">
+                  <li>
+                    <label for="config_cvs_commit">
+                      <%= hidden_field_tag 'config[cvs_commit]', 0 %>
+                      <%= check_box_tag 'config[cvs_commit]', 1, @cfm.config.cvs_commit=='1' %>
+                      Commit
+                    </label>
+                    <label for="config_cvs_push">
+                      <%= hidden_field_tag 'config[cvs_push]', 0 %>
+                      <%= check_box_tag 'config[cvs_push]', 1, @cfm.config.cvs_push=='1' %>
+                      Push
+                    </label>
+                  </li>
+                </ul>
+            <% end %>
+          </div>
         </li>
-        <li><%= link_to "Back", documentation_features_path %></li>
+        <!--<li><%#= link_to "Back", documentation_features_path %></li>-->
       </ul>
-      <h3>File Management</h3>
-      <ul class="actions">
-        <li>
-          <% form_tag rename_documentation_feature_path(@feature.id) do %>
-              <%= text_field_tag :name %>
-              <%= submit_tag 'rename' %>
-          <% end %>
-        </li>
-        <li>
-          <% form_tag move_documentation_feature_path(@feature.id) do %>
-              <%= select_tag 'dir', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
-              <%= submit_tag 'move' %>
-          <% end %>
-        </li>
-        <li>
-          <%= link_to 'Delete', documentation_feature_path(@feature.id), :method => 'delete', :confirm => "Do you really want to remove this feature?" %>
-        </li>
-      </ul>
-      <h3>Navigatior</h3>
+      <h3>File Management <%= link_to_function '[+]', '$("#file_management_more").toggle();' %></h3>
+
+      <div id="file_management_more" style="display: none;">
+        <ul class="actions">
+          <li>
+            <% form_tag rename_documentation_feature_path(@feature.id) do %>
+                <%= text_field_tag :name %>
+                <%= submit_tag 'rename' %>
+            <% end %>
+          </li>
+          <li>
+            <% form_tag move_documentation_feature_path(@feature.id) do %>
+                <%= select_tag 'dir', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
+                <%= submit_tag 'move' %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to 'Delete', documentation_feature_path(@feature.id), :method => 'delete', :confirm => "Do you really want to remove this feature?" %>
+          </li>
+        </ul>
+      </div>
+      <h3>Navigation</h3>
       <ul class="navigator_list">
       </ul>
     </div>

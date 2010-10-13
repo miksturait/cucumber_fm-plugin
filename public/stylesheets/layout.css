@@ -228,7 +228,9 @@ body
 .frame .content .right
 {
     width: 197px;
+    height: 600px;
     float: right;
+    overflow-y: auto;
     -moz-border-radius-bottomright: 5px;
     -webkit-border-bottom-right-radius: 5px;
     border-bottom-right-radius: 5px;    
