@@ -106,10 +106,10 @@
         return(editor.value.split("\n"));
     }
 
-    function navigationElement(line_number, title, scenario_tags) {
+    function navigationElement(line_number, title, scenario_tags, estimation) {
         return("<li><h5><a onclick=\"scrollTo(" + line_number + ");; return false;\" href=\"#\">" + title + "</a></h5>\
        <p>" + scenario_tags + "</p>\
-       <span class=\"marker m_magenta\" style=\"position:absolute; top: 13px; right: 5px;\">0</span> </li>");
+       <span class=\"marker m_magenta\" style=\"position:absolute; top: 13px; right: 5px;\">"+estimation+"</span> </li>");
     }
 
     function navigationRedraw() {
@@ -118,16 +118,22 @@
         var navigation = ""
         var line_before = ""
         var tags_line = ""
+        var estimation = ""
         $.each(editorLines(), function(index, line) {
             if (line_before.match(/^\s*@.+/)) {
                 tags_line = line_before;
+                if (tags_line.match(/@\d+/)){
+                   var estimation_tag = tags_line.match(/@\d+/)
+                   estimation = estimation_tag[0].replace('@','');
+                }
             }
             else {
                 tags_line = 'no tags found'
+                estimation = 'NaN';
             }
 
             if (scenario_line.test(line)) {
-                navigation += navigationElement(index + 1, line.replace(scenario_title, ''), tags_line);
+                navigation += navigationElement(index + 1, line.replace(scenario_title, ''), tags_line, estimation);
             }
             line_before = line;
         });
