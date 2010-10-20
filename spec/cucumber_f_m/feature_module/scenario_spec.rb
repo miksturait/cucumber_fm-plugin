@@ -5,7 +5,7 @@ describe CucumberFM::FeatureElement::Scenario do
 raw = %Q{#{@comment = "## wireframe::http://somelink"}
 
   @_todo  @2.5 @hash @wow
-  Scenario: #{@title = "Creating filter scope"}
+  Scenario: #{@title = "Creating filter: scope"}
     When I follow "New system user"
     And I fill in "password" for "Password Confirmation"}
    @feature = CucumberFM::Feature.new('fake_path')

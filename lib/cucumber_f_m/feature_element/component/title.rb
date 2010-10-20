@@ -15,7 +15,7 @@ module CucumberFM
 
         def fetch_title
           if tag_line = title_line_pattern.match(raw)
-            tag_line[0].gsub(/^.*:/,'').strip
+            tag_line[0].gsub(/^[^:]*:/,'').strip
           else
             '--- no title found'
           end
