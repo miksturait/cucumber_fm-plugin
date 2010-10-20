@@ -92,6 +92,7 @@
         var edit = document.getElementById("raw-bespin");
         var env = edit.bespin;
         window.editor = env.editor;
+        editor.value = editor.value.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
         navigationRedraw();
         editor.textChanged.add(function(oldRange, newRange, newText) {
             navigationRedraw();

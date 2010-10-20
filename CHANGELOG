@@ -1,3 +1,4 @@
+* fix - &amp; &lt; &gt; reverse_html_escape
 * fix - escaping ' and " for javascript strings
 * fix sorting directory names in business overview page
 * fix parsing estimation tag in scenarios navigator
