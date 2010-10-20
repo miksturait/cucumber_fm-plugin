@@ -16,7 +16,7 @@ Feature: Editor - advance
     When Greg write "ario: "
     Then Tome should imediately see "Scenario: " within editor in his browser
 
-  @_todo @m2 @i5
+  @_done @m2 @i5
   Scenario: Syntax highlighting
 
   @_backlog @m0

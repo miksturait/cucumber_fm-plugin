@@ -28,7 +28,7 @@ Feature: Business Overview - dashboard
   @_done @m2 @i3
   Scenario: Sort tags that are use to aggregate
 
-  @_todo
+  @_done @m2 @i5
   Scenario: Clicking on scenario
     Then I should be on feature page
     And I editor should be focus on the scenario line
