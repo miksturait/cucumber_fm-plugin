@@ -124,7 +124,7 @@
             if (line_before.match(/^\s*@.+/)) {
                 tags_line = line_before;
                 if (tags_line.match(/@\d+/)) {
-                    var estimation_tag = tags_line.match(/@\d+/)
+                    var estimation_tag = tags_line.match(/@\d+(\.\d+)?/)
                     estimation = estimation_tag[0].replace('@', '');
                 }
             }

@@ -1,4 +1,4 @@
-
+* fix parsing estimation tag in scenarios navigator
 * custom build of Mozilla SkyWriter (aka Bespin) with gherkin syntax highlighting
 * editor page
 ** layout fixes
