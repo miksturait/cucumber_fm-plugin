@@ -8,7 +8,7 @@ module CucumberFM
     end
 
     def aggregate_options
-      [''] + CucumberFM::FeatureElement::Component::Tags::PATTERN.keys.map(& :to_s)
+      [''] + CucumberFM::FeatureElement::Component::Tags::PATTERN.keys.map(& :to_s).sort
     end
 
     private

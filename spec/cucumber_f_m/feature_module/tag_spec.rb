@@ -17,7 +17,7 @@ describe "Cucumber::FeatureElement::Component::Tags" do
 
   context "without need to look in feature" do
     before(:each) do
-      @test.stub!(:raw).and_return("@user @m2 @_done @__forums @5 @_3 @mc @i1 @p4")
+      @test.stub!(:raw).and_return("@user @m2 @_done @__forums @5 @_3 @mc @i1 @p4 @$_admin")
       @test.stub!(:parent_tags).and_return(['@tb', '@_wip', '@m2b', '@4.5',
                                             '@__knowledge_base', '@_8', '@knowledge_base'])
     end
@@ -30,7 +30,8 @@ describe "Cucumber::FeatureElement::Component::Tags" do
             :value => 3,
             :developer => '@mc',
             :iteration => '@i1',
-            :priority => '@p4'
+            :priority => '@p4',
+            :role => '@$_admin'
      }.each do |tag, value|
       it "should scan #{tag} with #{value}" do
         @test.send(tag).should == value
