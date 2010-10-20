@@ -69,7 +69,7 @@
             <% end %>
           </li>
           <li>
-            <%= link_to 'Delete', documentation_feature_path(@feature.id), :method => 'delete', :confirm => "Do you really want to remove this feature?" %>
+            <%= link_to 'Delete', delete_documentation_feature_path(@feature.id), :confirm => "Do you really want to remove this feature?" %>
           </li>
         </ul>
       </div>

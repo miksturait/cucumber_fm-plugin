@@ -1,6 +1,6 @@
 class Documentation::FeaturesController < Documentation::ApplicationController
 
-  before_filter :fetch_feature, :only => [:show, :edit, :update, :destroy, :rename, :move]
+  before_filter :fetch_feature, :only => [:show, :edit, :update, :delete, :rename, :move]
   before_filter :cleanup_raw, :only => [:update]
 
   def index
@@ -39,7 +39,7 @@ class Documentation::FeaturesController < Documentation::ApplicationController
     redirect_to :action => :edit
   end
 
-  def destroy
+  def delete
     @feature.destroy
     flash[:notice]= "File: #{@feature.filename} was removed"
     redirect_to :action => :index

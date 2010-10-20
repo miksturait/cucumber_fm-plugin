@@ -1,3 +1,4 @@
+* fix - feature delete
 * fix - correct parsing scenario|feature|background title when in title appear ':'
 * fix - syntax highlighting ( Background:, Examples:, And, But )
 * fix - &amp; &lt; &gt; reverse_html_escape
