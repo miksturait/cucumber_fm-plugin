@@ -1,4 +1,4 @@
-#:::mockup: http://cs3b-cucumber-fm.s3.amazonaws.com/business.overview.png
+#:::mockup::: http://cs3b-cucumber-fm.s3.amazonaws.com/business.overview.png
 @business-dashboard
 Feature: Business Overview - dashboard
   In order to view stuff to do and see cost and value

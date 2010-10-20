@@ -172,7 +172,8 @@ end
 
 INFO_CONTENT = <<EOF
 # some comment
-# wireframe:: http://cs3b.com
+#:::wireframe::: http://cs3b.com
+
 @tag @mc
 Feature: Tag filter
   In order to fetch only scenarios that i want
@@ -191,7 +192,7 @@ BACKGROUND_CONTENT = <<EOF
 EOF
 
 SCENARIO_CONTENT = <<EOF
-  ## wireframe::http://somelink
+  #:::wireframe::: http://somelink
 
   @_todo @5.25
   Scenario: Creating filter scope
