@@ -1,3 +1,4 @@
+* feature - highlighting scenario estimation if this scenario isn't done
 * fix - sorting group by context in business overview
 * feature - grouping by role (@$_)
 * fix - feature delete

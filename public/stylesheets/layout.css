@@ -149,7 +149,7 @@ body
 .frame
 {
     -moz-box-shadow: 0px 0px 5px #c8cdd0;
-    box-shadow: 0px 0px 5px #c8cdd0; 
+    box-shadow: 0px 0px 5px #c8cdd0;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -233,7 +233,7 @@ body
     overflow-y: auto;
     -moz-border-radius-bottomright: 5px;
     -webkit-border-bottom-right-radius: 5px;
-    border-bottom-right-radius: 5px;    
+    border-bottom-right-radius: 5px;
 }
 
 .frame .content .right h3
@@ -268,7 +268,7 @@ body
     font-weight: bold;
     text-shadow: 1px 1px 0px #4e900c;
     text-decoration :none;
-    
+
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -320,7 +320,13 @@ table tbody tr.feature_header:first-child td
     border-top: none;
 }
 
+td.not_done {
+    background: #f08080;
+}
 
+td.done {
+
+}
 
 .marker
 {
@@ -538,7 +544,7 @@ input, textarea, select
 
 .statistic tbody tr:nth-of-type(2n) td
 {
-    background: #fbfbfb; 
+    background: #fbfbfb;
 }
 
 .statistic tbody tr.light_header td
@@ -547,7 +553,7 @@ input, textarea, select
     background: -webkit-gradient(linear, left top, left bottom, from(#f1f5f7), to(#fff));
     border-top: 1px solid #e2e7eb;
     border-bottom: 1px solid #edf1f4;
-    padding: 4px 4px 4px 10px;;    
+    padding: 4px 4px 4px 10px;;
 }
 
 table tbody tr.indent_25 td

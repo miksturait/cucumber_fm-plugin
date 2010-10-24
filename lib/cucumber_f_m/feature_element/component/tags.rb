@@ -41,6 +41,10 @@ module CucumberFM
           @tags = tags
         end
 
+        def done?
+          %w(@_done @_qa @_tested @_accepted).include?(status)
+        end
+
 
         def estimation
           effort ? effort.gsub('@', '').to_f : 0.0

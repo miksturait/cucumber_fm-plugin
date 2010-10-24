@@ -104,12 +104,13 @@ module Documentation
     def scenario_row(scenario)
       content_tag('tr', :class => 'scenario_row') do
         content_tag('td') <<
-                content_tag('td',  :colspan => 3, :style => 'text-align: left; padding-left: 25px;') do
+                content_tag('td', :colspan => 3, :style => 'text-align: left; padding-left: 25px;') do
                   link_to(scenario.title,
                           edit_documentation_feature_path(scenario.feature.id, :query => scenario.title),
-                  :class => 'scenario_link')
+                          :class => 'scenario_link')
                 end <<
-                content_tag('td', scenario.estimation, :style => 'text-align: center;')
+                content_tag('td', scenario.estimation, :style => 'text-align: center;',
+                            :class => (scenario.done? ? 'done' : 'not_done'))
       end
     end
 

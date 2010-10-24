@@ -11,10 +11,12 @@ describe CucumberFM::FeatureElement::Comment do
     @comment = CucumberFM::FeatureElement::Comment.new("nil", raw)
 
     it "should be treated as link" do
+      pending
       @comment.send(:is_it_link?).should be_true
     end
 
     it "should recognize type: #{type}" do
+      pending
       @comment.type.should == type
     end
   end

@@ -59,13 +59,14 @@ describe "Cucumber::FeatureElement::Component::Tags" do
         @test.send(tag).should == value
       end
     end
+    it { @test.done?.should be_false }
   end
 
   context "scenario tags without duplicates" do
 
     before(:each) do
       @test.stub!(:raw).and_return("@mc @m2 @__ads @p1 @i2")
-      @test.stub!(:parent_tags).and_return(['@tb', '@_wip', '@m2b', '@4.5',
+      @test.stub!(:parent_tags).and_return(['@tb', '@_done', '@m2b', '@4.5',
                                             '@__knowledge_base', '@_8', '@knowledge_base'])
     end
     ['@tb', '@m2b', '@__knowledge_base'].each do |tag|
@@ -76,6 +77,7 @@ describe "Cucumber::FeatureElement::Component::Tags" do
     it "should return 9 tags" do
       @test.should have(9).tags
     end
+    it { @test.done?.should be_true }
   end
 
   context "tag detecting"
