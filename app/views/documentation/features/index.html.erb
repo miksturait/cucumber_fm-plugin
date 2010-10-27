@@ -12,8 +12,8 @@
         <tr>
           <th></th>
           <th></th>
-          <th style="width: 170px">Features <span class="marker m_blue"><%= @cfm.features.size %></span></th>
-          <th style="width: 170px">Scenarios <span class="marker m_magenta"><%= @cfm.scenarios.size %></span></th>
+          <th style="width: 170px">Features <span class="marker m_magenta"><%= @cfm.features.size %></span></th>
+          <th style="width: 170px">Scenarios <span class="marker m_blue"><%= @cfm.scenarios.size %></span></th>
           <th style="width: 170px">Estimation <span class="marker m_grey"><%= @cfm.estimation %></span></th>
         </tr>
         </thead>
@@ -24,61 +24,86 @@
     </div>
 
     <div class="right">
-      <ul class="actions">
-        <li><%= link_to "Filter", "#" %></li>
-        <li class="section_view">
+      <% form_tag '', :method => :get do %>
 
-          <% form_tag '', :method => :get do %>
-              <h4>Scope by</h4>
+          <h3 class="first">Scope by</h3>
 
-              <ul class="form_fields">
-                <%= hidden_field_tag 'config[cvs_commit]', @cfm.config.cvs_commit %>
-                <%= hidden_field_tag 'config[cvs_push]', @cfm.config.cvs_push %>
-                <li>
+          <div class="pdd">
+
+            <fieldset class="inputs">
+              <%= hidden_field_tag 'config[cvs_commit]', @cfm.config.cvs_commit %>
+              <%= hidden_field_tag 'config[cvs_push]', @cfm.config.cvs_push %>
+              <ol>
+                <li class="select">
                   <%= label_tag 'config[dir]', "Directory:" %>
                   <%= select_tag 'config[dir]', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
                 </li>
-                <li>
+                <li class="string">
                   <%= label_tag 'config[tags]', "Tags:" %>
                   <%= text_field_tag 'config[tags]', @cfm.config.tags %>
                 </li>
-              </ul>
+              </ol>
+            </fieldset>
 
-              <h4>Presentation settings</h4>
+          </div>
 
-              <ul class="form_fields">
-                <li>
+          <h3>Presentation settings</h3>
+
+          <div class="pdd">
+
+            <fieldset class="inputs">
+              <ol>
+                <li class="select">
                   <label>Group by</label>
                   <%= select_tag 'config[aggregate][]', options_for_select(@cfm.config.aggregate_options, :selected => @cfm.config.aggregate.first) %>
                 </li>
-                <li>
+                <li class="select">
                   <%= select_tag 'config[aggregate][]', options_for_select(@cfm.config.aggregate_options, :selected => @cfm.config.aggregate.last) %>
                 </li>
-                <li class="commit">
-                  <%= submit_tag "Filter" %>
+                <li class="commit ta_r">
+                  <div class="bt">
+                    <%= submit_tag "Filter" %>
+                  </div>
                 </li>
-              </ul>
 
+              </ol>
+            </fieldset>
 
-          <% end %>
-        </li>
-        <li><%= link_to_function "Add new feature", "#" %></li>
+            <div class="ta_r">
 
-        <li class="section_view">
-          <ul class="form_fields">
-            <% form_tag documentation_features_path, :name => 'new_form', :method => 'post' do %>
-                <li>
+            </div>
+
+          </div>
+      <% end %>
+
+      <div class="header">
+        <h2>Add new feature</h2>
+      </div>
+
+      
+
+      <% form_tag documentation_features_path, :name => 'new_form', :method => 'post' do %>
+
+          <div class="pdd">
+
+            <fieldset class="inputs">
+              <ol>
+                <li class="string">
                   <label>Feature title</label>
                   <%= text_field_tag 'name' %>
                 </li>
-                <li class="commit">
-                  <%= submit_tag "Add" %>
+                <li class="commit ta_r">
+                  <div class="bt">
+                    <%= submit_tag "Add" %>
+                  </div>
                 </li>
+              </ol>
+            </fieldset>
+            
+          </div>
 
-            <% end %>
-          </ul>
-        </li>
-      </ul>
+      <% end %>
+
     </div>
 
     <div class="clb"></div>

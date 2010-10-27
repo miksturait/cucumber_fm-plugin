@@ -25,7 +25,6 @@
     {
         width: 940px;
     }
-
 }
 
 
@@ -49,7 +48,19 @@
         width: 257px;
     }
 
+    .inputs ol li.string input,
+    .inputs ol li.password input
+    {
+        /*width: 170px;*/
+        width: 230px;
+    }
 
+    .inputs ol li.select select
+    {
+        /*width: 178px;*/
+        width: 238px;
+        margin-bottom: 3px;
+    }
 
 }
 

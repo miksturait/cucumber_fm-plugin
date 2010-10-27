@@ -2,6 +2,7 @@
   <div class="head">
     <div class="actions">
       <h2>Actions</h2>
+      <%= link_to_function '', '$("#actions_more").toggle();', :class => "toggler" %>
     </div>
     <h1>[ <%= @feature.info.tags.join(" ") %> ] ::: <%= @feature.info.title %> - <i><%= @feature.relative_path %></i>
     </h1>
@@ -12,19 +13,11 @@
     </div>
 
     <div class="right">
-      <ul class="actions">
-        <li>
-          <div style="height: 2.3em; width: 100%;">
-            <div style="float: left;">
-              <%= link_to_function "Save", "document.getElementById('raw').value= editor.value; document.edit_form.submit();",
-                                   :style => "width: 5em;" %>
-            </div>
-            <div style="float: right;">
-              <%= link_to_function '[+]', '$("#actions_more").toggle();', :style => "width: 1.5em;" %>
-            </div>
-          </div>
 
-          <div id="actions_more" style="display: none; float:none; margin-top: 5%;">
+      <div id="right_wrapper">
+
+        <div class="pdd">
+          <div id="actions_more" style="display: none;">
             <% form_tag documentation_feature_path(@feature.id), :name => 'edit_form' do %>
                 <%= hidden_field_tag 'raw', '' %>
 
@@ -49,38 +42,72 @@
                 </ul>
             <% end %>
           </div>
-        </li>
-        <!--<li><%#= link_to "Back", documentation_features_path %></li>-->
-      </ul>
-      <h3>File Management <%= link_to_function '[+]', '$("#file_management_more").toggle();' %></h3>
 
-      <div id="file_management_more" style="display: none;">
-        <ul class="actions">
-          <li>
+          <div class="ta_r">
+            <%= link_to_function "Save", "document.getElementById('raw').value= editor.value; document.edit_form.submit();", :class => "bt" %>
+          </div>
+
+        </div>
+
+
+        <div class="header">
+          <h2>File Management</h2>
+          <%= link_to_function '', '$("#file_management_more").toggle();', :class => "toggler" %>
+        </div>
+
+        <div id="file_management_more" style="display: none;">
+
+          <div class="pdd">
             <% form_tag rename_documentation_feature_path(@feature.id) do %>
-                <%= text_field_tag :name %>
-                <%= submit_tag 'rename' %>
+                <fieldset class="inputs inputs_140 inputs_inline">
+                  <ol>
+                    <li class="string">
+                      <%= text_field_tag :name %>
+                    </li>
+                    <li class="commit">
+                      <div class="bt bt_blue">
+                        <%= submit_tag 'rename' %>
+                      </div>
+                    </li>
+                  </ol>
+                </fieldset>
             <% end %>
-          </li>
-          <li>
             <% form_tag move_documentation_feature_path(@feature.id) do %>
-                <%= select_tag 'dir', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
-                <%= submit_tag 'move' %>
+                <fieldset class="inputs inputs_140 inputs_inline">
+                  <ol>
+                    <li class="select">
+                      <%= select_tag 'dir', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
+                    </li>
+                    <li class="commit">
+                      <div class="bt bt_blue">
+                        <%= submit_tag 'move' %>
+                      </div>
+                    </li>
+                  </ol>
+                </fieldset>
             <% end %>
-          </li>
-          <li>
-            <%= link_to 'Delete', delete_documentation_feature_path(@feature.id), :confirm => "Do you really want to remove this feature?" %>
-          </li>
+          </div>
+          <div class="pdd ta_r">
+            <%= link_to 'Delete', delete_documentation_feature_path(@feature.id), :confirm => "Do you really want to remove this feature?", :class => "bt" %>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="header">
+        <h2>Navigation</h2>
+        <%= text_field_tag 'navigation_query', '', :onKeyUp => 'navigationFilter();' %>
+      </div>
+
+      <div id="navigator_wrapper">
+        <ul class="navigator_list">
         </ul>
       </div>
-      <h3>Navigation <%= text_field_tag 'navigation_query', '',
-                                        :style => "width: 7em; margin-left: 0.5em;", :onKeyUp => 'navigationFilter();' %></h3>
-      <ul class="navigator_list">
-      </ul>
+
     </div>
 
     <div class="clb"></div>
-
 
   </div>
 </div>
@@ -98,9 +125,9 @@
             navigationRedraw();
         });
 
-        <% if params.has_key?('query') %>
-        <%= "scrollToFirstMatchingLine('#{escape_javascript(params['query'])}');" %>
-        <% end %>
+    <% if params.has_key?('query') %>
+    <%= "scrollToFirstMatchingLine('#{escape_javascript(params['query'])}');" %>
+    <% end %>
     };
 
 
@@ -169,7 +196,7 @@
             var jqueryExpression = "";
             $.each(filter.split(/\s+/), function(index, word) {
                 if (word.match(/^~/)) {
-                    jqueryExpression += ':not(:contains(\'' + word.replace('~','') + '\'))';
+                    jqueryExpression += ':not(:contains(\'' + word.replace('~', '') + '\'))';
                 }
                 else {
                     jqueryExpression += ':contains(\'' + word + '\')';
@@ -188,5 +215,22 @@
     function navigationFilter() {
         showOnlyScenariosThatPassFilterOnNavigationList($('#navigation_query').attr('value'));
     }
+
+    function changeRightHeight()
+    {
+        var h = 600 - 43 - $("#right_wrapper").height();
+
+        $("#navigator_wrapper").height(h);
+    }
+
+    jQuery(document).ready(function() {
+
+        changeRightHeight();
+
+        $('.toggler').bind("click", function() {
+            $(this).toggleClass("toggler_minus");
+            changeRightHeight()
+        })
+    })
 
 </script>

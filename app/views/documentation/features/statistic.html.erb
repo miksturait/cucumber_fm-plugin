@@ -7,7 +7,7 @@
   </div>
   <div class="content two_columns">
     <div class="left">
-      
+
       <% [:overal, :iteration, :bucket, :developer, :something_todo, :component, :various, :status].each do |type| %>
           <%= raw statistic_table(type, @statistic) %>
       <% end %>
@@ -15,39 +15,38 @@
     </div>
 
     <div class="right">
-      <ul class="actions">
-        <li><%= link_to "Filter", "#" %></li>
-        <li class="section_view">
 
-          <% form_tag '', :method => :get do %>
-              <h4>Scope by</h4>
+      <% form_tag '', :method => :get do %>
 
-              <ul class="form_fields">
-                <%= hidden_field_tag 'config[cvs_commit]', @cfm.config.cvs_commit %>
-                <%= hidden_field_tag 'config[cvs_push]', @cfm.config.cvs_push %>
-                <%= hidden_field_tag 'config[aggregate][]', @cfm.config.aggregate.first %>
-                <%= hidden_field_tag 'config[aggregate][]', @cfm.config.aggregate.last %>
+          <h3 class="first">Scope by</h3>
 
-                <li>
+          <div class="pdd">
+
+            <fieldset class="inputs">
+              <%= hidden_field_tag 'config[cvs_commit]', @cfm.config.cvs_commit %>
+              <%= hidden_field_tag 'config[cvs_push]', @cfm.config.cvs_push %>
+              <%= hidden_field_tag 'config[aggregate][]', @cfm.config.aggregate.first %>
+              <%= hidden_field_tag 'config[aggregate][]', @cfm.config.aggregate.last %>
+              <ol>
+                <li class="select">
                   <%= label_tag 'config[dir]', "Directory:" %>
                   <%= select_tag 'config[dir]', options_for_select(list_of_dirs, :selected => @cfm.config.dir) %>
                 </li>
-                <li>
+                <li class="string">
                   <%= label_tag 'config[tags]', "Tags:" %>
                   <%= text_field_tag 'config[tags]', @cfm.config.tags %>
                 </li>
-              </ul>
-
-              <ul class="form_fields">
-
-                <li class="commit">
-                  <%= submit_tag "Filter" %>
+                <li class="commit ta_r">
+                  <div class="bt">
+                    <%= submit_tag "Filter" %>
+                  </div>
                 </li>
-              </ul>
+              </ol>
+            </fieldset>           
 
-          <% end %>
-          </ul>
+          </div>
 
+      <% end %>
     </div>
 
     <div class="clb"></div>
