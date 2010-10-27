@@ -1,0 +1,404 @@
+/* --- forms, inputs, etc ---
+--------------------------------------------------------------------------------- */
+
+.inputs
+{
+	/*margin-top: 5px;*/    
+    /*padding-top: 5px;*/
+}
+
+.inputs legend
+{
+	font-weight: bold;
+	color: #2e81eb;
+	margin: 0;
+	padding: 0;
+	display: block;
+	height: 20px;
+	width: 100%;
+}
+
+.inputs ol
+{
+	/*padding-top: 5px;*/
+}
+
+.inputs ol li
+{
+    clear: both;
+}
+
+.inputs ol li label abbr
+{
+    color: red;
+    padding-left: 3px;
+}
+
+.inputs ol li input
+{
+    margin-bottom: 4px;
+}
+
+.inputs ol li.string label,
+.inputs ol li.select label,
+.inputs ol li.text label,
+.inputs ol li.password label
+{
+	display: block;
+    padding: 3px 0;
+}
+
+.inputs ol li.string input,
+.inputs ol li.password input
+{
+	width: 170px;
+    /*width: 230px;*/
+}
+
+.inputs ol li.select select
+{
+    width: 178px;
+    /*width: 238px;*/
+    margin-bottom: 3px;
+}
+
+.inputs ol li.text textarea
+{
+    width: 300px;
+    height: 150px;
+    overflow-x: hidden;
+    margin-bottom: 5px;
+}
+
+.inputs ol li p.inline-hints, .inputs ol li p.inline-errors
+{
+    float: left;
+    font-size: 11px;
+    padding: 5px 0 5px 8px;
+}
+
+.inputs ol li p.inline-hints
+{
+    color: #8e8e8e;
+}
+
+.inputs ol li p.inline-errors
+{
+    color: red;
+}
+
+.inputs ol li.error input
+{
+    border-color: #ffb0b0;
+    border-top-color: #f45252;
+    background: #fff2f2;
+}
+
+.inputs ol li.commit
+{
+    padding-top: 4px;
+}
+
+
+/* --- boolean + radio ---
+--------------------------------------------------------------------------------- */
+
+
+.inputs ol li.boolean,
+.inputs ol li.radio
+{
+	height: 23px;
+}
+
+.inputs ol li.boolean input,
+.inputs ol li.radio input
+{
+	border: none;
+	margin: 2px 5px 0 0;
+	padding: 0px;
+	float: left;
+}
+
+
+/* --- inline ---
+--------------------------------------------------------------------------------- */
+
+.inputs_inline ol li
+{
+    clear: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.inputs_inline ol li input
+{
+
+}
+
+.inputs_inline ol li.commit
+{
+    margin: 0;
+    padding: 0;
+}
+
+.inputs_inline ol li.commit input
+{
+    margin: 0;
+    height: 22px;
+    padding: 0 3px;
+}
+
+
+
+/* --- sizes - inputs --- */
+
+
+.inputs_80 ol li.string input,
+.inputs_80 ol li.password input,
+.inputs_80 ol li.text textarea
+{
+	width: 80px;
+}
+
+.inputs_80 ol li.select select
+{
+	width: 94px;
+}
+
+
+.inputs_100 ol li.string input,
+.inputs_100 ol li.password input,
+.inputs_100 ol li.text textarea
+{
+	width: 100px;
+}
+
+.inputs_100 ol li.select select
+{
+	width: 114px;
+}
+
+
+.inputs_120 ol li.string input,
+.inputs_120 ol li.password input,
+.inputs_120 ol li.text textarea
+{
+	width: 120px;
+}
+
+.inputs_120 ol li.select select
+{
+	width: 134px;
+}
+
+
+.inputs_140 ol li.string input,
+.inputs_140 ol li.password input,
+.inputs_140 ol li.text textarea
+{
+	width: 140px !important;
+}
+
+.inputs_140 ol li.select select
+{
+	width: 148px !important;
+}
+
+
+.inputs_160 ol li.string input,
+.inputs_160 ol li.password input,
+.inputs_160 ol li.text textarea
+{
+	width: 160px;
+}
+
+.inputs_160 ol li.select select
+{
+	width: 174px;
+}
+
+
+.inputs_180 ol li.string input,
+.inputs_180 ol li.password input,
+.inputs_180 ol li.text textarea
+{
+	width: 180px;
+}
+
+.inputs_180 ol li.select select
+{
+	width: 194px;
+}
+
+
+.inputs_200 ol li.string input,
+.inputs_200 ol li.password input,
+.inputs_200 ol li.text textarea
+{
+	width: 200px;
+}
+
+.inputs_200 ol li.select select
+{
+	width: 214px;
+}
+
+
+.inputs_220 ol li.string input,
+.inputs_220 ol li.password input,
+.inputs_220 ol li.text textarea
+{
+	width: 220px;
+}
+
+.inputs_220 ol li.select select
+{
+	width: 234px;
+}
+
+
+.inputs_240 ol li.string input,
+.inputs_240 ol li.password input,
+.inputs_240 ol li.text textarea
+{
+	width: 240px;
+}
+
+.inputs_240 ol li.select select
+{
+	width: 254px;
+}
+
+
+
+.inputs_260 ol li.string input,
+.inputs_260 ol li.password input,
+.inputs_260 ol li.text textarea
+{
+	width: 260px;
+}
+
+.inputs_260 ol li.select select
+{
+	width: 274px;
+}
+
+
+.inputs_280 ol li.string input,
+.inputs_280 ol li.password input,
+.inputs_280 ol li.text textarea
+{
+	width: 280px;
+}
+
+.inputs_280 ol li.select select
+{
+	width: 294px;
+}
+
+
+.inputs_300 ol li.string input,
+.inputs_300 ol li.password input,
+.inputs_300 ol li.text textarea
+{
+	width: 300px;
+}
+
+.inputs_300 ol li.select select
+{
+	width: 314px;
+}
+
+.inputs_320 ol li.string input,
+.inputs_320 ol li.password input,
+.inputs_320 ol li.text textarea
+{
+	width: 320px;
+}
+
+.inputs_320 ol li.select select
+{
+	width: 334px;
+}
+
+.inputs_340 ol li.string input,
+.inputs_340 ol li.password input,
+.inputs_340 ol li.text textarea
+{
+	width: 340px;
+}
+
+.inputs_340 ol li.select select
+{
+	width: 354px;
+}
+
+.inputs_360 ol li.string input,
+.inputs_360 ol li.password input,
+.inputs_360 ol li.text textarea
+{
+	width: 360px;
+}
+
+.inputs_360 ol li.select select
+{
+	width: 374px;
+}
+
+.inputs_380 ol li.string input,
+.inputs_380 ol li.password input,
+.inputs_380 ol li.text textarea
+{
+	width: 380px;
+}
+
+.inputs_380 ol li.select select
+{
+	width: 394px;
+}
+
+
+.inputs_390 ol li.string input,
+.inputs_390 ol li.password input,
+.inputs_390 ol li.text textarea
+{
+	width: 390px;
+}
+
+.inputs_390 ol li.select select
+{
+	width: 404px;
+}
+
+
+.inputs_400 ol li.string input,
+.inputs_400 ol li.password input,
+.inputs_400 ol li.text textarea
+{
+	width: 400px;
+}
+
+.inputs_400 ol li.select select
+{
+	width: 414px;
+}
+
+
+
+/* --- forms ---
+--------------------------------------------------------------------------------- */
+
+
+textarea, select,
+input[type="text"],
+input[type="password"]
+{
+    border: 1px solid #c2c9cd;
+    border-top-color: #86979f;
+    padding: 3px;
+    font: 12px 'Trebuchet MS',Helvetica, Arial, Verdana, Tahoma;
+    color: #5a7582;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
