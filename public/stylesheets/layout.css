@@ -16,7 +16,7 @@ body
 {
     font: 12px 'Trebuchet MS',Helvetica, Arial, Verdana, Tahoma;
     color: #5a7582;
-    background: url(/documentation/assets/images//layout/bg_body.png) repeat-x top center #f1f5f7;
+    background: url(/documentation/assets/images/layout/bg_body.png) repeat-x top center #f1f5f7;
 }
 
 
@@ -65,18 +65,18 @@ body
 #menu ul li a.development
 {
     width: 163px;
-    background: url(/documentation/assets/images//layout/menu_development.png) no-repeat top center transparent;
+    background: url(/documentation/assets/images/layout/menu_development.png) no-repeat top center transparent;
 }
 
 #menu ul li a.business
 {
     width: 147px;
-    background: url(/documentation/assets/images//layout/menu_business.png) no-repeat top center transparent;
+    background: url(/documentation/assets/images/layout/menu_business.png) no-repeat top center transparent;
 }
 #menu ul li a.statistic
 {
     width: 147px;
-    background: url(/documentation/assets/images//layout/menu_statistic.png) no-repeat top center transparent;
+    background: url(/documentation/assets/images/layout/menu_statistic.png) no-repeat top center transparent;
 }
 
 
@@ -149,7 +149,7 @@ body
 {
     width: 100%;
     height: 43px;
-    background: url(/documentation/assets/images//layout/frame_head.png) repeat-x top left #b5bcc0;
+    background: url(/documentation/assets/images/layout/frame_head.png) repeat-x top left #b5bcc0;
     -moz-border-radius-topleft: 5px;
     -moz-border-radius-topright: 5px;
     -webkit-border-top-left-radius: 5px;
@@ -172,7 +172,7 @@ body
 {
     width: 200px;
     height: 43px;
-    background: url(/documentation/assets/images//layout/frame_head_actions.png) repeat-x top left #83969f;
+    background: url(/documentation/assets/images/layout/frame_head_actions.png) repeat-x top left #83969f;
     float: right;
     -moz-border-radius-topright: 5px;
     -webkit-border-top-right-radius: 5px;
@@ -187,7 +187,7 @@ body
     text-shadow: 1px 1px 0px #5c5c5c;
     padding: 14px 14px 13px;
     color: #fff;
-    background: url(/documentation/assets/images//layout/frame_head_actions_lb.png) no-repeat 0px 1px;
+    background: url(/documentation/assets/images/layout/frame_head_actions_lb.png) no-repeat 0px 1px;
 }
 
 .frame .content
@@ -203,7 +203,7 @@ body
 
 .frame .two_columns
 {
-    background: url(/documentation/assets/images//layout/frame_content_twocolumns.png) repeat-y right top #fff;
+    background: url(/documentation/assets/images/layout/frame_content_twocolumns.png) repeat-y right top #fff;
 }
 
 .frame .content .left
@@ -230,7 +230,7 @@ body
 
 .frame .content .right .header
 {
-    background: url(/documentation/assets/images//layout/frame_head_actions.png) repeat-x top left #83969f;
+    background: url(/documentation/assets/images/layout/frame_head_actions.png) repeat-x top left #83969f;
     position: relative;
 }
 
@@ -276,7 +276,7 @@ body
     right: 10px;
     width: 16px;
     height: 16px;
-    background: url(/documentation/assets/images//layout/toggler.png) no-repeat 0 0;
+    background: url(/documentation/assets/images/layout/toggler.png) no-repeat 0 0;
     border: none !important;
 }
 
@@ -299,7 +299,7 @@ body
     box-shadow: 0 1px 0 #bdc7cd;
     padding-left: 20px;
 
-    background: url(/documentation/assets/images//layout/magnify.png) no-repeat 2px center #fff; 
+    background: url(/documentation/assets/images/layout/magnify.png) no-repeat 2px center #fff;
 }
 
 
@@ -313,7 +313,7 @@ table.generic
 
 table thead tr th
 {
-    background: url(/documentation/assets/images//layout/table_thead.png) repeat-x bottom left #edf2f4;
+    background: url(/documentation/assets/images/layout/table_thead.png) repeat-x bottom left #edf2f4;
     padding: 6px 4px;
 }
 
@@ -614,7 +614,7 @@ div.bt_blue input
 
 .statistic tbody tr.tr_header td
 {
-    background: url(/documentation/assets/images//layout/table_thead.png) repeat-x bottom left #edf2f4;
+    background: url(/documentation/assets/images/layout/table_thead.png) repeat-x bottom left #edf2f4;
     padding: 6px 4px;
     font-weight: bold;
     text-align: center;

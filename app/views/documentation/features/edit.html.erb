@@ -100,7 +100,7 @@
         <%= text_field_tag 'navigation_query', '', :onKeyUp => 'navigationFilter();' %>
       </div>
 
-      <div id="navigator_wrapper">
+      <div id="navigator_wrapper" style="height: 469px;">
         <ul class="navigator_list">
         </ul>
       </div>
@@ -225,12 +225,12 @@
 
     jQuery(document).ready(function() {
 
-        changeRightHeight();
-
         $('.toggler').bind("click", function() {
             $(this).toggleClass("toggler_minus");
             changeRightHeight()
-        })
+        });
+
+        $("#navigator_wrapper").height(469);
     })
 
 </script>
