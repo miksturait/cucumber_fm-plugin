@@ -18,7 +18,7 @@ module CucumberFM
               {
                       :dir => '',
                       :tags => '',
-                      :aggregate => '',
+                      :aggregate => [],
                       :sort => '',
                       :display_as => 'list',
                       :cvs_commit => '1',

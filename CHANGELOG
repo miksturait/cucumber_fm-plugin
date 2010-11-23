@@ -1,3 +1,4 @@
+* fix - config.aggregate should by default array, instead of empty string
 * feature - orange highlighting scenario estimation if this scenario is in status @_todo
 * fix - status @_tested is treated also as done
 * feature - red highlighting scenario estimation if this scenario isn't done
