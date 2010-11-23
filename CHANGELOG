@@ -1,3 +1,4 @@
+* fix - status @_tested is treated also as done
 * feature - highlighting scenario estimation if this scenario isn't done
 * fix - sorting group by context in business overview
 * feature - grouping by role (@$_)

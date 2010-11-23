@@ -33,7 +33,8 @@ module CucumberFM
         private
 
         def estimation_done_filter
-          @estimation_done_filter = CucumberFM::TagFilter.new('@_done,@_qa,@_accepted')
+          tags = CucumberFM::FeatureElement::Component::Tags::STATUS_COMPLETE
+          @estimation_done_filter = CucumberFM::TagFilter.new(tags.join(','))
         end
       end
     end

@@ -33,6 +33,8 @@ module CucumberFM
                 '@additional-test'
         ]
 
+        STATUS_COMPLETE = %w(@_done @_qa @_tested @_accepted)
+
         def tags
           @tags ||= fetch_tags
         end
@@ -42,7 +44,7 @@ module CucumberFM
         end
 
         def done?
-          %w(@_done @_qa @_tested @_accepted).include?(status)
+          STATUS_COMPLETE.include?(status)
         end
 
 
@@ -84,7 +86,7 @@ module CucumberFM
 
         def detect_type tag
           PATTERN.invert.each_pair do |pattern, type|
-            return(type) if tag =~ pattern   
+            return(type) if tag =~ pattern
           end
         end
 
