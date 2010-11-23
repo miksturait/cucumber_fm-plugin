@@ -148,7 +148,7 @@ class CucumberFeatureManager < Struct.new(:path, :repo_path, :config_parameters)
   def timestamp_capistrano
     pattern = /\d{14}$/
     if defined?(Rails)
-      pattern.match(Rails.root)
+      pattern.match(Rails.root.to_s)
     end
   end
 
