@@ -109,7 +109,8 @@ module Documentation
                           edit_documentation_feature_path(scenario.feature.id, :query => scenario.title),
                           :class => 'scenario_link')
                 end <<
-                content_tag('td', scenario.done? ? scenario.estimation : content_tag('span', scenario.estimation, :class => "marker m_red"), :style => 'text-align: center;',
+            # TODO refactor
+                content_tag('td', scenario.done? ? scenario.estimation : content_tag('span', scenario.estimation, :class => "marker #{scenario.status == '@_todo' ? 'm_orange' : 'm_red'}"), :style => 'text-align: center;',
                             :class => (scenario.done? ? 'done' : 'not_done'))
       end
     end

@@ -1,5 +1,6 @@
+* feature - orange highlighting scenario estimation if this scenario is in status @_todo
 * fix - status @_tested is treated also as done
-* feature - highlighting scenario estimation if this scenario isn't done
+* feature - red highlighting scenario estimation if this scenario isn't done
 * fix - sorting group by context in business overview
 * feature - grouping by role (@$_)
 * fix - feature delete

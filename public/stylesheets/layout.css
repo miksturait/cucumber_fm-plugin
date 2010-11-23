@@ -387,8 +387,6 @@ table tbody tr.feature_header:first-child td
     background: #da150d;
 }
 
-
-
 .m_green
 {
     color: #fff;
@@ -404,7 +402,7 @@ table tbody tr.feature_header:first-child td
     text-shadow: 1px 1px 0px #d9ae00;
     -moz-box-shadow: 0px 1px 0px #fff, 0px -1px 0px #d9ae00;
     box-shadow: 0px 1px 0px #fff, 0px -1px 0px #d9ae00;
-    background: #ffc000;
+    background: #ff6600;
 }
 
 
