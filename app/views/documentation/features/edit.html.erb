@@ -142,8 +142,8 @@
     }
 
     function navigationRedraw() {
-        var scenario_line = /Scenario:/
-        var scenario_title = /Scenario:\s?/
+        var scenario_line = /Scenario( Outline)?:/
+        var scenario_title = /Scenario( Outline)?:\s?/
         var navigation = ""
         var line_before = ""
         var tags_line = ""
