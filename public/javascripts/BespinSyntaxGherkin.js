@@ -28,7 +28,7 @@ var states = {}
 
 states['topic_keywords'] = [
     {
-        regex: /(Feature:|Scenario:|Scenario Outline:)/,
+        regex: /(Feature:|Scenario:|Scenario Outline:|Funcionalidade:|Cenário:|Cenario:|Esquema do Cenário:|Esquema do Cenario:)/,
         tag: 'topic_keyword'
     },
     {
