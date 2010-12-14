@@ -6,11 +6,16 @@ describe CucumberFM::Aggregator do
   before(:each) do
     @f1 = mock('feature1')
     @f2 = mock('feature2')
-    @s11 = mock('scenario1', :feature => @f1, :tags => ['@m1', '@mc', '@i1'], :estimation => 1.5)
-    @s12 = mock('scenario2', :feature => @f1, :tags => ['@m2', '@ak', '@i1'], :estimation => 1.75)
-    @s13 = mock('scenario5', :feature => @f1, :tags => ['@m2', '@ak', '@i1'], :estimation => 1)
-    @s21 = mock('scenario3', :feature => @f2, :tags => ['@m3', '@mc', '@i1'], :estimation => 2)
-    @s22 = mock('scenario4', :feature => @f2, :tags => ['@m2', '@tb', '@i2'], :estimation => 1)
+    @s11 = mock('scenario1', :feature => @f1, :tags => ['@m1', '@mc', '@i1'],
+                :tags_without_technical => ['@m1', '@mc', '@i1'], :estimation => 1.5)
+    @s12 = mock('scenario2', :feature => @f1, :tags => ['@m2', '@ak', '@i1'],
+                :tags_without_technical => ['@m2', '@ak', '@i1'], :estimation => 1.75)
+    @s13 = mock('scenario5', :feature => @f1, :tags => ['@m2', '@ak', '@i1'],
+                :tags_without_technical => ['@m2', '@ak', '@i1'], :estimation => 1)
+    @s21 = mock('scenario3', :feature => @f2, :tags => ['@m3', '@mc', '@i1'],
+                :tags_without_technical => ['@m3', '@mc', '@i1'], :estimation => 2)
+    @s22 = mock('scenario4', :feature => @f2, :tags => ['@m2', '@tb', '@i2'],
+                :tags_without_technical => ['@m2', '@tb', '@i2'], :estimation => 1)
     @cfm = mock('cfm', :scenarios => [@s11, @s12, @s13, @s21, @s22])
     @aggregator1 = CucumberFM::FeatureElement::Component::Tags::PATTERN[:milestone]
     @aggregator2 = CucumberFM::FeatureElement::Component::Tags::PATTERN[:iteration]
@@ -133,7 +138,8 @@ describe CucumberFM::Aggregator do
 
   context "when tag for pattern not found is should be labelled as 'undefined' " do
     before(:each) do
-      @s22 = mock('scenario4', :feature => @f2, :tags => ['@tb'], :estimation => 1)
+      @s22 = mock('scenario4', :feature => @f2, :tags => ['@tb'], :tags_without_technical => ['@tb'],
+                  :estimation => 1)
       @cfm = mock('cfm', :scenarios => [@s11, @s12, @s13, @s21, @s22])
       @aggregator = CucumberFM::Aggregator.new(@cfm, [@aggregator1])
       @collection = @aggregator.collection
@@ -160,7 +166,8 @@ describe CucumberFM::Aggregator do
 
   context "multiple tags (one scenario can be aggregated many times" do
     before(:each) do
-      @s22 = mock('scenario4', :feature => @f2, :tags => ['@mc', '@tb'], :estimation => 1)
+      @s22 = mock('scenario4', :feature => @f2, :tags => ['@mc', '@tb'],
+                  :tags_without_technical => ['@mc', '@tb'], :estimation => 1)
       @cfm = mock('cfm', :scenarios => [@s11, @s12, @s13, @s21, @s22])
       @aggregator = CucumberFM::Aggregator.new(@cfm, nil, ['@mc', '@tb', '@ak'])
       @collection = @aggregator.collection

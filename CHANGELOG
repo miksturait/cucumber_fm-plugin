@@ -1,3 +1,4 @@
+* fix - when aggregating data skip technical tags
 * fix - drawing navigation in editor for scenario outline
 * fix - problem with parsing scenario outline
 * fix - explicit conversion to string for match param ( ruby 1.9.2 issue )

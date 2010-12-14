@@ -22,17 +22,17 @@ describe "Cucumber::FeatureElement::Component::Tags" do
                                             '@__knowledge_base', '@_8', '@knowledge_base'])
     end
     {
-            :component => '@user',
-            :milestone => '@m2',
-            :status => '@_done',
-            :bucket => '@__forums',
-            :estimation => 5.0,
-            :value => 3,
-            :developer => '@mc',
-            :iteration => '@i1',
-            :priority => '@p4',
-            :role => '@$_admin'
-     }.each do |tag, value|
+        :component  => '@user',
+        :milestone  => '@m2',
+        :status     => '@_done',
+        :bucket     => '@__forums',
+        :estimation => 5.0,
+        :value      => 3,
+        :developer  => '@mc',
+        :iteration  => '@i1',
+        :priority   => '@p4',
+        :role       => '@$_admin'
+    }.each do |tag, value|
       it "should scan #{tag} with #{value}" do
         @test.send(tag).should == value
       end
@@ -47,14 +47,14 @@ describe "Cucumber::FeatureElement::Component::Tags" do
                                             '@__knowledge_base', '@_8', '@knowledge_base'])
     end
     {
-            :component => '@knowledge_base',
-            :milestone => '@m2b',
-            :status => '@_wip',
-            :bucket => '@__knowledge_base',
-            :estimation => 4.5,
-            :value => 8,
-            :developer => '@tb'
-     }.each do |tag, value|
+        :component  => '@knowledge_base',
+        :milestone  => '@m2b',
+        :status     => '@_wip',
+        :bucket     => '@__knowledge_base',
+        :estimation => 4.5,
+        :value      => 8,
+        :developer  => '@tb'
+    }.each do |tag, value|
       it "should scan #{tag} with #{value}" do
         @test.send(tag).should == value
       end
@@ -81,4 +81,16 @@ describe "Cucumber::FeatureElement::Component::Tags" do
   end
 
   context "tag detecting"
+
+  context "tags without technical" do
+    before(:each) do
+      @test.stub!(:raw).and_return("@aa @selenium @bb @24343 @dd @nontestable")
+
+    end
+    it "should clean up all technical tags" do
+      %w(@selenium @nontestable).each do |tag|
+        @test.tags_without_technical.should_not include(tag)
+      end
+    end
+  end
 end

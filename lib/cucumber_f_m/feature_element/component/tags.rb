@@ -22,6 +22,7 @@ module CucumberFM
         TECHNICAL = [
                 '@javascript',
                 '@selenium',
+                '@sellenium',
                 '@celerity',
                 '@culerity',
                 '@mongo',
@@ -41,6 +42,10 @@ module CucumberFM
 
         def tags= tags
           @tags = tags
+        end
+
+        def tags_without_technical
+          tags - TECHNICAL
         end
 
         def done?

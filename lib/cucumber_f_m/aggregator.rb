@@ -12,12 +12,12 @@ module CucumberFM
         @collection = Collection.nested_hash(aggregator.size)
         if aggregator.size == 2
           cfm.scenarios.each do |scenario|
-            @collection[label(aggregator.first, scenario.tags)][label(aggregator.last, scenario.tags)][scenario.feature].push scenario
+            @collection[label(aggregator.first, scenario.tags_without_technical)][label(aggregator.last, scenario.tags)][scenario.feature].push scenario
           end
         else
           @collection = Collection.nested_hash(1)
           cfm.scenarios.each do |scenario|
-            @collection[label(aggregator.first, scenario.tags)][scenario.feature].push scenario
+            @collection[label(aggregator.first, scenario.tags_without_technical)][scenario.feature].push scenario
           end
         end
       end
