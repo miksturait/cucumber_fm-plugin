@@ -1,3 +1,4 @@
+* fix - some rails 3 deprecation and routing (thx for emoreth)
 * fix - when aggregating data skip technical tags
 * fix - drawing navigation in editor for scenario outline
 * fix - problem with parsing scenario outline
