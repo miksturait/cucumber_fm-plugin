@@ -1,4 +1,4 @@
-ActionController::Routing::Routes.draw do |map|
+Rails.application.routes.draw do |map|
   map.namespace :documentation do |doc|
     doc.feature_show 'features/:id', :requirements => { :id => /.*[^(\/(edit|statistic))]/}, :conditions => { :method => :get },
                      :controller => 'features',
