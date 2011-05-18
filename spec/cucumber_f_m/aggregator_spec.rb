@@ -183,4 +183,28 @@ describe CucumberFM::Aggregator do
     end
 
   end
+
+  context "results should not be aggregated by technical tags on second level" do
+    before(:each) do
+      @aggregator_component = CucumberFM::FeatureElement::Component::Tags::PATTERN[:component]
+      @aggregator_developer = CucumberFM::FeatureElement::Component::Tags::PATTERN[:developer]
+      @s22 = mock('scenario4', :feature => @f2, :tags => ['@selenium', '@aggregator', '@ao'],
+                  :tags_without_technical => ['@aggregator','@ao'], :estimation => 1)
+      @cfm = mock('cfm', :scenarios => [@s22])
+      @aggregator = CucumberFM::Aggregator.new(@cfm, [@aggregator_developer, @aggregator_component])
+      @collection = @aggregator.collection
+    end
+
+       it "should aggregate correctly" do
+      @collection.should ==
+              {
+                      '@ao' => {
+                          '@aggregator' => {
+                              @f2 => [@s22]
+                          }
+                      }
+              }
+    end
+
+  end
 end
