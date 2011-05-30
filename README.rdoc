@@ -24,9 +24,9 @@ always provide information as:
 
 == Requirements
 
-* you are using rails
-** 2.3.8 and higher
-** 3.0 and higher
+you are using rails
+    * 2.3.8 and higher
+    * 3.0 and higher
 
 on rails 3.0 there some deprecation warning - would be fixed soon
 
