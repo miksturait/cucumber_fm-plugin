@@ -1,16 +1,14 @@
 = Cucumber Feature Manager
 
-tool that supports scope management using cucumber features as specyfication
-
+tool that supports scope management using cucumber features as specification
 
 = DEMO
 
 http://demo.cucumber.fm
 
+= INFO
 
-== BETA BETA BETA BETA BETA
-
-do not use this in production
+http://cucumber.fm
 
 For now it only works when:
 
@@ -24,22 +22,28 @@ always provide information as:
 * rails version
 * backtrace
 
+== Requirements
+
+* you are using rails >2.3.8 or >3.0
+
+on rails 3.0 there some deprecation warning - would be fixed soon
+
 == Installation
 
     script/plugin install git://github.com/cs3b/cucumber_fm.git
+
+or for rails 3
+
+    rails plugin install git://github.com/cs3b/cucumber_fm.git
 
     gem install diff-lcs
 
 == Usage
 
+start rails application and go to path in your browser:
+
     /documentation/features
 
 == Documentation
 
-The latest presentation (based on version 0.0.11) is accessible here: http://vimeo.com/13816531
-
-I have plan to make some screencasts after version 0.2.0 would be ready
-
-== ScreenShoots
-
-http://cs3b.github.com/cucumber_fm/gallery.html
+http://cucumber.fm
