@@ -21,8 +21,8 @@ module CucumberFM
                       :aggregate => [],
                       :sort => '',
                       :display_as => 'list',
-                      :cvs_commit => '1',
-                      :cvs_push => '1'
+                      :cvs_commit => '0',
+                      :cvs_push => '0'
               })
 
     end
