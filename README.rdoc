@@ -30,13 +30,30 @@ on rails 3.0 there some deprecation warning - would be fixed soon
 
 == Installation
 
+=== rails 2
+
     script/plugin install git://github.com/cs3b/cucumber_fm.git
 
-or for rails 3
+inside config/environment.rb
+
+    config.gem 'diff-lcs', :lib => false
+
+install gem
+
+    gem install diff-lcs
+
+=== rails 3
 
     rails plugin install git://github.com/cs3b/cucumber_fm.git
 
-    gem install diff-lcs
+inside Gemfile
+
+    gem 'diff-lcs', :require => false
+
+install gem
+
+    bundle install
+
 
 == Usage
 
