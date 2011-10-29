@@ -15,11 +15,11 @@ if Rails::VERSION::STRING =~ /^2\.3/
 else
   Rails.application.routes.draw do
     namespace :documentation do
-      get 'features/:id', 'features#show', :constraints => {:id => /.*[^(\/(edit|statistic))]/},
-            :as => :feature_show
-      post 'features/:id', 'features#update', :constraints => {:id => /.*[^(\/edit)]/},
-            :as => :feature_update
-      resources :features  do
+      get 'features/:id', :action => 'features#show', :constraints => {:id => /.*[^(\/(edit|statistic))]/},
+          :as => :feature_show
+      post 'features/:id', :action => 'features#update', :constraints => {:id => /.*[^(\/edit)]/},
+           :as => :feature_update
+      resources :features do
         get 'statistic', :on => :collection
         member do
           match 'rename'
@@ -27,7 +27,7 @@ else
           match 'delete'
         end
       end
-      get 'assets/:path', "assets#get", :constraints => {:path => /.*/}
     end
+    match "documentation/assets/:path", :controller => "documentation/assets", :action => "get", :constraints => {:path => /.*/}
   end
 end
