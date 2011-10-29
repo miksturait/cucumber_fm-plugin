@@ -28,7 +28,7 @@ Any feedback would be valuable ( use github issue ) always provide information a
 
 you are using rails
     * ~> 2.3.8
-    * ~> 3.0 ( some deprecation warnings are placed, but working )
+    * ~> 3.0 ( some deprecation warnings are placed - it's hard to comply 2.3.* vs 3.0.* )
 
 == Installation
 
