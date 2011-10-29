@@ -34,7 +34,7 @@ you are using rails
 
 === rails 2 withoug bundler
 
-    script/plugin install git://github.com/cs3b/cucumber_fm_plugin.git
+    script/plugin install git://github.com/cs3b/cucumber_fm-plugin.git
 
 inside config/environment.rb
 
@@ -47,7 +47,7 @@ install gems
 
 === rails 3.0
 
-    rails plugin install git://github.com/cs3b/cucumber_fm_plugin.git
+    rails plugin install git://github.com/cs3b/cucumber_fm-plugin.git
 
 inside Gemfile ( and rails 2.3 < with bundler )
 
