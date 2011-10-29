@@ -34,23 +34,25 @@ you are using rails
 
 === rails 2 withoug bundler
 
+    script/plugin install git://github.com/cs3b/cucumber_fm_plugin.git
+
 inside config/environment.rb
 
     config.gem 'diff-lcs', :lib => false
     config.gem 'cucumber_fm-core', :lib => 'cucumber_feature_manager', :version => '0.1'
-    config.gem 'cucumber_fm-plugin'
 
 install gems
 
     rake gems:install
 
-=== rails 3.0 ( and rails 2.3 < with bundler )
+=== rails 3.0
 
-inside Gemfile
+    rails plugin install git://github.com/cs3b/cucumber_fm_plugin.git
+
+inside Gemfile ( and rails 2.3 < with bundler )
 
     gem 'diff-lcs', :require => false
     gem 'cucumber_fm-core', '0.1', :require => 'cucumber_feature_manager'
-    gem 'cucumber_fm-plugin', ''
 
 install gems
 

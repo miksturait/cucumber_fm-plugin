@@ -1,6 +1,5 @@
 class Documentation::AssetsController < Documentation::ApplicationController
 
-  # TODO in future use xsend_file for apache or X-ACCEELL for nginx
   def get
     if File.exist?(full_path)
       send_file(full_path, {:type => file_content_type})
@@ -12,7 +11,7 @@ class Documentation::AssetsController < Documentation::ApplicationController
   private
 
   def full_path
-    Rails.root.join('vendor', 'plugins', 'cucumber_fm', 'public', file_path)
+    Rails.root.join('vendor', 'plugins', 'cucumber_fm-plugin', 'public', file_path)
   end
 
   def file_path
