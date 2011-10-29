@@ -1,6 +1,6 @@
 = Cucumber Feature Manager
 
-tool that supports scope management using cucumber features as specification
+scope management using cucumber features files as main specification
 
 = DEMO
 
@@ -10,13 +10,15 @@ http://demo.cucumber.fm
 
 http://cucumber.fm
 
-For now it only works when:
+It works when:
 
-* you are using rails version 2.3.8 or 3.0.0
+* you are using rails version ~> 2.3.8 or  ~> 3.0.0
 * you have features directory inside your rails app
 
-Any feedback would be valuable ( use github issue )
-always provide information as:
+* for rails >= 3.1 versions look at https://github.com/cs3b/cucumber_fm
+
+Any feedback would be valuable ( use github issue ) always provide information as:
+
 * os
 * ruby version
 * rails version
@@ -25,41 +27,39 @@ always provide information as:
 == Requirements
 
 you are using rails
-    * 2.3.8 and higher
-    * 3.0 and higher
-
-on rails 3.0 there some deprecation warning - would be fixed soon
+    * ~> 2.3.8
+    * ~> 3.0 ( some deprecation warnings are placed, but working )
 
 == Installation
 
-=== rails 2
-
-    script/plugin install git://github.com/cs3b/cucumber_fm.git
+=== rails 2 withoug bundler
 
 inside config/environment.rb
 
     config.gem 'diff-lcs', :lib => false
+    config.gem 'cucumber_fm-core', :lib => 'cucumber_feature_manager', :version => '0.1'
+    config.gem 'cucumber_fm-plugin'
 
-install gem
+install gems
 
-    gem install diff-lcs
+    rake gems:install
 
-=== rails 3
-
-    rails plugin install git://github.com/cs3b/cucumber_fm.git
+=== rails 3.0 ( and rails 2.3 < with bundler )
 
 inside Gemfile
 
     gem 'diff-lcs', :require => false
+    gem 'cucumber_fm-core', '0.1', :require => 'cucumber_feature_manager'
+    gem 'cucumber_fm-plugin', ''
 
-install gem
+install gems
 
     bundle install
 
 
 == Usage
 
-start rails application and go to path in your browser:
+start rails application and open in your browser following path:
 
     /documentation/features
 
