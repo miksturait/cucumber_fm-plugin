@@ -12,10 +12,8 @@ http://cucumber.fm
 
 It works when:
 
-* you are using rails version ~> 2.3.8 or  ~> 3.0.0
+* you are using rails version ~> 2.3.8 or  ~> 3.0.0 ( works also with 3.1 )
 * you have features directory inside your rails app
-
-* for rails >= 3.1 versions look at https://github.com/cs3b/cucumber_fm
 
 Any feedback would be valuable ( use github issue ) always provide information as:
 
@@ -28,7 +26,8 @@ Any feedback would be valuable ( use github issue ) always provide information a
 
 you are using rails
     * ~> 2.3.8
-    * ~> 3.0 ( some deprecation warnings are placed - it's hard to comply 2.3.* vs 3.0.* )
+    * ~> 3.0 ( some deprecation warnings are placed - it's hard to comply 2.3.* vs 3.0.* vs 3.1.* )
+    * ~> 3.1 ( few fixes on the go )
 
 == Installation
 
@@ -45,11 +44,11 @@ install gems
 
     rake gems:install
 
-=== rails 3.0
+=== rails 3.0 and 3.1
 
     rails plugin install git://github.com/cs3b/cucumber_fm-plugin.git
 
-inside Gemfile ( and rails 2.3 < with bundler )
+inside Gemfile ( is valid for rails > 2.3 that use bundler )
 
     gem 'diff-lcs', :require => false
     gem 'cucumber_fm-core', '0.1', :require => 'cucumber_feature_manager'
