@@ -12,7 +12,7 @@ http://cucumber.fm
 
 It works when:
 
-* you are using proper rails version ( for rails >= 3.0 checkout #master )
+* you are using proper rails version ( for rails >= 3.0 checkout master branch )
 * you have features directory inside your rails app
 
 Any feedback would be valuable ( use github issue ) always provide information as:
@@ -37,7 +37,9 @@ and ruby
 
 === rails 2
 
-    script/plugin install git://github.com/cs3b/cucumber_fm-plugin.git
+    git clone git://github.com/cs3b/cucumber_fm-plugin.git -b rails_2_3 vendor/plugins/cucumber_fm-plugin
+    rm -rf vendor/plugins/cucumber_fm-plugin/.git
+
 
 ===== without bundler
 
