@@ -1,4 +1,5 @@
-
+0.1.5
+* all rails 3 compatibility have been reverted
 0.1.4
 * fix - rails 3 routing
 * spliting core functionality into gem
