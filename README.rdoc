@@ -12,7 +12,7 @@ http://cucumber.fm
 
 It works when:
 
-* you are using rails version ~> 2.3.8 or  ~> 3.0.0 ( works also with 3.1 )
+* you are using compatible rails version (for rails 2.3 checkout branch rails_2_3 )
 * you have features directory inside your rails app
 
 Any feedback would be valuable ( use github issue ) always provide information as:
@@ -24,31 +24,17 @@ Any feedback would be valuable ( use github issue ) always provide information a
 
 == Requirements
 
+(for rails 2.3 checkout branch rails_2_3 )
+
 you are using rails
-    * ~> 2.3.8
     * ~> 3.0 ( some deprecation warnings are placed - it's hard to comply 2.3.* vs 3.0.* vs 3.1.* )
     * ~> 3.1 ( few fixes on the go )
 
 == Installation
 
-=== rails 2 withoug bundler
-
-    script/plugin install git://github.com/cs3b/cucumber_fm-plugin.git
-
-inside config/environment.rb
-
-    config.gem 'diff-lcs', :lib => false
-    config.gem 'cucumber_fm-core', :lib => 'cucumber_feature_manager', :version => '0.1'
-
-install gems
-
-    rake gems:install
-
-=== rails 3.0 and 3.1
-
     rails plugin install git://github.com/cs3b/cucumber_fm-plugin.git
 
-inside Gemfile ( is valid for rails > 2.3 that use bundler )
+inside Gemfile
 
     gem 'diff-lcs', :require => false
     gem 'cucumber_fm-core', '0.1', :require => 'cucumber_feature_manager'

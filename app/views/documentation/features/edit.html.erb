@@ -18,7 +18,7 @@
 
         <div class="pdd">
           <div id="actions_more" style="display: none;">
-            <% form_tag documentation_feature_path(@feature.id), :name => 'edit_form' do %>
+            <%= form_tag documentation_feature_path(@feature.id), :name => 'edit_form' do %>
                 <%= hidden_field_tag 'raw', '' %>
 
                 <%= hidden_field_tag 'config[tags]', @cfm.config.tags %>
@@ -58,7 +58,7 @@
         <div id="file_management_more" style="display: none;">
 
           <div class="pdd">
-            <% form_tag rename_documentation_feature_path(@feature.id) do %>
+            <%= form_tag rename_documentation_feature_path(@feature.id) do %>
                 <fieldset class="inputs inputs_140 inputs_inline">
                   <ol>
                     <li class="string">
@@ -72,7 +72,7 @@
                   </ol>
                 </fieldset>
             <% end %>
-            <% form_tag move_documentation_feature_path(@feature.id) do %>
+            <%= form_tag move_documentation_feature_path(@feature.id) do %>
                 <fieldset class="inputs inputs_140 inputs_inline">
                   <ol>
                     <li class="select">
