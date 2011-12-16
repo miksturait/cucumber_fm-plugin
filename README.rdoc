@@ -27,8 +27,8 @@ Any feedback would be valuable ( use github issue ) always provide information a
 (for rails 2.3 checkout branch rails_2_3 )
 
 you are using rails
-    * ~> 3.0 ( some deprecation warnings are placed - it's hard to comply 2.3.* vs 3.0.* vs 3.1.* )
-    * ~> 3.1 ( few fixes on the go )
+    * ~> 3.0
+    * ~> 3.1
 
 == Installation
 
