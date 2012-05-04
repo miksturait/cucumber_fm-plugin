@@ -43,7 +43,3 @@ install gems
 start rails application and open in your browser following path:
 
     /documentation/features
-
-== Documentation
-
-http://cucumber.fm
