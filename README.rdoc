@@ -2,13 +2,7 @@
 
 scope management using cucumber features files as main specification
 
-= DEMO
 
-http://demo.cucumber.fm
-
-= INFO
-
-http://cucumber.fm
 
 It works when:
 
