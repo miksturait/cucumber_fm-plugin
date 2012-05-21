@@ -1,6 +1,8 @@
 = Cucumber Feature Manager
 
-http://api.coderwall.com/cs3b/endorsecount.png http://coderwall.com/cs3b
+http://api.coderwall.com/cs3b/endorsecount.png 
+
+http://coderwall.com/cs3b
 
 
 
