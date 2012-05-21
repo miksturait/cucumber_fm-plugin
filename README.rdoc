@@ -1,5 +1,7 @@
 = Cucumber Feature Manager
 
+[![CoderWall](http://api.coderwall.com/cs3b/endorsecount.png)](http://coderwall.com/cs3b)
+
 scope management using cucumber features files as main specification
 
 
